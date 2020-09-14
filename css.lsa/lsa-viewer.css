@@ -1,0 +1,192 @@
+@CHARSET "UTF-8";
+
+/* body, html { margin:0; padding:0; color:#000; width:64em; white-space:nowrap; } /* background:#a7a09a; } */
+
+#choicesArea { 
+	/*width:70em;*/ 
+	white-space:nowrap; 
+}
+
+#searchtypediv {
+	margin-left:1em; 
+	float:left; 
+	/*width:15em;*/
+	border-style:solid; 
+	border-color:lightgray; 
+	border-width:1px; }
+	
+#scopetypediv { 
+	float:left; 
+	margin-left:0.5em; 
+	/*width:26em;*/
+	border-style:solid; 
+	border-color:lightgray; 
+	border-width:1px; 
+}
+
+#outputEnv { 
+	float:left; 
+	margin-left:0.5em; 
+	/*width:20em; */
+	border-style:solid; 
+	border-color:lightgray; 
+	border-width:1px; 
+}
+
+#setupEnv { 
+	clear:both; 
+	margin-left:50px; 
+}
+
+#selectArea { 
+	/*width:70em;*/ 
+	white-space:nowrap; 
+}
+
+#selectTerm250Env { 
+	margin-left:10px; 
+	float:left; 
+	/*width:325px; */
+}
+
+#appendTerm250Env { 
+	float:left; 
+	/*width:200px; */
+}
+
+#selectTerm1000Env { 
+	margin-left:10px; 
+	float:left; 
+	/*width:325px; */
+}
+
+#appendTerm1000Env { 
+	float:left; 
+	/*width:200px; */
+}
+
+#regexTermEnv { 
+	float:left; 
+	/*width:280px; */
+}
+
+#appendRegexTermEnv { 
+	margin-left:10px; 
+	float:left; 
+}
+
+#break0 { 
+	clear:both; 
+}
+
+#queryArea { 
+	/*width:70em; */
+	white-space:nowrap; 
+}
+
+#selectDocEnv { 
+	margin-left:10px; 
+	float:left; 
+	/*width:525px; */
+}
+
+#selectChunk250Env {
+	 margin-left:10px; 
+	 float:left; 
+	 /*width:600px; */
+}
+
+#selectChunk1000Env { 
+	margin-left:10px; 
+	float:left; 
+	/*width:600px; */
+}
+
+#appendDocEnv { 
+	float:left; 
+	/*width:200px; */
+}
+
+#appendChunkEnv { 
+	float:left; 
+	/*width:200px; */
+}
+
+#break1 { 
+	clear:both; 
+}
+
+#queryEnv { 
+	float:left; 
+	margin-top:1px; 
+	margin-left:10px; 
+	/*width:27em; */
+}
+
+#queryButtonArea { 
+	float:left; 
+	/*width:10em; */
+}
+
+#queryButtons { 
+	float:left; 
+	margin-top: 5px; 
+	margin-left:5px; 
+}
+
+#clearQueryEnv { 
+	margin-bottom:10px; 
+}
+
+#runSearch { 
+}
+
+#docBoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#chunkBoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#term250BoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#termdoc250BoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#term1000BoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#termdoc1000BoundEnv { 
+	float:left; 
+	margin-left:2%; 
+	margin-bottom:1px; 
+	/*width:400px; */
+}
+
+#break2 { 
+	clear:both; 
+}
+
+#results { 
+	margin-left:20em; 
+}

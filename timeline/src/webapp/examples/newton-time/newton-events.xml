@@ -1,0 +1,31 @@
+<data>
+<event start="" end=""
+	title=""
+	link="">
+</event>
+<event isDuration="true" start="" end=""
+	title=""
+	link="">
+</event>
+<event isDuration="true" start="Apr 1659" end="Jun 1659"
+	title="Newton writes a school notebook on Ovid now in Babson collection [NAR]**"
+	link="">
+	NAR p.142 ¶.1 n.44
+</event>
+<event isDuration="true" start="Sep 1670" end="Mar 1672"
+	title="Newton lectures on optics">
+</event>
+<event start="Feb 2 1672" end="Feb 2 1672" title="Newton reports his optical experiments to Royal Society"/>
+<event start="May 1672" end="May 1672" title="Newton decides not to publish his optical lectures when faced with queries [PON]">PON p.131</event>
+<event start="Jun 1675" end="Jun 1675" title="Collins tells Gregory that Newton said he will no longer publish on math and exact sciences [PON]">PON p.131</event>
+<event start="Aug 1 1684" end="Aug 31 1684" title="Newton hosts Halley who wants to talk about the inverse square law"/>
+<event start="Jul 5 1687" end="Jul 5 1687"
+	title="'Principia Mathematica' first edition published">
+</event>
+<event start="1704" end="1704" title="'Opticks' first edition is published"/>
+<event start="1706" end="1706" title="'Opticks' Latin edition is published"/>
+<event start="1713" end="1713"
+	title="'Principia' second edition published"/>
+<event start="1726" end="1726" title="'Principia' third edition published"/>
+</data>
+    

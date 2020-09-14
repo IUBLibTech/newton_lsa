@@ -1,0 +1,91 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Keynes MS. 13, f.003v" "ALCH00002" "z2z"
+2 "Keynes MS. 13, f.004r" "ALCH00002" "z2z"
+3 "Keynes MS. 13, f.001r" "ALCH00002" "z2z"
+4 "Keynes MS. 13, f.001v_2" "ALCH00002" "z2z"
+5 "Keynes MS. 13, f.004v" "ALCH00002" "z2z"
+6 "Keynes MS. 12, f.005v" "ALCH00001" "z2z"
+7 "Keynes MS. 12, f.005v_2" "ALCH00001" "z2z"
+8 "Keynes MS. 13, f.001v" "ALCH00002" "z2z"
+9 "Keynes MS. 13, f.004r_2" "ALCH00002" "z2z"
+10 "Keynes MS. 13, f.002r" "ALCH00002" "z2z"
+11 "Keynes MS. 14, f.003v" "ALCH00003" "z2z"
+12 "Keynes MS. 14, f.003v_2" "ALCH00003" "z2z"
+13 "Keynes MS. 30/1, f.003r_2" "ALCH00200" "z2z"
+14 "Keynes MS. 14, f.005r_2" "ALCH00003" "z2z"
+15 "Keynes MS. 30/5, f.001r_3" "ALCH00202" "z2z"
+16 "Keynes MS. 30/1, f.011r" "ALCH00200" "z2z"
+17 "Keynes MS. 14, f.006v" "ALCH00003" "z2z"
+18 "Keynes MS. 30/1, f.029r" "ALCH00200" "z2z"
+19 "Keynes MS. 30/1, f.010r_2" "ALCH00200" "z2z"
+20 "Keynes MS. 35, f.019v" "ALCH00024" "z2z"
+21 "Keynes MS. 14, f.003r_2" "ALCH00003" "z2z"
+22 "Keynes MS. 35, f.019r" "ALCH00024" "z2z"
+23 "Keynes MS. 14, f.004r" "ALCH00003" "z2z"
+24 "Keynes MS. 14, f.005r" "ALCH00003" "z2z"
+25 "Keynes MS. 30/4, f.002r" "ALCH00204" "z2z"
+26 "Keynes MS. 13, f.002r_2" "ALCH00002" "z2z"
+27 "Keynes MS. 14, f.006v_2" "ALCH00003" "z2z"
+28 "Keynes MS. 30/1, f.022v" "ALCH00200" "z2z"
+29 "Keynes MS. 30/5, f.001r_2" "ALCH00202" "z2z"
+30 "Keynes MS. 40, f.005r" "ALCH00029" "z2z"
+31 "Keynes MS. 14, f.004v" "ALCH00003" "z2z"
+32 "Keynes MS. 14, f.006r" "ALCH00003" "z2z"
+33 "Keynes MS. 13, f.003r" "ALCH00002" "z2z"
+34 "Keynes MS. 30/1, f.004r" "ALCH00200" "z2z"
+35 "Keynes MS. 35, f.015v" "ALCH00024" "z2z"
+36 "Keynes MS. 30/1, f.012r_2" "ALCH00200" "z2z"
+37 "Keynes MS. 57, f.009v" "ALCH00046" "z2z"
+38 "Keynes MS. 48, f.021v" "ALCH00037" "z2z"
+39 "Keynes MS. 32, f.007v_2" "ALCH00021" "z2z"
+40 "Keynes MS. 30/1, f.056r" "ALCH00200" "z2z"
+41 "Keynes MS. 30/5, f.002r_2" "ALCH00202" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.960439
+3	4	0.954255
+2	5	0.949022
+6	7	0.944544
+3	2	0.938700
+3	8	0.930091
+2	9	0.919553
+4	2	0.919121
+3	10	0.907075
+11	12	0.901185
+3	1	0.896022
+3	9	0.881012
+8	2	0.880060
+3	5	0.861392
+10	2	0.853899
+7	13	0.850619
+12	14	0.849851
+7	15	0.829175
+7	16	0.826470
+12	17	0.810936
+7	18	0.790402
+7	19	0.783875
+7	20	0.780603
+21	12	0.777026
+7	22	0.768604
+12	23	0.747328
+12	24	0.735782
+7	25	0.725103
+26	2	0.724409
+3	26	0.721549
+12	27	0.715056
+7	28	0.694657
+7	29	0.689188
+7	30	0.687114
+12	31	0.671291
+12	32	0.670553
+3	33	0.669067
+7	34	0.664157
+7	35	0.663904
+7	36	0.653210
+33	2	0.638156
+7	37	0.620838
+7	38	0.619567
+7	39	0.614207
+7	40	0.608964
+7	41	0.603470

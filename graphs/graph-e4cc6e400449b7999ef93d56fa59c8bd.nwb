@@ -1,0 +1,214 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Portsmouth Add. MS. 3973, f.032v" "ALCH00109" "z2z"
+2 "Portsmouth Add. MS. 3975, f.141v_2" "ALCH00110" "z2z"
+3 "Portsmouth Add. MS. 3973, f.019r_3" "ALCH00109" "z2z"
+4 "Portsmouth Add. MS. 3975, f.077v" "ALCH00110" "z2z"
+5 "Portsmouth Add. MS. 3973, f.019r_2" "ALCH00109" "z2z"
+6 "Portsmouth Add. MS. 3975, f.077r" "ALCH00110" "z2z"
+7 "Portsmouth Add. MS. 3975, f.004v" "ALCH00110" "z2z"
+8 "Portsmouth Add. MS. 3975, f.004v_2" "ALCH00110" "z2z"
+9 "Portsmouth Add. MS. 3973, f.037v" "ALCH00109" "z2z"
+10 "Portsmouth Add. MS. 3975, f.138r" "ALCH00110" "z2z"
+11 "Portsmouth Add. MS. 3975, f.001r" "ALCH00110" "z2z"
+12 "Portsmouth Add. MS. 3975, f.001r_2" "ALCH00110" "z2z"
+13 "Portsmouth Add. MS. 3973, f.038v_2" "ALCH00109" "z2z"
+14 "Portsmouth Add. MS. 3975, f.139r" "ALCH00110" "z2z"
+15 "Portsmouth Add. MS. 3975, f.013r" "ALCH00110" "z2z"
+16 "Portsmouth Add. MS. 3975, f.014r" "ALCH00110" "z2z"
+17 "Portsmouth Add. MS. 3973, f.019r" "ALCH00109" "z2z"
+18 "Portsmouth Add. MS. 3975, f.076v" "ALCH00110" "z2z"
+19 "Portsmouth Add. MS. 3975, f.091v" "ALCH00110" "z2z"
+20 "Portsmouth Add. MS. 3975, f.096v" "ALCH00110" "z2z"
+21 "Portsmouth Add. MS. 3975, f.006r" "ALCH00110" "z2z"
+22 "Portsmouth Add. MS. 3975, f.006v" "ALCH00110" "z2z"
+23 "Portsmouth Add. MS. 3973, f.033v" "ALCH00109" "z2z"
+24 "Portsmouth Add. MS. 3975, f.143v" "ALCH00110" "z2z"
+25 "Portsmouth Add. MS. 3975, f.137r" "ALCH00110" "z2z"
+26 "Portsmouth Add. MS. 3975, f.137r_2" "ALCH00110" "z2z"
+27 "Portsmouth Add. MS. 3975, f.065v" "ALCH00110" "z2z"
+28 "Portsmouth Add. MS. 3975, f.066v" "ALCH00110" "z2z"
+29 "Portsmouth Add. MS. 3975, f.020v" "ALCH00110" "z2z"
+30 "Portsmouth Add. MS. 3975, f.021r" "ALCH00110" "z2z"
+31 "Portsmouth Add. MS. 3973, f.014v_2" "ALCH00109" "z2z"
+32 "Portsmouth Add. MS. 3973, f.017r" "ALCH00109" "z2z"
+33 "Portsmouth Add. MS. 3973, f.019v" "ALCH00109" "z2z"
+34 "Portsmouth Add. MS. 3975, f.078r" "ALCH00110" "z2z"
+35 "Portsmouth Add. MS. 3975, f.037v" "ALCH00110" "z2z"
+36 "Portsmouth Add. MS. 3975, f.038r_2" "ALCH00110" "z2z"
+37 "Portsmouth Add. MS. 3975, f.017r" "ALCH00110" "z2z"
+38 "Portsmouth Add. MS. 3975, f.019v_2" "ALCH00110" "z2z"
+39 "Portsmouth Add. MS. 3975, f.109v" "ALCH00110" "z2z"
+40 "Portsmouth Add. MS. 3975, f.110r" "ALCH00110" "z2z"
+41 "Portsmouth Add. MS. 3973, f.009r" "ALCH00109" "z2z"
+42 "Portsmouth Add. MS. 3975, f.057v" "ALCH00110" "z2z"
+43 "Portsmouth Add. MS. 3973, f.032r" "ALCH00109" "z2z"
+44 "Portsmouth Add. MS. 3975, f.141r" "ALCH00110" "z2z"
+45 "Portsmouth Add. MS. 3975, f.003v" "ALCH00110" "z2z"
+46 "Portsmouth Add. MS. 3975, f.004r" "ALCH00110" "z2z"
+47 "Portsmouth Add. MS. 3973, f.036r" "ALCH00109" "z2z"
+48 "Portsmouth Add. MS. 3975, f.143r" "ALCH00110" "z2z"
+49 "Portsmouth Add. MS. 3973, f.038r" "ALCH00109" "z2z"
+50 "Portsmouth Add. MS. 3975, f.142v" "ALCH00110" "z2z"
+51 "Portsmouth Add. MS. 3973, f.010v_2" "ALCH00109" "z2z"
+52 "Portsmouth Add. MS. 3975, f.057r" "ALCH00110" "z2z"
+53 "Portsmouth Add. MS. 3975, f.014v_2" "ALCH00110" "z2z"
+54 "Portsmouth Add. MS. 3975, f.018v_2" "ALCH00110" "z2z"
+55 "Portsmouth Add. MS. 3973, f.044v" "ALCH00109" "z2z"
+56 "Portsmouth Add. MS. 3975, f.066r" "ALCH00110" "z2z"
+57 "Portsmouth Add. MS. 3975, f.001v" "ALCH00110" "z2z"
+58 "Portsmouth Add. MS. 3975, f.067r" "ALCH00110" "z2z"
+59 "Portsmouth Add. MS. 3975, f.020r" "ALCH00110" "z2z"
+60 "Portsmouth Add. MS. 3975, f.090v" "ALCH00110" "z2z"
+61 "Portsmouth Add. MS. 3975, f.091v_2" "ALCH00110" "z2z"
+62 "Portsmouth Add. MS. 3975, f.090v_2" "ALCH00110" "z2z"
+63 "Portsmouth Add. MS. 3973, f.001v_2" "ALCH00109" "z2z"
+64 "Portsmouth Add. MS. 3973, f.005r" "ALCH00109" "z2z"
+65 "Portsmouth Add. MS. 3975, f.111v_2" "ALCH00110" "z2z"
+66 "Portsmouth Add. MS. 3975, f.112r" "ALCH00110" "z2z"
+67 "Portsmouth Add. MS. 3975, f.016r" "ALCH00110" "z2z"
+68 "Portsmouth Add. MS. 3975, f.091r" "ALCH00110" "z2z"
+69 "Portsmouth Add. MS. 3973, f.008v_2" "ALCH00109" "z2z"
+70 "Portsmouth Add. MS. 3975, f.055r" "ALCH00110" "z2z"
+71 "Portsmouth Add. MS. 3973, f.008v" "ALCH00109" "z2z"
+72 "Portsmouth Add. MS. 3975, f.038r" "ALCH00110" "z2z"
+73 "Portsmouth Add. MS. 3973, f.009v" "ALCH00109" "z2z"
+74 "Portsmouth Add. MS. 3975, f.056r" "ALCH00110" "z2z"
+75 "Portsmouth Add. MS. 3975, f.081r" "ALCH00110" "z2z"
+76 "Portsmouth Add. MS. 3975, f.081v" "ALCH00110" "z2z"
+77 "Portsmouth Add. MS. 3975, f.026r_2" "ALCH00110" "z2z"
+78 "Portsmouth Add. MS. 3975, f.026v" "ALCH00110" "z2z"
+79 "Portsmouth Add. MS. 3975, f.090r_2" "ALCH00110" "z2z"
+80 "Portsmouth Add. MS. 3973, f.010r" "ALCH00109" "z2z"
+81 "Portsmouth Add. MS. 3975, f.055r_2" "ALCH00110" "z2z"
+82 "Portsmouth Add. MS. 3975, f.005v" "ALCH00110" "z2z"
+83 "Portsmouth Add. MS. 3975, f.007r" "ALCH00110" "z2z"
+84 "Portsmouth Add. MS. 3975, f.056v" "ALCH00110" "z2z"
+85 "Portsmouth Add. MS. 3975, f.037v_2" "ALCH00110" "z2z"
+86 "Portsmouth Add. MS. 3975, f.096v_2" "ALCH00110" "z2z"
+87 "Portsmouth Add. MS. 3973, f.030v_2" "ALCH00109" "z2z"
+88 "Portsmouth Add. MS. 3975, f.140r" "ALCH00110" "z2z"
+89 "Portsmouth Add. MS. 3975, f.111v" "ALCH00110" "z2z"
+90 "Portsmouth Add. MS. 3975, f.038v_3" "ALCH00110" "z2z"
+91 "Portsmouth Add. MS. 3975, f.039v_2" "ALCH00110" "z2z"
+92 "Portsmouth Add. MS. 3973, f.010v" "ALCH00109" "z2z"
+93 "Portsmouth Add. MS. 3975, f.007v" "ALCH00110" "z2z"
+94 "Portsmouth Add. MS. 3975, f.040r" "ALCH00110" "z2z"
+95 "Portsmouth Add. MS. 3975, f.087r" "ALCH00110" "z2z"
+96 "Portsmouth Add. MS. 3975, f.086r" "ALCH00110" "z2z"
+97 "Portsmouth Add. MS. 3975, f.040v" "ALCH00110" "z2z"
+98 "Portsmouth Add. MS. 3975, f.047r_2" "ALCH00110" "z2z"
+99 "Portsmouth Add. MS. 3975, f.105r" "ALCH00110" "z2z"
+100 "Portsmouth Add. MS. 3975, f.037r" "ALCH00110" "z2z"
+101 "Portsmouth Add. MS. 3975, f.009r" "ALCH00110" "z2z"
+102 "Portsmouth Add. MS. 3975, f.009v" "ALCH00110" "z2z"
+103 "Portsmouth Add. MS. 3975, f.095r" "ALCH00110" "z2z"
+104 "Portsmouth Add. MS. 3973, f.006r" "ALCH00109" "z2z"
+105 "Portsmouth Add. MS. 3975, f.010v_2" "ALCH00110" "z2z"
+106 "Portsmouth Add. MS. 3975, f.010v_3" "ALCH00110" "z2z"
+107 "Portsmouth Add. MS. 3975, f.106v_2" "ALCH00110" "z2z"
+108 "Portsmouth Add. MS. 3975, f.108r" "ALCH00110" "z2z"
+109 "Portsmouth Add. MS. 3975, f.003r_2" "ALCH00110" "z2z"
+110 "Portsmouth Add. MS. 3975, f.010r" "ALCH00110" "z2z"
+111 "Portsmouth Add. MS. 3975, f.010v" "ALCH00110" "z2z"
+112 "Portsmouth Add. MS. 3975, f.097r" "ALCH00110" "z2z"
+113 "Portsmouth Add. MS. 3975, f.065v_2" "ALCH00110" "z2z"
+114 "Portsmouth Add. MS. 3975, f.141v" "ALCH00110" "z2z"
+115 "Portsmouth Add. MS. 3973, f.008r" "ALCH00109" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.976930
+3	4	0.972720
+5	6	0.968634
+7	8	0.965322
+9	10	0.965237
+11	12	0.956469
+13	14	0.952954
+15	16	0.948829
+17	18	0.940929
+5	4	0.938788
+19	20	0.925972
+21	22	0.925444
+23	24	0.917270
+6	4	0.915054
+25	26	0.909870
+27	28	0.903145
+5	3	0.893199
+29	30	0.887690
+31	32	0.886844
+33	34	0.886619
+35	36	0.885495
+37	38	0.884761
+39	40	0.881387
+41	42	0.874668
+43	44	0.874553
+45	46	0.872212
+47	48	0.871956
+49	50	0.868166
+51	52	0.867033
+53	54	0.865064
+55	56	0.864620
+3	6	0.864222
+11	57	0.863337
+28	58	0.863326
+38	59	0.861728
+60	61	0.859763
+60	62	0.859518
+63	64	0.858394
+65	66	0.858088
+19	61	0.857323
+67	38	0.854098
+12	57	0.853811
+68	19	0.852137
+69	70	0.850565
+63	71	0.846162
+72	36	0.845055
+73	74	0.844447
+60	19	0.844173
+75	76	0.842680
+77	78	0.840658
+79	60	0.839975
+80	81	0.839418
+82	83	0.838359
+84	42	0.835736
+85	72	0.835114
+85	36	0.832930
+62	19	0.830654
+35	72	0.830188
+37	59	0.828325
+19	86	0.828008
+87	88	0.827967
+89	65	0.824415
+90	91	0.824351
+73	42	0.823827
+92	52	0.822879
+68	61	0.821510
+45	93	0.821421
+90	94	0.820734
+95	62	0.819703
+62	61	0.818384
+35	85	0.818260
+96	20	0.817981
+97	98	0.817102
+76	99	0.816315
+100	36	0.816293
+101	102	0.816214
+62	86	0.815549
+19	103	0.814600
+62	20	0.814415
+62	68	0.811239
+63	104	0.810789
+105	106	0.809014
+68	20	0.805654
+107	108	0.805436
+109	45	0.804222
+60	68	0.804110
+20	86	0.803876
+110	111	0.803852
+89	66	0.802997
+96	112	0.802098
+60	20	0.801959
+55	113	0.801084
+113	56	0.800227
+43	114	0.800206
+115	71	0.800019

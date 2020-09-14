@@ -1,0 +1,205 @@
+
+#searchChunkDiv, #scopetypediv, #outputEnv {
+	min-height:25em;
+}
+#searchChunkDiv {
+	margin-left:1em;
+	float:left;
+	width:20em;
+	border-style:solid;
+	border-color:lightgray;
+	border-radius:15px;
+	border-width:1px;
+	padding:.5em;
+	white-space:nowrap;
+}
+#scopetypediv {
+	float:left;
+	margin-left:1em;
+	width:26em;
+	border-radius:15px;
+	border-style:solid;
+	border-color:lightgray;
+	border-width:1px;
+	padding:.5em;
+}
+#outputEnv {
+	float:left;
+	margin-left:1em;
+	width:20em;
+	border-radius:15px;
+	border-style:solid;
+	border-color:lightgray;
+	border-width:1px;
+	width:20em;
+	padding:.5em;
+}
+
+
+#setupEnv {
+	clear:both;
+	margin-left:50px;
+}
+#selectArea {
+	width:70em;
+}
+
+
+
+/* SELECT AREA */
+#selectTerm250Env, #selectTerm1000Env, #regexTermEnv { /* wrapper */
+	display:block;
+	position:relative;
+	width: 20em;
+	min-width: 20em;
+	height: auto;
+	float:left;
+	padding: 2em;
+}
+#selectTerm250FormDiv, #selectTerm1000FormDiv, #regexTermFormDiv { /* drop-down */
+	display:block;
+	position: relative;
+	width: 70%;
+	padding:0;
+	margin:0;
+	float: left;	
+}
+#appendTerm250Env, #appendTerm1000Env, #appendregexTermEnv { /* button */
+	display:block;
+	position:relative;
+	height: auto;
+	float:left;
+	width: 27%;
+	top: 3em;
+	margin-left: 0.5em;
+}
+#regexTermEnv {
+	width: 40em;
+}
+#queryEnv {
+	display:block;
+	position:relative;
+	float:left;
+	min-width: 50%;
+	padding: 1em;
+	width: auto;
+}
+#theQuery {
+	display:inline-block;
+	position:relative;	
+	max-width: 100%;
+	width: 100%;
+	min-height: 10em;
+	padding: 0.5em
+}
+
+
+/* BUTTONS */
+#appendDocEnv, #appendChunkEnv {
+	display:block;
+	position:relative;
+	width: auto;
+	min-height: 3em;
+	height: auto;
+	float:left;
+	padding: 1em;
+}
+
+
+
+/* ENVELOPES
+#selectDocEnv, #selectChunk250Env, #selectChunk1000Env, #queryEnv {
+	display:block;
+	position:relative;
+	width: 65%;
+	min-width: 50%;
+	height: auto;
+	float:left;
+}
+#appendDocEnv, #appendChunkEnv {
+	display:block;
+	position:relative;
+	width: 30%;
+	min-width: 20%;
+	min-height: 4em;
+	height: auto;
+	float:left;
+}*/
+
+#break1 {
+	clear:both;
+}
+
+
+
+/* ----- */
+#queryArea {
+	width:100%;
+	height: auto;
+}
+
+#queryButtonArea {
+	width: 30%;
+	float: left;
+	text-align:right;
+	margin:0; padding:0;
+}
+#queryButtons {
+	float:right;
+	width: auto;
+	vertical-align: middle;	
+}
+#clearQueryEnv {
+	width: auto; 
+	float: left;
+}
+#runSearch {
+	width: auto;
+	float: left;
+}
+/* ---- */
+
+
+#docBoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#chunkBoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#term250BoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#termdoc250BoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#term1000BoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#termdoc1000BoundEnv {
+	float:left;
+	margin-left:2%;
+	margin-bottom:1px;
+	width:400px;
+}
+#break2 {
+	clear:both;
+}
+#results {
+	float:left;
+	margin-left:5em;
+}

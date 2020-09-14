@@ -1,0 +1,48 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Portsmouth Add. MS. 3973, f.032v" "ALCH00109" "z2z"
+2 "Portsmouth Add. MS. 3975, f.141v_2" "ALCH00110" "z2z"
+3 "Portsmouth Add. MS. 3973, f.019r_3" "ALCH00109" "z2z"
+4 "Portsmouth Add. MS. 3975, f.077v" "ALCH00110" "z2z"
+5 "Portsmouth Add. MS. 3973, f.019r_2" "ALCH00109" "z2z"
+6 "Portsmouth Add. MS. 3975, f.077r" "ALCH00110" "z2z"
+7 "Portsmouth Add. MS. 3975, f.004v" "ALCH00110" "z2z"
+8 "Portsmouth Add. MS. 3975, f.004v_2" "ALCH00110" "z2z"
+9 "Portsmouth Add. MS. 3973, f.037v" "ALCH00109" "z2z"
+10 "Portsmouth Add. MS. 3975, f.138r" "ALCH00110" "z2z"
+11 "Portsmouth Add. MS. 3975, f.001r" "ALCH00110" "z2z"
+12 "Portsmouth Add. MS. 3975, f.001r_2" "ALCH00110" "z2z"
+13 "Portsmouth Add. MS. 3973, f.038v_2" "ALCH00109" "z2z"
+14 "Portsmouth Add. MS. 3975, f.139r" "ALCH00110" "z2z"
+15 "Portsmouth Add. MS. 3975, f.013r" "ALCH00110" "z2z"
+16 "Portsmouth Add. MS. 3975, f.014r" "ALCH00110" "z2z"
+17 "Portsmouth Add. MS. 3973, f.019r" "ALCH00109" "z2z"
+18 "Portsmouth Add. MS. 3975, f.076v" "ALCH00110" "z2z"
+19 "Portsmouth Add. MS. 3975, f.091v" "ALCH00110" "z2z"
+20 "Portsmouth Add. MS. 3975, f.096v" "ALCH00110" "z2z"
+21 "Portsmouth Add. MS. 3975, f.006r" "ALCH00110" "z2z"
+22 "Portsmouth Add. MS. 3975, f.006v" "ALCH00110" "z2z"
+23 "Portsmouth Add. MS. 3973, f.033v" "ALCH00109" "z2z"
+24 "Portsmouth Add. MS. 3975, f.143v" "ALCH00110" "z2z"
+25 "Portsmouth Add. MS. 3975, f.137r" "ALCH00110" "z2z"
+26 "Portsmouth Add. MS. 3975, f.137r_2" "ALCH00110" "z2z"
+27 "Portsmouth Add. MS. 3975, f.065v" "ALCH00110" "z2z"
+28 "Portsmouth Add. MS. 3975, f.066v" "ALCH00110" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.976930
+3	4	0.972720
+5	6	0.968634
+7	8	0.965322
+9	10	0.965237
+11	12	0.956469
+13	14	0.952954
+15	16	0.948829
+17	18	0.940929
+5	4	0.938788
+19	20	0.925972
+21	22	0.925444
+23	24	0.917270
+6	4	0.915054
+25	26	0.909870
+27	28	0.903145

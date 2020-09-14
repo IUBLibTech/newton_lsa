@@ -1,0 +1,59 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Keynes MS. 16, f.001v" "ALCH00005" "z2z"
+2 "Keynes MS. 16, f.002r" "ALCH00005" "z2z"
+3 "Keynes MS. 23, f.008v" "ALCH00012" "z2z"
+4 "Keynes MS. 23, f.009r" "ALCH00012" "z2z"
+5 "Keynes MS. 16, f.001r_2" "ALCH00005" "z2z"
+6 "Keynes MS. 16, f.003v" "ALCH00005" "z2z"
+7 "Keynes MS. 16, f.001r" "ALCH00005" "z2z"
+8 "Keynes MS. 16, f.002v" "ALCH00005" "z2z"
+9 "Keynes MS. 16, f.003r" "ALCH00005" "z2z"
+10 "Keynes MS. 16, f.002v_2" "ALCH00005" "z2z"
+11 "Keynes MS. 23, f.001r" "ALCH00012" "z2z"
+12 "Keynes MS. 23, f.006r" "ALCH00012" "z2z"
+13 "Keynes MS. 23, f.001v" "ALCH00012" "z2z"
+14 "Keynes MS. 23, f.003r" "ALCH00012" "z2z"
+15 "Keynes MS. 23, f.002r" "ALCH00012" "z2z"
+16 "Keynes MS. 23, f.002v" "ALCH00012" "z2z"
+17 "Keynes MS. 23, f.007r" "ALCH00012" "z2z"
+18 "Keynes MS. 23, f.004r" "ALCH00012" "z2z"
+19 "Keynes MS. 23, f.005r" "ALCH00012" "z2z"
+20 "Keynes MS. 23, f.005v" "ALCH00012" "z2z"
+21 "Keynes MS. 16, f.004r" "ALCH00005" "z2z"
+22 "Keynes MS. 23, f.007v" "ALCH00012" "z2z"
+23 "Keynes MS. 23, f.009v" "ALCH00012" "z2z"
+24 "Keynes MS. 16, f.003v_2" "ALCH00005" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.950796
+3	4	0.907950
+5	6	0.904480
+7	6	0.889854
+8	9	0.878347
+10	9	0.877003
+7	5	0.876307
+11	3	0.865381
+12	4	0.861527
+13	14	0.856466
+11	15	0.849837
+8	10	0.849580
+13	16	0.844956
+15	17	0.843587
+18	19	0.842944
+13	4	0.841971
+15	3	0.838760
+16	3	0.834299
+13	20	0.832140
+7	21	0.830201
+2	8	0.827530
+14	22	0.824610
+1	8	0.816829
+14	23	0.816644
+13	3	0.815505
+11	4	0.812111
+7	24	0.808519
+19	22	0.805153
+2	21	0.803802
+9	24	0.802394
+14	4	0.800414

@@ -1,0 +1,105 @@
+/* wrapper */
+#sbHolder {
+	display: block;
+	position: relative; 
+	width: 100%;
+	min-height: 7em;
+	min-width: 10em;
+}
+#sb {
+	display: block;
+	position: absolute;	
+	width:80%;
+	min-height: 3em;
+	margin:0; 
+	padding:0;
+	font-size:small;
+	border: 0;
+	bottom: 0;
+	left: 0;
+	text-align: right;
+}
+
+#sb form {
+	height: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+#sb fieldset {
+	border: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+#sb label {
+	font-size:small;
+}
+
+/* Fieldset 1 */
+
+#sb fieldset#set1 {
+	position: relative;
+	margin-right: 0.3em;
+	padding:0;
+	border:0;
+}
+#sb ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#sb li {
+	float: left;
+	margin: 0 0.4em 0 0.2em ;
+	line-height: 1.6em; 
+}
+#search1, #search2, #search3 {
+	left: 0;
+	float: left;
+	padding: 0;
+	margin: 0 0.5em;
+	position: relative;
+	width: 1em;
+}
+
+/* Fieldset 2 */
+
+#sb fieldset#set2 {
+	position: relative;
+	margin-right: 0.3em;
+	padding:0;
+	border:0;	
+}
+#sb #searchtxt {
+	border: thin solid #c59d9a;
+	color: #616364;
+	float: left;
+	height: 1.5em; /* 15px */
+	line-height: 1.1em; /* 11px */
+	margin: 0 0.2em 0 0;
+	min-height: 2em;
+	padding: 0.1em 0.2em 0 0.2em;
+	min-width: 10em; /* 93px */
+}
+#sb #go {
+	margin: 0.1em 0 0 0;
+}
+
+/* ADVANCED SEARCH - HEADER */
+#header_advSearchBox {
+	display:block;
+	position:absolute;
+	width:20%;
+	min-height: 3em;
+	bottom:0;
+	right:0;
+	text-align: right;
+}
+#header_advSearchBox span {
+	font-size:0.7em;
+	display:block;
+	min-height:1em;
+	position:absolute;
+	bottom:1em;
+}

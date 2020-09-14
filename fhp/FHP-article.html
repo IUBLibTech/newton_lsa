@@ -1,0 +1,199 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>FHP article pages (Local)</title>
+<style>
+/* The grid: Four (25%) no Five (20%) equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 20%;
+  padding: 0px;
+}
+
+/* Style the images inside the grid */
+.column img {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The expanding image container (positioning is needed to position the close button and the text) */
+.container {
+  position: relative;
+  display: none;
+}
+
+/* Expanding image text */
+#imgtext {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  color: white;
+  font-size: 20px;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}
+</style>
+<script>
+function myFunction(imgs) {
+  // Get the expanded image
+  var expandImg = document.getElementById("expandedImg");
+  // Get the image text
+  var imgText = document.getElementById("imgtext");
+  // Use the same src in the expanded image as the image being clicked on from the grid
+  expandImg.src = imgs.src;
+  // Use the value of the alt attribute of the clickable image as text inside the expanded image
+  imgText.innerHTML = imgs.alt;
+  // Show the container element (hidden with CSS)
+  expandImg.parentElement.style.display = "block";
+}
+function popWindow(imgFile) {
+	thisURL = "http://localhost/lsa/fhp/FHP-images/" + imgFile
+	window.open(thisURL);
+}
+</script>
+</head>
+<body>
+	<!-- The expanding image container -->
+	<div class="container">
+  <!-- Close the image -->
+  <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span>
+
+  <!-- Expanded image -->
+  <img id="expandedImg" style="width:100%">
+
+  <!-- Image text -->
+  <div id="imgtext"></div><br/>
+</div>
+	
+	<div><a name="top"></a><p><br><br><center><h3>Figala, Harrison*, &amp; Petzold, "De Scriptoribus Chemicis" (1992) pgs. 135&ndash;179.</h3></center><br><br></p></div>
+	<!-- top of the grid -->
+	<div class="row">
+		<div class="column"><br><br><br><br><br><br>&nbsp;<br/><br/></div>
+  		<div class="column"><list>
+			<item><a href="#pgs-135-138">Pages 135&ndash;138</a></item><br/><br/>
+			<item><a href="#pgs-139-142">Pages 139&ndash;142</a></item><br/><br/>
+			<item><a href="#pgs-143-146">Pages 143&ndash;146</a></item><br/><br/>
+			</list></div>
+		<div class="column"><list>
+			<item><a href="#pgs-147-150">Pages 147&ndash;150</a></item><br/><br/>
+			<item><a href="#pgs-151-154">Pages 151&ndash;154</a></item><br/><br/>
+			<item><a href="#pgs-155-158">Pages 155&ndash;158</a></item><br/><br/>
+			</list></div>
+		<div class="column">
+			<item><a href="#pgs-159-162">Pages 159&ndash;162</a></item><br/><br/>
+			<item><a href="#pgs-163-166">Pages 163&ndash;166</a></item><br/><br/>
+			<item><a href="#pgs-167-170">Pages 167&ndash;170</a></item><br/><br/>
+			</list></div>
+		<div class="column">
+			<item><a href="#pgs-171-174">Pages 171&ndash;174</a></item><br/><br/>
+			<item><a href="#pgs-175-178">Pages 175&ndash;178</a></item><br/><br/>
+			<item><a href="#pgs-179">Page 179</a></item><br/><br/>
+			</list></div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-135-38"/>&nbsp;<br><br><br><br><br><br>135&ndash;138<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-135"/><img src="./FHP-images/FHP-pg-135.png" alt="page 135" width="90%" onclick="popWindow('FHP-pg-135.png');"><br/>135</div>
+		<div class="column"><a name="pg-136"/><img src="./FHP-images/FHP-pg-136.png" alt="page 136" width="90%" onclick="popWindow('FHP-pg-136.png');"><br/>136</div>
+		<div class="column"><a name="pg-137"/><img src="./FHP-images/FHP-pg-137.png" alt="page 137" width="90%" onclick="popWindow('FHP-pg-137.png');"><br/>137</div>
+		<div class="column"><a name="pg-138"/><img src="./FHP-images/FHP-pg-138.png" alt="page 138" width="90%" onclick="popWindow('FHP-pg-138.png');"><br/>138</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-139-142"/>&nbsp;<br><br><br><br><br><br>139&ndash;142<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-139"/><img src="./FHP-images/FHP-pg-139.png" alt="page 139" width="90%" onclick="popWindow('FHP-pg-139.png');"><br/>139</div>
+		<div class="column"><a name="pg-140"/><img src="./FHP-images/FHP-pg-140.png" alt="page 140" width="90%" onclick="popWindow('FHP-pg-140.png');"><br/>140</div>
+		<div class="column"><a name="pg-141"/><img src="./FHP-images/FHP-pg-141.png" alt="page 137" width="90%" onclick="popWindow('FHP-pg-141.png');"><br/>141</div>
+		<div class="column"><a name="pg-142"/><img src="./FHP-images/FHP-pg-142.png" alt="page 142" width="90%" onclick="popWindow('FHP-pg-142.png');"><br/>142</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-143-146"/>&nbsp;<br><br><br><br><br><br>143&ndash;146<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-143"/><img src="./FHP-images/FHP-pg-143.png" alt="page 143" width="90%" onclick="popWindow('FHP-pg-143.png');"><br/>143</div>
+		<div class="column"><a name="pg-144"/><img src="./FHP-images/FHP-pg-144.png" alt="page 144" width="90%" onclick="popWindow('FHP-pg-144.png');"><br/>144</div>
+		<div class="column"><a name="pg-145"/><img src="./FHP-images/FHP-pg-145.png" alt="page 145" width="90%" onclick="popWindow('FHP-pg-145.png');"><br/>145</div>
+		<div class="column"><a name="pg-146"/><img src="./FHP-images/FHP-pg-146.png" alt="page 146" width="90%" onclick="popWindow('FHP-pg-146.png');"><br/>146</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-147-150"/>&nbsp;<br><br><br><br><br><br>147&ndash;150<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-147"/><img src="./FHP-images/FHP-pg-147.png" alt="page 147" width="90%" onclick="popWindow('FHP-pg-147.png');"><br/>147</div>
+		<div class="column"><a name="pg-148"/><img src="./FHP-images/FHP-pg-148.png" alt="page 148" width="90%" onclick="popWindow('FHP-pg-148.png');"><br/>148</div>
+		<div class="column"><a name="pg-149"/><img src="./FHP-images/FHP-pg-149.png" alt="page 149" width="90%" onclick="popWindow('FHP-pg-149.png');"><br/>149</div>
+		<div class="column"><a name="pg-150"/><img src="./FHP-images/FHP-pg-150.png" alt="page 150" width="90%" onclick="popWindow('FHP-pg-150.png');"><br/>150</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-151-154"/>&nbsp;<br><br><br><br><br><br>151&ndash;154<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-151"/><img src="./FHP-images/FHP-pg-151.png" alt="page 151" width="90%" onclick="popWindow('FHP-pg-151.png');"><br/>151</div>
+		<div class="column"><a name="pg-152"/><img src="./FHP-images/FHP-pg-152.png" alt="page 152" width="90%" onclick="popWindow('FHP-pg-152.png');"><br/>152</div>
+		<div class="column"><a name="pg-153"/><img src="./FHP-images/FHP-pg-153.png" alt="page 153" width="90%" onclick="popWindow('FHP-pg-153.png');"><br/>153</div>
+		<div class="column"><a name="pg-154"/><img src="./FHP-images/FHP-pg-154.png" alt="page 154" width="90%" onclick="popWindow('FHP-pg-154.png');"><br/>154</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-155-158"/>&nbsp;<br><br><br><br><br><br>155&ndash;158<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-155"/><img src="./FHP-images/FHP-pg-155.png" alt="page 155" width="90%" onclick="popWindow('FHP-pg-155.png');"><br/>155</div>
+		<div class="column"><a name="pg-156"/><img src="./FHP-images/FHP-pg-156.png" alt="page 156" width="90%" onclick="popWindow('FHP-pg-156.png');"><br/>156</div>
+		<div class="column"><a name="pg-157"/><img src="./FHP-images/FHP-pg-157.png" alt="page 157" width="90%" onclick="popWindow('FHP-pg-157.png');"><br/>157</div>
+		<div class="column"><a name="pg-158"/><img src="./FHP-images/FHP-pg-158.png" alt="page 158" width="90%" onclick="popWindow('FHP-pg-158.png');"><br/>158</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-159-162"/>&nbsp;<br><br><br><br><br><br>159&ndash;162<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-159"/><img src="./FHP-images/FHP-pg-159.png" alt="page 159" width="90%" onclick="popWindow('FHP-pg-159.png');"><br/>159</div>
+		<div class="column"><a name="pg-160"/><img src="./FHP-images/FHP-pg-160.png" alt="page 160" width="90%" onclick="popWindow('FHP-pg-160.png');"><br/>160</div>
+		<div class="column"><a name="pg-161"/><img src="./FHP-images/FHP-pg-161.png" alt="page 161" width="90%" onclick="popWindow('FHP-pg-161.png');"><br/>161</div>
+		<div class="column"><a name="pg-162"/><img src="./FHP-images/FHP-pg-162.png" alt="page 162" width="90%" onclick="popWindow('FHP-pg-162.png');"><br/>162</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-163-166"/>&nbsp;<br><br><br><br><br><br>163&ndash;166<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-163"/><img src="./FHP-images/FHP-pg-163.png" alt="page 163" width="90%" onclick="popWindow('FHP-pg-163.png');"><br/>163</div>
+		<div class="column"><a name="pg-164"/><img src="./FHP-images/FHP-pg-164.png" alt="page 164" width="90%" onclick="popWindow('FHP-pg-164.png');"><br/>164</div>
+		<div class="column"><a name="pg-165"/><img src="./FHP-images/FHP-pg-165.png" alt="page 165" width="90%" onclick="popWindow('FHP-pg-165.png');"><br/>165</div>
+		<div class="column"><a name="pg-166"/><img src="./FHP-images/FHP-pg-166.png" alt="page 166" width="90%" onclick="popWindow('FHP-pg-166.png');"><br/>166</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-167-170"/>&nbsp;<br><br><br><br><br><br>167&ndash;170<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-167"/><img src="./FHP-images/FHP-pg-167.png" alt="page 167" width="90%" onclick="popWindow('FHP-pg-167.png');"><br/>167</div>
+		<div class="column"><a name="pg-168"/><img src="./FHP-images/FHP-pg-168.png" alt="page 168" width="90%" onclick="popWindow('FHP-pg-168.png');"><br/>168</div>
+		<div class="column"><a name="pg-169"/><img src="./FHP-images/FHP-pg-169.png" alt="page 169" width="90%" onclick="popWindow('FHP-pg-169.png');"><br/>169</div>
+		<div class="column"><a name="pg-170"/><img src="./FHP-images/FHP-pg-170.png" alt="page 170" width="90%" onclick="popWindow('FHP-pg-170.png');"><br/>170</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-171-174"/>&nbsp;<br><br><br><br><br><br>171&ndash;174<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-171"/><img src="./FHP-images/FHP-pg-171.png" alt="page 171" width="90%" onclick="popWindow('FHP-pg-171.png');"><br/>171</div>
+		<div class="column"><a name="pg-172"/><img src="./FHP-images/FHP-pg-172.png" alt="page 172" width="90%" onclick="popWindow('FHP-pg-172.png');"><br/>172</div>
+		<div class="column"><a name="pg-173"/><img src="./FHP-images/FHP-pg-173.png" alt="page 173" width="90%" onclick="popWindow('FHP-pg-173.png');"><br/>173</div>
+		<div class="column"><a name="pg-174"/><img src="./FHP-images/FHP-pg-174.png" alt="page 174" width="90%" onclick="popWindow('FHP-pg-174.png');"><br/>174</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-175-178"/>&nbsp;<br><br><br><br><br><br>175&ndash;178<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-175"/><img src="./FHP-images/FHP-pg-175.png" alt="page 175" width="90%" onclick="popWindow('FHP-pg-175.png');"><br/>175</div>
+		<div class="column"><a name="pg-176"/><img src="./FHP-images/FHP-pg-176.png" alt="page 176" width="90%" onclick="popWindow('FHP-pg-176.png');"><br/>176</div>
+		<div class="column"><a name="pg-177"/><img src="./FHP-images/FHP-pg-177.png" alt="page 177" width="90%" onclick="popWindow('FHP-pg-177.png');"><br/>177</div>
+		<div class="column"><a name="pg-178"/><img src="./FHP-images/FHP-pg-178.png" alt="page 178" width="90%" onclick="popWindow('FHP-pg-178.png');"><br/>178</div>
+	</div><br/><br/><br/>
+	<div class="row">
+		<div class="column"><a name="pgs-179"/>&nbsp;<br><br><br><br><br><br>179<br/><br/><br/><br/><a href="#top">Top</a></div>
+  		<div class="column"><a name="pg-179"/><img src="./FHP-images/FHP-pg-179.png" alt="page 179" width="90%" onclick="popWindow('FHP-pg-179.png');"><br/>179</div>
+		<div class="column"></div>
+		<div class="column"></div>
+		<div class="column"></div>
+	</div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>.
+
+	
+</body>
+</html>

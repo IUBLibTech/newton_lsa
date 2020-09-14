@@ -1,0 +1,395 @@
+
+	@font-face {
+		font-family: "Liberation Sans Alchemy";
+		src: url("LiberationSansAlchemy-Regular.ttf") format('truetype'),
+			 url("LiberationSansAlchemy-Regular.woff") format('woff'),
+			 url("LiberationSansAlchemy-Regular.svg") format('svg'),
+			 url("LiberationSansAlchemy-Regular.otf") format('otf'),
+			 url("LiberationSansAlchemy-Regular.eot") format('eot');	 
+	}
+	html, body {
+		font-family: "Liberation Sans Alchemy", serif, sans-serif !important;
+		font-size: 0.9em;
+	}
+
+
+/* DEFAULTS */
+div {
+	display:block;
+	position:relative;	
+	padding:0;
+	margin:0;
+}
+.alignRight {
+	float: right;
+}
+.border {
+	border: thin solid #ccc;
+	-moz-border-radius: 0.5em;
+	-webkit-border-radius: 0.5em;
+	border-radius: 0.5em;	
+}
+.paddingSmall {
+	padding: 0.3em;
+}
+
+/* MAIN LAYOUT */
+.lsa-row {
+	width:100%;
+	height: auto;
+	overflow: hidden;
+	padding:0; margin:0;
+}
+#lsa-rowOneA { 
+	display:none; 
+	position:relative; 
+	width:100%; 
+	max-width: 100%; 
+	min-height:2em; 
+	background-color:#FFF; 	
+}
+#lsa-rowOne, #lsa-rowTwo, #lsa-rowThree, #lsa-rowFour, #lsa-rowFive, #lsa-rowSix, #lsa-rowSeven, #lsa-rowEight {
+	display: block;
+	position: relative;
+	padding: 1em;
+	margin: 1em;
+	
+	width: 90%;
+	height: auto;
+	max-width: 90%;
+	min-height: 8em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	border-style:solid;
+	border-color:lightgray;
+	border-width:thin;	
+}
+#lsa-rowOne, #lsa-rowTwo, #lsa-rowSix, #lsa-rowSeven { 
+	border: none; 
+	border-radius:0; 
+	-moz-border-radius:0; 
+	-webkit-border-radius: 0; 
+	min-height: 5em; 
+}
+#lsa-rowTwo {  min-height: 31em; }
+#lsa-rowThree, #lsa-rowFour {
+	display:none;
+}
+#lsa-rowFive {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+/* ROW TWO */
+#lsa-searchChunkDiv, #lsa-outputEnv, #lsa-scopetypediv {
+	display:block;
+	position:relative;
+	min-width: 30%;
+	margin: 0 0.5em;
+	padding:0;
+	float: left;
+	min-height: 30em; 
+}
+#lsa-searchtypeDiv, #lsa-chunksize, #lsa-outputtype, #lsa-scopetype {
+	padding: 0.5em;	
+}
+#lsa-submit {
+	
+}
+
+
+
+/* INSIDE BOXES */
+#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv {
+	/* font-family: GentiumNewton; */
+	position:relative;	
+	width: auto;
+	height: auto;
+}
+#lsa-info {
+	display:block;
+	position:absolute;
+	bottom:0;
+	vertical-align: bottom;	
+}
+#lsa-appendDocEnv, #lsa-appendChunkEnv {
+	width: auto;
+	height: auto;
+	float:left;
+}
+
+/* THE QUERY BOX */
+#lsa-ContinueEnv {
+	display:block;
+	position:relative;
+	width:auto;
+	height:auto;
+	float:left;
+}
+#lsa-theQuery {
+	border: thin solid gray;
+	width: 30em;
+	min-height: 10em;
+}
+
+
+/* ROW THREE */
+#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv  {
+	float:left;
+	width: 30em;
+	clear:right;
+}
+
+/* ROW FIVE */
+#lsa-docBoundEnv {
+	width: auto;
+	height: auto;
+	float: left;
+}
+#lsa-queryButtonArea {
+	width: auto;
+	height: auto;
+	max-width: 30em;
+	min-height:5em;
+	float: left;
+}
+#lsa-chunkBoundEnv {
+	width: auto;
+	height: auto;
+	max-width: 30em;
+	min-height:5em;
+	float: left;	
+}
+#lsa-runSearch, #lsa-clearQueryEnv {
+	float:left !important;
+}
+
+
+/* BOX NUMBERS STYLES */
+.lsa-boxOne { 
+	background-color: #f7f6f2;
+	background-image: url('../images/one.png');
+	background-position: 85% 5%;
+	background-repeat: no-repeat;
+}
+.lsa-boxTwo { 
+	background-color: #f7f6f2;
+	background-image: url('../images/two.png');
+	background-position: 85% 5%;
+	background-repeat: no-repeat;
+}
+.lsa-boxThree { 
+	background-color: #f7f6f2;
+	background-image: url('../images/three.png');
+	background-position: 85% 5%;
+	background-repeat: no-repeat;
+}
+.lsa-boxFour { 
+	background-color: #f7f6f2;
+	background-image: url('../images/four.png');
+	background-position: 95% 5%;
+	background-repeat: no-repeat;
+}
+.lsa-boxFive { 
+	background-color: #f7f6f2;
+	background-image: url('../images/five.png');
+	background-position: 95% top;
+	background-repeat: no-repeat;
+	min-height: 11em !important;
+}
+
+/* FORM DESIGN */
+#lsa-selectdoc {
+	min-width: 30em;
+}
+
+
+/* BUTTONS */
+input[type="button"], input[type="submit"] {
+	border-radius:0.2em;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-style:solid;
+	border-color:#666;
+	border-width:thin;
+	-moz-box-shadow:    0.2em 0.2em 0.2em 0.1em #ccc;
+	-webkit-box-shadow: 0.2em 0.2em 0.2em 0.1em #ccc;
+	box-shadow:         0.2em 0.2em 0.2em 0.1em #ccc;
+	min-width: 8em;
+	max-width: 15em;
+	float:right;
+	clear:right;
+	margin-right: 1em;
+}
+
+/* CLEAR BUTTON */
+#lsa-clearSearchPress {
+	background-color:#FFE1E1;
+	color: #000;
+}
+	
+/* BOXES STYLE */
+#lsa-searchChunkDiv, #lsa-outputEnv, #lsa-scopetypediv {
+	border-radius:1em;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-style:solid;
+	border-color:lightgray;
+	border-width:thin;
+}
+#lsa-searchChunkDiv {
+	padding-bottom: 1em;
+}
+#lsa-chunkSizeDiv {
+	display:block;
+	position:relative;
+	width: 100%;
+	height: 100%;
+	margin-top: 2em;
+	padding-bottom: 1em;
+}
+#lsa-chunksize, #lsa-searchtype {
+	padding: 1em;
+}
+	
+
+
+/* PROGRESS MESSAGES */
+#lsa-spinningImageHolder {
+	display:block;
+	position:relative;
+	margin: auto auto;
+	padding: 2em;
+	width: auto;
+	min-height: 4em;
+}
+#lsa-spinningImageHolder span {
+	font-size: 1em;
+	font-weight: bold;	
+}
+
+
+
+/* TAB */
+#lsa-rightSideTab {
+	display:block;
+	position:absolute;
+	right:0;	
+	width: auto;
+	height: 2.5em;
+	padding: 0.5em 1em;
+	margin: 0;
+	font-size:0.8em;
+	font-weight: bold;
+	background-color:none;
+	border: thin solid #CCC;
+	border-top:none;
+	border-radius: 0.5em;
+	-moz-border-radius:0.5em;
+	-webkit-border-radius:0.5em;
+	z-index: 99;
+}
+#lsa-rightSideTab a {
+	color:#000;
+	text-decoration:none;
+}
+#lsa-rightSideTab a:hover {
+	text-decoration:underline;
+}
+
+
+/* GENERIC FORM */
+form.lsa-genericForm {
+	padding:0; margin:0;
+	border:0;
+}
+form.lsa-genericForm fieldset {
+	padding:0; margin:0;
+	border:0;
+}
+form.lsa-genericForm legend {
+	padding:0; margin:0;
+	border:0;
+	font-weight: bold;
+	padding-bottom:1em;
+}
+form.lsa-genericForm label {
+	padding:0; margin:0;
+	border:0;
+	width: auto; height: auto;
+	min-width: 70%;
+	max-width: 90%;
+	vertical-align: top;
+	padding-right: 0.3em;
+	float: left;	
+}
+form.lsa-genericForm input[type="radio"] {
+	display: inline-block;
+	position:absolute;	
+	padding:0; margin:0;
+	border:0;
+	width: auto; height: auto;	
+	min-width: 10%;
+	max-width: 30%;
+	float: left;
+	clear: right;
+	right: 0;
+}
+
+
+/* FORM LISTS */
+ul.lsa-formList {
+	list-style:none;
+	margin:0; padding:0;
+}
+ul.lsa-formList li {
+	display:block;
+	position:relative;
+	list-style-type:none;
+	margin-bottom: 1em;
+	padding-bottom: 1em;
+	width: auto;
+}
+
+
+/* RESULTS TABLE */
+table.lsa-resultsTable {
+	display: table;
+	position:relative;
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin:0;
+	border-collapse: collapse;	
+}
+table.lsa-resultsTable tr:nth-child(2n+1) {
+	background-color: #f7f6f2;
+}
+table.lsa-resultsTable tr {
+	margin: 1em 0;
+}
+table.lsa-resultsTable tr td {
+	padding: 0.5em;
+}
+
+
+/* GENERIC CLASSES */
+.lsa-halfOpacity {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+.lsa-opacityNormal {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";	
+}
+
+
+
+/* NEW */
+#lsa-queryFormContinue, #lsa-queryFormClear, #lsa-appendDocEnv {
+	width: 10em; float: left; clear: right;
+}

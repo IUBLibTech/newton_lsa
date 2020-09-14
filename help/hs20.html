@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<meta name="keywords" content="science,chemistry,history,isaac newton,chymistry,alchemical manuscripts,national science foundation,laboratory,chymistry of isaac newton,indiana university,digtial library,alchemy,newton" />
+<meta name="description" content="Isaac Newton, like Albert Einstein, is a quintessential symbol of the human intellect and its ability to decode the secrets of nature. Newton wrote and transcribed about a million words on the subject of alchemy, of which only a tiny fraction has today been published. With the support of the National Science Foundation and the National Endowment for the Humanities, The Chymistry of Isaac Newton hosted by Indiana University's Digital Library Program, is producing a scholarly online edition of Newton's alchemical manuscripts integrated with new research on Newton's chymistry." />
+<title>The Chymistry of Isaac Newton Project: Home</title>
+<!-- ******************************
+BEGIN FAVICON
+******************************  -->
+<link rel="icon" href="http://webapp-test.dlib.indiana.edu/newton/favicon.ico" />
+<link rel="shortcut icon" href="http://webapp-test.dlib.indiana.edu/newton/favicon.ico" />
+<!-- ******************************
+BEGIN INDIANA UNIVERSITY BRANDING BAR AND FOOTER STYLES
+******************************  -->
+<link href="http://webapp-test.dlib.indiana.edu/newton/images/IU/css/styles.css" rel="stylesheet" type="text/css" />
+<link href="http://webapp-test.dlib.indiana.edu/newton/images/IU/css/print.css" rel="stylesheet" type="text/css" media="print" />
+<!--[if IE 6]>
+	<link href="http://webapp-test.dlib.indiana.edu/newton/images/IU/css/ie6.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+<!-- ******************************
+BEGIN 1140GRID SYSTEM from http://cssgrid.net/ 
+******************************  -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="http://webapp-test.dlib.indiana.edu/newton/1140grid/css/1140.css" rel="stylesheet" type="text/css" media="screen" />
+<!--[if lte IE 9]><link href="http://webapp-test.dlib.indiana.edu/newton/1140grid/css/ie.css" rel="stylesheet" type="text/css" media="screen" /><![endif]-->
+<!-- ******************************
+BEGIN GOOGLE WEBFONTS
+******************************  -->
+<!--	
+    <link href='http://fonts.googleapis.com/css?family=News+Cycle' rel='stylesheet' type='text/css' />
+	<link href='http://fonts.googleapis.com/css?family=UnifrakturMaguntia' rel='stylesheet' type='text/css'>
+    -->
+<!-- ******************************
+BEGIN INDIANA UNIVERSITY SLIDESHOW
+******************************  -->
+<link href="http://webapp-test.dlib.indiana.edu/newton/css.new/iu_slideshow.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- ******************************
+BEGIN jQUERY UI
+******************************  -->
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+<!-- ******************************
+BEGIN DROP-DOWN BOX
+******************************  -->
+<link href="http://webapp-test.dlib.indiana.edu/newton/css.new/search-dropdown.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- ******************************
+BEGIN SYMBOL SEARCH - jQUERY UI DIALOG BOX
+******************************  -->
+<link href="http://webapp-test.dlib.indiana.edu/newton/css/keyboard2.css" rel="stylesheet" type="text/css" media="screen" />
+<!-- ******************************
+BEGIN NEWTON PROJECT STYLE
+******************************  -->
+<link href="http://webapp-test.dlib.indiana.edu/newton/css.new/styles.css" rel="stylesheet" type="text/css" media="screen" />
+<!--[if IE 9]><link href="http://webapp-test.dlib.indiana.edu/newton/css.new/ie.css" rel="stylesheet" type="text/css" media="screen" /><![endif]-->
+<link href="http://webapp-test.dlib.indiana.edu/newton/css.new/print.css" rel="stylesheet" type="text/css" media="print" />
+<link href="css/style.css" rel="stylesheet" media="all"/>
+</head>
+<body>
+
+
+<!-- IU BRANDING -->
+
+
+<!-- HEADER -->
+<!-- CONTENT -->
+<section class="container mainContent">
+	<div class="row" style="background-color: #FFF;">
+		<div class="twelvecol last">
+			<section class="marginDesign secondLevel"> 
+
+<!-- REMOVE -->
+<P> <A HREF="index.html">Contents</A> - <A HREF="hs35.html">Next</A> 
+<HR>
+</P>
+<h1>About Latent Semantic Analysis</h1>
+<p>Latent semantic analysis (LSA) is a computational method that allows researchers to analyze the relationships between all terms and documents in a corpus.</p>
+
+<p>You can find a brief introduction to LSA in the Wikipedia entry for <A HREF="http://en.wikipedia.org/wiki/Latent_semantic_analysis">Latent semantic analysis.</A>.</p>
+
+<p>LSA calculates correlations between documents, correlations between terms, and correlations between terms and documents. The method begins with a <I>term-document matrix</I> whose rows list all the terms in the corpus and whose columns tally the frequencies of the terms in each document.</p>
+
+<p>LSA uses <I>singular value decomposition</I> to produce vectors for each of the terms and each of the documents. Each vector is an <I>n-dimensional</I> description of the terms and the documents. LSA then applies <I>rank reduction</I> to simplify the calculations and expose the most important dimensions that capture the <I>latent</I> structure of the corpus in terms of its semantics.</p>
+
+<p>We use the term vectors and document vectors to calculate the correlations as cosine similarites: the result gives the cosine of the angle between the two term vectors or document vectors, or between a term vector and a document vector. The closer the cosine is to 1.0, the greater the similarity between two documents or the greater the semantic relationship between two terms. As the cosine approaches zero there is no real relationship at all.</p>
+
+<p>The Newton LSA component stores all significant term-term, document-document, and term-document correlations in a database and provides a suite of built-in query tools that a user can use to investigate those relationships. There are several million correlations and the tools allow us to make both broad and focused queries</p>
+
+<p>The LSA also supports user queries based on choice of terms or on choice of documents. </p>
+
+                       </section>
+		</div>		
+	</div>
+</section>
+<!-- END CONTENT -->
+
+</body>
+</html>

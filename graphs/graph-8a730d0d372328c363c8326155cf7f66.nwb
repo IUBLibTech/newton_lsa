@@ -1,0 +1,27 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Keynes MS. 16, f.001v" "ALCH00005" "z2z"
+2 "Keynes MS. 16, f.002r" "ALCH00005" "z2z"
+3 "Keynes MS. 16, f.001r_2" "ALCH00005" "z2z"
+4 "Keynes MS. 16, f.003v" "ALCH00005" "z2z"
+5 "Keynes MS. 16, f.001r" "ALCH00005" "z2z"
+6 "Keynes MS. 16, f.002v" "ALCH00005" "z2z"
+7 "Keynes MS. 16, f.003r" "ALCH00005" "z2z"
+8 "Keynes MS. 16, f.002v_2" "ALCH00005" "z2z"
+9 "Keynes MS. 16, f.004r" "ALCH00005" "z2z"
+10 "Keynes MS. 16, f.003v_2" "ALCH00005" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.950796
+3	4	0.904480
+5	4	0.889854
+6	7	0.878347
+8	7	0.877003
+5	3	0.876307
+6	8	0.849580
+5	9	0.830201
+2	6	0.827530
+1	6	0.816829
+5	10	0.808519
+2	9	0.803802
+7	10	0.802394

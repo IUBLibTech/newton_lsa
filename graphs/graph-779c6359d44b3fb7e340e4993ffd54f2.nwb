@@ -1,0 +1,11 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "alchymy" "d2d" "z2z"
+2 "paradox" "d2d" "z2z"
+3 "Christ" "d2d" "z2z"
+4 "Jesus" "d2d" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.676743
+1	3	0.627262
+1	4	0.627262

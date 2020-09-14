@@ -1,0 +1,269 @@
+/*** The Essential Code ***/
+
+/* SYMBOL SEARCH */
+#symbolDrownDown {
+	display:none;
+	position:relative;
+	width: auto;
+	min-height: 50em;
+	padding: 0.5em;
+	font-size: 0.8em;
+	margin: 1em;
+}
+
+
+label {
+	display: block;
+	margin-top: 10px;
+}
+
+#login {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#submit_butt {
+	margin-top: 15px;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+input.key {
+	background-repeat: no-repeat;
+	background-color: transparent;
+	border: none;
+}
+.symbolCat {
+	display:inline-block;
+	position:relative;
+	min-width: 8em;
+	margin: 0.1em 0.5em;
+}
+#symbolDrop {
+	position: relative;
+	display: block;
+	border: 1px solid #7F9DB9;
+	background-color: #FFFFCD;
+	width: 300px;
+	min-width: 250px;
+	height: auto;
+	min-height: 25px;
+	vertical-align: middle;
+	padding: 1px;
+	margin: 0;
+	text-align: middle;
+	overflow: auto;
+	font-size: 100%;
+}
+
+ul.droppableSymbols {
+	display: inline-block;
+	list-style: none;
+	padding: 2px;
+	border-left: 1px solid #ccc;
+}
+
+li.key {
+	display: inline;
+	padding: 1px;
+	margin: 1px;
+	z-index: 9999;
+	cursor: move;
+}
+
+.draggableSymbol {
+	border: 1px solid #ccc;
+	padding: 2px;
+}
+
+.droppedItem {
+	border: 2px solid #9F0000;
+}
+
+#symbolSearch {
+	display: block;
+	position:relative;
+	width: 760px;
+	min-width: 200px;
+	background-color:#9F0000;
+	vertical-align: bottom;
+}
+
+.ui-effects-transfer {
+	border: 1px solid maroon;
+}
+
+.transferring {
+	background-color: red;
+	opacity: 0.5;
+}
+
+/* jQuery UI */
+.ui-dialog-buttonpane {
+	height:	1.5em !important;
+	margin:0 !important;
+	padding:0 !important;
+}
+.ui-button .ui-button-text {
+	font-size: 0.8em !important;	
+	margin:0 !important;
+	padding: 0.2em !important;
+} 
+.ui-dialog-titlebar,
+.ui-widget-header {
+	background-image:none !important;
+	background-color:#79080E !important;
+	color:#FFF !important;	
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	background-image: none !important;
+	border: 0 !important;
+	color: #79080E !important;
+}
+.ui-widget-header .ui-icon {
+	background-image: none !important;	
+	text-indent: 0 !important;
+}
+
+/* Caution! Ensure accessibility in print and other media types... */
+@media projection , screen {
+	/* Use class for showing/hiding tab content, so that visibility can be better controlled in different media types... */
+	.ui-tabs-hide {
+		display: none !important;
+	}
+}
+/* Hide useless elements in print layouts... */
+@media print {
+	.ui-tabs-nav {
+		display: none;
+	}
+}
+
+/* Skin */
+.ui-wrapper {
+	border: 0;
+}
+
+.ui-wrapper input,.ui-wrapper textarea {
+	border: 0;
+}
+
+.ui-tabs-nav,.ui-tabs-panel {
+	font-size: xx-small;
+}
+
+.ui-tabs-nav {
+	font-size: xx-small;
+	font-variant: small-caps;
+	letter-spacing: 2px;
+	list-style: none;
+	padding: 4px;
+	margin: 3px;
+}
+
+.ui-tabs-nav:after {
+	/* clearing without presentational markup, IE gets extra treatment */
+	display: block;
+	clear: both;
+	content: " ";
+}
+
+.ui-tabs-nav li {
+	float: left;
+	margin: 0;
+	/*margin: 0 0 0 2px;
+    font-weight: bold;*/
+}
+
+.ui-tabs-nav a,.ui-tabs-nav a span {
+	float: left; /* fixes dir=ltr problem and other quirks IE */
+	padding: 3px;
+	background-color: #999;
+	border: 1px solid #ccc;
+}
+
+.ui-tabs-nav a { /* margin: 5px 0 0; */
+	/* position: relative makes opacity fail for disabled tab in IE */
+	text-decoration: none;
+	white-space: nowrap; /* @ IE 6 */
+	outline: 0; /* @ Firefox, prevent dotted border after click */
+	text-align: center;
+}
+
+.ui-tabs-nav a:link,.ui-tabs-nav a:visited {
+	color: #fff;
+}
+
+.ui-tabs-nav .ui-tabs-selected a {
+	position: relative;
+	/*top: 1px;*/
+	z-index: 2;
+	margin-top: 0;
+	background-color: #474B5F;
+}
+
+.ui-tabs-nav a span {
+	padding-top: 1px;
+	padding-right: 0;
+	height: 20px;
+	line-height: 20px;
+}
+
+.ui-tabs-nav .ui-tabs-selected a span {
+	padding-top: 0;
+	height: 27px;
+	background-color: #999999;
+	line-height: 27px;
+}
+
+.ui-tabs-nav .ui-tabs-selected a:link,.ui-tabs-nav .ui-tabs-selected a:visited,.ui-tabs-nav .ui-tabs-disabled a:link,.ui-tabs-nav .ui-tabs-disabled a:visited
+	{ /* @ Opera, use pseudo classes otherwise it confuses cursor... */
+	cursor: text;
+}
+
+.ui-tabs-nav a:hover,.ui-tabs-nav a:focus,.ui-tabs-nav a:active,.ui-tabs-nav .ui-tabs-unselect a:hover,.ui-tabs-nav .ui-tabs-unselect a:focus,.ui-tabs-nav .ui-tabs-unselect a:active
+	{ /* @ Opera, we need to be explicit again here now... */
+	cursor: pointer;
+}
+
+d
+.ui-tabs-disabled {
+	opacity: .4;
+	filter: alpha(opacity = 40);
+}
+
+.ui-tabs-nav .ui-tabs-disabled a:link,.ui-tabs-nav .ui-tabs-disabled a:visited
+	{
+	color: #000;
+}
+
+.ui-tabs-panel {
+	border: 0;
+	padding: 3px;
+	background: #fff;
+	/* declare background color for container to avoid distorted fonts in IE while fading */
+	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+	min-height: 200px;
+	margin: 0px;
+	vertical-align: top;
+	text-align: top;
+}
+/*.ui-tabs-loading em {
+    padding: 0 0 0 20px;
+    background: url(loading.gif) no-repeat 0 50%;
+}*/
+
+/* Additional IE specific bug fixes... */
+* html .ui-tabs-nav { /* auto clear @ IE 6 & IE 7 Quirks Mode */
+	display: inline-block;
+}
+
+*:first-child+html .ui-tabs-nav {
+	/* auto clear @ IE 7 Standards Mode - do not group selectors, otherwise IE 6 will ignore complete rule (because of the unknown + combinator)... */
+	display: inline-block;
+}

@@ -1,0 +1,42 @@
+*Nodes
+id*int label*string docid*string lemmaid*string
+1 "Keynes MS. 19, f.001r" "ALCH00008" "z2z"
+2 "Keynes MS. 55, f.019r" "ALCH00044" "z2z"
+3 "Keynes MS. 16, f.002r" "ALCH00005" "z2z"
+4 "Keynes MS. 16, f.003r" "ALCH00005" "z2z"
+5 "Keynes MS. 55, f.017r" "ALCH00044" "z2z"
+6 "Keynes MS. 19, f.002v" "ALCH00008" "z2z"
+7 "Keynes MS. 19, f.004r" "ALCH00008" "z2z"
+8 "Keynes MS. 19, f.001v" "ALCH00008" "z2z"
+9 "Keynes MS. 21, f.007r" "ALCH00010" "z2z"
+10 "Keynes MS. 16, f.001r" "ALCH00005" "z2z"
+11 "Keynes MS. 36, f.002r" "ALCH00025" "z2z"
+12 "Keynes MS. 21, f.008v" "ALCH00010" "z2z"
+13 "Keynes MS. 35, f.011v" "ALCH00024" "z2z"
+14 "Keynes MS. 21, f.010v" "ALCH00010" "z2z"
+15 "Keynes MS. 35, f.013v" "ALCH00024" "z2z"
+*UndirectedEdges
+source*int	target*int	weight*float
+1	2	0.964329
+3	4	0.921180
+1	5	0.887185
+6	7	0.881107
+8	9	0.879420
+8	6	0.875817
+1	8	0.872315
+8	2	0.859086
+1	6	0.847919
+1	9	0.845215
+10	4	0.827960
+1	11	0.823761
+8	7	0.796354
+10	3	0.786491
+6	2	0.771314
+1	12	0.764448
+1	7	0.762419
+6	5	0.748300
+1	13	0.746948
+6	9	0.743063
+1	14	0.742329
+8	5	0.714442
+6	15	0.710859

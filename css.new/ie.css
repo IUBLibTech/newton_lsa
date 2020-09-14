@@ -1,0 +1,34 @@
+
+/* Content */
+div.multiColumnsFront {
+	column-count: 2;
+	column-gap: 8px; 
+	column-rule: thin solid #333;	
+	column-width: 240px;
+}
+p.frontPage {
+	font-size: 1em;
+	line-height: 1.2em;
+	font-weight: normal;
+	padding: 0; margin: 0;
+}
+
+p.frontPage:first-letter {
+
+}
+/*
+ul.aboutNewton {
+	display: block;
+	margin: 0.3em 0 0.6em 1.2em;
+	padding: 1em;
+	font-weight: bold;
+	line-height: 1em;	
+	color: #423C30;
+}
+ul.aboutNewton li:nth-child(1) {
+	margin-top: 0.8em;
+}
+ul.aboutNewton li:last-child {
+	margin-bottom: 0.8em;	
+}
+*/

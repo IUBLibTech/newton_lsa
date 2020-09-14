@@ -1,0 +1,86 @@
+
+/****************************************
+ * Slideshow
+ ****************************************/
+ul#slideshow li {
+	display: none;
+}
+ul#slideshow li.active {
+	display: block;
+}
+
+
+#slideshow-wrap {
+	margin: 0;
+	padding: 0.1em;
+	position: relative;
+	display: block;
+	width: 100%;
+	min-height: 100%;
+}
+#slideshow {
+	display: block;
+	position: relative;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#slideshow li {
+    margin: 0;
+	padding: 0;
+	border: thin solid #c0c0c0;
+		
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	
+	/*
+	-moz-box-shadow: 0.2em 0.2em 0.2em #c0c0c0;
+	-webkit-box-shadow: 0.2em 0.2em 0.2em #c0c0c0;
+	box-shadow: 0.2em 0.2em 0.2em #c0c0c0;	
+	*/
+}
+#slideshow img {
+ 	margin: 0;
+	background-color: #FFF;
+	padding: 0;
+}
+#slideshow li .slideshow-caption {
+	display: block;
+	position: absolute;
+	width: 100%;
+	font-size: 1em;
+	line-height: 1em;
+	min-height: 2.5em;
+	padding: 0;
+	margin: 0;
+	bottom: 0;
+	text-align: center;
+	vertical-align: bottom;
+	background-color: #DFD9BD;	
+	
+	border-top: thin solid #c0c0c0;
+	border-bottom-left-radius: 0.4em;
+	border-bottom-right-radius: 0.4em;	
+	-moz-border-radius-bottomleft: 0.4em;
+	-moz-border-radius-bottomright: 0.4em;	
+	-webkit-border-bottom-right-radius: 0.4em;
+	-webkit-border-bottom-left-radius: 0.4em;
+}
+#slideshow li .slideshow-caption p {
+	margin: 1em 0.5em;	
+	padding: 0;
+}
+#slideshow li .slideshow-caption a {
+	display: inline;
+	color: #990000;
+	text-decoration: none;	
+	/*font-weight: bold;*/
+	padding: 0;
+	margin: 0;
+}
+#slideshow li .slideshow-caption a:hover {
+	text-decoration: underline;	
+	padding: 0;
+	margin: 0;
+}

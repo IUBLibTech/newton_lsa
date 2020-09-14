@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+<event start="" end=""
+	title=""
+	link="">
+</event>
+<event isDuration="true" start="" end=""
+	title=""
+	link="">
+</event>
+<event isDuration="true" start="Jun 1655" end="Nov 1659"
+	title="In Grantham, Newton lodges with an apothecary [NAR, PON], Mr. Clark, whose brother read chymical books." 
+	link="">
+	The environment probably intrigued Newton intellectually as well as giving him a years-long experience 
+	of family-like life including perhaps an adolescent romance with a girl who was Clark's ward. He built things 
+	in the attic. [NAR] Did Newton have access to Clark's shop or regular chores there?"
+	NAR p.55-65. PON
+</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read Ripley's &lt;i&gt;Opera omnia chemici&lt;/i&gt; (Kassel 1649) [cf. FHP p.160 ¶.1] ..................................................................."
+		   link="">
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read &lt;i&gt;Tractatus aliquot chemica&lt;/i&gt; (Geismar 1647) [cf. FHP p.160 ¶.1] ..................................................................."
+		   link="">
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read &lt;i&gt;Musaeum Hermeticum&lt;/i&gt; (Frankfurt 1625) [cf. FHP p.160 ¶.1] ..................................................................."
+		   link="">
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read &lt;i&gt;Harmoniae imperscrutabilis . .  Decas [I-II]&lt;/i&gt; (Frankfurt 1625) [cf. FHP p.160 ¶.1] ..................................................................."
+		   link="">
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read Basilius Valentinus &lt;i&gt;Currus triumphalis antimonii&lt;/i&gt; (Frankfurt 1625) [cf. FHP p.160 ¶.1]** ..................................................................."
+		   link="">This book appears in Stanford "A" even though Newton read it earlier.
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read &lt;i&gt;Nicholas Flammel, his exposition of the hierographical figures&lt;/i&gt; (London 1624) [cf. FHP p.160 ¶.2]** ..................................................................."
+		   link="">Newton kept trying to find a copy of this through the 1690s.
+	</event>
+	<event isDuration="true" start="Jan 1 1668" end="Apr 15 1671"
+		   title="Before Stanford A, Newton must have read George Starkey &lt;i&gt;Pyrotechny asserted&lt;/i&gt; (London 1645) [cf. FHP p.161 ¶.0]** ..................................................................."
+		   link="">Newton still added this title to DCS [desiderata] as late as the 1680s.
+	</event>
+	<event isDuration="true" start="Sep 1 1668" latestStart="Apr 15 1671" earliestEnd="Apr 30 1671" end="May 1 1673"
+		title="Newton likely wrote the aspirational 5-page Stanford A (MS M132/2/4), 'De Scriptoribus Chemicis' [early 1670s cf. FHP, maybe before Apr 1669 cf. DTW]** ..................................................................."
+		link="fhp-1.html#stanfordA">Right-click to open in New Tab
+	</event>
+<event start="Apr 8 1669" end="Apr 10 1669"
+	title="Newton purchases a copy of Zetzner's &lt;i&gt;Theatrum Chemicum&lt;/i&gt;">
+</event>
+<event isDuration="true" start="1670" latestStart="Sep 1 1672"
+	earliestEnd="Sep 15 1672" end="1676"
+	title="Newton is likely writing 7-page Babson 419, 'Of Chemicall Authors and their writings' from Maier (1617) [1670-75 by handwriting cf. FHP]**"
+	link="fhp-1.html#babson419">Right-click to open in New Tab&lt;br/&gt;
+	Babson MS 419. ALCH00093&lt;br/&gt;
+	FHP p.142 ¶.0 n.22
+</event>
+<event isDuration="true" start="1670" latestStart="Sep 1 1672"
+	earliestEnd="Sep 29 1672" end="1676"
+	title="Newton is likely writing 12-page Dibner 1031 B, 'Of Natures obvious laws &amp; processes in vegetation [cf. NTA]**"
+	link="https://newton.dlib.indiana.edu/text/ALCH00081/diplomatic">
+	Dibner 1031 B. ALCH00081&lt;br/&gt;
+	NTA p.64 ¶.5-6
+</event>
+<event isDuration="true" start="Sep 1 1676" latestStart="Sep 1 1677"
+	earliestEnd="Sep 8 1677" end="Dec 31 1679"
+	title="Newton is likely writing 3-page St. Andrews 38195(c), 'Authors by nationality' from Maier (1617) [late 1670s cf. FHP]**"
+	link="fhp-1.html#stAndrews3">Right-click to open in New Tab&lt;br/&gt;
+	FHP p.142 ¶.0 n.24
+</event>
+<event isDuration="true" start="Dec 1677" end="Mar 1678"
+	title="Newton has a fire that destroys papers related to a dispute in optics [PON]**"
+	link="">PON p.164
+</event>
+<event isDuration="true" start="Dec 10 1678" end="Jan 15 1679"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.1r-2v (sheet 1) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Jan 1 1686" latestStart="Dec 1 1688" 
+	earliestEnd="Dec 27 1688" end="Dec 31 1689"
+	title="Newton is likely writing the 11-page Stanford B (MS M132/2/3) 'De Script. Chem.' [sometime in the late 1680s cf. FHP]**"
+	link="fhp-1.html#stanfordB">Right-click to open in New Tab&lt;br/&gt;
+</event>
+<event isDuration="true" start="Jan 1 1680" end="Jan 22 1680"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.5r-8v (sheet 2) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Feb 1 1680" end="Feb 28 1680"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.9r-12v (sheet 3) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Jul 1 1680" end="Jul 10 1680"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.15r-18v (sheet 5) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+	This sheet bears a handwritten date from Aug 1682, but internal evidence implies that
+	parts of this sheet were written in 1680. See metadata for Portsmouth Add MS 3973.
+</event>
+<event isDuration="true" start="Jul 1 1680" end="Jul 10 1680"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.10r-14v (sheet 4) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Jul 1 1682" end="Aug 31 1682"
+	title="Newton records chymical experiments, Portsmouth 3973 ff.15r-18v (sheet 5) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+	This sheet bears a handwritten date from Aug 1682, but internal evidence implies that
+	parts of this sheet were written in 1680. See metadata for Portsmouth Add MS 3973.
+</event>
+
+<event isDuration="true" start="Jan 1 1687" latestStart="Jul 1 1688"
+		   earliestEnd="Jul 5 1688" end="Dec 31 1689"
+	title="Newton is likely writing Keynes 13/A, 'Authors listed chronologically' from Maier (1617) [late 1680s?? cf. FHP. Post 1689 or 1696 more likely]**"
+	link="fhp-1.html#keynes13">Right-click to open in New Tab&lt;br/&gt;
+	Keynes 13, first part of 3.&lt;br/&gt;FHP p.142 ¶.0 n.25
+</event>
+<event isDuration="true" start="Jan 1 1687" latestStart="Jan 1 1688"
+	earliestEnd="Dec 31 1688" end="Dec 31 1689"
+	title="Newton purchases a copy of &lt;i&gt;Catalogue of Chymicall Books&lt;/i&gt; (Wm. Cooper, pub) about now [cf. FHP]*">
+	FHP 139 ¶1
+</event>
+<event isDuration="true" start="1690" latestStart="Jan 15 1691" 
+	earliestEnd="Jan 20 1691" end="1694"
+	title="Newton is likely writing Keynes 13/B, 'Authors listed chronologically' [early 1690s cf. FHP]**"
+	link="fhp-1.html#keynes13">Right-click to open in New Tab&lt;br/&gt;
+	Keynes 13, second part of 3.&lt;br/&gt;FHP p.142 ¶.0 n.25
+</event>
+<event start="Mar 5 1691" end="Mar 5 1691"
+	title="Newton records chymical experiments, 'March 5t,' Portsmouth 3973 f.21r (sheet 7) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Dec 1 1692" end="Jan 31 1693"
+	title="Newton records chymical experiments, Portsmouth 3973 f.25r (sheet 8a) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Apr 1 1693" end="Apr 30 1693"
+	title="Newton records chymical experiments, Portsmouth 3973 f.28r (sheet 8b) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Jun 1 1693" end="Jun 30 1693"
+	title="Newton records chymical experiments, Portsmouth 3973 f.28r (sheet 8b) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Apr 1 1695" end="Apr 30 1695"
+	title="Newton records chymical experiments, Portsmouth 3973 f.29r-v (sheet 9a) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="Jan 1 1696" latestStart="April 1 1696" 
+		earliestEnd="April 5 1696" end="Feb 28 1697"
+	title="Newton is likely compiling 2-page Babson 418, 'Lib. Chem', part 2, inventory of his library [about 1696-97 cf. FHP]**"
+	link="fhp-1.html#babson418">Right-click to open in New Tab&lt;br/&gt;
+	Babson MS 418. &lt;br/&gt;FHP p.140 ¶ 2 n.18
+</event>
+<event isDuration="true" start="Feb 1 1696" end="Feb 28 1696"
+	title="Newton records chymical experiments, Portsmouth 3973 f.30v (sheet 9b) **"
+	link="http://carbon.dlib.indiana.edu:8220/text/ALCH00109/diplomatic">
+</event>
+<event isDuration="true" start="1700" latestStart="jan 15 1701" 
+		   earliestEnd="jan 20 1701" end="1703"
+	title="Newton is likely writing Keynes 13/C 'Authors chronologically' [early 1700s cf. FHP]**"
+	link="fhp-1.html#keynes13">Right-click to open in New Tab&lt;br/&gt;
+	Keynes 13, second part of 3.&lt;br/&gt;FHP p.142 ¶.0 n.25
+</event>
+<event start="1702" end="1702"
+	title="A book-sellers' list, 'Books for Mr. Newton' survives [cf. FHP]">
+</event>
+</data>

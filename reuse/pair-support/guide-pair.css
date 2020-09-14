@@ -1,0 +1,26 @@
+@font-face {
+    font-family: GentiumNewton;
+    src: url('../pair-support/GenR102-Newton-ansi.ttf');
+}
+
+body {
+    font-family: GentiumNewton;
+    color:black;
+    }
+
+body.compare {
+    font-family: GentiumNewton;
+    color:gray;
+    }
+
+.guidetext {
+    color:black;
+    }
+
+.shared {
+    color:red;
+    }
+
+.chain {
+	background:cornsilk;
+    }

@@ -1,0 +1,336 @@
+html {
+	background-color: #272727;	
+	padding:0;
+	margin:0;	
+}
+
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1em;
+	height:100%; 
+	padding:0;
+	margin:0;	
+}
+
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;	
+}
+
+
+/* LAYOUT */
+#wrapper {
+	width: 857px;
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	text-align: left;
+}
+
+#contentShell {
+	margin-top: 20px;
+	display: inline-block;
+	width: 100%;
+	color: #000;
+	background-color:#6F6F6F;
+}
+
+#contentEqualizer {
+	float: right;
+	height: 600px;
+	width: 0px;
+}
+
+#northPane { 
+	display: block;
+	position: relative;
+	background:url('../images/fm.background.png') #272727 left repeat-x;
+	width: 857px;
+	height: 120px;
+	padding: 0;
+	margin: 0;
+	border-bottom: #272727 1px solid;
+}
+
+#westPane {
+	display: block;
+	position: relative;
+	width: 257px;
+	height: 100%;
+	min-height:550px;
+	padding: 0;
+	margin: 0;
+	float: left;
+	font-size: 0.7em;	
+	border-left: #272727 1px solid;
+}
+	
+#eastPane {
+	display: block;
+	position: relative;
+	width: 590px;
+	height: 100%;
+	min-height: 550px;
+	padding: 0;
+	margin: 0;	
+	float: left;
+	font-size: 0.8em;	
+}
+
+#southPane {
+	display: block;
+	position: relative;  
+	width: 100%;
+	height: 75px;
+	padding: 0;
+	margin: 0;
+	font-size: 0.7em;
+	background-color:#666;
+	bottom: 0;
+	vertical-align:baseline;
+	border-top: #272727 1px solid;
+	
+}
+
+#footerText {
+	display:block;
+	position: relative;
+	padding: 6px;
+	font-size: 0.8em;
+	bottom: 0;
+	top: 20px;
+	color: #CCC;
+}
+
+#welcome {
+    display: block;
+    position: relative;
+    float: right;
+    width: auto;
+    top: 65px;
+    padding: 5px;
+    color: #FFF;
+	font-size: 0.8em;
+	right: 10px;
+}	
+
+
+
+
+/* TYPOGRAPHY */
+.pointEightEM {
+	font-size: 0.8em;	
+}
+.pointSevenEM {
+	font-size: 0.7em;	
+}
+.pointSixEM {
+	font-size: 0.6em;	
+}
+.uppercase {
+	text-transform: uppercase;	
+}
+.bold {
+	font-weight: bold;	
+}
+
+
+
+
+
+/* PADDING */
+.letterSpacing {
+	letter-spacing: 0.1em;	
+}
+.paddingFivePX {
+	padding: 5px;	
+}
+.paddingTenPX {
+	padding: 10px;	
+}
+
+
+
+
+
+/* COLORS */
+.white {
+	color: #FFF;
+}
+.yellow {
+	color: #FF6; 	
+}
+.orange {
+	color:#F96;
+}
+
+
+
+
+/* ERRORS & REQUIRED */
+.badAlert {
+	display: block;
+	postion: relative;
+	font-size: 0.8em;
+	font-weight: bold;
+	color:#FFF04F;	
+}
+.goodAlert {
+	display: block;
+	postion: relative;
+	float: right;	
+	font-size: 0.8em;
+	font-weight: bold;
+	color:#6F3;	
+}
+.required {
+	font-size: 0.8em;
+	font-weight: bold;
+	color:#FFF04F;	
+}
+.error {
+	font-size: 0.8em;
+	font-weight: bold;
+	color:#FFF04F;			
+}
+.bigAlert {
+	width: 300px;
+	min-height: 50px;
+	float: right;
+}
+.smallAlert {
+	width: 90%;
+	min-height: 20px;
+	text-align: left;
+}
+
+
+/* FORM STYLE */
+.genericForm {
+	display: block;
+	position: relative;
+	margin: auto auto;
+	border: 0;
+}
+.genericForm ul.fieldList {
+	list-style:none;
+}
+.genericForm legend {
+	border: 1px solid #173F5F;
+	background-color: #3F94CD;
+	color: #FFF;
+	padding: 3px;
+}
+.genericForm label {
+	display: inline-block;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding: 5px;
+	color: #CCC;
+}
+.genericForm input.large {
+	width: 250px;
+	border: 1px solid #666;
+	font-size: 0.9em;
+	padding: 2px;
+}
+.genericForm input.medium {
+	width: 150px;
+	border: 1px solid #666;
+	font-size: 0.9em;
+	padding: 2px;	
+}
+.genericForm input.small {
+	width: 50px;
+	border: 1px solid #666;
+	font-size: 0.9em;
+	padding: 2px;
+}
+.genericForm input.submit {
+	display: block;
+	float: right;
+	width: 50px;
+	border: 1px solid #173F5F;
+	background-color:#3F94CD;
+	color:#FFF;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding: 2px;
+	margin: 5px;
+}
+.formRequire {
+	display: block; 
+	position: relative; 
+	float: right; 
+	right: 50px;
+}
+/* specific forms */
+.frontPageForm, .editForm {
+	width: 550px;
+}
+.frontPageForm label, .editForm label {
+	width: 130px;
+}
+.searchForm {
+	width: 99%;
+}
+
+
+
+/* DATABASE RESULTS */
+.addBox {
+	display: block;
+	position: relative;
+	float: right;
+	right: 5px;
+	padding: 5px;
+	height: 1.5em;	
+}
+.dbResults {
+	display: table;
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #FFF;
+	border-collapse:collapse;
+}
+.dbResults tr {
+	display: table-row;
+	padding: 5px;	
+}
+.dbResults th {
+	text-transform:uppercase;
+	font-weight:bold;
+	padding: 5px;		
+}
+.dbResults td {
+	padding-left: 2px;	
+	vertical-align: top;
+	text-align: left;	
+}
+
+
+.odd {
+	background-color:#555;
+}
+.even {
+	background-color:#333;	
+}
+
+
+
+.noBorder {
+	border: 0 !important;	
+}
+.otherLabel {
+	border: 0 !important;
+	background-color: transparent !important;
+	color: #FFF !important;
+	padding: 2px;
+	font-size: 0.8em;
+	font-weight: bold;
+	margin-bottom: 10px;	
+	text-transform: uppercase;
+}
