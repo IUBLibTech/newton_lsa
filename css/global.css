@@ -135,7 +135,7 @@ img#newton-masthead-image {
 }
 @font-face {
   font-family: "Newton Sans";
-  src: url("http://localhost/lsa/css.new/NewtonSans/NewtonSans-2015-11-04.ttf");
+  src: url("../NewtonSans/newtonsans-2015-11-04.ttf");
 }
 
 nav#main-nav {

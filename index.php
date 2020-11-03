@@ -16,7 +16,12 @@ Variables:		$cameFrom 	--	This will be used to build navigation options.
 /****************************
 Set up variable values 
 ****************************/
-$cameFrom = $_SERVER['HTTP_REFERER'];
+if (isset($_SERVER['HTTP_REFERER'])) {
+    $cameFrom = $_SERVER['HTTP_REFERER'];
+}
+else {
+    $cameFrom = "http://carbon.dlib.indiana.edu:8220/";
+}
 
 /****************************************************
 Define database and calling Newton site using a private file
@@ -39,7 +44,7 @@ Write to a log file
 $logfile = "log/mainpage.txt";
 $log = fopen($logfile, "w");
 fwrite($log, "server_name = $cameFrom\n");
-fwrite($log, "flag = ".$flag."\n");
+//fwrite($log, "flag = ".$flag."\n");
 fwrite($log, "host = ". $host . ", port = ". $port."\n");
 fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
 if ($connection) {
@@ -266,7 +271,7 @@ require_once 'design/includes.php';
 		//  style='font-family: Liberation Sans Alchemy'
 		$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
 		while ($term250 = mysqli_fetch_row($term250list)) {
-			print("<option value='$term250[0]' style='font-family: LiberationSansRegular'>$term250[0]</option>");
+			print("<option value='$term250[0]' style='font-family: Newton Sans'>$term250[0]</option>");
 		}
 		mysqli_free_result($term250list);
 		fwrite($log, "term250list loaded.\n");
@@ -309,7 +314,7 @@ require_once 'design/includes.php';
 		//   style='font-family: Liberation Sans Alchemy'
 		$term1000list = mysqli_query($connection, "SELECT wordform FROM term1000_list");
 		while ($term1000 = mysqli_fetch_row($term1000list)) {
-			print("<option value='$term1000[0]' style='font-family: LiberationSansRegular'>$term1000[0]</option>");
+			print("<option value='$term1000[0]' style='font-family: Newton Sans'>$term1000[0]</option>");
 		}
 		mysqli_free_result($term1000list);
 		fwrite($log, "term1000list loaded.\n");
@@ -492,7 +497,7 @@ require_once 'design/includes.php';
 					<ul class="lsa-formList">
 						<li>
 							<label>Query Set:</label>
-							<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: LiberationSansRegular" readonly></textarea>
+							<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: Newton Sans" readonly></textarea>
 						</li>
 					</ul>
 				</fieldset>
@@ -724,7 +729,7 @@ require_once 'design/includes.php';
 				<!--	 	-->
 				<div class="lsa-row" style="background-color: #FEFEFE;">
 					<div id="lsa-rowSix">
-						<div id="lsa-info"> NSF Project #0620868 — Science and Technology Studies <em><b>Note:</b> If you have problems seeing the alchemical symbols correctly, install the Gentium Newton TTF font </em>(GenR102-Newton-ansi.tff)<em> on your machine.<br/>
+						<div id="lsa-info"> NSF Project #0620868 &mdash; Fred Science and Technology Studies <em><b>Note:</b> If you have problems seeing the alchemical symbols correctly, install the Gentium Newton TTF font </em>(GenR102-Newton-ansi.tff)<em> on your machine.<br/>
 									<a href="GentiumNewton.zip">Download font zip file here.</a> Font works on Windows, Macintosh and Linux.<br/>
 									To view and modify network graph files, download and install <a href='http://nwb.slis.indiana.edu/'>Network Workbench</a></em> (NWB).<br/></div>
 					</div>

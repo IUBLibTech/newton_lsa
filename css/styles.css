@@ -8,22 +8,22 @@
 	/*   Be very careful about upper/lower case in the names of the font files   */
 	/*****************************************************************************/
 	@font-face {
-		font-family: 'NewtonSansRegular';
-		src: url('NewtonSans/newtonsans-2015-11-04.eot');
-		src: url('NewtonSans/newtonsans-2015-11-04.eot?#iefix') format('embedded-opentype'),
-			 url('NewtonSans/newtonsans-2015-11-04.woff') format('woff'),
-			 url('NewtonSans/newtonsans-2015-11-04.ttf') format('truetype'),
-			 url('NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
+		font-family: 'Newton Sans';
+		src: url('../NewtonSans/newtonsans-2015-11-04.eot');
+		src: url('../NewtonSans/newtonsans-2015-11-04.eot?#iefix') format('embedded-opentype'),
+url('../NewtonSans/newtonsans-2015-11-04.woff') format('woff'),
+url('../NewtonSans/newtonsans-2015-11-04.ttf') format('truetype'),
+url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		font-weight: normal;
 		font-style: normal;
 	
 	}
 	html, body {
-		font-family: 'NewtonSansRegular';
+		font-family: 'Newton Sans';
 		font-size: 1em;
 	}
 	.symbolDisplay {
-		font-family: 'NewtonSansRegular' !important; 
+		font-family: 'Newton Sans' !important; 
 		font-size: inherit;
 		text-decoration: inherit;
 	}	
@@ -149,7 +149,7 @@
 	}
 	.minHeight {
 		display: inline;
-		font-family: 'NewtonSansRegular';
+		font-family: 'Newton Sans';
 		font-size: 0.1em; /* <<<  */
 		line-height: 0.1em;
 		padding: 0;
@@ -292,7 +292,7 @@
 		font-weight: normal;
 	}
 	p.frontPage:first-letter {
-		font-family: 'NewtonSansRegular';
+		font-family: 'Newton Sans';
 		float: left;
 		font-size: x-large; /* <<<  */
 		font-weight: bold;
@@ -675,7 +675,7 @@
 	/**************************/
 	/**************************/
 	.secondLevel h2 {
-		font-family: 'NewtonSansRegular', sans-serif;
+		font-family: 'Newton Sans', sans-serif;
 		line-height: 2em;
 		display: block;
 		width: 100%;
@@ -800,7 +800,7 @@
 	/* GLOSSARY LISTING  */
 	/*********************/
 	#myList {
-		font-family: 'NewtonSansRegular', sans-serif;
+		font-family: 'Newton Sans', sans-serif;
 		font-weight: lighter;
 		padding: 0.5em;
 	}
@@ -921,7 +921,7 @@
 	/* INDEX CHEMICUS ORDINATUS  */
 	/*****************************/
 	#chemicusList {
-		font-family: 'NewtonSansRegular', sans-serif;
+		font-family: 'Newton Sans', sans-serif;
 		font-weight: lighter;
 		padding: 0.5em;
 		list-style: none;
