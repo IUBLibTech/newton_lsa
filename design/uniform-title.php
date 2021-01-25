@@ -1,6 +1,6 @@
 <header class="page-header">
 		  <link href="https://assets.iu.edu/brand/3.x/brand.css" rel="stylesheet" type="text/css"/>
-		  <div aria-labelledby="campus-name" class="iub" id="branding-bar" itemscope="itemscope" itemtype="http://schema.org/CollegeOrUniversity" role="complementary">
+		  <div aria-labelledby="campus-name" class="iub" id="branding-bar" itemscope="itemscope" itemtype="https://schema.org/CollegeOrUniversity" role="complementary">
 			  <div class="row pad">
 				  ::before
 				  <img alt="" src="//assets.iu.edu/brand/3.x/trident-large.png"/>
@@ -15,13 +15,13 @@
 		  </div>
          <section class="chymistry">
             <div class="masthead">
-				<a class="masthead-link" href=<?php echo($cameFrom) ?> title='Chymistry of Isaac Newton Project HOME'>
+				<a class="masthead-link" href=<?php echo($textSite) ?> title='Chymistry of Isaac Newton Project HOME'>
 					<img id="newton-masthead-image" src="images/newtonImage.transparent.png" alt="Image of Isaac Newton" title="Image of Isaac Newton"/>
 				</a>
-				<a class="masthead-link" href=<?php echo($cameFrom) ?> title='Chymistry of Isaac Newton Project HOME'>
+				<a class="masthead-link" href=<?php echo($textSite) ?> title='Chymistry of Isaac Newton Project HOME'>
 					<img id="newton-masthead-text" src="images/masthead.png" alt="The Chymistry of Isaac Newton Project" title="The Chymistry of Isaac Newton Project"/>
 				</a>
-				<form id="quick-search" action=<?php echo($cameFrom) ?>search/" method="GET">
+				<form id="quick-search" action=<?php echo($textSite) ?>search/" method="GET">
                   <details class="keyboard">
                      	
                      <summary>symbols</summary>
@@ -1423,24 +1423,24 @@
                         	
                      </div>
                      
-                  </details><input type="text" name="text" placeholder="Search manuscripts"/><button type="submit">Search</button><a href="<?php echo($cameFrom) ?>search/">Advanced search</a></form>
+                  </details><input type="text" name="text" placeholder="Search manuscripts"/><button type="submit">Search</button><a href="<?php echo($textSite) ?>search/">Advanced search</a></form>
             </div>
          </section>
       </header>
       <nav id="main-nav">
          <ul class="primary">
-            <li><a href="<?php echo($cameFrom) ?>">Home</a></li>
-            <li><a href="<?php echo($cameFrom) ?>search/">Browse Manuscripts</a></li>
+            <li><a href="<?php echo($textSite) ?>">Home</a></li>
+            <li><a href="<?php echo($textSite) ?>search/">Browse Manuscripts</a></li>
             <li>
                <details>
                   <summary>Online Tools</summary>
                   <ul class="secondary">
-                     <li><a href="<?php echo($cameFrom) ?>bibliography">Bibliography</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/glossary">Alchemical Glossary</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/index-chemicus">Index Chemicus</a></li>
+                     <li><a href="<?php echo($textSite) ?>bibliography">Bibliography</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/glossary">Alchemical Glossary</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/index-chemicus">Index Chemicus</a></li>
                      <li><a href="http://localhost/lsa/index.php">Latent Semantic Analysis</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/font">Newton Font</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/symbols">Symbol Guide</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/font">Newton Font</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/symbols">Symbol Guide</a></li>
                   </ul>
                </details>
             </li>
@@ -1448,10 +1448,10 @@
                <details>
                   <summary>Educational Resources</summary>
                   <ul class="secondary">
-                     <li><a href="<?php echo($cameFrom) ?>page/chymical-products">Chymical Products</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/mineral">Experiments in Mineral Acids</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/chem-lab">Multimedia Lab</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/related">Related Websites</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/chymical-products">Chymical Products</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/mineral">Experiments in Mineral Acids</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/chem-lab">Multimedia Lab</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/related">Related Websites</a></li>
                   </ul>
                </details>
             </li>
@@ -1459,30 +1459,18 @@
                <details>
                   <summary>Project Information</summary>
                   <ul class="secondary">
-                     <li><a href="<?php echo($cameFrom) ?>page/publication">Articles and Presentations</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/news">Chymistry in the News</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/grant">Grant Proposal</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/about">Newton and Alchemy</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/tech">Technical Implementation</a></li>
-                     <li><a href="<?php echo($cameFrom) ?>page/copyright">Use &amp; Copyright</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/publication">Articles and Presentations</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/news">Chymistry in the News</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/grant">Grant Proposal</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/about">Newton and Alchemy</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/tech">Technical Implementation</a></li>
+                     <li><a href="<?php echo($textSite) ?>page/copyright">Use &amp; Copyright</a></li>
                   </ul>
                </details>
             </li>
-            <li><a href="<?php echo($cameFrom) ?>page/editorial-practices">Editorial Practices</a></li>
-            <li><a href="<?php echo($cameFrom) ?>page/personnel">Project Team</a></li>
-            <li><a href="<?php echo($cameFrom) ?>site-index">Site Index</a></li>
-            <li>
-               <details>
-                  <summary>Features</summary>
-                  <ul class="secondary">
-                     <li><a href="reuse/pair_reports.xhtml">Computational Study of Text Reuse</a></li>
-                     <li><a href="timeline/src/webapp/examples/newton-time/tl-one.html">Timeline of Newton's Life and Work</a></li>
-                     <li><a href="timeline/src/webapp/examples/newton-time/fhp-1.html">Figala, Harris &amp; Petzoldt Timeline</a></li>
-                     <li><a href="fhp/FHP-article.html">Figala, Harris &amp; Petzoldt 'De Scriptoribus Chemicis' 1992</a></li>
-                     <li><a href="fhp/FHP-images.html">MSS Discussed in Figala, Harris &amp; Petzoldt</a></li>
-                  </ul>
-               </details>
-            </li>
+            <li><a href="<?php echo($textSite) ?>page/editorial-practices">Editorial Practices</a></li>
+            <li><a href="<?php echo($textSite) ?>page/personnel">Project Team</a></li>
+            <li><a href="<?php echo($textSite) ?>site-index">Site Index</a></li>
          </ul>
       </nav>	
 
