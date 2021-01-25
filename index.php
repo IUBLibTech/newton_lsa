@@ -5,7 +5,7 @@ Co-Author:  	Timothy D Bowman
 
 Description:	Latent Semantic Analysis Tool
 
-Variables:		$cameFrom 	--	This will be used to build navigation options.
+Variables:		$textSite 	--	This will be used to build navigation options.
 				$flag 		--	
  				$host		--	Which database to use (prod or dev)
 				
@@ -16,19 +16,37 @@ Variables:		$cameFrom 	--	This will be used to build navigation options.
 /****************************
 Set up variable values 
 ****************************/
+/*************************************
+This LSA component is able accept queries from all current versions of
+the Chymistry of Isaac Newton website (P4, P5, development, production, local)
+and identify which mysql database (dev/prod) to draw from when responding
+to an user.
+
+The component needs to be told which version of the Chymistry website
+called it. The component stores the calling version in a variable named
+$cameFrom whose value looks like "http://webapp1.dlib.indiana.edu/newton/".
+
+It uses the value of $cameFrom to select the appropriate mysql connection to open, $mysql_connection, and which edition, $text_site, to link back to from the component's own document displays.
+
+The app requires three files in it functions folder.
+    1. came_from.php:  should define $cameFrom as a safe fallback calling version for the server site.
+	2. mysql_connection.php:  where you can define and manage several logins with users, pw, servers, etc, using a switch statement. Returns one valid $mysql_connection.
+	3. callers.php:  this is the switchboard file where $cameFrom is associated with the correct database, $mdb, and text site, $textSite.
+	
+****/
 if (isset($_SERVER['HTTP_REFERER'])) {
     $cameFrom = $_SERVER['HTTP_REFERER'];
 }
 else {
-    $cameFrom = "http://carbon.dlib.indiana.edu:8220/";
+	include_once("functions/came_from.php");
 }
 
 /****************************************************
 Define database and calling Newton site using a private file
 *****************************************************/
-// uses $cameFrom as input
+// uses $textSite as input
 // returns $mdb (1-prod, 2-dev) from /functions/ folder
-// returns $homeSite (int) and its path from /functions/ folder
+// returns $textSite_ID (int) and its path from /functions/ folder
 include_once("functions/callers.php");
 
 /****************************************************
@@ -43,7 +61,7 @@ Write to a log file
 ****************************/
 $logfile = "log/mainpage.txt";
 $log = fopen($logfile, "w");
-fwrite($log, "server_name = $cameFrom\n");
+fwrite($log, "server_name = $textSite\n");
 //fwrite($log, "flag = ".$flag."\n");
 fwrite($log, "host = ". $host . ", port = ". $port."\n");
 fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
@@ -60,7 +78,7 @@ require_once 'design/includes.php';
 ?>
 
 <!-- LSA Style -->
-<link href="css.lsa/style.css" rel="stylesheet" media="all" />
+<link href="css/style.css" rel="stylesheet" media="all" />
 <!-- End LSA Style -->
 <!-- Newton Skin -->
 <?php require_once('design/header.php') ?>
@@ -109,10 +127,10 @@ require_once 'design/includes.php';
 						<form name="lsa-hsForm" id="lsa-hsForm">
 							<?php
 	
-							fwrite($log, "hs = $homeSite\n");
+							fwrite($log, "hs = $textSite_ID\n");
 							
 							// create a hidden form field with the mdb value
-							echo '<input type="hidden" id="lsa-hsValue" name="lsa-hsValue" value="'.$homeSite.'"/>';
+							echo '<input type="hidden" id="lsa-hsValue" name="lsa-hsValue" value="'.$textSite_ID.'"/>';
 							?>
 						</form>
 		
@@ -731,7 +749,7 @@ require_once 'design/includes.php';
 					<div id="lsa-rowSix">
 						<div id="lsa-info"> NSF Project #0620868 &mdash; Fred Science and Technology Studies <em><b>Note:</b> If you have problems seeing the alchemical symbols correctly, install the Gentium Newton TTF font </em>(GenR102-Newton-ansi.tff)<em> on your machine.<br/>
 									<a href="GentiumNewton.zip">Download font zip file here.</a> Font works on Windows, Macintosh and Linux.<br/>
-									To view and modify network graph files, download and install <a href='http://nwb.slis.indiana.edu/'>Network Workbench</a></em> (NWB).<br/></div>
+									To view and modify network graph files, download and install <a href='https://nwb.slis.indiana.edu/'>Network Workbench</a></em> (NWB).<br/></div>
 					</div>
 				</div>
 
