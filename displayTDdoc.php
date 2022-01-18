@@ -32,23 +32,28 @@ function explodeX($delimiters,$string)
 }
 
 function makeDocUrl($urlBase, $alchid, $title) {
-	$alcharray = array();
-	$alchpattern = "/^[ALCH0-9]+/";
-	preg_match($alchpattern, $alchid, $alcharray);
-	$alch = $alcharray[0];
-	
-	$folioarray = array();
-	$foliopattern = "/f\.[0]*([0-9\.rv]+)/";
-	preg_match($foliopattern, $title, $folioarray);
-	$folio = $folioarray[1];
-	
-	return $urlBase.$alch."/#f".$folio; 
+    $alcharray = array();
+    $alchpattern = "/^[ALCH0-9]+/";
+    preg_match($alchpattern, $alchid, $alcharray);
+    $alch = $alcharray[0];
+
+    $folioarray = array();
+    $foliopattern = "/f\.[0]*([0-9\.rv]+)/";
+    preg_match($foliopattern, $title, $folioarray);
+    $folio = $folioarray[1];
+
+    return $urlBase."text/".$alch."/diplomatic"."/#f".$folio;
 }
 
 /* STOP LISTS */
 
 $stoplist =" PARAG[[ ]]PARAG EXPAN[[ ]]EXPAN REG[[ ]]REG [[LB]] HEAD[[ ]]HEAD LATIN[[ ]]LATIN ENGLISH[[ ]]ENGLISH FRENCH[[ ]]FRENCH NAME[[ ]]NAME ABBR[[ ]]ABBR CORR[[ ]]CORR";
 $passlist =" ADD[[ ]]ADD HI[[ ]]HI FOLIO[[ ]]FOLIO . , ; : ? ( ) [ ] { } p p. p: ";
+
+// open the database
+$textSite = "";
+$connection = new mysqli();
+require_once("functions/mysql_connection.php");
 
 /* PROGRAM SETUP */
 $frags = "";
@@ -79,14 +84,6 @@ if (isset($_GET['corr']) && $_GET['corr'] != 0)
 	$corr = $_GET['corr'];
 }
 
-$mdb = $_GET['mdb'];
-$homeSite = $_GET['hs']
-// use $homeSite to define $cameFrom
-include_once("functions/homesites.php")
-
-// open the database
-require_once("functions/mysql_connection.php");
-
 //begin setup
 $getdocdata = "SELECT alch, ctitle, mstitle, ctext FROM frag250 WHERE id=".$doc;
 if ($frags == "ch1000") {
@@ -102,7 +99,7 @@ $mstitle = $docrow[2];
 $dstring = $docrow[3];
 
 // make document URLs
-$docUrl = makeDocUrl($cameFrom, $alch, $title);
+$docUrl = makeDocUrl($textSite, $alch, $title);
 
 // pulling out the text
 //$dstring = file_get_contents($sourcedir.$doc);
@@ -197,7 +194,7 @@ echo "</div>";
 
 <!-- Newton Skin -->
 <?php 
-require_once('design/page-footer.php')
+require_once('design/page-footer.php');
 require_once 'design/jsfooter.php'; 
 ?>
 

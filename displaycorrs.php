@@ -30,7 +30,7 @@ function explodeX($delimiters,$string)
     return $return_array; // Return the exploded elements
 }
 
-function makeDocUrl($sid, $urlBase, $alchid, $title) {	
+function makeDocUrl($urlBase, $alchid, $title) {
 	$alcharray = array();
 	$alchpattern = "/^[ALCH0-9]+/";
 	preg_match($alchpattern, $alchid, $alcharray);
@@ -40,13 +40,8 @@ function makeDocUrl($sid, $urlBase, $alchid, $title) {
 	$foliopattern = "/f\.[0]*([0-9\.rv]+)/";
 	preg_match($foliopattern, $title, $folioarray);
 	$folio = $folioarray[1];
-	
-	if ($sid == 2 || $sid >= 6) {
-		return $urlBase."text/".$alch."/diplomatic"."/#f".$folio;
-	}
-	else {
-		return $urlBase.$alch."/#f".$folio;
-	}
+
+	return $urlBase."text/".$alch."/diplomatic"."/#f".$folio;
 }
 
 /* STOP LISTS */
@@ -55,6 +50,14 @@ $stoplist =" PARAG[[ ]]PARAG EXPAN[[ ]]EXPAN REG[[ ]]REG [[LB]] HEAD[[ ]]HEAD LA
 $passlist =" ADD[[ ]]ADD HI[[ ]]HI FOLIO[[ ]]FOLIO . , ; : ? ( ) [ ] { } p p. p: ";
 
 /* PROGRAM SETUP */
+
+// open the database
+$textSite = "";
+$connection = new mysqli();
+$host = "";
+$port = "";
+require_once("functions/mysql_connection.php");
+
 $frags = "";
 if (isset($_GET['frags']) && $_GET['frags'] != "")
 {
@@ -82,13 +85,6 @@ if (isset($_GET['corr']) && $_GET['corr'] != 0)
 {
 	$corr = $_GET['corr'];
 }
-
-$mdb = $_GET['mdb'];
-$homeSite = $_GET['hs'];
-include_once("functions/homesites.php");
-
-// open the database
-require_once("functions/mysql_connection.php");
 
 /****************************
 Write to a log file 
@@ -149,8 +145,8 @@ $termsx = prepstring($termstring);
 $terms = explode("\n", $termsx);
 
 // make document URLs
-$doc1url = makeDocUrl($homeSite, $cameFrom, $doc1alch, $doc1title);
-$doc2url = makeDocUrl($homeSite, $cameFrom, $doc2alch, $doc2title);
+$doc1url = makeDocUrl($textSite, $doc1alch, $doc1title);
+$doc2url = makeDocUrl($textSite, $doc2alch, $doc2title);
 
 // pulling out the text
 $d1 = explode("\n", $d1string);

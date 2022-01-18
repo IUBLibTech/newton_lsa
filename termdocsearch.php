@@ -38,7 +38,7 @@ function extract_key1($keyint, $mod) {
 	return $key1;
 }
 
-function test_for_presence($fragset, $term, $chunk) {
+function test_for_presence($connection, $fragset, $term, $chunk) {
 	$fragtable = "frag250";
 	if ($fragset == "ch1000") {
 		$fragtable = "frag1000";
@@ -68,8 +68,13 @@ $logfile = "log/termdocsearch.txt";
 $log = fopen($logfile, "w");
 fwrite($log, "open termdocsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
-$homeSite = $_GET['hs']
-$mdb = $_GET['mdb'];
+// open the database
+$connection = new mysqli();
+require_once("functions/mysql_connection.php");
+if ($connection) {
+    fwrite($log, "mysql is connected\n");
+}
+
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
@@ -77,7 +82,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-$hash_value = md5($mdb."|".$list."|".$frags."|".$scope."|".$bound."|".$qs);
+$hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 
 if($outf == "TDcsv" &&  file_exists("graphs/xy-".$hash_value.".csv")) {
 	$downloadpath = "graphs/xy-".$hash_value.".csv";
@@ -88,13 +93,7 @@ if($outf == "TDcsv" &&  file_exists("graphs/xy-".$hash_value.".csv")) {
      exit;
 }
 
-fwrite($log, "mdb=$mdb, list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-// open the database
-require_once("functions/mysql_connection.php");
-if ($connection) {
-	fwrite($log, "mysql is connected\n");
-}
+fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "term250_list";
@@ -143,7 +142,7 @@ fwrite($log, "selectedids: $selectedids\n");
 //  going to try using a temporary table called results to organize the work
 // create temporary table results
 $removeresultstemp = "DROP TEMPORARY TABLE IF EXISTS results";
-mysqli_query($connection, $removepagestemp);
+mysqli_query($connection, $removeresultstemp);
 $makeresultstemp = "CREATE TEMPORARY TABLE results (
 		correlation TEXT, 
 		term INT NOT NULL, 
@@ -247,7 +246,7 @@ if ($outf == "ranked" || $outf == "byterms" || $outf == "bychunks") {
 		
 		$termisthere = 1;
 		if ($scope == "presence"|| $scope == "presentonly") {
-			$termisthere = test_for_presence($frags, $term, $chunk_id);
+			$termisthere = test_for_presence($connection, $frags, $term, $chunk_id);
 		}
 		
 		if ($termisthere == 1) {
@@ -350,7 +349,7 @@ else if ($outf == "TDcsv") {
 		
 		$termIsThere = 1;
 		if ($scope == "presence" || $scope = "presentonly") {
-			$termIsThere = test_for_presence($frags, $term, $chunkID); 
+			$termIsThere = test_for_presence($connection, $frags, $term, $chunkID);
 		}
 		
 		// put $corr into the array

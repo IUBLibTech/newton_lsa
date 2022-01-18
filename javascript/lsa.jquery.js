@@ -8,8 +8,8 @@ var $searchType,//		= 	"wholedocs",
 	$queryString	=	'',
 	$getData 		= 	'',
 	$regexPattern	=	'',
-	$searchURL 		= 	'docsearch.php',
-	$mdb 			= 	2;
+	$searchURL 		= 	'docsearch.php';
+	// $mdb 			= 	2;
 
 function init() {
 	
@@ -54,8 +54,8 @@ function getUserValues() {
 	$chunkSize	= 	$('input[name=lsa-chunkradio]:checked',	'#lsa-chunksize').val(),  //radio
 	$outputType	= 	$('input[name=lsa-outputradio]:checked','#lsa-outputtype').val(), //radio
 	$scopeType	= 	$('input[name=lsa-scoperadio]:checked', '#lsa-scopetype').val();  //radio	
-	$mdb		= 	$('#lsa-mdbValue').val();
-	$hs			= 	$('#lsa-hsValue').val();
+	// $mdb		= 	$('#lsa-mdbValue').val();
+	// $hs			= 	$('#lsa-hsValue').val();
 	
 	
 	// set boundRatio
@@ -120,9 +120,9 @@ function clearQuery() {
 	$queryString	=	'',
 	$getData 		= 	'',
 	$regexPattern	=	'',
-	$searchURL 		= 	'docsearch.php',
-	$mdb			=	2;
-	$hs				= 	1;
+	$searchURL 		= 	'docsearch.php';
+	// $mdb			=	2;
+	// $hs				= 	1;
 
 
 }
@@ -198,9 +198,9 @@ function doSearch() {
 	} else if ($searchType == "chunkquery") { $searchURL = 'usersearch.php';
 	}
 	
-	$getData = "hs="+$hs;
-	$getData += "&mdb="+$mdb;
-	$getData += "&list="+$searchType;
+	// $getData = "hs="+$hs;
+	// $getData += "&mdb="+$mdb;
+	$getData = "&list="+$searchType;
 	$getData += "&frags="+ $chunkSize;
 	$getData += "&scope="+ $scopeType;
 	$getData += "&outf="+	$outputType;
@@ -603,9 +603,9 @@ function updateQueryDisplay($selectSet) {
 }
 
 function openViewer($chset, $chunk1, $chunk2, $correlation) {
-	window.open("displaycorrs.php?hs="+$hs+"&mdb="+$mdb+"&frags="+$chset+"&doc1="+$chunk1+"&doc2="+$chunk2+"&corr="+$correlation);
+	window.open("displaycorrs.php?frags="+$chset+"&doc1="+$chunk1+"&doc2="+$chunk2+"&corr="+$correlation);
 }
 
 function openTDViewer($chset, $chunk, $term, $correlation) {
-	window.open("displayTDdoc.php?hs="+$hs+"&mdb="+$mdb+"&frags="+$chset+"&doc="+$chunk+"&term="+$term+"&corr="+$correlation);
+	window.open("displayTDdoc.php?frags="+$chset+"&doc="+$chunk+"&term="+$term+"&corr="+$correlation);
 }

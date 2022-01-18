@@ -42,11 +42,14 @@ function extract_key1($keyint, $mod) {
 //####################
 // run the search over the correlation matrix
 
+// open the database
+$connection = new mysqli();
+require_once("functions/mysql_connection.php");
+
 $logfile = "log/termsearch.txt";
 $log = fopen($logfile, "w");
 fwrite($log, "open termsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
-$mdb = $_GET['mdb'];
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
@@ -54,7 +57,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-$hash_value = md5($mdb."|".$list."|".$frags."|".$scope."|".$bound."|".$qs);
+$hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 
 if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
   $downloadpath = "graphs/graph-".$hash_value.".nwb";
@@ -65,10 +68,7 @@ if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
      exit;
 }
 
-fwrite($log, "mdb=$mdb, list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-// open the database
-require_once("functions/mysql_connection.php");
+fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "term250_list";
@@ -113,7 +113,7 @@ fwrite($log, "selectedids: $selectedids\n");
 //  going to try using a temporary table called results to organize the work
 // create temporary table results
 $removeresultstemp = "DROP TEMPORARY TABLE IF EXISTS results";
-mysqli_query($connection, $removepagestemp);
+mysqli_query($connection, $removeresultstemp);
 $makeresultstemp = "CREATE TEMPORARY TABLE results (
 		correlation TEXT, 
 		term1 INT NOT NULL, 

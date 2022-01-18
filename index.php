@@ -5,68 +5,59 @@ Co-Author:  	Timothy D Bowman
 
 Description:	Latent Semantic Analysis Tool
 
-Variables:		$textSite 	--	This will be used to build navigation options.
-				$flag 		--	
- 				$host		--	Which database to use (prod or dev)
-				
  
 *********************************/
 
+$this_server = $_SERVER['SERVER_NAME'];
 
 /****************************
 Set up variable values 
 ****************************/
-/*************************************
-This LSA component is able accept queries from all current versions of
-the Chymistry of Isaac Newton website (P4, P5, development, production, local)
-and identify which mysql database (dev/prod) to draw from when responding
-to an user.
-
-The component needs to be told which version of the Chymistry website
-called it. The component stores the calling version in a variable named
-$cameFrom whose value looks like "http://webapp1.dlib.indiana.edu/newton/".
-
-It uses the value of $cameFrom to select the appropriate mysql connection to open, $mysql_connection, and which edition, $text_site, to link back to from the component's own document displays.
-
-The app requires three files in it functions folder.
-    1. came_from.php:  should define $cameFrom as a safe fallback calling version for the server site.
-	2. mysql_connection.php:  where you can define and manage several logins with users, pw, servers, etc, using a switch statement. Returns one valid $mysql_connection.
-	3. callers.php:  this is the switchboard file where $cameFrom is associated with the correct database, $mdb, and text site, $textSite.
-	
-****/
-if (isset($_SERVER['HTTP_REFERER'])) {
-    $cameFrom = $_SERVER['HTTP_REFERER'];
-}
-else {
-	include_once("functions/came_from.php");
-}
 
 /****************************************************
 Define database and calling Newton site using a private file
 *****************************************************/
-// uses $textSite as input
-// returns $mdb (1-prod, 2-dev) from /functions/ folder
-// returns $textSite_ID (int) and its path from /functions/ folder
-include_once("functions/callers.php");
+// The mysql database connection and predefined path to the digital edition
+// will be defined externally in functions/mysql_connection.php
+// but they are initialized in this file to reduce error messages
+// in the development environment.
+//
+// $connection will contain the handle for the mysql database.
+//
+// $textSite will contain the web path to the Chymistry P5 digital edition.
+// The component displays replicas of two passages side by side and includes
+// links to those folio anchors in the digital edition.
+// The component uses $textSite (which must end with a '/') to create those
+// links.
 
-/****************************************************
-Connect to the MySQL database using a private file
-*****************************************************/
-// include() the connection string from /functions/ folder
-// uses $mdb and returns a mysqli $connection
+$connection = new mysqli();  //  initializing empty mysql connection
+$host = "";  // initializing variable to report in log file
+$port = "";  // initializing variable to report in log file
+$textSite = "";    //  initializing variable for web URL of relevant digital edition
+
+/******************************************************************************
+Connect to the MySQL database and digital edition using a private file
+*******************************************************************************/
 include "functions/mysql_connection.php";
 
-/****************************
-Write to a log file 
-****************************/
+/*****************************************
+Write setup info to a log file
+*****************************************/
 $logfile = "log/mainpage.txt";
 $log = fopen($logfile, "w");
-fwrite($log, "server_name = $textSite\n");
+fwrite($log, "this_server = $this_server\n");
+// fwrite($log, "cameFrom = $cameFrom\n");
+fwrite($log, "textSite = $textSite\n");
 //fwrite($log, "flag = ".$flag."\n");
 fwrite($log, "host = ". $host . ", port = ". $port."\n");
 fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
 if ($connection) {
 	fwrite($log, "mysql connected\n"); }
+
+
+/*****************************************
+HTML document begins here
+ *****************************************/
 ?>
 <!doctype html>
 <html>
@@ -113,28 +104,6 @@ require_once 'design/includes.php';
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowTwo">
 		<div id="lsa-searchChunkDiv" class="lsa-boxOne">
-		
-						<form name="lsa-mdbForm" id="lsa-mdbForm">
-							<?php
-	
-							fwrite($log, "mdb = $mdb\n");
-							
-							// create a hidden form field with the mdb value
-							echo '<input type="hidden" id="lsa-mdbValue" name="lsa-mdbValue" value="'.$mdb.'"/>';
-							?>
-						</form>
-		
-						<form name="lsa-hsForm" id="lsa-hsForm">
-							<?php
-	
-							fwrite($log, "hs = $textSite_ID\n");
-							
-							// create a hidden form field with the mdb value
-							echo '<input type="hidden" id="lsa-hsValue" name="lsa-hsValue" value="'.$textSite_ID.'"/>';
-							?>
-						</form>
-		
-		
 			<div id="lsa-searchtypeDiv">
 				<form name="lsa-searchtype" id="lsa-searchtype" class="lsa-genericForm">
 					<fieldset>

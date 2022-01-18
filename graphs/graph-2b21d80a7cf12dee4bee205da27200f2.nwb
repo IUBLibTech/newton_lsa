@@ -1,7 +1,0 @@
-*Nodes
-id*int label*string docid*string lemmaid*string
-1 "Keynes MS. 63, f.003v" "ALCH00052" "z2z"
-2 "Keynes MS. 63, f.006r" "ALCH00052" "z2z"
-*UndirectedEdges
-source*int	target*int	weight*float
-1	2	0.922832

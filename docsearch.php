@@ -42,16 +42,19 @@ function extract_key1($keyint, $mod) {
 //####################
 // run the search over the correlation matrix
 
+// open the database
+$textSite = "";
+$connection = new mysqli();
+require_once 'functions/mysql_connection.php';
+
 $logfile = "log/docsearch.txt";
 $log = fopen($logfile, "w");
 /*if (!$log) {
 	echo "no log";
 	return;
 }*/
-fwrite($log, "open docsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
+fwrite($log, "opened docsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
-$homeSite = $_GET['hs'];
-$mdb = $_GET['mdb'];
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
@@ -60,14 +63,7 @@ $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
 
-// added by TDBOWMAN (to get live path working)
-// this probably should be more elegant
-if ($mdb == 0) {
-	$mdb = 1;
-}
-
-
-$hash_value = md5($mdb."|".$list."|".$frags."|".$scope."|".$bound."|".$qs);
+$hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 
 if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
   $downloadpath = "graphs/graph-".$hash_value.".nwb";
@@ -83,11 +79,7 @@ if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
      exit;
 }
 
-fwrite($log, "mdb=$mdb, list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-// open the database
-// use $mdb to open $connection
-require_once 'functions/mysql_connection.php';
+fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "doc250_list";
@@ -106,7 +98,9 @@ $selected = array();
 if ($qs == "ALL") {
 	// grab everything from doclist
 	$selectalldocs = "SELECT id, ctitle FROM ".$listTable;
-	$allset = mysqli_query($connection, $selectalldocs);
+	if (!empty($connection)) {
+		$allset = mysqli_query($connection, $selectalldocs);
+	}
 	fwrite($log, "allset query made. memory used: ".memory_get_usage()."\n");
 
 	while($row_all = mysqli_fetch_row($allset)) {
@@ -139,10 +133,16 @@ else {
 	else if ($list == "chunks") {
 		$wherecolumn = "id";
 	}
-	
+
+	fwrite($log, "matchID: ".$matchID."\n");
+
 	$selectsome = "SELECT id, ctitle FROM ".$listTable." WHERE ".$wherecolumn." IN (".$matchID.")";
+
+	fwrite($log, "selectsome: $selectsome\n");
+
 	$someset = mysqli_query($connection, $selectsome);
 	fwrite($log, "someset query made. memory used: ".memory_get_usage()."\n");
+	fwrite($log, "number of rows returned: ".mysqli_num_rows($someset)."\n");
 
 	while($row_some = mysqli_fetch_row($someset)) {
 		$selected[$row_some[0]] = $row_some[1];

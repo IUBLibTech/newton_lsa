@@ -851,9 +851,9 @@ function updateQueryDisplay(selectset) {
 }
 
 function openViewer(chset, chunk1, chunk2, correlation) {
-	window.open("displaycorrs.php?hs="+hs+"&mdb="+mdb+"&frags="+chset+"&doc1="+chunk1+"&doc2="+chunk2+"&corr="+correlation);
+	window.open("displaycorrs.php?frags="+chset+"&doc1="+chunk1+"&doc2="+chunk2+"&corr="+correlation);
 }
 
 function openTDViewer(chset, chunk, term, correlation) {
-	window.open("displayTDdoc.php?hs="+hs+"&mdb="+mdb+"&frags="+chset+"&doc="+chunk+"&term="+term+"&corr="+correlation);
+	window.open("displayTDdoc.php?frags="+chset+"&doc="+chunk+"&term="+term+"&corr="+correlation);
 }

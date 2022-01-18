@@ -88,7 +88,7 @@ function extract_key1($keyint, $mod) {
 	return $key1;
 }
 
-function test_for_presence($fragset, $term, $chunk) {
+function test_for_presence($connection, $fragset, $term, $chunk) {
 	$fragtable = "frag250";
 	if ($fragset == "ch1000") {
 		$fragtable = "frag1000";
@@ -113,6 +113,9 @@ function test_for_presence($fragset, $term, $chunk) {
 //  MAIN PROCEDURE
 //####################
 // run the search over the correlation matrix
+// open the database
+$connection = new mysqli();
+require_once("functions/mysql_connection.php");
 
 $logfile = "log/usersearch.txt";
 $log = fopen($logfile, "w");
@@ -122,7 +125,6 @@ if (!$log) {
 }
 fwrite($log, "open usersearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
-$mdb = $_GET['mdb'];
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
@@ -130,9 +132,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-fwrite($log, "mdb=$mdb, list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-require_once("functions/mysql_connection.php")
+fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $chunktable = "doc250_list";
@@ -196,7 +196,7 @@ if ($list == "termquery") {
 	}
 	fwrite($log, "selectedterm_id array loaded: ".memory_get_usage()."\n");
 	fwrite($log, "select_termid_string: $select_termid_string\n");
-	mysql_free_result($termtablerows);
+	mysqli_free_result($termtablerows);
 	fwrite($log, "termtablerows freed: ".memory_get_usage()."\n");
 	fwrite($log, "count in selectedterm_id: ".count($selectedterm_id)."\n");
 	
@@ -272,7 +272,7 @@ if ($list == "termquery") {
 			if ($scope == "presence"|| $scope == "presentonly") {
 				foreach($qsq as $qterm) {
 					$termtest = 0;
-					$termtest = test_for_presence($frags, $qterm, $chunkId);
+					$termtest = test_for_presence($connection, $frags, $qterm, $chunkId);
 					fwrite($log, $termtest."\n");
 					$termisthere = $termisthere + $termtest;
 					if ($termtest == 1) {
@@ -435,7 +435,7 @@ elseif ($list == "chunkquery") {
 					fwrite($log, "chunk= ".$chunktitle."\n");
 					fwrite($log, "chunkfile= ".$chunkfile."\n");
 					$termtest = 0;
-					$termtest = test_for_presence($frags, $term, $chunkId);
+					$termtest = test_for_presence($connection, $frags, $term, $chunkId);
 					fwrite($log, $termtest."\n");
 					$termisthere = $termisthere + $termtest;
 					if ($termtest == 1) {

@@ -1,5 +1,4 @@
 <?php
-//require_once './functions/mysql_connection.php';
 //  FUNCTIONS
 //####################
 function cosine_sim($vecstring1, $vecstring2, $sumsq1, $sumsq2) {
@@ -39,13 +38,13 @@ function extract_key1($keyint, $mod) {
 	return $key1;
 }
 
-function test_for_presence($fragset, $term, $chunk) {
+function test_for_presence($connection, $fragset, $term, $chunk) {
 	$fragtable = "frag250";
 	if ($fragset == "ch1000") {
 		$fragtable = "frag1000";
 	}
-	$fragresult = mysql_query("SELECT ctext FROM $fragtable WHERE id=$chunk");
-	$fragment = mysql_fetch_row($fragresult);
+	$fragresult = mysqli_query($connection, "SELECT ctext FROM $fragtable WHERE id=$chunk");
+	$fragment = mysqli_fetch_row($fragresult);
 	$fstring = $fragment[0];
 	
 	$lc_term = strtolower($term);
@@ -65,6 +64,11 @@ function test_for_presence($fragset, $term, $chunk) {
 //####################
 // run the search over the correlation matrix
 
+// open the database
+$textSite = "";
+$connection = new mysqli();
+require_once("functions/mysql_connection.php");
+
 $logfile = "log/chunktermsearch.txt";
 $log = fopen($logfile, "w");
 if (!$log) {
@@ -73,7 +77,6 @@ if (!$log) {
 }
 fwrite($log, "open chunktermsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
-$mdb = $_GET['mdb'];
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
@@ -81,8 +84,10 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-$hash_value = md5($mdb."|".$list."|".$frags."|".$scope."|".$bound."|".$qs);
+fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
+// filename for possible network graph will need a hash value
+$hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 if($outf == "TDcsv" &&  file_exists("graphs/xy-".$hash_value.".csv")) {
 	$downloadpath = "graphs/xy-".$hash_value.".csv";
     echo  "<br/><br/>(Right-click the link and use <em>Save link as...</em> to get a copy of a CSV file for viewing an XY Chart in Excel or another program.)<br/><br/>
@@ -91,11 +96,6 @@ if($outf == "TDcsv" &&  file_exists("graphs/xy-".$hash_value.".csv")) {
 				</table><br/><br/>";
      exit;
 }
-
-fwrite($log, "mdb=$mdb, list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-// open the database
-require_once("functions/mysql_connection.php");
 
 //begin setup
 $listTable = "doc250_list";
@@ -118,35 +118,36 @@ $chidx = 0;
 $selectedchunks = "";
 if ($qs == "ALL") {
 	unset($selected);
-	print "There's no point in asking for ALL chunks. I'll fix this. Try choosing some chunks.";
+	print "'ALL' chunks is more than the webapp can handle. Try choosing (many) individual chunks.";
 	return;
 }
 else {
 	$selectedchunks = str_replace("_", ",", $qs);
 	//$selectedchunks = "'".$selectedchunks."'";
 	$getselecteddocids = "SELECT id, alch FROM ".$listTable." WHERE id IN (".$selectedchunks.")";
-	$selectedrows = mysql_query($getselecteddocids);
-	while ($nextid = mysql_fetch_row($selectedrows)) {
+	$selectedrows = mysqli_query($connection, $getselecteddocids);
+	while ($nextid = mysqli_fetch_row($selectedrows)) {
 		$selected[] = $nextid[0];
 		$chunkindex[$nextid[0]] = $chidx;
 		$chidx++;
 	}
-	mysql_free_result($selectedrows);
+	mysqli_free_result($selectedrows);
 }
 fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
 fwrite($log, "count in selected: ".count($selected)."\n");
 
 fwrite($log, "selectedchunks: $selectedchunks\n");
+fwrite($log, "get selected query: $getselecteddocids\n");
 
 //  going to try using a temporary table called results to organize the work
 // create temporary table results
 $removeresultstemp = "DROP TEMPORARY TABLE IF EXISTS results";
-mysql_query($removepagestemp);
+mysqli_query($connection, $removeresultstemp);
 $makeresultstemp = "CREATE TEMPORARY TABLE results (
 		correlation TEXT, 
 		term INT NOT NULL, 
 		doc INT NOT NULL)";
-mysql_query($makeresultstemp);
+mysqli_query($connection, $makeresultstemp);
 
 $pairs4 = 0;
 $pairs1 = 0;
@@ -155,40 +156,41 @@ $pairs0 = 0;
 $getcosines4 = "INSERT INTO results (correlation, term, doc)
 		SELECT correlation, term, doc FROM $correlationTable4
 		WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
-mysql_query($getcosines4);
-$pairs4 = mysql_affected_rows();
+mysqli_query($connection, $getcosines4);
+$pairs4 = mysqli_affected_rows($connection);
 fwrite($log, "getcosines4 query executed: ".memory_get_usage()."\n");
 fwrite($log, "cosines4 rows: $pairs4\n");
-$pairs5 = mysql_affected_rows();
+$pairs5 = mysqli_affected_rows($connection);
 if ($bound <= 0.4) {
 	$getcosines1 = "INSERT INTO results (correlation, term, doc)
 			SELECT correlation, term, doc FROM $correlationTable1
 			WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
-	mysql_query($getcosines1);
+	mysqli_query($connection, $getcosines1);
 	fwrite($log, "getcosines1 query executed: ".memory_get_usage()."\n");
-	$pairs1 = mysql_affected_rows();
+	$pairs1 = mysqli_affected_rows();
 	fwrite($log, "cosines1 rows: $pairs1\n");
 }
 if ($bound <= 0.1) {
 	$getcosines0 = "INSERT INTO results (correlation, term, doc)
 			SELECT correlation, term, doc FROM $correlationTable0
 			WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
-	mysql_query($getcosines0);
+	mysqli_query($getcosines0);
 	fwrite($log, "getcosines0 query executed: ".memory_get_usage()."\n");
-	$pairs0 = mysql_affected_rows();
+	$pairs0 = mysqli_affected_rows();
 }
 
+fwrite($log, "Made it to line 182!\n");
 // load the appropriate term list into memory array for output
 $getallterms = "SELECT wordform FROM ".$termlistTable;
 $termliststring = "BASE\n";
-$termrows = mysql_query($getallterms);
-while ($termrow = mysql_fetch_row($termrows)) {
+$termrows = mysqli_query($connection, $getallterms);
+while ($termrow = mysqli_fetch_row($termrows)) {
 	$termliststring = $termliststring.$termrow[0]."\n";
 }
 $termlist = explode("\n", $termliststring);
 fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
 unset($termliststring);
-mysql_free_result($termrows);
+mysqli_free_result($termrows);
 fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
 fwrite($log, "termlist count: ".count($termlist)."\n");
 
@@ -200,11 +202,11 @@ if ($frags == "ch1000") {
 	$getchunksdata = "SELECT id, ctitle FROM doc1000_list";
 	$displayscript = "javascript:openTDViewer(\"ch1000\", \"";
 }
-$chunksdata = mysql_query($getchunksdata);
+$chunksdata = mysqli_query($connection, $getchunksdata);
 
 $chunks = array();
 $chunks[] = "BASE"; // fills that pesky $chunks[0] member
-while ($outchunk = mysql_fetch_array($chunksdata)) {
+while ($outchunk = mysqli_fetch_array($chunksdata)) {
 	$chunks[] = $outchunk;
 }
 fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
@@ -229,12 +231,12 @@ if ($outf == "ranked" || $outf == "byterms" || $outf == "bychunks") {
 		//$output = $db->query("select * from results order by item2 asc, item1 asc");
 	}
 	
-	$output = mysql_query($getoutput);	
+	$output = mysqli_query($connection, $getoutput);
 	$outputcount = 0;
 	//fwrite($log, "output array initialized. ".memory_get_usage()."\n");
 	
 	echo "<table cellpadding=5>";
-	while ($outrow = mysql_fetch_row($output)) {
+	while ($outrow = mysqli_fetch_row($output)) {
 		//
 		$corr = $outrow[0];
 		$term_id = $outrow[1];
@@ -245,7 +247,7 @@ if ($outf == "ranked" || $outf == "byterms" || $outf == "bychunks") {
 		
 		$termisthere = 1;
 		if ($scope == "presence"|| $scope == "presentonly") {
-			$termisthere = test_for_presence($frags, $term, $chunk_id);
+			$termisthere = test_for_presence($connection, $frags, $term, $chunk_id);
 		}
 
 		if ($termisthere == 1) {
@@ -275,13 +277,13 @@ if ($outf == "ranked" || $outf == "byterms" || $outf == "bychunks") {
 	}
 	echo "</table>";
 	
-	mysql_free_result($output);
+	mysqli_free_result($output);
 }
 else if ($outf == "TDcsv") {
 	// Make a csv file for use in Excel to make an XY chart with X as docIds and corrs as Ys
 	//$output2 = $db->query("select * from results order by item1 asc");
 	$csvoutputselect = "SELECT * FROM results ORDER BY term ASC";
-	$output2 = mysql_query($csvoutputselect);
+	$output2 = mysqli_query($connection, $csvoutputselect);
 	
 	// We have to know how many chunks there are in selected. Each gets one column. Add two columns for
 	// the document names and for the chunk IDs.
@@ -323,7 +325,7 @@ else if ($outf == "TDcsv") {
 	fwrite($csv, "\n");
 	
 	// Other rows will have the chunk IDs and term correlations
-	while ($outrow2 = mysql_fetch_row($output2)) {
+	while ($outrow2 = mysqli_fetch_row($output2)) {
 		// check the bound
 		$corr = $outrow2[0];
 		
@@ -347,7 +349,7 @@ else if ($outf == "TDcsv") {
 		$termIsThere = 1;
 		// everything is reported unless the user tests for present/not present
 		if ($scope == "presence" || $scope = "presentonly") {
-			$termIsThere = test_for_presence($frags, $term, $chunkID); 
+			$termIsThere = test_for_presence($connection, $frags, $term, $chunkID);
 		}
 		
 		// put $corr into the array
@@ -397,13 +399,13 @@ else if ($outf == "TDcsv") {
 				<tr><td>XY scatterplot CSV file:</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td></tr>
 				</table><br/><br/>";
 	
-	mysql_free_result($output2);
+	mysqli_free_result($output2);
 }
 
 //  clean up
 unset($termlist);
 unset($chunks);
-//mysql_free_result($output);
+//mysqli_free_result($output);
 mysqli_close($connection);
 fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
 fclose($log);
