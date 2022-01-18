@@ -1,8 +1,14 @@
 After copying the LSA webapp to its web home, create a file in this folder, lsa/functions, named
 mysql_connection.php.
 
-In that file, write code to create a working mysql_connection named $connection (see PHP documentation) to a
-Chymistry LSA database.
+In that file, define the PHP variable $textSite with the web address of the Chymistry xproc P5 digital edition
+where this installation of the component can links its own side-by-side displays to the digital edition's versions of
+the same texts.
+
+In that same file, also write code to create a working mysql_connection named $connection (see PHP documentation) to a
+Chymistry LSA database with a statement that looks like:
+
+$connection = new mysqli($host.$port, $user, $passwd, $db);    (Notice that I joined $host and $port and added the colon to $host.)
 
 On library mysql servers, the database name is newton_lsa. There is a production version for the public site and 
 a development version for the full development site.
