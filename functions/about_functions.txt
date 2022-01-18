@@ -1,0 +1,12 @@
+After copying the LSA webapp to its web home, create a file in this folder, lsa/functions, named
+mysql_connection.php.
+
+In that file, write code to create a working mysql_connection named $connection (see PHP documentation) to a
+Chymistry LSA database.
+
+On library mysql servers, the database name is newton_lsa. There is a production version for the public site and 
+a development version for the full development site.
+
+On HPC/RDC, the database name is whooper_lsa_2011.
+
+Contact library administrators or whooper@iu.edu for login information, if available.

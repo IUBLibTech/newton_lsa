@@ -1,0 +1,1 @@
+Each of the PHP pages in the LSA component will create log files in the lsa/log folder.
