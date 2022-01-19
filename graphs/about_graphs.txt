@@ -1,0 +1,5 @@
+The LSA component can create network graphs in Network Workbench (.nwb) format or in CSV format on user request.
+
+Those files will be given hashed filenames, so that if a later user requests the same graph, the component will not rewrite it
+but will return the existing copy.
+
