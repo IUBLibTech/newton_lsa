@@ -1,46 +1,49 @@
 
+     <?php
+      include "../functions/mysql_connection.php";
+      ?>
       <footer class="page-footer">
          <div class="link-to-top"><a href="#top"><img src="images/icons/icon_toTop.png" alt="To Top of Page" title="To Top of Page"/></a></div>
          <div class="menus-and-links">
             <div class="menus">
                <div class="menu">
                   <ul>
-                     <li><a href="$cameFrom/" class="current">Home</a></li>
-                     <li><a href="$cameFrom/search/">Browse Manuscripts</a></li>
-                     <li><a href="$cameFrom/page/editorial-practices">Editorial Practices</a></li>
-                     <li><a href="$cameFrom/page/personnel">Project Team</a></li>
-                     <li><a href="$cameFrom/site-index">Site Index</a></li>
+                     <li><a href="<?php echo $textSite ?>" class="current">Home</a></li>
+                     <li><a href="<?php echo $textSite ?> ?>search/">Browse Manuscripts</a></li>
+                     <li><a href="<?php echo $textSite ?>page/editorial-practices">Editorial Practices</a></li>
+                     <li><a href="<?php echo $textSite ?>page/personnel">Project Team</a></li>
+                     <li><a href="<?php echo $textSite ?>site-index">Site Index</a></li>
                   </ul>
                </div>
                <div class="menu">
                   <header>Online Tools</header>
                   <ul>
-                     <li><a href="$cameFrom/bibliography">Bibliography</a></li>
-                     <li><a href="$cameFrom/page/glossary">Alchemical Glossary</a></li>
-                     <li><a href="$cameFrom/page/index-chemicus">Index Chemicus</a></li>
+                     <li><a href="<?php echo $textSite ?>bibliography">Bibliography</a></li>
+                     <li><a href="<?php echo $textSite ?>page/glossary">Alchemical Glossary</a></li>
+                     <li><a href="<?php echo $textSite ?>page/index-chemicus">Index Chemicus</a></li>
                      <li><a href="index.php">Latent Semantic Analysis</a></li>
-                     <li><a href="$cameFrom/page/font">Newton Font</a></li>
-                     <li><a href="$cameFrom/page/symbols">Symbol Guide</a></li>
+                     <li><a href="<?php echo $textSite ?>page/font">Newton Font</a></li>
+                     <li><a href="<?php echo $textSite ?>page/symbols">Symbol Guide</a></li>
                   </ul>
                </div>
                <div class="menu">
                   <header>Educational Resources</header>
                   <ul>
-                     <li><a href="$cameFrom/page/chymical-products">Chymical Products</a></li>
-                     <li><a href="$cameFrom/page/mineral">Experiments in Mineral Acids</a></li>
-                     <li><a href="$cameFrom/page/chem-lab">Multimedia Lab</a></li>
-                     <li><a href="$cameFrom/page/related">Related Websites</a></li>
+                     <li><a href="<?php echo $textSite ?>page/chymical-products">Chymical Products</a></li>
+                     <li><a href="<?php echo $textSite ?>page/mineral">Experiments in Mineral Acids</a></li>
+                     <li><a href="<?php echo $textSite ?>page/chem-lab">Multimedia Lab</a></li>
+                     <li><a href="<?php echo $textSite ?>page/related">Related Websites</a></li>
                   </ul>
                </div>
                <div class="menu">
                   <header>Project Information</header>
                   <ul>
-                     <li><a href="$cameFrom/page/publication">Articles and Presentations</a></li>
-                     <li><a href="$cameFrom/page/news">Chymistry in the News</a></li>
-                     <li><a href="$cameFrom/page/grant">Grant Proposal</a></li>
-                     <li><a href="$cameFrom/page/about">Newton and Alchemy</a></li>
-                     <li><a href="$cameFrom/page/tech">Technical Implementation</a></li>
-                     <li><a href="$cameFrom/page/copyright">Use &amp; Copyright</a></li>
+                     <li><a href="<?php echo $textSite ?>page/publication">Articles and Presentations</a></li>
+                     <li><a href="<?php echo $textSite ?>page/news">Chymistry in the News</a></li>
+                     <li><a href="<?php echo $textSite ?>page/grant">Grant Proposal</a></li>
+                     <li><a href="<?php echo $textSite ?>page/about">Newton and Alchemy</a></li>
+                     <li><a href="<?php echo $textSite ?>page/tech">Technical Implementation</a></li>
+                     <li><a href="<?php echo $textSite ?>page/copyright">Use &amp; Copyright</a></li>
                   </ul>
                </div>
             </div>
@@ -54,7 +57,7 @@
                   					In collaboration with the <a href="http://www.dlib.indiana.edu" target="_blank" title="Digital Library Program at IU">IU Digital Library Program</a> 
                   					| <a href="http://www.libraries.iub.edu/index.php?pageId=1137" title="Libraries Privacy Policy" target="_blank">Libraries Privacy Policy</a> 
                   					| In association with <a href="http://www.newtonproject.sussex.ac.uk/" title="Newton Project at Sussex" target="_blank">The Newton Project</a> - 
-                  					University of Sussex<br/><a href="/page/copyright" title="Copyright">© Copyright 2005—2020, 
+                  					University of Sussex<br/><a href="page/copyright" title="Copyright">© Copyright 2005—2020,
                      					William R. Newman.</a><br/>
                   					Peer reviewed by <a href="http://18thconnect.org/" target="_blank">18thConnect</a>.
                </p>

@@ -83,7 +83,7 @@ require_once 'design/includes.php';
 <!--	 			-->
 <div class="lsa-row">
 	<div id="lsa-rowZero">
-		<div class="alignRight border paddingSmall" style="background-color: #7D100B;"><a href="help/index.html" title="HELP" class="helpLink">HELP Documentation</a></div>
+		<div class="alignRight border paddingSmall" style="background-color: #7D100B;"><a href="help.html" title="HELP" class="helpLink">HELP Documentation</a></div>
         <p style="margin: 1em; margin-bottom:0;"><span class="instructionHeading">INSTRUCTIONS:</span> <span class="instructions">To begin, choose a search type and chunk size in Step 1. After Step 3, click the Continue button and proceed to step 4.<br/>(Change your browser's encoding to UTF-8 to render Newton's alchemical symbols. Firefox and Opera support symbol rendering.)</span></p>
         
 	</div>
