@@ -11,7 +11,7 @@ BEGIN 1140GRID SYSTEM from http://cssgrid.net/
 <!-- ******************************
 BEGIN jQUERY UI
 ******************************  -->
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 <!-- ******************************
 BEGIN DROP-DOWN BOX
 ******************************  -->
@@ -23,5 +23,5 @@ BEGIN SYMBOL SEARCH - jQUERY UI DIALOG BOX
 <!-- ******************************
 BEGIN NEWTON PROJECT STYLE
 ******************************  -->
-<link href="css.new/styles.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="css.new/print.css" rel="stylesheet" type="text/css" media="print" />    
+<!--<link href="css.new/styles.css" rel="stylesheet" type="text/css" media="screen" />-->
+<!--<link href="css.new/print.css" rel="stylesheet" type="text/css" media="print" />-->    
