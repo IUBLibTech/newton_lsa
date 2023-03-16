@@ -60,7 +60,7 @@ HTML document begins here
  *****************************************/
 ?>
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <title>Latent Semantic Analysis of Newton's Chymistry</title>
 
@@ -258,7 +258,12 @@ require_once 'design/includes.php';
 		//  style='font-family: Liberation Sans Alchemy'
 		$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
 		while ($term250 = mysqli_fetch_row($term250list)) {
-			print("<option value='$term250[0]' style='font-family: Newton Sans'>$term250[0]</option>");
+		    if (strpos($term250[0],"'") > -1) {
+                $term_string = str_replace("'", "&#8217;", $term250[0]);
+            }
+		    else $term_string = $term250[0];
+
+		    print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
 		}
 		mysqli_free_result($term250list);
 		fwrite($log, "term250list loaded.\n");
@@ -301,7 +306,12 @@ require_once 'design/includes.php';
 		//   style='font-family: Liberation Sans Alchemy'
 		$term1000list = mysqli_query($connection, "SELECT wordform FROM term1000_list");
 		while ($term1000 = mysqli_fetch_row($term1000list)) {
-			print("<option value='$term1000[0]' style='font-family: Newton Sans'>$term1000[0]</option>");
+            if (strpos($term1000[0],"'") > -1) {
+                $term_string = str_replace("'", "&#8217;", $term1000[0]);
+            }
+            else $term_string = $term1000[0];
+
+            print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
 		}
 		mysqli_free_result($term1000list);
 		fwrite($log, "term1000list loaded.\n");

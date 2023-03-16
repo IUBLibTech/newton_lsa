@@ -1,8 +1,8 @@
 <!-- ******************************
 BEGIN FAVICON
 ******************************  -->
-<link rel="icon" href="favicon.ico" />
-<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="favicon.ico">
+<link rel="shortcut icon" href="favicon.ico">
 <!-- ******************************
 BEGIN 1140GRID SYSTEM from http://cssgrid.net/ 
 ******************************  -->

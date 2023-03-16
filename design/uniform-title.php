@@ -21,7 +21,7 @@
 				<a class="masthead-link" href=<?php echo($textSite) ?> title='Chymistry of Isaac Newton Project HOME'>
 					<img id="newton-masthead-text" src="images/masthead.png" alt="The Chymistry of Isaac Newton Project" title="The Chymistry of Isaac Newton Project"/>
 				</a>
-				<form id="quick-search" action=<?php echo($textSite) ?>search/" method="GET">
+				<!--<form id="quick-search" action="<?php /*echo($textSite+"search/") */?>" method="GET">
                   <details class="keyboard">
                      	
                      <summary>symbols</summary>
@@ -1423,7 +1423,7 @@
                         	
                      </div>
                      
-                  </details><input type="text" name="text" placeholder="Search manuscripts"/><button type="submit">Search</button><a href="<?php echo($textSite) ?>search/">Advanced search</a></form>
+                  </details><input type="text" name="text" placeholder="Search manuscripts"/><button type="submit">Search</button><a href="<?php /*echo($textSite) */?>search/">Advanced search</a></form>-->
             </div>
          </section>
       </header>
