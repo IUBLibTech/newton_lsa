@@ -70,33 +70,4 @@
                </p>
             </div>
          </div>
-         <html>
-            <head>
-               					<link href="https://assets.iu.edu/brand/3.x/brand.css" rel="stylesheet" type="text/css"/>
-               				
-            </head>
-            <body>
-               <footer id="footer" itemscope="itemscope" itemtype="http://schema.org/CollegeOrUniversity" role="contentinfo">
-                  
-                  <div class="row pad">
-                     
-                     <p class="signature">
-                        <a class="signature-link signature-img" href="https://www.iu.edu"><img alt="Indiana University" src="//assets.iu.edu/brand/3.x/iu-sig-formal.svg"/></a>
-                        
-                     </p>
-                     
-                     
-                     <p class="copyright">
-                        <span class="line-break"><a href="https://accessibility.iu.edu/assistance" id="accessibility-link" title="Having trouble accessing this web page content? Please visit this page for assistance.">Accessibility</a> | <a href="/privacy" id="privacy-policy-link">Privacy Notice</a></span>
-                        <span class="hide-on-mobile"> | </span>
-                        <a href="https://www.iu.edu/copyright/index.html">Copyright</a> © 2020 <span class="line-break-small">The Trustees of <a href="https://www.iu.edu/" itemprop="url"><span itemprop="name">Indiana University</span></a></span>
-                        
-                     </p>
-                     
-                  </div>
-                  
-               </footer>
-               
-            </body>
-         </html>
       </footer><script src="js/global.js"></script>
