@@ -111,31 +111,31 @@ require_once 'design/includes.php';
 						<ul class="lsa-formList">
 							<li>
 								<label>Document-Document</label>
-								<input type="radio" value="wholedocs" name="lsa-searchradio"/>
+								<input type="radio" value="wholedocs" name="lsa-searchradio" aria-label="wholedocs-searchradio"/>
 							</li>
 							<li>
 								<label>Chunk-Chunk</label>
-								<input type="radio" value="chunks" name="lsa-searchradio"/>
+								<input type="radio" value="chunks" name="lsa-searchradio" aria-label="chunks-searchradio"/>
 							</li>
 							<li>
 								<label>Term-Term</label>
-								<input type="radio" value="terms" name="lsa-searchradio"/>
+								<input type="radio" value="terms" name="lsa-searchradio" aria-label="terms-searchradio"/>
 							</li>
 							<li>
 								<label>Term-Chunk</label>
-								<input type="radio" value="termdoc" name="lsa-searchradio"/>
+								<input type="radio" value="termdoc" name="lsa-searchradio" aria-label="termdoc-searchradio"/>
 							</li>
 							<li>
 								<label>Chunk-Term</label>
-								<input type="radio" value="chunkterm" name="lsa-searchradio"/>
+								<input type="radio" value="chunkterm" name="lsa-searchradio" aria-label="chunkterm-searchradio"/>
 							</li>
 							<li>
 								<label>Compose Query w/Terms</label>
-								<input type="radio" value="termquery" name="lsa-searchradio"/>
+								<input type="radio" value="termquery" name="lsa-searchradio" aria-label="termquery-searchradio"/>
 							</li>
 							<li>
 								<label>Compose Query w/Chunks</label>
-								<input type="radio" value="chunkquery" name="lsa-searchradio"/>
+								<input type="radio" value="chunkquery" name="lsa-searchradio" aria-label="chunkquery-searchradio"/>
 							</li>
 						</ul>
 					</fieldset>
@@ -149,11 +149,11 @@ require_once 'design/includes.php';
 						<ul class="lsa-formList">
 							<li>
 								<label>250-word Chunks</label>
-								<input type="radio" value="ch250" name="lsa-chunkradio"/>
+								<input type="radio" value="ch250" name="lsa-chunkradio" aria-label="ch250-chunkradio"/>
 							</li>
 							<li>
 								<label>1000-word Chunks</label>
-								<input type="radio" value="ch1000" name="lsa-chunkradio"/>
+								<input type="radio" value="ch1000" name="lsa-chunkradio" aria-label="ch1000-chunkradio"/>
 							</li>
 						</ul>
 					</fieldset>
@@ -167,27 +167,27 @@ require_once 'design/includes.php';
 					<ul class="lsa-formList">
 						<li>
 							<label>Descending Order</label>
-							<input type="radio" value="ranked" name="lsa-outputradio" />
+							<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
 						</li>
 						<li>
 							<label>One Doc in Page Order</label>
-							<input type="radio" value="pages" name="lsa-outputradio" />
+							<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
 						</li>
 						<li>
 							<label>Term Alpha Order</label>
-							<input type="radio" value="byterms" name="lsa-outputradio" />
+							<input type="radio" value="byterms" name="lsa-outputradio" aria-label="byterms-outputradio"/>
 						</li>
 						<li>
 							<label>Doc Catalog Order</label>
-							<input type="radio" value="bychunks" name="lsa-outputradio" />
+							<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
 						</li>
 						<li>
 							<label>Graph for NWB</label>
-							<input type="radio" value="graph" name="lsa-outputradio" />
+							<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
 						</li>
 						<li>
 							<label>CSV: XY Term &#x2194; Doc</label>
-							<input type="radio" value="TDcsv" name="lsa-outputradio" />
+							<input type="radio" value="TDcsv" name="lsa-outputradio" aria-label="TDcsv-outputradio"/>
 						</li>
 					</ul>
 				</fieldset>
@@ -200,23 +200,23 @@ require_once 'design/includes.php';
 					<ul class="lsa-formList">
 						<li>
 							<label>All Above Chosen Value</label>
-							<input type="radio" value="allcorrs" name="lsa-scoperadio" />
+							<input type="radio" value="allcorrs" name="lsa-scoperadio" aria-label="allcorrs-scoperadio"/>
 						</li>
 						<li>
 							<label>All Between Docs or Terms</label>
-							<input type="radio" value="onlyselected" name="lsa-scoperadio" />
+							<input type="radio" value="onlyselected" name="lsa-scoperadio" aria-label="onlyselected-scoperadio"/>
 						</li>
 						<li>
 							<label>Within One Document (Doc-Doc)</label>
-							<input type="radio" value="internal" name="lsa-scoperadio" />
+							<input type="radio" value="internal" name="lsa-scoperadio" aria-label="internal-scoperadio"/>
 						</li>
 						<li>
 							<label>All w/Term Presence (Term &#x2194; Doc)</label>
-							<input type="radio" value="presence" name="lsa-scoperadio" />
+							<input type="radio" value="presence" name="lsa-scoperadio" aria-label="presence-scoperadio"/>
 						</li>
 						<li>
 							<label>Only if Term Present (Term &#x2194; Doc)</label>
-							<input type="radio" value="presentonly" name="lsa-scoperadio" />
+							<input type="radio" value="presentonly" name="lsa-scoperadio" aria-label="presentonly-scoperadio"/>
 						</li>
 					</ul>
 					<br style="clear:both;"/>
@@ -413,7 +413,7 @@ require_once 'design/includes.php';
 		$doc250list = mysqli_query($connection, "SELECT ctitle FROM doc250_list");
 		while ($doc250 = mysqli_fetch_row($doc250list)) {
 			print("<option value=\"$doc250count\">$doc250[0]</option>");
-		$doc250count++;	
+		$doc250count++;
 		}
 		fwrite($log, "doc250list loaded.\n");
 		?>
@@ -444,7 +444,7 @@ require_once 'design/includes.php';
 		$doc1000list = mysqli_query($connection, "SELECT ctitle FROM doc1000_list");
 		while ($doc1000 = mysqli_fetch_row($doc1000list)) {
 			print("<option value=\"$doc1000count\">$doc1000[0]</option>");
-		$doc1000count++;	
+		$doc1000count++;
 		}
 		fwrite($log, "doc1000list loaded.\n");
 		?>

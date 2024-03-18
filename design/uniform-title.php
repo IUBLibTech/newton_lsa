@@ -1475,4 +1475,4 @@
       </nav>	
 
 <!-- MAIN CONTENT -->
-<h2 style="margin-bottom: 0 !important;">Latent Semantic Analysis Tool</h2>
+<h1 style="margin-bottom: 0 !important;">Latent Semantic Analysis Tool</h1>
