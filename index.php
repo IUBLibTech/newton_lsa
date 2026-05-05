@@ -110,32 +110,39 @@ require_once 'design/includes.php';
 						<legend>Search Type:</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Document-Document</label>
-								<input type="radio" value="wholedocs" name="lsa-searchradio" aria-label="wholedocs-searchradio"/>
+								<label>Document-Document
+									<input type="radio" value="wholedocs" name="lsa-searchradio" aria-label="wholedocs-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Chunk-Chunk</label>
-								<input type="radio" value="chunks" name="lsa-searchradio" aria-label="chunks-searchradio"/>
+								<label>Chunk-Chunk
+									<input type="radio" value="chunks" name="lsa-searchradio" aria-label="chunks-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Term-Term</label>
-								<input type="radio" value="terms" name="lsa-searchradio" aria-label="terms-searchradio"/>
+								<label>Term-Term
+									<input type="radio" value="terms" name="lsa-searchradio" aria-label="terms-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Term-Chunk</label>
-								<input type="radio" value="termdoc" name="lsa-searchradio" aria-label="termdoc-searchradio"/>
+								<label>Term-Chunk
+									<input type="radio" value="termdoc" name="lsa-searchradio" aria-label="termdoc-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Chunk-Term</label>
-								<input type="radio" value="chunkterm" name="lsa-searchradio" aria-label="chunkterm-searchradio"/>
+								<label>Chunk-Term
+									<input type="radio" value="chunkterm" name="lsa-searchradio" aria-label="chunkterm-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Compose Query w/Terms</label>
-								<input type="radio" value="termquery" name="lsa-searchradio" aria-label="termquery-searchradio"/>
+								<label>Compose Query w/Terms
+									<input type="radio" value="termquery" name="lsa-searchradio" aria-label="termquery-searchradio"/>
+								</label>
 							</li>
 							<li>
-								<label>Compose Query w/Chunks</label>
-								<input type="radio" value="chunkquery" name="lsa-searchradio" aria-label="chunkquery-searchradio"/>
+								<label>Compose Query w/Chunks
+									<input type="radio" value="chunkquery" name="lsa-searchradio" aria-label="chunkquery-searchradio"/>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -148,12 +155,14 @@ require_once 'design/includes.php';
 						<legend>Chunk Size:</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>250-word Chunks</label>
-								<input type="radio" value="ch250" name="lsa-chunkradio" aria-label="ch250-chunkradio"/>
+								<label>250-word Chunks
+									<input type="radio" value="ch250" name="lsa-chunkradio" aria-label="ch250-chunkradio"/>
+								</label>
 							</li>
 							<li>
-								<label>1000-word Chunks</label>
-								<input type="radio" value="ch1000" name="lsa-chunkradio" aria-label="ch1000-chunkradio"/>
+								<label>1000-word Chunks
+									<input type="radio" value="ch1000" name="lsa-chunkradio" aria-label="ch1000-chunkradio"/>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -166,28 +175,34 @@ require_once 'design/includes.php';
 					<legend>Results Output Type:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>Descending Order</label>
-							<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
+							<label>Descending Order
+								<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
+							</label>
 						</li>
 						<li>
-							<label>One Doc in Page Order</label>
-							<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
+							<label>One Doc in Page Order
+								<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
+							</label>
 						</li>
 						<li>
-							<label>Term Alpha Order</label>
-							<input type="radio" value="byterms" name="lsa-outputradio" aria-label="byterms-outputradio"/>
+							<label>Term Alpha Order
+								<input type="radio" value="byterms" name="lsa-outputradio" aria-label="byterms-outputradio"/>
+							</label>
 						</li>
 						<li>
-							<label>Doc Catalog Order</label>
-							<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
+							<label>Doc Catalog Order
+								<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
+							</label>
 						</li>
 						<li>
-							<label>Graph for NWB</label>
-							<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
+							<label>Graph for NWB
+								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
+							</label>
 						</li>
 						<li>
-							<label>CSV: XY Term &#x2194; Doc</label>
-							<input type="radio" value="TDcsv" name="lsa-outputradio" aria-label="TDcsv-outputradio"/>
+							<label>CSV: XY Term &#x2194; Doc
+								<input type="radio" value="TDcsv" name="lsa-outputradio" aria-label="TDcsv-outputradio"/>
+							</label>
 						</li>
 					</ul>
 				</fieldset>
@@ -199,24 +214,29 @@ require_once 'design/includes.php';
 					<legend>Return Scope of Pairs:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>All Above Chosen Value</label>
-							<input type="radio" value="allcorrs" name="lsa-scoperadio" aria-label="allcorrs-scoperadio"/>
+							<label>All Above Chosen Value
+								<input type="radio" value="allcorrs" name="lsa-scoperadio" aria-label="allcorrs-scoperadio"/>
+							</label>
 						</li>
 						<li>
-							<label>All Between Docs or Terms</label>
-							<input type="radio" value="onlyselected" name="lsa-scoperadio" aria-label="onlyselected-scoperadio"/>
+							<label>All Between Docs or Terms
+								<input type="radio" value="onlyselected" name="lsa-scoperadio" aria-label="onlyselected-scoperadio"/>
+							</label>
 						</li>
 						<li>
-							<label>Within One Document (Doc-Doc)</label>
-							<input type="radio" value="internal" name="lsa-scoperadio" aria-label="internal-scoperadio"/>
+							<label>Within One Document (Doc-Doc)
+								<input type="radio" value="internal" name="lsa-scoperadio" aria-label="internal-scoperadio"/>
+							</label>
 						</li>
 						<li>
-							<label>All w/Term Presence (Term &#x2194; Doc)</label>
-							<input type="radio" value="presence" name="lsa-scoperadio" aria-label="presence-scoperadio"/>
+							<label>All w/Term Presence (Term &#x2194; Doc)
+								<input type="radio" value="presence" name="lsa-scoperadio" aria-label="presence-scoperadio"/>
+							</label>
 						</li>
 						<li>
-							<label>Only if Term Present (Term &#x2194; Doc)</label>
-							<input type="radio" value="presentonly" name="lsa-scoperadio" aria-label="presentonly-scoperadio"/>
+							<label>Only if Term Present (Term &#x2194; Doc)
+								<input type="radio" value="presentonly" name="lsa-scoperadio" aria-label="presentonly-scoperadio"/>
+							</label>
 						</li>
 					</ul>
 					<br style="clear:both;"/>
@@ -229,8 +249,9 @@ require_once 'design/includes.php';
 					<legend></legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>&nbsp;</label>
-							<input type="submit" value="Continue" name="lsa-submit" id="lsa-submitQueryButton"/>
+							<label>&nbsp;
+								<input type="submit" value="Continue" name="lsa-submit" id="lsa-submitQueryButton"/>
+							</label>
 						</li>
 						<li>
 					</ul>
@@ -251,8 +272,9 @@ require_once 'design/includes.php';
 						<legend>Terms</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Choose one or more</label>
-								<select name="lsa-selectterm250" id="lsa-selectterm250" size="15">
+								<label>Choose one or more
+									<select name="lsa-selectterm250" id="lsa-selectterm250" size="15">
+								</label>
 		<?php
 		// open the document chunk names file and read it into an array
 		//  style='font-family: Liberation Sans Alchemy'
@@ -284,7 +306,10 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<input type="button" value="Add Term" />
+								<label>Add term
+									<input type="button" value="Add Term" />
+								</label>
+								
 							</li>
 						</ul>
 					</fieldset>
@@ -299,8 +324,9 @@ require_once 'design/includes.php';
 						<legend>Terms</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Choose One or More</label>
-								<select name="lsa-selectterm1000" id="lsa-selectterm1000" size="15" >
+								<label>Choose One or More
+									<select name="lsa-selectterm1000" id="lsa-selectterm1000" size="15" >
+								</label>
 		<?php
 		// open the document chunk names file and read it into an array
 		//   style='font-family: Liberation Sans Alchemy'
@@ -333,7 +359,9 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<input type="button" value="Add Term" />
+								<label>Add term
+									<input type="button" value="Add Term" />
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -347,9 +375,9 @@ require_once 'design/includes.php';
 					<fieldset>
 						<legend>Regex pattern to select from list of terms:</legend>
 						<ul class="lsa-formList">
-							<li> /
+							<li> <label>/
 								<input type="text" name="lsa-thePattern" id="lsa-thePattern" size="30"/>
-								/</li>
+								/</label></li>
 						</ul>
 					</fieldset>
 				</form>
@@ -359,7 +387,9 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<input type="button" value="Add Matches" />
+								<label>Add matches
+									<input type="button" value="Add Matches" />
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -375,9 +405,10 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<label>Choose One or More, or All</label>
+							<label>Choose One or More, or All
 							<select name="lsa-selectdoc" id="lsa-selectdoc" size="15">
 								<option value="ALL">All documents</option>
+							</label>
 		<?php
 		// open the document chunk names file and read it into an array
 		$corpuslist = mysqli_query($connection, "SELECT * FROM corpus_list");
@@ -404,9 +435,10 @@ require_once 'design/includes.php';
 					<legend>Document Chunks:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>Choose One or More, or All</label>
-							<select name="lsa-selectchunk250" id="lsa-selectchunk250" size="15" >
+							<label>Choose One or More, or All
+								<select name="lsa-selectchunk250" id="lsa-selectchunk250" size="15" >
 								<option value = "ALL">All chunks</option>
+							</label>
 		<?php
 		// open the document chunk names file and read it into an array
 		$doc250count = 1;
@@ -434,10 +466,11 @@ require_once 'design/includes.php';
 					<legend>Document Chunks:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>Choose One or More, or All</label>
-							<select name="lsa-selectchunk1000" id="lsa-selectchunk1000" size="15" >
-								<option></option>
-								<option value="ALL">All chunks</option>
+							<label>Choose One or More, or All
+								<select name="lsa-selectchunk1000" id="lsa-selectchunk1000" size="15" >
+									<option></option>
+									<option value="ALL">All chunks</option>
+							</label>
 		<?php
 		// open the document chunk names file and read it into an array
 		$doc1000count = 1;
@@ -467,7 +500,9 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<input type="button" id="lsa-appendDocPress" value="Add Docs" />
+							<label>Add document
+								<input type="button" id="lsa-appendDocPress" value="Add Docs" />
+							</label>
 						</li>
 					</ul>
 				</fieldset>
@@ -478,7 +513,9 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<input type="button" id="lsa-appendChunkPress" value="Add Chunk" />
+							<label>Add passage
+								<input type="button" id="lsa-appendChunkPress" value="Add Chunk" />
+							</label>
 						</li>
 					</ul>
 				</fieldset>
@@ -493,8 +530,9 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<label>Query Set:</label>
-							<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: Newton Sans" readonly></textarea>
+							<label>Query Set:
+								<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: Newton Sans" readonly></textarea>
+							</label>
 						</li>
 					</ul>
 				</fieldset>
@@ -503,7 +541,9 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<input type="submit" id="lsa-queryFormContinuePress" value="Continue" />
+							<label>Continue
+								<input type="submit" id="lsa-queryFormContinuePress" value="Continue" />
+							</label>
 						</li>
 						
 					</ul>
@@ -513,7 +553,10 @@ require_once 'design/includes.php';
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<input type="submit" id="lsa-queryFormClearButton" value="Clear Query Set" />
+							<label>Clear Query Set
+								<input type="submit" id="lsa-queryFormClearButton" value="Clear Query Set" />
+							</label>
+							
 						</li>
 						
 					</ul>
@@ -538,7 +581,9 @@ require_once 'design/includes.php';
 							<fieldset>
 								<ul class="lsa-formList">
 									<li>
-										<input type="button" value="RUN" id="lsa-runSearchPress"/>
+										<label>Run search
+											<input type="button" value="RUN" id="lsa-runSearchPress"/>
+										</label>
 									</li>
 								</ul>
 							</fieldset>
@@ -550,7 +595,10 @@ require_once 'design/includes.php';
 							<fieldset>
 								<ul class="lsa-formList">
 									<li>
-										<input type="button" value="CLEAR QUERY" id="lsa-clearSearchPress" />
+										<label>Clear query
+											<input type="button" value="CLEAR QUERY" id="lsa-clearSearchPress" />
+										</label>
+										
 									</li>
 								</ul>
 							</fieldset>
@@ -563,7 +611,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Doc-Doc Correlation Threshold</label>
+								<labeL>Doc-Doc Correlation Threshold
 								<select name="lsa-bounddocs" id="lsa-bounddocs">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -577,6 +625,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0">0 (lowest available correlations)</option>
 								</select>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -587,7 +636,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Chunk &#x2013; Term Threshold</labeL>
+								<labeL>Chunk &#x2013; Term Threshold
 								<select name="lsa-boundchunk" id="lsa-boundchunk">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -601,6 +650,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0">0 (lowest available correlations)</option>
 								</select>
+								</labeL>
 							</li>
 						</ul>
 					</fieldset>
@@ -611,7 +661,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Term Threshold</labeL>
+								<labeL>Term-Term Threshold
 								<select name="lsa-bound250" id="lsa-bound250">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -623,6 +673,7 @@ require_once 'design/includes.php';
 									<option value="0.3">0.3 (more results)</option>
 									<option value="0.2">0.2 (lowest available correlations)</option>
 								</select>
+								</labeL>
 							</li>
 						</ul>
 					</fieldset>
@@ -633,7 +684,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Document Threshold</labeL>
+								<labeL>Term-Document Threshold
 								<select name="lsa-tdbound250" id="lsa-tdbound250">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -647,6 +698,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0.0">0.0 (lowest available correlations)</option>
 								</select>
+								</labeL>
 							</li>
 						</ul>
 					</fieldset>
@@ -657,7 +709,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Term Threshold</labeL>
+								<labeL>Term-Term Threshold
 								<select name="lsa-bound1000" id="lsa-bound1000">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -669,6 +721,7 @@ require_once 'design/includes.php';
 									<option value="0.3">0.3 (more results)</option>
 									<option value="0.2">0.2 (lowest available correlations)</option>
 								</select>
+								</labeL>
 							</li>
 						</ul>
 					</fieldset>
@@ -679,7 +732,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Document Threshold</labeL>
+								<labeL>Term-Document Threshold
 								<select name="lsa-tdbound1000" id="lsa-tdbound1000">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -693,6 +746,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0.0">0.0 (lowest available correlations)</option>
 								</select>
+								</labeL>
 							</li>
 						</ul>
 					</fieldset>
