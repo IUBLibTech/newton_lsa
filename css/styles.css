@@ -242,7 +242,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		padding: 0.75em;
 		display: inline-block;
 		color: #F7F6F0;
-		text-decoration: none;
+		text-decoration: underline;
 		min-width: 50%;
 		width: auto;
 		display: block;
@@ -277,7 +277,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		font-size: small; /* <<<  */
 		padding: 0.7em 0.7em;
 		color: #F7F6F0;
-		text-decoration: none;
+		text-decoration: underline;
 		width: auto;
 		display: inline-block;
 	}
@@ -343,7 +343,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 	.mainAdverts .container a {
 		color: #FFC;
 		font-weight: normal;
-		text-decoration: none;
+		text-decoration: underline;
 	}
 	.mainAdverts .container a:hover {
 		text-decoration: underline;
@@ -409,7 +409,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 	}
 	.footer ul.footerLinks a {
 		color: #FFC;
-		text-decoration: none;
+		text-decoration: underline;
 	}
 	.footer ul.footerLinks a:hover {
 		text-decoration: underline;
@@ -423,7 +423,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 	}
 	p.myFooter a {
 		color: #FFF;
-		text-decoration: none;
+		text-decoration: underline;
 	}
 	p.myFooter a:hover {
 		text-decoration: underline;
@@ -776,7 +776,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		padding: 0.4em;
 		border: thin solid silver;
 		border-right: none;
-		text-decoration: none;
+		text-decoration: underline;
 		font-size: 1em;
 		color: #2d2921;
 	}
@@ -932,7 +932,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 	}
 	#chemicusList li a {
 		color: #790A10;
-		text-decoration:none;
+		text-decoration:underline;
 	}
 	#chemicusList li:hover {
 		font-weight: bold;	
