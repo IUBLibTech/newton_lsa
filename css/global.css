@@ -171,7 +171,7 @@ nav#main-nav ul.primary summary {
 	padding: 0.5em;
 	vertical-align: baseline;
 	cursor: pointer;
-	text-decoration: none;
+	text-decoration: underline;
 	border-right-color: rgb(247, 246, 240);
 	border-right-style: solid;
 	border-right-width: 1px;
@@ -237,7 +237,7 @@ nav.internal li {
 }
 nav.internal a {
 	color: rgb(120, 19, 11);
-	text-decoration: none;
+	text-decoration: underline;
 }
 nav.internal a.current {
 	font-weight: bold;
@@ -261,7 +261,7 @@ div.tei-view-selection span {
 	padding-right: 0.5em;
 }
 div.tei-view-selection a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: black;
 }
 div.tei-view-selection a:hover {
