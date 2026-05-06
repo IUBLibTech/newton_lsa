@@ -11,5 +11,5 @@ mark.non-match {
 a.hit-link {
 	margin-left: 0.25em;
 	margin-right: 0.25em;
-	text-decoration: none;
+	text-decoration: underline;
 }
