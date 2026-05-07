@@ -1,0 +1,5 @@
+this_server = localhost
+textSite = https://localhost:8080/
+host = sasrdsmp01.uits.iu.edu, port = 3306
+open viewcorrs with 361280 RAM at May 07 8:52:13
+mysql connected

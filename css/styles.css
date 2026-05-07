@@ -50,7 +50,7 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 	}
 	a {
 		color: #78130b;
-		text-decoration: none;	
+		text-decoration: underline;	
 	}
 	a:hover {
 		text-decoration: underline;	

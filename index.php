@@ -30,7 +30,7 @@ Define database and calling Newton site using a private file
 // The component uses $textSite (which must end with a '/') to create those
 // links.
 
-$connection = new mysqli();  //  initializing empty mysql connection
+$connection = null;  //  initializing empty mysql connection
 $host = "";  // initializing variable to report in log file
 $port = "";  // initializing variable to report in log file
 $textSite = "";    //  initializing variable for web URL of relevant digital edition
@@ -611,7 +611,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Doc-Doc Correlation Threshold
+								<label>Doc-Doc Correlation Threshold
 								<select name="lsa-bounddocs" id="lsa-bounddocs">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -636,7 +636,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Chunk &#x2013; Term Threshold
+								<label>Chunk &#x2013; Term Threshold
 								<select name="lsa-boundchunk" id="lsa-boundchunk">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -650,7 +650,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0">0 (lowest available correlations)</option>
 								</select>
-								</labeL>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -661,7 +661,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Term Threshold
+								<label>Term-Term Threshold
 								<select name="lsa-bound250" id="lsa-bound250">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -673,7 +673,7 @@ require_once 'design/includes.php';
 									<option value="0.3">0.3 (more results)</option>
 									<option value="0.2">0.2 (lowest available correlations)</option>
 								</select>
-								</labeL>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -684,7 +684,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Document Threshold
+								<label>Term-Document Threshold
 								<select name="lsa-tdbound250" id="lsa-tdbound250">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -698,7 +698,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0.0">0.0 (lowest available correlations)</option>
 								</select>
-								</labeL>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -709,7 +709,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Term Threshold
+								<label>Term-Term Threshold
 								<select name="lsa-bound1000" id="lsa-bound1000">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -721,7 +721,7 @@ require_once 'design/includes.php';
 									<option value="0.3">0.3 (more results)</option>
 									<option value="0.2">0.2 (lowest available correlations)</option>
 								</select>
-								</labeL>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
@@ -732,7 +732,7 @@ require_once 'design/includes.php';
 					<fieldset>
 						<ul class="lsa-formList">
 							<li>
-								<labeL>Term-Document Threshold
+								<label>Term-Document Threshold
 								<select name="lsa-tdbound1000" id="lsa-tdbound1000">
 									<option value=""></option>
 									<option value="0.9">0.9 (fewer results)</option>
@@ -746,7 +746,7 @@ require_once 'design/includes.php';
 									<option value="0.1">0.1 (more results)</option>
 									<option value="0.0">0.0 (lowest available correlations)</option>
 								</select>
-								</labeL>
+								</label>
 							</li>
 						</ul>
 					</fieldset>
