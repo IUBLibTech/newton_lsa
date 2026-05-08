@@ -22,7 +22,9 @@ $user = "whooper_lsa_11";
 //$pass = "Bad5%Crab&7";
 $pass = "QXKtHgl-&1Cz^3k0";
 
-$dsn ="mysql:dbname=$db;host=$host;port=$port";
+$connection = mysqli_connect($host, $user, $pass, $db, $port);
+
+/* $dsn ="mysql:dbname=$db;host=$host;port=$port";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_NAMED,
@@ -36,5 +38,5 @@ try {
     
     $connection_error = $e->getMessage();
 }
-
+ */
 ?>

@@ -92,7 +92,8 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		background-color: #790A10;
 	}
 	.bottomDivider {
-		background-color: #bcab8b;
+		/* background-color: #bcab8b; */
+		background-color: #e0d3bc;
 		min-height:1em;
 	}
 	.footer {
@@ -626,7 +627,8 @@ url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
 		padding: 0.3em;
 		padding-left: 0.5em;
 		width: auto;
-		background-color: #bcab8b;
+		/* background-color: #bcab8b; */
+		background-color: #e0d3bc;
 	}
 	
 	
