@@ -1,7 +1,7 @@
 After copying the LSA webapp to its web home, create a file in this folder, lsa/functions, named
 mysql_connection.php.
 
-In that file, define the PHP variable $textSite.
+In that file, define the PHP variable $textSite. 
 
 Give $textSite the web address of the Chymistry xproc P5 digital edition
 so this installation of the component can link its side-by-side displays to
