@@ -42,7 +42,7 @@ function makeDocUrl($urlBase, $alchid, $title) {
     preg_match($foliopattern, $title, $folioarray);
     $folio = $folioarray[1];
 
-    return $urlBase."text/".$alch."/diplomatic"."/#f".$folio;
+    return $urlBase."text/".$alch."/diplomatic"."#f".$folio;
 }
 
 /* STOP LISTS */

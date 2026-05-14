@@ -41,7 +41,7 @@ function makeDocUrl($urlBase, $alchid, $title) {
 	preg_match($foliopattern, $title, $folioarray);
 	$folio = $folioarray[1];
 
-	return $urlBase."text/".$alch."/diplomatic"."/#f".$folio;
+	return $urlBase."text/".$alch."/diplomatic"."#f".$folio;
 }
 
 /* STOP LISTS */
@@ -89,15 +89,15 @@ if (isset($_GET['corr']) && $_GET['corr'] != 0)
 /****************************
 Write to a log file 
 ****************************/
-$logfile = "log/displaycorrs.txt";
-$log = fopen($logfile, "w");
-fwrite($log, "host = ". $host . ", port = ". $port."\n");
-fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
-if ($connection) {
-	fwrite($log, "mysql connected\n"); 
-}
-fwrite($log, "doc1 = ". $doc1 . "\n");
-fwrite($log, "doc2 = ". $doc2 . "\n");
+// $logfile = "log/displaycorrs.txt";
+// $log = fopen($logfile, "w");
+// fwrite($log, "host = ". $host . ", port = ". $port."\n");
+// fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
+// if ($connection) {
+	// fwrite($log, "mysql connected\n"); 
+// }
+// fwrite($log, "doc1 = ". $doc1 . "\n");
+// fwrite($log, "doc2 = ". $doc2 . "\n");
 
 //begin setup
 $getdoc1data = "SELECT alch, ctitle, mstitle, ctext FROM frag250 WHERE id=".$doc1;
@@ -116,10 +116,10 @@ $doc1alch = $doc1data[0];
 $doc1title = $doc1data[1];
 $doc1mstitle = $doc1data[2];
 $d1string = $doc1data[3];
-fwrite($log, "doc1alch = ". $doc1alch . "\n");
-fwrite($log, "doc1title = ". $doc1title . "\n");
-fwrite($log, "doc1mstitle = ". $doc1mstitle . "\n");
-fwrite($log, "d1string = ". $d1string . "\n");
+// fwrite($log, "doc1alch = ". $doc1alch . "\n");
+// fwrite($log, "doc1title = ". $doc1title . "\n");
+// fwrite($log, "doc1mstitle = ". $doc1mstitle . "\n");
+// fwrite($log, "d1string = ". $d1string . "\n");
 
 $doc2row = mysqli_query($connection, $getdoc2data);
 $doc2data = mysqli_fetch_row($doc2row);
@@ -128,10 +128,10 @@ $doc2alch = $doc2data[0];
 $doc2title = $doc2data[1];
 $doc2mstitle = $doc2data[2];
 $d2string = $doc2data[3];
-fwrite($log, "doc2alch = ". $doc2alch . "\n");
-fwrite($log, "doc2title = ". $doc2title . "\n");
-fwrite($log, "doc2mstitle = ". $doc2mstitle . "\n");
-fwrite($log, "d2string = ". $d2string . "\n");
+// fwrite($log, "doc2alch = ". $doc2alch . "\n");
+// fwrite($log, "doc2title = ". $doc2title . "\n");
+// fwrite($log, "doc2mstitle = ". $doc2mstitle . "\n");
+// fwrite($log, "d2string = ". $d2string . "\n");
 
 // setting up the term list
 $termstring = "";

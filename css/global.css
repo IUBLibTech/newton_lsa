@@ -20,7 +20,7 @@ body {
 }
 a {
 	color: #78130B;
-	text-decoration: none;
+	text-decoration: underline;
 }
 a:hover {
 	text-decoration: underline !important;
@@ -299,7 +299,7 @@ footer.page-footer div.menus div.menu ul {
 	margin-left: 1em;
 }
 footer.page-footer div.menus div.menu a {
-	text-decoration: none;
+	text-decoration: underline;
 	color: #ffc;
 }
 footer.page-footer div.menus div.menu a.current {
@@ -319,7 +319,7 @@ footer.page-footer div.links {
 }
 footer.page-footer div.links a {
 	color: #fff;
-	text-decoration: none;
+	text-decoration: underline;
 }
 ul.site-index-menu {
 	padding-left: 2em;

@@ -43,16 +43,16 @@ include "functions/mysql_connection.php";
 /*****************************************
 Write setup info to a log file
 *****************************************/
-$logfile = "log/mainpage.txt";
-$log = fopen($logfile, "w");
-fwrite($log, "this_server = $this_server\n");
+// $logfile = "log/mainpage.txt";
+// $log = ""; // fopen($logfile, "w");
+// fwrite($log, "this_server = $this_server\n");
 // fwrite($log, "cameFrom = $cameFrom\n");
-fwrite($log, "textSite = $textSite\n");
-//fwrite($log, "flag = ".$flag."\n");
-fwrite($log, "host = ". $host . ", port = ". $port."\n");
-fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
-if ($connection) {
-	fwrite($log, "mysql connected\n"); }
+// fwrite($log, "textSite = $textSite\n");
+// fwrite($log, "flag = ".$flag."\n");
+// fwrite($log, "host = ". $host . ", port = ". $port."\n");
+// fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
+// if ($connection) {
+	// fwrite($log, "mysql connected\n"); }
 
 
 /*****************************************
@@ -62,17 +62,18 @@ HTML document begins here
 <!doctype html>
 <html lang="en">
 <head>
-<title>Latent Semantic Analysis of Newton's Chymistry</title>
+	<title>Latent Semantic Analysis of Newton's Chymistry</title>
 
-<?php
-require_once 'design/includes.php';
-?>
+	<?php
+	require_once 'design/includes.php';
+	?>
 
-<!-- LSA Style -->
-<link href="css/style.css" rel="stylesheet" media="all" />
-<!-- End LSA Style -->
-<!-- Newton Skin -->
-<?php require_once('design/header.php') ?>
+	<!-- LSA Style -->
+	<link href="css/style.css" rel="stylesheet" media="all" />
+	<!-- End LSA Style -->
+
+	<!-- Newton Skin -->
+	<?php require_once('design/header.php') ?>
 </head>
 <body>
 
@@ -84,7 +85,8 @@ require_once 'design/includes.php';
 <div class="lsa-row">
 	<div id="lsa-rowZero">
 		<div class="alignRight border paddingSmall" style="background-color: #7D100B;"><a href="help.php" title="HELP" class="helpLink">HELP Documentation</a></div>
-        <p style="margin: 1em; margin-bottom:0;"><span class="instructionHeading">INSTRUCTIONS:</span> <span class="instructions">To begin, choose a search type and chunk size in Step 1. After Step 3, click the Continue button and proceed to step 4.<br/>(Change your browser's encoding to UTF-8 to render Newton's alchemical symbols. Firefox and Opera support symbol rendering.)</span></p>
+        <p style="margin: 1em; margin-bottom:0;"><span class="instructionHeading">INSTRUCTIONS:</span> <span class="instructions">To begin, choose a search type and chunk size in Step 1. Choose an output type for results in Step 2 then select threshold types and scopes in Step 3.<br/>
+		After Step 3, click the Continue button and proceed to Step 4 when the window reorganizes.</span></p>
         
 	</div>
 </div>
@@ -288,7 +290,7 @@ require_once 'design/includes.php';
 		    print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
 		}
 		mysqli_free_result($term250list);
-		fwrite($log, "term250list loaded.\n");
+		// fwrite($log, "term250list loaded.\n");
 		?>
 								</select>
 							</li>
@@ -340,7 +342,7 @@ require_once 'design/includes.php';
             print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
 		}
 		mysqli_free_result($term1000list);
-		fwrite($log, "term1000list loaded.\n");
+		// fwrite($log, "term1000list loaded.\n");
 		?>
 								</select>
 		<label>(Browsers other than Firefox may not render alchemical symbols.)</label>
@@ -416,7 +418,7 @@ require_once 'design/includes.php';
 			print("<option value=\"$docinfo[2]\">$docinfo[0]</option>");
 		}
 		mysqli_free_result($corpuslist);
-		fwrite($log, "corpuslist loaded.\n");
+		// fwrite($log, "corpuslist loaded.\n");
 		?>
 							</select>
 						</li>
@@ -447,7 +449,7 @@ require_once 'design/includes.php';
 			print("<option value=\"$doc250count\">$doc250[0]</option>");
 		$doc250count++;
 		}
-		fwrite($log, "doc250list loaded.\n");
+		// fwrite($log, "doc250list loaded.\n");
 		?>
 							</select>
 						</li>
@@ -479,7 +481,7 @@ require_once 'design/includes.php';
 			print("<option value=\"$doc1000count\">$doc1000[0]</option>");
 		$doc1000count++;
 		}
-		fwrite($log, "doc1000list loaded.\n");
+		// fwrite($log, "doc1000list loaded.\n");
 		?>
 							</select>
 						</li>
@@ -780,9 +782,11 @@ require_once 'design/includes.php';
 				<!--	 	-->
 				<div class="lsa-row" style="background-color: #FEFEFE;">
 					<div id="lsa-rowSix">
-						<div id="lsa-info"> NSF Project #0620868 &mdash; Fred Science and Technology Studies <em><b>Note:</b> If you have problems seeing the alchemical symbols correctly, install the Gentium Newton TTF font </em>(GenR102-Newton-ansi.tff)<em> on your machine.<br/>
-									<a href="GentiumNewton.zip">Download font zip file here.</a> Font works on Windows, Macintosh and Linux.<br/>
-									To view and modify network graph files, download and install <a href='https://nwb.slis.indiana.edu/'>Network Workbench</a></em> (NWB).<br/></div>
+						<div id="lsa-info"> 
+							NSF Project #0620868 &mdash; Science and Technology Studies<br/> 
+							<em>&#x2022; If you have problems seeing the alchemical symbols correctly, please install the Newton Sans TTF font </em>(NewtonSans-UnicodeFont-2025-09-09.tff)<em> directly onto your machine. <a href="font/NewtonSans-UnicodeFont-2025-09-09.zip">Download font zip file.</a><br/>
+							&#x2022; To view the Network Work Bench (.NWB) network graph files made by the 'Graph' options, please install the <a href='https://sci2.cns.iu.edu/user/index.php'>Sci<sup>2</sup> Tool</a>, a modular toolset for the study of science.<br/>
+							[CITE: Sci2 Team. (2009). Science of Science (Sci2) Tool. Indiana University and SciTech Strategies, https://sci2.cns.iu.edu.]</em><br/></div>
 					</div>
 				</div>
 

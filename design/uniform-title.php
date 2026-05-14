@@ -2,7 +2,7 @@
 		  <link href="https://assets.iu.edu/brand/3.x/brand.css" rel="stylesheet" type="text/css"/>
 		  <div aria-labelledby="campus-name" class="iub" id="branding-bar" itemscope="itemscope" itemtype="https://schema.org/CollegeOrUniversity" role="complementary">
 			  <div class="row pad">
-				  ::before
+				  <!-- ::before -->
 				  <img alt="" src="//assets.iu.edu/brand/3.x/trident-large.png"/>
 				  <p id="iu-campus">
 					  <a href="https://www.iu.edu" title="Indiana University Bloomington">

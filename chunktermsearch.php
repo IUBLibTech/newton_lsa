@@ -69,13 +69,13 @@ $textSite = "";
 $connection = new mysqli();
 require_once("functions/mysql_connection.php");
 
-$logfile = "log/chunktermsearch.txt";
+/* $logfile = "log/chunktermsearch.txt";
 $log = fopen($logfile, "w");
 if (!$log) {
 	echo "log OPEN FAILED.<br/>";
 	return;
-}
-fwrite($log, "open chunktermsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
+} */
+// fwrite($log, "open chunktermsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
 $list = $_GET['list'];
 $frags = $_GET['frags'];
@@ -84,7 +84,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
+// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 // filename for possible network graph will need a hash value
 $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
@@ -133,11 +133,11 @@ else {
 	}
 	mysqli_free_result($selectedrows);
 }
-fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
-fwrite($log, "count in selected: ".count($selected)."\n");
+// fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
+// fwrite($log, "count in selected: ".count($selected)."\n");
 
-fwrite($log, "selectedchunks: $selectedchunks\n");
-fwrite($log, "get selected query: $getselecteddocids\n");
+// fwrite($log, "selectedchunks: $selectedchunks\n");
+// fwrite($log, "get selected query: $getselecteddocids\n");
 
 //  going to try using a temporary table called results to organize the work
 // create temporary table results
@@ -158,28 +158,28 @@ $getcosines4 = "INSERT INTO results (correlation, term, doc)
 		WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
 mysqli_query($connection, $getcosines4);
 $pairs4 = mysqli_affected_rows($connection);
-fwrite($log, "getcosines4 query executed: ".memory_get_usage()."\n");
-fwrite($log, "cosines4 rows: $pairs4\n");
+// fwrite($log, "getcosines4 query executed: ".memory_get_usage()."\n");
+// fwrite($log, "cosines4 rows: $pairs4\n");
 $pairs5 = mysqli_affected_rows($connection);
 if ($bound <= 0.4) {
 	$getcosines1 = "INSERT INTO results (correlation, term, doc)
 			SELECT correlation, term, doc FROM $correlationTable1
 			WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
 	mysqli_query($connection, $getcosines1);
-	fwrite($log, "getcosines1 query executed: ".memory_get_usage()."\n");
+	// fwrite($log, "getcosines1 query executed: ".memory_get_usage()."\n");
 	$pairs1 = mysqli_affected_rows();
-	fwrite($log, "cosines1 rows: $pairs1\n");
+	// fwrite($log, "cosines1 rows: $pairs1\n");
 }
 if ($bound <= 0.1) {
 	$getcosines0 = "INSERT INTO results (correlation, term, doc)
 			SELECT correlation, term, doc FROM $correlationTable0
 			WHERE (correlation >= $bound) AND (doc IN ($selectedchunks) )";
 	mysqli_query($getcosines0);
-	fwrite($log, "getcosines0 query executed: ".memory_get_usage()."\n");
+	// fwrite($log, "getcosines0 query executed: ".memory_get_usage()."\n");
 	$pairs0 = mysqli_affected_rows();
 }
 
-fwrite($log, "Made it to line 182!\n");
+// fwrite($log, "Made it to line 182!\n");
 // load the appropriate term list into memory array for output
 $getallterms = "SELECT wordform FROM ".$termlistTable;
 $termliststring = "BASE\n";
@@ -188,11 +188,11 @@ while ($termrow = mysqli_fetch_row($termrows)) {
 	$termliststring = $termliststring.$termrow[0]."\n";
 }
 $termlist = explode("\n", $termliststring);
-fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
+// fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
 unset($termliststring);
 mysqli_free_result($termrows);
-fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
-fwrite($log, "termlist count: ".count($termlist)."\n");
+// fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
+// fwrite($log, "termlist count: ".count($termlist)."\n");
 
 
 // load the chunk list so we can write out titles and files names for displaycorrs.php
@@ -209,8 +209,8 @@ $chunks[] = "BASE"; // fills that pesky $chunks[0] member
 while ($outchunk = mysqli_fetch_array($chunksdata)) {
 	$chunks[] = $outchunk;
 }
-fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
-fwrite($log, "chunks array initialized. ".memory_get_usage()."\n");
+// fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
+// fwrite($log, "chunks array initialized. ".memory_get_usage()."\n");
 
 echo "<br/><br/>";
 
@@ -233,7 +233,7 @@ if ($outf == "ranked" || $outf == "byterms" || $outf == "bychunks") {
 	
 	$output = mysqli_query($connection, $getoutput);
 	$outputcount = 0;
-	//fwrite($log, "output array initialized. ".memory_get_usage()."\n");
+	// fwrite($log, "output array initialized. ".memory_get_usage()."\n");
 	
 	echo "<table cellpadding=5>";
 	while ($outrow = mysqli_fetch_row($output)) {
@@ -306,7 +306,7 @@ else if ($outf == "TDcsv") {
 	$downloadpath = "graphs/$newcsv";
 	$csv = fopen("graphs/$newcsv", 'w');
 	if ($csv == '' || $csv == 0) {
-		fwrite($log, "Can't open csv file.\n");
+		// fwrite($log, "Can't open csv file.\n");
 	}
 	chmod($csv, 0666);  # make sure the file is user/group writable.
 	
@@ -407,8 +407,8 @@ unset($termlist);
 unset($chunks);
 //mysqli_free_result($output);
 mysqli_close($connection);
-fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
-fclose($log);
+//fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
+// fclose($log);
 return;
 
 ?>

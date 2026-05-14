@@ -21,7 +21,7 @@ function cosine_sim($vecstring1, $vecstring2, $magn1, $magn2) {
 	return $correlation;
 }
 
-function cosine_simR($vecstring, $magn, $log) {
+function cosine_simR($vecstring, $magn) {
 	global $request;
 	global $requestmagn;
 	$vector = explode(",", $vecstring);
@@ -43,21 +43,21 @@ function cosine_simR($vecstring, $magn, $log) {
 	return $correlation;
 }
 
-function calculate_request($vecstring, $log) {
+function calculate_request($vecstring) {
 	global $request;
 	global $requestmagn;
-	fwrite($log, "vecstring: ".$vecstring."\n");
+	// fwrite($log, "vecstring: ".$vecstring."\n");
 	$rvector = explode(",", $vecstring);
 	$numdims = count($rvector);
 	//fwrite($log, "numdims in calculate_request= ".$numdims."\n");
 	for ($ri=0; $ri < $numdims; $ri++) {
 		$request[$ri] = $request[$ri] + $rvector[$ri];
-		fwrite($log, $request[$ri].",");
+		// fwrite($log, $request[$ri].",");
 	}
 	//fwrite($log, "\n");
 }
 
-function calculate_request_magn($log) {
+function calculate_request_magn() {
 	global $request;
 	global $requestmagn;
 	$count = count($request);
@@ -117,13 +117,13 @@ function test_for_presence($connection, $fragset, $term, $chunk) {
 $connection = new mysqli();
 require_once("functions/mysql_connection.php");
 
-$logfile = "log/usersearch.txt";
-$log = fopen($logfile, "w");
-if (!$log) {
-	echo "log OPEN FAILED.<br/>";
-	return;
-}
-fwrite($log, "open usersearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
+// $logfile = "log/usersearch.txt";
+// $log = fopen($logfile, "w");
+// if (!$log) {
+// 	echo "log OPEN FAILED.<br/>";
+// 	return;
+// }
+// fwrite($log, "open usersearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
 $list = $_GET['list'];
 $frags = $_GET['frags'];
@@ -132,7 +132,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
+// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $chunktable = "doc250_list";
@@ -160,7 +160,7 @@ for ($r=0; $r < 100; $r++) {
 	$request[] = 0.0;
 }
 $requestmagn = 0.0;
-fwrite($log, "request array created, count= ".count($request)."\n");
+// fwrite($log, "request array created, count= ".count($request)."\n");
 
 //  going to try using a temporary table called request to organize the work
 // create temporary table request
@@ -194,24 +194,24 @@ if ($list == "termquery") {
 			$selectedterm_id[] = $nextid[0];
 		}
 	}
-	fwrite($log, "selectedterm_id array loaded: ".memory_get_usage()."\n");
-	fwrite($log, "select_termid_string: $select_termid_string\n");
+	// fwrite($log, "selectedterm_id array loaded: ".memory_get_usage()."\n");
+	// fwrite($log, "select_termid_string: $select_termid_string\n");
 	mysqli_free_result($termtablerows);
-	fwrite($log, "termtablerows freed: ".memory_get_usage()."\n");
-	fwrite($log, "count in selectedterm_id: ".count($selectedterm_id)."\n");
+	// fwrite($log, "termtablerows freed: ".memory_get_usage()."\n");
+	// fwrite($log, "count in selectedterm_id: ".count($selectedterm_id)."\n");
 	
 	// put the selected vector info from uvNN_uksk into request
 	
 	mysqli_query($connection, "INSERT INTO request (id, vector)
 						SELECT id, vector from $uksktable 
 						WHERE id IN (".$select_termid_string.")");
-	fwrite($log, "count in request table ".mysqli_affected_rows()."\n");
-	fwrite($log, "request table filled.\n");
+	// fwrite($log, "count in request table ".mysqli_affected_rows()."\n");
+	// fwrite($log, "request table filled.\n");
 	
 	$requestrows = mysqli_query($connection, "select * from request");
 	while ($requestrow = mysqli_fetch_row($requestrows)) {
 		$nextvector = $requestrow[1];
-		calculate_request($nextvector, $log);
+		calculate_request($nextvector);
 	}
 	// now calculate the centroid
 	$numrows = count($selectedterm_id);
@@ -219,8 +219,8 @@ if ($list == "termquery") {
 		$request[$ix] = $request[$ix]/$numrows;
 	}
 	// and then calculate the magnitude of the centroid
-	calculate_request_magn($log);
-	fwrite($log, "requestmagn= ".$requestmagn."\n");
+	calculate_request_magn();
+	// fwrite($log, "requestmagn= ".$requestmagn."\n");
 	
 	$results = array();
 	$traverseVk = mysqli_query($connection, "select * from $vktable");
@@ -228,7 +228,7 @@ if ($list == "termquery") {
 		// $nextVk[0] is the chunkID
 		// $nextVk[1] is the magnitude of the vector
 		// $nextVk[2] is the vector string
-		$corr = cosine_simR($nextVk[2], $nextVk[1], $log);
+		$corr = cosine_simR($nextVk[2], $nextVk[1]);
 		//fwrite($log, "corr in traversveVk= ".$corr."\n");
 		
 		if ($corr >= $bound) {
@@ -241,7 +241,7 @@ if ($list == "termquery") {
 			$results[$corrs] = $nextVk[0];
 		}
 	}
-	fwrite($log, "count of results= ".count($results)."\n");
+	// fwrite($log, "count of results= ".count($results)."\n");
 	
 	// return the results
 	echo "<table cellpadding=10>";
@@ -257,7 +257,7 @@ if ($list == "termquery") {
 			$chunks[] = $chunklistrow;
 		}
 		mysqli_free_result($chunklistrows);
-		fwrite($log, "chunks array initialized. ".memory_get_usage()."\n");
+		// fwrite($log, "chunks array initialized. ".memory_get_usage()."\n");
 		
 		$qsx = strtr($qs, "'", "@");
 		$qsq = explode("_", $qs);
@@ -266,14 +266,14 @@ if ($list == "termquery") {
 		foreach($results as $rcorr => $chunkId) {
 			$chunktitle = $chunks[$chunkId][1];
 			$chunkfile = $chunks[$chunkId][2];
-			fwrite($log, "rcorr= ".$rcorr.", chunkId= ".$chunkId.", chunkfile =".$chunkfile."\n");
+			// fwrite($log, "rcorr= ".$rcorr.", chunkId= ".$chunkId.", chunkfile =".$chunkfile."\n");
 			$termisthere = 0;
 			$showpresent = "(";
 			if ($scope == "presence"|| $scope == "presentonly") {
 				foreach($qsq as $qterm) {
 					$termtest = 0;
 					$termtest = test_for_presence($connection, $frags, $qterm, $chunkId);
-					fwrite($log, $termtest."\n");
+					// fwrite($log, $termtest."\n");
 					$termisthere = $termisthere + $termtest;
 					if ($termtest == 1) {
 						if ($termisthere > 1) {
@@ -338,18 +338,18 @@ elseif ($list == "chunkquery") {
 		$chunkindex[$thischunk] = $chidx;
 		$chidx++;
 	}
-	fwrite($log, "selectedchunk and chunkindex arrays loaded: ".memory_get_usage()."\n");
-	fwrite($log, "count in selectedchunk: ".count($selectedchunk)."\n");
+	// fwrite($log, "selectedchunk and chunkindex arrays loaded: ".memory_get_usage()."\n");
+	// fwrite($log, "count in selectedchunk: ".count($selectedchunk)."\n");
 	
 	mysqli_query($connection, "INSERT INTO request (id, vector)
 				SELECT id, vector FROM $vksktable
 				WHERE id IN ($select_chunkid_string)");
-	fwrite($log, "request table filled.\n");
+	// fwrite($log, "request table filled.\n");
 	
 	$requestrows = mysqli_query($connection, "select * from request");
 	while ($requestrow = mysqli_fetch_row($requestrows)) {
 		$nextvector = $requestrow[1];
-		calculate_request($nextvector, $log);
+		calculate_request($nextvector);
 	}
 	// now calculate the centroid
 	$numrows = count($selectedchunk);
@@ -357,8 +357,8 @@ elseif ($list == "chunkquery") {
 		$request[$ix] = $request[$ix]/$numrows;
 	}
 	// and then calculate the magnitude of the centroid
-	calculate_request_magn($log);
-	fwrite($log, "requestmagn= ".$requestmagn."\n");
+	calculate_request_magn();
+	// fwrite($log, "requestmagn= ".$requestmagn."\n");
 	
 	$results = array();
 	$traverseUk = mysqli_query($connection, "select * from $uktable");
@@ -366,7 +366,7 @@ elseif ($list == "chunkquery") {
 		// $nextUk[0] is the chunkID
 		// $nextUk[1] is the magnitude of the vector
 		// $nextUk[2] is the vector string
-		$corr = cosine_simR($nextUk[2], $nextUk[1], $log);
+		$corr = cosine_simR($nextUk[2], $nextUk[1]);
 		//fwrite($log, "corr in traversveUk= ".$corr."\n");
 		
 		if ($corr >= $bound) {
@@ -379,7 +379,7 @@ elseif ($list == "chunkquery") {
 			$results[$corrs] = $nextUk[0];
 		}
 	}
-	fwrite($log, "count of results= ".count($results)."\n");
+	// fwrite($log, "count of results= ".count($results)."\n");
 		
 	// return the results
 	echo "<table cellpadding=10>";
@@ -404,7 +404,7 @@ elseif ($list == "chunkquery") {
 			$chunks[] = $cc;
 		}
 		mysqli_free_result($chunklist);
-		fwrite($log, "chunks array initialized. memory= ".memory_get_usage()."\n");
+		// fwrite($log, "chunks array initialized. memory= ".memory_get_usage()."\n");
 		
 		// now get the terms
 		$termlist = array();
@@ -423,20 +423,20 @@ elseif ($list == "chunkquery") {
 		krsort($results);
 		foreach($results as $rcorr => $termId) {
 			$term = $termlist[$termId];
-			fwrite($log, "count termlist now= ".count($termlist)."\n");
-			fwrite($log, "rcorr= ".$rcorr." termId= ".$termId." term= ".$term."\n");
+			// fwrite($log, "count termlist now= ".count($termlist)."\n");
+			// fwrite($log, "rcorr= ".$rcorr." termId= ".$termId." term= ".$term."\n");
 			$termisthere = 0;
 			$showpresent = "(present in ";
 			if ($scope == "presence"|| $scope == "presentonly") {
 				foreach($selectedchunk as $chunkId) {
 					$chunktitle = $chunks[$chunkId][1];
 					$chunkfile = $chunks[$chunkId][2];
-					fwrite($log, "chunkId= ".$chunkId."\n");
-					fwrite($log, "chunk= ".$chunktitle."\n");
-					fwrite($log, "chunkfile= ".$chunkfile."\n");
+					// fwrite($log, "chunkId= ".$chunkId."\n");
+					// fwrite($log, "chunk= ".$chunktitle."\n");
+					// fwrite($log, "chunkfile= ".$chunkfile."\n");
 					$termtest = 0;
 					$termtest = test_for_presence($connection, $frags, $term, $chunkId);
-					fwrite($log, $termtest."\n");
+					// fwrite($log, $termtest."\n");
 					$termisthere = $termisthere + $termtest;
 					if ($termtest == 1) {
 						if ($termisthere > 1) {
@@ -473,7 +473,7 @@ elseif ($list == "chunkquery") {
 			}
 			echo "</tr>";
 		}
-		fwrite($log, "printcount= ".$printcount."\n");
+		// fwrite($log, "printcount= ".$printcount."\n");
 		if ($printcount == 0) {
 			echo "<tr><td>None of the selected chunks contained terms in their centroid region.</td></tr>";
 		}
@@ -483,6 +483,6 @@ elseif ($list == "chunkquery") {
 
 mysqli_free_result($results);
 mysqli_close($connection);
-fwrite($log, "arrays and results freed, connection closed. memory used: ".memory_get_usage()."\n");
-fclose($log);
+// fwrite($log, "arrays and results freed, connection closed. memory used: ".memory_get_usage()."\n");
+// fclose($log);
 ?>

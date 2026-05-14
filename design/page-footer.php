@@ -3,6 +3,7 @@
       include "../functions/mysql_connection.php";
       ?>
       <footer class="page-footer">
+         <link href="css/global.css" rel="stylesheet" type="text/css"/>
          <div class="link-to-top"><a href="#top"><img src="images/icons/icon_toTop.png" alt="To Top of Page" title="To Top of Page"/></a></div>
          <div class="menus-and-links">
             <div class="menus">
@@ -49,17 +50,18 @@
             </div>
             <div class="links">
                <p>General Editor: William R. Newman, Professor of 
-                  					<a href="http://www.indiana.edu/~hpscdept/" title="History of Science Department" target="_blank">History of Science</a>, 
-                  					<a href="http://www.iub.edu/" title="Indiana University" target="_blank">Indiana University</a><br/>
-                  					Technical Editor: John A. Walsh,  Assistant Professor of 
-                  					<a href="http://www.slis.indiana.edu/" title="School of Library and Information Science" target="_blank">Library and Information Science</a>, 
-                  					<a href="http://www.iub.edu/" title="Indiana University" target="_blank">Indiana University</a><br/>
-                  					In collaboration with the <a href="http://www.dlib.indiana.edu" target="_blank" title="Digital Library Program at IU">IU Digital Library Program</a> 
-                  					| <a href="http://www.libraries.iub.edu/index.php?pageId=1137" title="Libraries Privacy Policy" target="_blank">Libraries Privacy Policy</a> 
-                  					| In association with <a href="http://www.newtonproject.sussex.ac.uk/" title="Newton Project at Sussex" target="_blank">The Newton Project</a> - 
-                  					University of Sussex<br/><a href="page/copyright" title="Copyright">© Copyright 2005—2020,
-                     					William R. Newman.</a><br/>
-                  					Peer reviewed by <a href="http://18thconnect.org/" target="_blank">18thConnect</a>.
+                  <a href="https://hpsc.indiana.edu/" title="Department of History and Philosophy of Science and Medicine" target="_blank">History and Philosophy of Science and Medicine</a>, 
+                  <a href="http://www.iub.edu/" title="Indiana University" target="_blank">Indiana University</a><br/>
+                  Technical Editor: John A. Walsh,  Associate Professor of 
+                  <a href="http://ils.indiana.edu/" title="Department of Information and Library Science" target="_blank">Information and Library Science</a>, 
+                  <a href="http://www.iub.edu/" title="Indiana University" target="_blank">Indiana University</a><br/>
+                  In collaboration with the <a href="http://www.dlib.indiana.edu" target="_blank" title="Digital Library Program at IU">IU Libraries</a> 
+                  | <a href="https://policies.iu.edu/policies/lib-01-libraries-privacy/index.html" title="Libraries Privacy Policy" target="_blank">Libraries Privacy Policy</a> 
+                  | In association with <a href="https://www.newtonproject.ox.ac.uk/" target="_blank">The Newton Project</a> - 
+                  University of Oxford<br/>
+                  <a href="<?php echo $textSite ?>page/copyright" title="Copyright">© Copyright 2005—2026,
+                     William R. Newman.</a><br/>
+                  Peer reviewed by <a href="https://ar-c.org/18thconnect/" target="_blank">18thConnect</a>.
                </p>
                <p>This material is based upon work supported by the <a href="http://www.nsf.gov/" title="NSF" target="_blank">National Science Foundation</a> 
                   					under Grant Nos. 0324310 and 0620868 and by the <a href="http://www.neh.gov/" title="NEH" target="_blank">National Endowment for the Humanities</a> 

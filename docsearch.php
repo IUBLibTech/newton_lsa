@@ -47,13 +47,13 @@ $textSite = "";
 $connection = new mysqli();
 require_once 'functions/mysql_connection.php';
 
-$logfile = "log/docsearch.txt";
-$log = fopen($logfile, "w");
-/*if (!$log) {
-	echo "no log";
-	return;
-}*/
-fwrite($log, "opened docsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
+// $logfile = "log/docsearch.txt";
+// $log = fopen($logfile, "w");
+// /*if (!$log) {
+// 	echo "no log";
+// 	return;
+// }*/
+// fwrite($log, "opened docsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
 $list = $_GET['list'];
 $frags = $_GET['frags'];
@@ -79,7 +79,7 @@ if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
      exit;
 }
 
-fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
+// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "doc250_list";
@@ -88,7 +88,7 @@ if ($frags == "ch1000") {
 	$listTable = "doc1000_list";
 	$correlationTable = "doc1000_cosines";
 }
-fwrite($log, "initialized: memoryused: ".memory_get_usage()."\n");
+// fwrite($log, "initialized: memoryused: ".memory_get_usage()."\n");
 
 //  $qs will contain doc IDs (ALCHnn_ALCHnn) or chunk IDs (n_n_n) or ALL
 // we'll use an array to track user's selections passed in $qs
@@ -101,17 +101,17 @@ if ($qs == "ALL") {
 	if (!empty($connection)) {
 		$allset = mysqli_query($connection, $selectalldocs);
 	}
-	fwrite($log, "allset query made. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "allset query made. memory used: ".memory_get_usage()."\n");
 
 	while($row_all = mysqli_fetch_row($allset)) {
 		$selected[$row_all[0]] = $row_all[1];
 	}
 	mysqli_free_result($allset);
-	fwrite($log, "allset released, selected array loaded. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "allset released, selected array loaded. memory used: ".memory_get_usage()."\n");
 }
 else {
 	$qset = explode("_", $qs);
-	fwrite($log, "user query string in qset array. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "user query string in qset array. memory used: ".memory_get_usage()."\n");
 	$matchID = "";
 	$matchcount = 0;
 	foreach($qset as $qn) {
@@ -124,7 +124,7 @@ else {
 		}
 	}
 	unset($qset);
-	fwrite($log, "qset unset. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "qset unset. memory used: ".memory_get_usage()."\n");
 	
 	$wherecolumn = "zz";
 	if ($list == "wholedocs") {
@@ -134,21 +134,21 @@ else {
 		$wherecolumn = "id";
 	}
 
-	fwrite($log, "matchID: ".$matchID."\n");
+	// fwrite($log, "matchID: ".$matchID."\n");
 
 	$selectsome = "SELECT id, ctitle FROM ".$listTable." WHERE ".$wherecolumn." IN (".$matchID.")";
 
-	fwrite($log, "selectsome: $selectsome\n");
+	// fwrite($log, "selectsome: $selectsome\n");
 
 	$someset = mysqli_query($connection, $selectsome);
-	fwrite($log, "someset query made. memory used: ".memory_get_usage()."\n");
-	fwrite($log, "number of rows returned: ".mysqli_num_rows($someset)."\n");
+	// fwrite($log, "someset query made. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "number of rows returned: ".mysqli_num_rows($someset)."\n");
 
 	while($row_some = mysqli_fetch_row($someset)) {
 		$selected[$row_some[0]] = $row_some[1];
 	}
 	mysqli_free_result($someset);
-	fwrite($log, "someset released, selected array loaded. memory used: ".memory_get_usage()."\n");
+	// fwrite($log, "someset released, selected array loaded. memory used: ".memory_get_usage()."\n");
 }
 
 $results = NULL;
@@ -169,7 +169,7 @@ else if ($outf == "pages") {
 			$matchchunkcount = 1;
 		}
 	}
-	fwrite($log, "matchchunks = ".$matchchunks."\n");
+	// fwrite($log, "matchchunks = ".$matchchunks."\n");
 	
 	// create temporary table pages
 	$removepagestemp = "DROP TEMPORARY TABLE IF EXISTS pages";
@@ -192,7 +192,7 @@ else if ($outf == "pages") {
 	$getresults = "SELECT * FROM pages WHERE correlation >=".$bound." ORDER BY doc1, doc2";
 }
 $results = mysqli_query($connection, $getresults);
-fwrite($log, "results query executed. memory used: ".memory_get_usage()."\n");
+// fwrite($log, "results query executed. memory used: ".memory_get_usage()."\n");
 
 // load the chunk list so we can write out titles and files names for displaycorrs.php
 $getchunksdata = "SELECT id, ctitle, alch FROM doc250_list";
@@ -208,7 +208,7 @@ $chunks[] = "base"; // fills that pesky $chunks[0] member
 while ($outchunk = mysqli_fetch_array($chunksdata)) {
 	$chunks[] = $outchunk;
 }
-fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
+// fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
 
 // now we produce the outputs and send them to the user
 if ($outf == "ranked") {
@@ -309,7 +309,7 @@ elseif ($outf == "pages") {
 }
 elseif ($outf == "graph") {
 
-	fwrite($log, "Entered graph.\n");
+	// fwrite($log, "Entered graph.\n");
 	$nodes = array();
 	$edges = array();
 	
@@ -387,7 +387,7 @@ elseif ($outf == "graph") {
 		#$graph = fopen($graphfile, 'w');
 		$graph = fopen("graphs/$newgraph", 'w');
 		if ($graph == '' || $graph == 0) {
-			fwrite($log, "Can't open graph file.\n");
+			// fwrite($log, "Can't open graph file.\n");
 		}
 		chmod($graph, 0666);  # make sure the file is user/group writable.
 		
@@ -419,7 +419,7 @@ elseif ($outf == "graph") {
 		}
 		
 		fclose($graph);
-		fwrite($log, "Closed graph file.\n");
+		// fwrite($log, "Closed graph file.\n");
 		$graphstring = $graphstring."<br>___________";
 		
 		// change the permissions for the new graph file
@@ -442,7 +442,7 @@ unset($selected);
 unset($chunks);
 mysqli_free_result($results);
 mysqli_close($connection);
-fwrite($log, "arrays and results freed, connection closed. memory used: ".memory_get_usage()."\n");
-fclose($log);
+// fwrite($log, "arrays and results freed, connection closed. memory used: ".memory_get_usage()."\n");
+// fclose($log);
 return;
 ?>

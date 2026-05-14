@@ -46,9 +46,9 @@ function extract_key1($keyint, $mod) {
 $connection = new mysqli();
 require_once("functions/mysql_connection.php");
 
-$logfile = "log/termsearch.txt";
-$log = fopen($logfile, "w");
-fwrite($log, "open termsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
+// $logfile = "log/termsearch.txt";
+// $log = fopen($logfile, "w");
+// fwrite($log, "open termsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
 $list = $_GET['list'];
 $frags = $_GET['frags'];
@@ -68,7 +68,7 @@ if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
      exit;
 }
 
-fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
+// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "term250_list";
@@ -105,10 +105,10 @@ else {
 	}
 	mysqli_free_result($selectedrows);
 }
-fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
-fwrite($log, "count in selected: ".count($selected)."\n");
+// fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
+// fwrite($log, "count in selected: ".count($selected)."\n");
 
-fwrite($log, "selectedids: $selectedids\n");
+// fwrite($log, "selectedids: $selectedids\n");
 
 //  going to try using a temporary table called results to organize the work
 // create temporary table results
@@ -130,7 +130,7 @@ $getcosines6 = "INSERT INTO results (correlation, term1, term2)
 		(term1 IN ($selectedids)) OR
 		(term2 IN ($selectedids)) )";
 mysqli_query($connection, $getcosines6);
-fwrite($log, "getcosines6 query executed: ".memory_get_usage()."\n");
+// fwrite($log, "getcosines6 query executed: ".memory_get_usage()."\n");
 $pairs6 = mysqli_affected_rows();
 if ($bound <= 0.6) {
 	$getcosines3 = "INSERT INTO results (correlation, term1, term2)
@@ -139,7 +139,7 @@ if ($bound <= 0.6) {
 			(term1 IN ($selectedids)) OR 
 			(term2 IN ($selectedids)) )";
 	mysqli_query($connection, $getcosines3);
-	fwrite($log, "getcosines3 query executed: ".memory_get_usage()."\n");
+	// fwrite($log, "getcosines3 query executed: ".memory_get_usage()."\n");
 	$pairs3 = mysqli_affected_rows();
 }
 if ($bound <= 0.3) {
@@ -149,7 +149,7 @@ if ($bound <= 0.3) {
 			(term1 IN ($selectedids)) OR 
 			(term2 IN ($selectedids)) )";
 	mysqli_query($connection, $getcosines2);
-	fwrite($log, "getcosines2 query executed: ".memory_get_usage()."\n");
+	// fwrite($log, "getcosines2 query executed: ".memory_get_usage()."\n");
 	$pairs2 = mysqli_affected_rows();
 }
 
@@ -161,17 +161,17 @@ while ($termrow = mysqli_fetch_row($termrows)) {
 	$termliststring = $termliststring.$termrow[0]."\n";
 }
 $termlist = explode("\n", $termliststring);
-fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
+// fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
 unset($termliststring);
 mysqli_free_result($termrows);
-fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
+// fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
 
 echo "<br/><br/>";
 
 // everything is gathered in results, time to work through them
 $getoutput = "SELECT * FROM results ORDER BY correlation DESC";
 $output = mysqli_query($connection, $getoutput);
-fwrite($log, "getoutput query executed. memory used: ".memory_get_usage()."\n");
+// fwrite($log, "getoutput query executed. memory used: ".memory_get_usage()."\n");
 //$output = $db->query("select * from results order by correlation desc");
 	
 if ($outf == "ranked") {
@@ -220,14 +220,14 @@ if ($outf == "ranked") {
 else if ($outf == "graph") {
 	//
 
-	fwrite($log, "Entered graph.\n");
+	// fwrite($log, "Entered graph.\n");
 	$nodes = array();
 	$edges = array();
 	
 	$outputcount = 0;
 	while ($outrow = mysqli_fetch_row($output)) {
 
-		fwrite($log, "Graph loop ".$outputcount."\n");
+		// fwrite($log, "Graph loop ".$outputcount."\n");
 		$corr = $outrow[0];
 		if ($corr < $bound) {
 			break;
@@ -255,12 +255,12 @@ else if ($outf == "graph") {
 		if ($writethis == 0) {
 			continue;
 		}
-		fwrite($log, "will writethis.\n");
+		// fwrite($log, "will writethis.\n");
 
 		$corr = $outrow[0];
 
 		$newkey = combine_key($new1, $new2);
-		fwrite($log, "got newkey ".$newkey."\n");
+		// fwrite($log, "got newkey ".$newkey."\n");
 		
 		$edges[$newkey] = $corr;
 		if (!in_array($new1, $nodes)) {
@@ -269,13 +269,13 @@ else if ($outf == "graph") {
 		if (!in_array($new2, $nodes)) {
 			$nodes[] = $new2;
 		}
-		fwrite($log, "loaded nodes and edges.\n");
+		// fwrite($log, "loaded nodes and edges.\n");
 		
 		$outputcount++;
 	}
 	if ($outputcount == 0) {
 		echo "No results greater than or equal to ".$bound." were found.<br/>";
-		fwrite($log, "outputcount was 0.\n");
+		// fwrite($log, "outputcount was 0.\n");
 	}
 	else {
 		// we can write the graph
@@ -283,9 +283,9 @@ else if ($outf == "graph") {
 		$downloadpath = "graphs/$newgraph";
 		#$graph = fopen($graphfile, 'w');
 		$graph = fopen("graphs/$newgraph", 'w');
-		if ($graph == '' || $graph == 0) {
-			fwrite($log, "Can't open graph file.\n");
-		}
+		// if ($graph == '' || $graph == 0) {
+		// 	fwrite($log, "Can't open graph file.\n");
+		// }
 		chmod($graph, 0666);  # make sure the file is user/group writable.
 		
 		fwrite($graph, '*Nodes'."\n");
@@ -311,7 +311,7 @@ else if ($outf == "graph") {
 		}
 		
 		fclose($graph);
-		fwrite($log, "Closed graph file.\n");
+		// fwrite($log, "Closed graph file.\n");
 		
 		// change the permissions for the new graph file
 		chmod($newgraph, 0644);
@@ -326,8 +326,8 @@ else if ($outf == "graph") {
 mysqli_close($connection);
 unset($termlist);
 //$db->close();
-fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
-fclose($log);
+// fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
+// fclose($log);
 return;
 	
 ?>
