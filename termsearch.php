@@ -43,7 +43,7 @@ function extract_key1($keyint, $mod) {
 // run the search over the correlation matrix
 
 // open the database
-$connection = new mysqli();
+$connection = null;
 require_once("functions/mysql_connection.php");
 
 // $logfile = "log/termsearch.txt";
@@ -59,16 +59,18 @@ $qs = $_GET['qs'];
 
 $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 
-if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
-  $downloadpath = "graphs/graph-".$hash_value.".nwb";
-      echo  "<br/><br/>(Right-click the link and use <em>Save link as...</em> to get a copy for viewing in Network Workbench or an editor.)<br/><br/>
-				<table>
-				<tr><td>NWB network graph file (cached):</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td></tr>
-				</table><br/><br/>";
-     exit;
-}
+// if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
+//   $downloadpath = "graphs/graph-".$hash_value.".nwb";
+//       echo  "<br/><br/>(Right-click the link and use <em>Save link as...</em> to get a copy for viewing in Network Workbench or an editor.)<br/><br/>
+// 				<table>
+// 				<tr><td>NWB network graph file (cached):</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td></tr>
+// 				</table><br/><br/>";
+//      exit;
+// }
 
 // fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
+
+echo "<script type='text/javascript'>alert('have entered graph in termsearch');</script>";
 
 //begin setup
 $listTable = "term250_list";
@@ -220,6 +222,7 @@ if ($outf == "ranked") {
 else if ($outf == "graph") {
 	//
 
+	echo "<script>alert('have entered graph in docsearch');</script>";
 	// fwrite($log, "Entered graph.\n");
 	$nodes = array();
 	$edges = array();
@@ -274,52 +277,92 @@ else if ($outf == "graph") {
 		$outputcount++;
 	}
 	if ($outputcount == 0) {
-		echo "No results greater than or equal to ".$bound." were found.<br/>";
+		// echo "No results greater than or equal to ".$bound." were found.<br/>";
+		echo "<script type='text/javascript'>alert('No results were found.');</script>";
 		// fwrite($log, "outputcount was 0.\n");
 	}
 	else {
 		// we can write the graph
 		$newgraph = "graph-". $hash_value.".nwb";
-		$downloadpath = "graphs/$newgraph";
-		#$graph = fopen($graphfile, 'w');
-		$graph = fopen("graphs/$newgraph", 'w');
+		// $downloadpath = "graphs/$newgraph";
+		// #$graph = fopen($graphfile, 'w');
+		// $graph = fopen("graphs/$newgraph", 'w');
 		// if ($graph == '' || $graph == 0) {
 		// 	fwrite($log, "Can't open graph file.\n");
 		// }
-		chmod($graph, 0666);  # make sure the file is user/group writable.
+		// chmod($graph, 0666);  # make sure the file is user/group writable.
 		
-		fwrite($graph, '*Nodes'."\n");
-		fwrite($graph, 'id*int label*string docid*string lemmaid*string'."\n");
+		// fwrite($graph, '*Nodes'."\n");
+		// fwrite($graph, 'id*int label*string docid*string lemmaid*string'."\n");
+
+		$graphstring = "*Nodes".PHP_EOL."id*int label*string docid*string";
+		// echo "<script>alert(`".$graphstring."`);</script>";
 		
 		$nodeIdx = array();
 		$nodecounter = 1;		
 		// first write all the nodes that were selected
 		foreach ($nodes as $node) {
 			$nodeIdx[$node] = $nodecounter;
-			fwrite($graph, $nodecounter.' "'.$termlist[$node].'" "d2d" "z2z"'."\n");
+			$nextNode = $nodecounter.' "'.$termlist[$node].'"';
+			// fwrite($graph, $nodecounter.' '.$termlist[$node]);
+			$graphstring = $graphstring . PHP_EOL . $nextNode;
 			$nodecounter++;
 		}
+		echo "<script>alert(`".$graphstring."`);</script>";
 		
-		fwrite($graph, "*UndirectedEdges\n");
-		fwrite($graph, "source*int\ttarget*int\tweight*float");		
+		// Now the edges.
+
+		$graphstring = $graphstring. PHP_EOL ."*UndirectedEdges";
+		$graphstring = $graphstring. PHP_EOL . "source*int\ttarget*int\tweight*float";
+		
+		// fwrite($graph, "*UndirectedEdges\n");
+		// fwrite($graph, "source*int\ttarget*int\tweight*float");		
 		
 		foreach($edges as $bigkey => $edgecorr) {
 			$ekey2 = extract_key2($bigkey);
 			$ekey1 = extract_key1($bigkey, $ekey2);
 			
-			fwrite($graph, "\n".$nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr);
+			$nextEdge = $nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr;
+			$graphstring = $graphstring . PHP_EOL . $nextEdge;
+			
+			// fwrite($graph, "\n".$nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr);
 		}
+		echo "<script type='text/javascript'>console.log(`".$graphstring."`)</script>";
 		
-		fclose($graph);
+		// fclose($graph);
 		// fwrite($log, "Closed graph file.\n");
 		
 		// change the permissions for the new graph file
-		chmod($newgraph, 0644);
+		// chmod($newgraph, 0644);
 		
-		echo  "<br/><br/>(Right-click the link and use <em>Save link as...</em> to get a copy for viewing in Network Workbench or an editor.)<br/><br/>
-				<table>
-				<tr><td>NWB network graph file:</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td></tr>
-				</table><br/><br/>";
+		// define the graph download function
+		echo "<script type='text/javascript'>
+			function downloadGraph(contents, filename) {
+				const graphBlob = new Blob([contents], { type: 'text/plain' });
+				const graphUrl = URL.createObjectURL(graphBlob);
+				const graphLink = document.createElement('a');
+				graphLink.href = graphUrl;
+				graphLink.download = filename;
+				document.body.appendChild(graphLink);
+				graphLink.click();
+				document.body.removeChild(graphLink);
+				URL.revokeObjectURL(graphUrl);
+			}
+		</script>";
+
+		// start downloading the graph and inform the user
+		echo  "<br/><br/>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;The requested graph file, named '$newgraph' should have downloaded to your browser's default download location.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
+				use in the Sci<sup>2</sup> network-graph application, but the file is
+				plain text, so it can be read in other editors.</p>
+				<br/><br/>
+				<script type='text/javascript'>
+					const graphContents = `$graphstring`;
+					const graphFile = '$newgraph';
+					downloadGraph(graphContents, graphFile);
+				</script>";
+		
 	}
 }
 

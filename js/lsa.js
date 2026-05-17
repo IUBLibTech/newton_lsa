@@ -129,7 +129,7 @@ function doSearch() {
 		//return;
 	}
 	// note: mdb = 2, defined at top of this file, db-dev
-	searchUrl = searchUrl+"?hs="+hs
+	searchUrl = searchUrl+"?hs="+hs;
 	searchUrl = searchUrl+"&mdb="+mdb;
 	searchUrl = searchUrl+"&list="+list;
 	searchUrl = searchUrl+"&frags="+frags;

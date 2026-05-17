@@ -1,6 +1,6 @@
 
      <?php
-      include "../functions/mysql_connection.php";
+      include "functions/mysql_connection.php";
       ?>
       <footer class="page-footer">
          <link href="css/global.css" rel="stylesheet" type="text/css"/>

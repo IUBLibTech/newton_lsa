@@ -44,16 +44,8 @@ function extract_key1($keyint, $mod) {
 
 // open the database
 $textSite = "";
-$connection = new mysqli();
+$connection = null;
 require_once 'functions/mysql_connection.php';
-
-// $logfile = "log/docsearch.txt";
-// $log = fopen($logfile, "w");
-// /*if (!$log) {
-// 	echo "no log";
-// 	return;
-// }*/
-// fwrite($log, "opened docsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
 
 $list = $_GET['list'];
 $frags = $_GET['frags'];
@@ -62,24 +54,7 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
-
 $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
-
-if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
-  $downloadpath = "graphs/graph-".$hash_value.".nwb";
-      echo  "<br/><br/>
-	  		 <small>(Right-click the link and use <em>Save link as...</em> to get a copy for viewing in Network Workbench or an editor.)</small>
-			 <br/><br/>
-			 <table class='lsa-resultsTable'>
-					<tr>
-						<td>NWB network graph file (cached):</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td>
-					</tr>
-			 </table>
-			 <br/><br/>";
-     exit;
-}
-
-// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
 
 //begin setup
 $listTable = "doc250_list";
@@ -88,7 +63,6 @@ if ($frags == "ch1000") {
 	$listTable = "doc1000_list";
 	$correlationTable = "doc1000_cosines";
 }
-// fwrite($log, "initialized: memoryused: ".memory_get_usage()."\n");
 
 //  $qs will contain doc IDs (ALCHnn_ALCHnn) or chunk IDs (n_n_n) or ALL
 // we'll use an array to track user's selections passed in $qs
@@ -101,17 +75,14 @@ if ($qs == "ALL") {
 	if (!empty($connection)) {
 		$allset = mysqli_query($connection, $selectalldocs);
 	}
-	// fwrite($log, "allset query made. memory used: ".memory_get_usage()."\n");
 
 	while($row_all = mysqli_fetch_row($allset)) {
 		$selected[$row_all[0]] = $row_all[1];
 	}
 	mysqli_free_result($allset);
-	// fwrite($log, "allset released, selected array loaded. memory used: ".memory_get_usage()."\n");
 }
 else {
 	$qset = explode("_", $qs);
-	// fwrite($log, "user query string in qset array. memory used: ".memory_get_usage()."\n");
 	$matchID = "";
 	$matchcount = 0;
 	foreach($qset as $qn) {
@@ -124,7 +95,6 @@ else {
 		}
 	}
 	unset($qset);
-	// fwrite($log, "qset unset. memory used: ".memory_get_usage()."\n");
 	
 	$wherecolumn = "zz";
 	if ($list == "wholedocs") {
@@ -134,21 +104,14 @@ else {
 		$wherecolumn = "id";
 	}
 
-	// fwrite($log, "matchID: ".$matchID."\n");
-
 	$selectsome = "SELECT id, ctitle FROM ".$listTable." WHERE ".$wherecolumn." IN (".$matchID.")";
 
-	// fwrite($log, "selectsome: $selectsome\n");
-
 	$someset = mysqli_query($connection, $selectsome);
-	// fwrite($log, "someset query made. memory used: ".memory_get_usage()."\n");
-	// fwrite($log, "number of rows returned: ".mysqli_num_rows($someset)."\n");
 
 	while($row_some = mysqli_fetch_row($someset)) {
 		$selected[$row_some[0]] = $row_some[1];
 	}
 	mysqli_free_result($someset);
-	// fwrite($log, "someset released, selected array loaded. memory used: ".memory_get_usage()."\n");
 }
 
 $results = NULL;
@@ -169,7 +132,6 @@ else if ($outf == "pages") {
 			$matchchunkcount = 1;
 		}
 	}
-	// fwrite($log, "matchchunks = ".$matchchunks."\n");
 	
 	// create temporary table pages
 	$removepagestemp = "DROP TEMPORARY TABLE IF EXISTS pages";
@@ -192,7 +154,6 @@ else if ($outf == "pages") {
 	$getresults = "SELECT * FROM pages WHERE correlation >=".$bound." ORDER BY doc1, doc2";
 }
 $results = mysqli_query($connection, $getresults);
-// fwrite($log, "results query executed. memory used: ".memory_get_usage()."\n");
 
 // load the chunk list so we can write out titles and files names for displaycorrs.php
 $getchunksdata = "SELECT id, ctitle, alch FROM doc250_list";
@@ -208,7 +169,6 @@ $chunks[] = "base"; // fills that pesky $chunks[0] member
 while ($outchunk = mysqli_fetch_array($chunksdata)) {
 	$chunks[] = $outchunk;
 }
-// fwrite($log, "chunks name array initialized. memory used: ".memory_get_usage()."\n");
 
 // now we produce the outputs and send them to the user
 if ($outf == "ranked") {
@@ -309,26 +269,17 @@ elseif ($outf == "pages") {
 }
 elseif ($outf == "graph") {
 
-	// fwrite($log, "Entered graph.\n");
 	$nodes = array();
 	$edges = array();
 	
 	// hidden loop to create nwb files with all nodes showing---connected and unconnected
 	// we can invoke this ouselves to produce specialty graphs but suppress it otherwise
-	/*
-	$filler = 1;
-	foreach ($chunks as $chunkxx) {
-		$nodes[] = $filler;
-		$filler++;
-	}
-	*/
-	
-	$graphstring = "_________<br>";
+
+	// echo "<script>alert('have entered graph in docsearch');</script>";
 	
 	$outputcount = 0;
 	while ($outrow = mysqli_fetch_row($results)) {
 
-		//fwrite($log, "Graph loop".$outputcount.". Memory: ".memory_get_usage()."\n");
 		$new1 = $outrow[1];
 		$new2 = $outrow[2];
 		
@@ -382,57 +333,66 @@ elseif ($outf == "graph") {
 	}
 	else {
 		// we can write the graph
-		$newgraph = "graph-". $hash_value.".nwb";
-		$downloadpath = "graphs/$newgraph";
-		#$graph = fopen($graphfile, 'w');
-		$graph = fopen("graphs/$newgraph", 'w');
-		if ($graph == '' || $graph == 0) {
-			// fwrite($log, "Can't open graph file.\n");
-		}
-		chmod($graph, 0666);  # make sure the file is user/group writable.
+		// echo "<script>alert('there are returned results  -line 384');</script>";
 		
-		fwrite($graph, '*Nodes'."\n");
-		fwrite($graph, 'id*int label*string docid*string lemmaid*string'."\n");
-		$graphstring = $graphstring.'*Nodes'."<br>";
-		$graphstring = $graphstring.'id*int label*string docid*string lemmaid*string'."<br>";
+		$newgraph = "graph-". $hash_value.".nwb";
+
+		$graphstring = "*Nodes".PHP_EOL."id*int label*string docid*string";
+		// echo "<script>alert(`".$graphstring."`);</script>";
 		
 		$nodeIdx = array();
 		$nodecounter = 1;
 		// first write all the nodes that were selected
 		foreach ($nodes as $node) {
 			$nodeIdx[$node] = $nodecounter;
-			fwrite($graph, $nodecounter.' "'.$chunks[$node][1].'" "'.$chunks[$node][2].'" "z2z"'."\n");
-			$graphstring = $graphstring.$nodecounter.' "'.$chunks[$node][1].'" "'.$chunks[$node][2].'" "z2z"'."<br>";
+			$nextNode = $nodecounter.' "'.$chunks[$node][1].'" "'.$chunks[$node][2].'"';
+
+			$graphstring = $graphstring . PHP_EOL . $nextNode;
 			$nodecounter++;
 		}
+		// echo "<script>alert(`".$graphstring."`);</script>";
 		
-		fwrite($graph, "*UndirectedEdges\n");
-		fwrite($graph, "source*int\ttarget*int\tweight*float");
-		$graphstring = $graphstring."*UndirectedEdges<br>";
-		$graphstring = $graphstring."source*int##target*int##weight*float";
+		// Now the edges.
+
+		$graphstring = $graphstring. PHP_EOL ."*UndirectedEdges";
+		$graphstring = $graphstring. PHP_EOL . "source*int\ttarget*int\tweight*float";
+
 		foreach($edges as $bigkey => $edgecorr) {
 			$ekey2 = extract_key2($bigkey);
 			$ekey1 = extract_key1($bigkey, $ekey2);
-			
-			fwrite($graph, "\n".$nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr);
-			$graphstring = $graphstring."<br>".$nodeIdx[$ekey1]."##".$nodeIdx[$ekey2]."##".$edgecorr;
+
+			$nextEdge = $nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr;
+			$graphstring = $graphstring . PHP_EOL . $nextEdge;
 		}
-		
-		fclose($graph);
-		// fwrite($log, "Closed graph file.\n");
-		$graphstring = $graphstring."<br>___________";
-		
-		// change the permissions for the new graph file
-		chmod("graphs/$newgraph", 0644);
-		
+		// echo "<script type='text/javascript'>console.log(`".$graphstring."`)</script>";
+
+		// define the graph download function
+		echo "<script type='text/javascript'>
+			function downloadGraph(contents, filename) {
+				const graphBlob = new Blob([contents], { type: 'text/plain' });
+				const graphUrl = URL.createObjectURL(graphBlob);
+				const graphLink = document.createElement('a');
+				graphLink.href = graphUrl;
+				graphLink.download = filename;
+				document.body.appendChild(graphLink);
+				graphLink.click();
+				document.body.removeChild(graphLink);
+				URL.revokeObjectURL(graphUrl);
+			}
+		</script>";
+
+		// start downloading the graph and inform the user
 		echo  "<br/><br/>
-			   <small>(Right-click the link and use <em>Save link as...</em> to get a copy for viewing in Network Workbench or an editor.)</small>
-			   <br/><br/>
-			   <table class='lsa-resultsTable'>
-				<tr>
-					<td>NWB network graph file:</td><td><a href='".$downloadpath."'>Link for download.</a> Give it a new name.</td>
-				</tr>
-				</table>";
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;The requested graph file, named '$newgraph' should have downloaded to your browser's default download location.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
+				use in the Sci<sup>2</sup> network-graph application, but the file is
+				plain text, so it can be read in other editors.</p>
+				<br/><br/>
+				<script type='text/javascript'>
+					const graphContents = `$graphstring`;
+					const graphFile = '$newgraph';
+					downloadGraph(graphContents, graphFile);
+				</script>";
 		
 	}
 }
@@ -442,7 +402,5 @@ unset($selected);
 unset($chunks);
 mysqli_free_result($results);
 mysqli_close($connection);
-// fwrite($log, "arrays and results freed, connection closed. memory used: ".memory_get_usage()."\n");
-// fclose($log);
 return;
 ?>

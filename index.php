@@ -201,11 +201,11 @@ HTML document begins here
 								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
 							</label>
 						</li>
-						<li>
+						<!-- <li>
 							<label>CSV: XY Term &#x2194; Doc
 								<input type="radio" value="TDcsv" name="lsa-outputradio" aria-label="TDcsv-outputradio"/>
 							</label>
-						</li>
+						</li> -->
 					</ul>
 				</fieldset>
 			</form>
@@ -502,8 +502,8 @@ HTML document begins here
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<label>Add document
-								<input type="button" id="lsa-appendDocPress" value="Add Docs" />
+							<label>&nbsp;
+								<input type="button" id="lsa-appendDocPress" value="Add Doc to Query Set" />
 							</label>
 						</li>
 					</ul>
@@ -539,23 +539,11 @@ HTML document begins here
 					</ul>
 				</fieldset>
 			</form>
-			<form name="lsa-queryFormContinue" id="lsa-queryFormContinue" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>Continue
-								<input type="submit" id="lsa-queryFormContinuePress" value="Continue" />
-							</label>
-						</li>
-						
-					</ul>
-				</fieldset>
-			</form>
 			<form name="lsa-queryFormClear" id="lsa-queryFormClear" class="lsa-genericForm">
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
-							<label>Clear Query Set
+							<label>&nbsp;
 								<input type="submit" id="lsa-queryFormClearButton" value="Clear Query Set" />
 							</label>
 							
@@ -563,7 +551,19 @@ HTML document begins here
 						
 					</ul>
 				</fieldset>
-			</form>			
+			</form>
+			<form name="lsa-queryFormContinue" id="lsa-queryFormContinue" class="lsa-genericForm">
+				<fieldset>
+					<ul class="lsa-formList">
+						<li>
+							<label>&nbsp;
+								<input type="submit" id="lsa-queryFormContinuePress" value="Continue to thresholds" />
+							</label>
+						</li>
+						
+					</ul>
+				</fieldset>
+			</form>
 		</div>
 		<br style="clear:both;"/>
 	</div>
