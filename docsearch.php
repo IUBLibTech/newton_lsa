@@ -331,7 +331,8 @@ elseif ($outf == "graph") {
 	if ($outputcount == 0) {
 		echo "No results greater than or equal to ".$bound." were found.<br/>";
 	}
-	else {
+	else 
+	{
 		// we can write the graph
 		// echo "<script>alert('there are returned results  -line 384');</script>";
 		
@@ -383,16 +384,21 @@ elseif ($outf == "graph") {
 
 		// start downloading the graph and inform the user
 		echo  "<br/><br/>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;The requested graph file, named '$newgraph' should have downloaded to your browser's default download location.</p>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
-				use in the Sci<sup>2</sup> network-graph application, but the file is
-				plain text, so it can be read in other editors.</p>
-				<br/><br/>
-				<script type='text/javascript'>
-					const graphContents = `$graphstring`;
-					const graphFile = '$newgraph';
-					downloadGraph(graphContents, graphFile);
-				</script>";
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;Confirm download of the requested graph file, '$newgraph'
+			to your browser's default download location.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
+			use in the Sci<sup>2</sup> network-graph application, but the file is
+			plain text, so it can be read in other editors.</p>
+			<br/><br/>
+			<script type='text/javascript'>
+				let permission = confirm('Download requested graph file?');
+				if (permission) {
+						const graphContents = `$graphstring`;
+						const graphFile = '$newgraph';
+						downloadGraph(graphContents, graphFile);
+					}
+			</script>
+		";
 		
 	}
 }
