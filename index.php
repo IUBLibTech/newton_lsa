@@ -63,6 +63,11 @@ HTML document begins here
 <html lang="en">
 <head>
 	<title>Latent Semantic Analysis of Newton's Chymistry</title>
+	<script src="https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/graphology-library@0.6.0/dist/graphology-library.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/3.0.2/sigma.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@sigma/node-square@3.0.0/+esm"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/3.0.2/sigma.min.js"></script> -->
 
 	<?php
 	require_once 'design/includes.php';
@@ -74,13 +79,14 @@ HTML document begins here
 
 	<!-- Newton Skin -->
 	<?php require_once('design/header.php') ?>
+ 
 </head>
 <body>
 
 <?php require_once('design/uniform-title.php') ?>
 
 <!--	 			--> 
-<!-- ROW #0 (HELP) 	--> 
+<!-- ROW #0 (HELP) locating "HELP Documentation" Button 	--> 
 <!--	 			-->
 <div class="lsa-row">
 	<div id="lsa-rowZero">
@@ -92,7 +98,7 @@ HTML document begins here
 </div>
 
 <!--	 			--> 
-<!-- ROW #1A (TAB) 	--> 
+<!-- ROW #1A (TAB) locating "Show Query Tool" Button 	--> 
 <!--	 			-->
 <div class="lsa-row">
 	<div id="lsa-rowOneA">
@@ -101,7 +107,7 @@ HTML document begins here
 </div>
 
 <!--	 	--> 
-<!-- ROW #2 --> 
+<!-- ROW #2 locating the four radio-button panels of "step" 1 --> 
 <!--	 	-->
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowTwo">
@@ -177,27 +183,27 @@ HTML document begins here
 					<legend>Results Output Type:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>Descending Order
+							<label>List of pairs in Descending Order
 								<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>One Doc in Page Order
+							<label>Pairs from One Doc in Page Order
 								<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Term Alpha Order
+							<label>List of Term Pairs in Alpha Order
 								<input type="radio" value="byterms" name="lsa-outputradio" aria-label="byterms-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Doc Catalog Order
+							<label>List of Pairs in Catalog Order
 								<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Graph for NWB
+							<label>Network Graph of Doc Pairs
 								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
 							</label>
 						</li>
@@ -274,24 +280,22 @@ HTML document begins here
 						<legend>Terms</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Choose one or more
-									<select name="lsa-selectterm250" id="lsa-selectterm250" size="15">
-								</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		//  style='font-family: Liberation Sans Alchemy'
-		$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
-		while ($term250 = mysqli_fetch_row($term250list)) {
-		    if (strpos($term250[0],"'") > -1) {
-                $term_string = str_replace("'", "&#8217;", $term250[0]);
-            }
-		    else $term_string = $term250[0];
+								<label>Choose one or more</label>
+								<select aria-label="Terms selection list" name="lsa-selectterm250" id="lsa-selectterm250" size="15">
+									<?php
+									// open the document chunk names file and read it into an array
+									$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
+									while ($term250 = mysqli_fetch_row($term250list)) {
+										if (strpos($term250[0],"'") > -1) {
+											$term_string = str_replace("'", "&#8217;", $term250[0]);
+										}
+										else $term_string = $term250[0];
 
-		    print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
-		}
-		mysqli_free_result($term250list);
-		// fwrite($log, "term250list loaded.\n");
-		?>
+										print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
+									}
+									mysqli_free_result($term250list);
+									// fwrite($log, "term250list loaded.\n");
+									?>
 								</select>
 							</li>
 						</ul>
@@ -302,7 +306,7 @@ HTML document begins here
                 unset($termlist);
                 unset($termselect);
                 ?>
-			</div>
+		</div>
 			<div id="lsa-appendTerm250Env">
 				<form name="lsa-appendTerm250Button" id="lsa-appendTerm250Button" class="lsa-genericForm">
 					<fieldset>
@@ -800,7 +804,7 @@ HTML document begins here
 <!-- Newton Skin -->
 <?php 
 require_once('design/page-footer.php');
-require_once 'design/jsfooter.php'; ?>
+require_once('design/jsfooter.php'); ?>
 
 </body>
 </html>	

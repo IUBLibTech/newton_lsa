@@ -81,14 +81,14 @@ function getUserValues() {
 	
 	
 	// TESTING
-	/*	
-		console.log($searchType);
-		console.log($chunkSize);
-		console.log($outputType);
-		console.log($scopeType);
-		console.log($boundRatio);
-		console.log(' ');
-	*/
+		
+		// console.log($searchType);
+		// console.log($chunkSize);
+		// console.log($outputType);
+		// console.log($scopeType);
+		// console.log($boundRatio);
+		// console.log(' ');
+	
 }
 // end tdbowman add
 

@@ -163,17 +163,17 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<!-- <meta charset="utf-8" />
 <meta name="keywords" content="science,chemistry,history,isaac newton,chymistry,alchemical manuscripts,national science foundation,laboratory,chymistry of isaac newton,indiana university,digtial library,alchemy,newton">
 <meta name="description" content="Isaac Newton, like Albert Einstein, is a quintessential symbol of the human intellect and its ability to decode the secrets of nature. Newton wrote and transcribed about a million words on the subject of alchemy, of which only a tiny fraction has today been published. With the support of the National Science Foundation and the National Endowment for the Humanities, The Chymistry of Isaac Newton hosted by Indiana University's Digital Library Program, is producing a scholarly online edition of Newton's alchemical manuscripts integrated with new research on Newton's chymistry.">
 <meta name="author" content="Wallace Hooper">
-<meta name="generator" content="tei2html stylesheets" />
+<meta name="generator" content="tei2html stylesheets" /> -->
 <!-- Dublin Core Record: start -->
-<meta name="DC.title" content="Latent Semantic Analysis Tool" />
+<!-- <meta name="DC.title" content="Latent Semantic Analysis Tool" />
 <meta name="DC.creator" content="Wally Hooper">
 <meta name="DC.designer" content="Timothy D Bowman">
 <meta name="DC.type" scheme="DCTERMS.DCMIType" content="Text">
-<meta name="DC.Format" scheme="DCTERMS.IMT" content="application/xhtml+xml">
+<meta name="DC.Format" scheme="DCTERMS.IMT" content="application/xhtml+xml"> -->
 <!-- Dublin Core Record: end -->
 
 
