@@ -35,5 +35,25 @@ function restoreGraph(graph, sigma) {
     });
     graph.forEachEdge((edge, attribute) => {
         graph.setEdgeAttribute(edge, 'color', 'gray');
+
+        let weight = graph.getEdgeAttribute(edge, 'weight');
+        weightFloat = parseFloat(weight);
+        if (weightFloat >= 0.9) {
+            weight_size = 6;
+        }
+        else if (weightFloat >= 0.8) {
+            weight_size = 4;
+        }
+        else if (weightFloat >= 0.7) {
+            weight_size = 3;
+        }
+        else if (weightFloat >= 0.6) {
+            weight_size = 2;
+        }
+        else {
+            weight_size = 1;
+        }
+        graph.setEdgeAttribute(edge, 'size', weight_size);
     });
 }
+	

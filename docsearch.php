@@ -550,6 +550,10 @@ elseif ($outf == "graph") {
 
 		// POINT OF RETURN TO index.php for GRAPHS
 
+		// make the "neighbors" button visible
+		echo "let sideBySideBtn = document.querySelector('lsa-sidebyside');";
+		echo "sideBySideBtn.style.display = 'block';";
+
 		echo "<div id='graph_div'>";
 
 		// return the graphology-ready JSON graph to the main page
@@ -558,13 +562,25 @@ elseif ($outf == "graph") {
 		// echo $see_graph_final;
 		echo "</div>";
 
-		// define the div where the graph will be drawn
-		echo "<div id='sigmaGraph' style='width: 1000px; height: 800px; background: white' oncontextmenu='event.preventDefault();'></div>";
-		
-		// hidden storage element for the black nodeId whose neighbors are highlighted in red and by size
-		echo "<textarea id='queryNode' style='display:none'>None</textarea>";
+		echo "<div style='float: left' id='graphPanel'>";
+		echo "<p>Click a node once to display that passage's<br/>title and graph details.</p>";
+		// echo "<input type='button' id='lsa-sidebyside' value='Open base and selected neighbor side-by-side'/>";
+		echo "</div>";  // end id='graphPanel
 
-		echo "<textarea id='chunkSize' style='display:none'>".$chunkSize."</textarea>";
+		// define the div where the graph will be drawn
+		echo "<div id='sigmaGraph' style='width: 1200px; height: 1000px; background: white; border: 2px solid black; box-sizing: border-box; float: right' oncontextmenu='event.preventDefault();'></div>";
+		
+		// hidden storage element for the black "base" nodeId whose neighbors are enlarged and highlighted in red
+		echo "<textarea id='baseArea' style='display:none'>None</textarea>";
+
+		// hidden storage element for dark blue "counterpart" nodeID selected for side-by-side display
+		echo "<textarea id='counterpartArea' style='display:none'>None</textarea>";
+
+		// hidden storage element for the chunk size to choose between 250-word and 1000-word chunks
+		echo "<textarea id='chunkSizeArea' style='display:none'>".$frags."</textarea>";
+
+		// hidden storage element for the chunk size to choose between 250-word and 1000-word chunks
+		echo "<textarea id='weightArea' style='display:none'></textarea>";
 
 		echo "<script type='text/javascript'>
 			const graphdata = document.getElementById('graph_data').textContent;
@@ -587,7 +603,7 @@ elseif ($outf == "graph") {
 			const sigma = new SigmaRend(userGraph, container, {
 				renderLabels: true,
 				renderEdgeLabels: false,
-				labelSize: 12,
+				labelSize: 15,
 				nodeReducer: (node, data) => {
 					return data;
 				}
@@ -605,7 +621,7 @@ elseif ($outf == "graph") {
 				let nodeColor = userGraph.getNodeAttribute(nodeId, 'color');
 				let nodeSize = userGraph.getNodeAttribute(nodeId, 'size');
 
-				if (nodeColor !='red' && nodeSize != 15) {
+				if (nodeSize != 15) {
 					// Display the node information in an alert or console log
 					let bindalert = 'Selected Node ID: ' + nodeId + '\\n';
 					bindalert = bindalert + 'Label: ' + nodeLabel + '\\n\\n';
@@ -615,30 +631,73 @@ elseif ($outf == "graph") {
 					bindalert = bindalert + 'X: ' + nodeX + ', ';
 					bindalert = bindalert + 'Y: ' + nodeY;
 					alert(bindalert);
-				} else {
-					let graphQueryElement = document.getElementById('queryNode');
-					let queryNodeId = graphQueryElement.value;
-					let chunkSizeElement = document.getElementById('chunkSize');
-					let chunkSize = chunkSizeElement.value;
-					openViewer(chunkSize, queryNodeId, nodeId, '0.9');
+				}
+				else if (nodeColor == 'red') {
+					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'hotpink');
+
+					let chunkSize = chunkSizeArea.value;
+
+					let graphQueryElement = document.getElementById('baseArea');
+					let queryNodeIdList = graphQueryElement.value;
+					let queryNodeIds = queryNodeIdList.split(';');
+					let queryNodeId = queryNodeIds[0];
+					let queryNodeIdInt = parseInt(queryNodeId, 10);
+					let queryNodeDbid = queryNodeIds[1];
+					let queryNodeDbidInt = parseInt(queryNodeDbid, 10);
+					let nodeIdInt = parseInt(nodeId, 10);
+					let nodeDbidInt = parseInt(nodeDbid, 10);
+					console.log(queryNodeIdInt + ', ' + nodeIdInt);
+					// alert('queryNodeIdInt and NodeIdInt');
+					console.log(queryNodeDbidInt + ', ' + nodeDbidInt);
+					// alert('queryNodeDbidInt and nodeDbidInt');
+					let edgeIdDeduced = '000';
+					if (queryNodeIdInt < nodeIdInt) {
+						edgeIdDeduced = userGraph.edge(queryNodeId, nodeId);
+					} else {
+						edgeIdDeduced = userGraph.edge(nodeId, queryNodeId);
+					}
+					console.log(edgeIdDeduced);
+					// alert('edgeIdDeduced');
+
+					let edgeWeight = userGraph.getEdgeAttribute(edgeIdDeduced, 'weight');
+					console.log(edgeWeight);
+					// alert('edgeWeight');
+					let weightStore = document.getElementById('weightArea');
+					weightStore.value = edgeWeight;
+
+					let counterpartElement = document.getElementById('counterpartArea');
+					let priorIds = counterpartElement.value;
+					if (priorIds != 'None') {
+						let priorIdList = priorIds.split(';');
+						let priorNodeId = priorIdList[0];
+						let priorNodeDbid = priorIdList[1];
+						if (priorNodeDbid == nodeDbid) {
+							// this means the user has just clicked the same neighbor again, so we will restore the graph and exit this event handler
+							restoreGraph(userGraph, sigma);
+							return;
+						}
+						updateNodeAttribute(userGraph, sigma, priorNodeId, 'color', 'red');
+					}
 				}
 			});
 
 			sigma.on('rightClickNode', (payload) => {
 				const nodeId = payload.node;
+				let nodeDbid = userGraph.getNodeAttribute(nodeId, 'dbid');
+				let queryIds = nodeId + ';' + nodeDbid;
 
-				let graphQueryElement = document.getElementById('queryNode');
-				graphQueryElement.value = nodeId;
+				let graphQueryElement = document.getElementById('baseArea');
+				graphQueryElement.value = queryIds;
 
 				let n_neighbors = userGraph.neighbors(nodeId);
 				// console.log(nodeId, n_neighbors);
 
-				size = userGraph.getNodeAttribute(nodeId, 'size');
-				color = userGraph.getNodeAttribute(nodeId, 'color');
-				orig_color = userGraph.getNodeAttribute(nodeId, 'orig_color');
+				let size = userGraph.getNodeAttribute(nodeId, 'size');
+				let color = userGraph.getNodeAttribute(nodeId, 'color');
+				let orig_color = userGraph.getNodeAttribute(nodeId, 'orig_color');
 
-				nodeTitle = userGraph.getNodeAttribute(nodeId, 'title');
-				nodeAbbrev = userGraph.getNodeAttribute(nodeId, 'abbrev');
+				let nodeTitle = userGraph.getNodeAttribute(nodeId, 'title');
+				let nodeAbbrev = userGraph.getNodeAttribute(nodeId, 'abbrev');
 
 				let n_edges = userGraph.edges(nodeId);
 				console.log(nodeId, n_edges);
@@ -647,7 +706,7 @@ elseif ($outf == "graph") {
 				// if color and orig_color are different, then orig_color should be restored
 				if (color == orig_color) {
 					alert('neighbors of ' + nodeId + ' : ' + n_neighbors);
-					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'black');
+					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'maroon');
 					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 15);
 					updateNodeAttribute(userGraph, sigma, nodeId, 'label', nodeTitle);
 
@@ -660,6 +719,7 @@ elseif ($outf == "graph") {
 
 					n_edges.forEach((n_edge) => {
 						updateEdgeAttribute(userGraph, sigma, n_edge, 'color', 'red');
+						updateEdgeAttribute(userGraph, sigma, n_edge, 'size', 8);
 					});
 				}
 				else {
@@ -667,28 +727,7 @@ elseif ($outf == "graph") {
 				}
 			});
 		</script>";
-		echo "</div>";  // end of graph_div div
-		echo "<script src='javascript/lsa.graphs.js' type='text/javascript'></script>";
-
-
-		// start downloading the graph and inform the user
-		// echo  "<br/><br/>
-		// 	<p>&nbsp;&nbsp;&nbsp;&nbsp;Confirm download of the requested graph file, '$newgraph'
-		// 	to your browser's default download location.</p>
-		// 	<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
-		// 	use in the Sci<sup>2</sup> network-graph application, but the file is
-		// 	plain text, so it can be read in other editors.</p>
-		// 	<br/><br/>
-		// 	<script type='text/javascript'>
-		// 		let permission = confirm('Download requested graph file?');
-		// 		if (permission) {
-		// 				const graphContents = `$graphstring`;
-		// 				const graphFile = '$newgraph';
-		// 				downloadGraph(graphContents, graphFile);
-		// 			}
-		// 	</script>
-		// ";
-		
+		echo "</div>";  // end of graph_div div		
 	}
 }
 

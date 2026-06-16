@@ -1,3 +1,5 @@
+const { default: Sigma } = require("sigma");
+
 $(document).ready(function() {
 	// WALLY'S INITIALIZE FUNCTION
 		init();	
@@ -89,8 +91,7 @@ $(document).ready(function() {
 		return false;
 	});	
 		
-		
-	
+
 	// ************************************************* //	
 	// ROW FOUR - RUN QUERY
 		$('#lsa-runSearchPress').on('click', function(i,e) {
@@ -108,7 +109,7 @@ $(document).ready(function() {
 			resetDisplay();
 			return false;
 		});
-	
+
 	// ************************************************* //	
 	// TAB TO SHOW QUERY ROWS 
 		$('#lsa-rightSideTab a').on('click', function() {
@@ -124,6 +125,37 @@ $(document).ready(function() {
 		});
 
 	// *************************************************//
+
+		// ROW FIVE - GRAPH INTERACTION
+		$('#lsa-sidebyside').on('click', function() {
+			let baseArea = document.getElementById('baseArea');
+			let baseIdString = baseArea.value;
+			let baseIds = baseIdString.split(';');
+			let baseId = baseIds[0];
+			let baseDbid = baseIds[1];
+			let baseDbidInt = parseInt(baseDbid, 10);
+
+			let counterpartArea = document.getElementById('counterpartArea');
+			let counterpartIdString = counterpartArea.value;
+			let counterpartIds = counterpartIdString.split(';');
+			let counterpartId = counterpartIds[0];
+			let counterpartDbid = counterpartIds[1];
+			let counterpartDbidInt = parseInt(counterpartDbid, 10);
+
+			let sizeArea = document.getElementById('chunkSizeArea');
+			let size = sizeArea.value;
+
+			let weightArea = document.getElementById('weightArea');
+			let weight = weightArea.value;
+
+			if (baseDbidInt < nodeDbidInt) {
+				openViewer(size, baseDbid, counterpartDbid, edgeWeight);
+			} else {
+				openViewer(size, counterpartDbid, baseDbid, edgeWeight);
+			}
+
+			updateNodeAttribute(userGraph, sigma, counterpartId, 'color', 'red');
+		});
 			
 	// ************************************************* //	
 	// POPUP jQuery CODE

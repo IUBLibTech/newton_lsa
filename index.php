@@ -183,12 +183,17 @@ HTML document begins here
 					<legend>Results Output Type:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>List of pairs in Descending Order
+							<label>Network Graph of Similar Pairs
+								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
+							</label>
+						</li>
+						<li>
+							<label>List of Pairs in Descending Order
 								<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Pairs from One Doc in Page Order
+							<label>All Pairs from One Doc in Page Order
 								<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
 							</label>
 						</li>
@@ -200,11 +205,6 @@ HTML document begins here
 						<li>
 							<label>List of Pairs in Catalog Order
 								<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
-							</label>
-						</li>
-						<li>
-							<label>Network Graph of Doc Pairs
-								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
 							</label>
 						</li>
 						<!-- <li>
@@ -772,6 +772,7 @@ HTML document begins here
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFive" style="display:none;">
 		<div id="lsa-spinningImageHolder"><img id="lsa-spinningLogo" src="images/ajax-loader.gif" alt="Waiting for Results" title="Waiting for Results" /> <span title="message"></span> </div>
+		<input type="button" id="lsa-sidebyside" style="display: none"/>
 		<div id="lsa-results"></div>
 		<br style="clear:both;"/>
 	</div>

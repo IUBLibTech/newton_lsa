@@ -32,7 +32,7 @@
     <script src="javascript/lsa.jquery-popup.js" type="text/javascript"></script> 
 	<script src="javascript/lsa.jquery.js" type="text/javascript"></script>
 	<script src="javascript/lsa.functionality.js" type="text/javascript"></script>
-	<!-- <script src="javascript/lsa.graphs.js" type="text/javascript"></script> -->
+	<script src="javascript/lsa.graphs.js" type="text/javascript"></script>
 	<!-- End LSA Specific jQuery -->
 	
     <!-- END JavaScript -->
