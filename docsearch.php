@@ -477,19 +477,27 @@ elseif ($outf == "graph") {
 			$ekey2 = extract_key2($bigkey);
 			$ekey1 = extract_key1($bigkey, $ekey2);
 
-			$e_source = $nodeIdx[$ekey1];
-			$source_str = sprintf("%03d", $e_source);
+			$key1_int = $nodeIdx[$ekey1];
+			$key1_str = sprintf("%03d", $key1_int);
 
-			$e_target = $nodeIdx[$ekey2];
-			$target_str = sprintf("%03d", $e_target);
+			$key2_int = $nodeIdx[$ekey2];
+			$key2_str = sprintf("%03d", $key2_int);
+
+			if ($key1_int < $key2_int) {
+				$source_str = $key1_str;
+				$target_str = $key2_str;
+			} else {
+				$source_str = $key2_str;
+				$target_str = $key1_str;
+			}
 
 			$edge_key = sprintf("%03d", $edgeCounter);
 
-			if ($nodeNpid[$e_source] == $nodeNpid[$e_target]) {
-				$e_type = "curved";
-			} else {
-				$e_type = "line";
-			}
+			// if ($nodeNpid[$e_source] == $nodeNpid[$e_target]) {
+			// 	$e_type = "curved";
+			// } else {
+			// 	$e_type = "line";
+			// }
 			$e_type = "line";
 
 			$edgefloat = floatval($edgecorr);
@@ -507,7 +515,7 @@ elseif ($outf == "graph") {
 			}
 			// $roundcorr = sprintf("%.5d", $edgefloat);
 
-			$e_attributes = "\"weight\": {$edgecorr}, \"type\": \"{$e_type}\", \"size\": \"{$e_size}\", \"color\": \"gray\"";
+			$e_attributes = "\"weight\": {$edgecorr}, \"type\": \"{$e_type}\", \"size\": \"{$e_size}\", \"color\": \"lightgray\"";
 			
 			$nextEdge = "{ \"key\": \"{$edge_key}\", \"source\": \"{$source_str}\", \"target\": \"{$target_str}\", ";
 			$nextEdge = $nextEdge . "\"attributes\": { {$e_attributes} } }";
@@ -550,10 +558,6 @@ elseif ($outf == "graph") {
 
 		// POINT OF RETURN TO index.php for GRAPHS
 
-		// make the "neighbors" button visible
-		echo "let sideBySideBtn = document.querySelector('lsa-sidebyside');";
-		echo "sideBySideBtn.style.display = 'block';";
-
 		echo "<div id='graph_div'>";
 
 		// return the graphology-ready JSON graph to the main page
@@ -562,19 +566,39 @@ elseif ($outf == "graph") {
 		// echo $see_graph_final;
 		echo "</div>";
 
-		echo "<div style='float: left' id='graphPanel'>";
-		echo "<p>Click a node once to display that passage's<br/>title and graph details.</p>";
-		// echo "<input type='button' id='lsa-sidebyside' value='Open base and selected neighbor side-by-side'/>";
+		echo "<div style='float: left; width: 360px; border: 2px solid black; box-sizing: border-box; padding: 20px' id='graphPanel'>";
+		// make the "neighbors" button visible
+		// echo "<script type='text/javascript'>
+		// 	let sideBySideBtn = document.querySelector('#lsa-sidebyside');
+		// 	sideBySideBtn.style.display = 'block';
+		// </script>";
+		// instruction text
+		echo "<p>&bullet; Click on a node to display that passage's title and display details.</p>";
+		echo "<p>&bullet; Right-click on a node to highlight that passage and neighbor passages with
+		which it shares significant vocabulary. The base passage turns maroon and its neighbors
+		turn indian red.</p>
+		<p>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
+		The selected neighbor will turn to red. You can now view those passages side by side by
+		clicking the button below.</p>
+		<p>&bullet; Right-click on the base node (maroon) to end the highlighting.</p>";
+		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor (red) side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
+		echo "<br/><p>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
+		alchemical manuscripts.</p>
+		<p>Each passage begins on indicated folio but because many folios contain more than
+		250 words, there can be successive cuts on the same folio, and the last cut likely includes the
+		top of the next page.</p>
+		<p>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
+		or equal to the requested cosine threshold.</p>";
 		echo "</div>";  // end id='graphPanel
 
 		// define the div where the graph will be drawn
 		echo "<div id='sigmaGraph' style='width: 1200px; height: 1000px; background: white; border: 2px solid black; box-sizing: border-box; float: right' oncontextmenu='event.preventDefault();'></div>";
 		
 		// hidden storage element for the black "base" nodeId whose neighbors are enlarged and highlighted in red
-		echo "<textarea id='baseArea' style='display:none'>None</textarea>";
+		echo "<textarea id='baseArea' style='display:none'></textarea>";
 
 		// hidden storage element for dark blue "counterpart" nodeID selected for side-by-side display
-		echo "<textarea id='counterpartArea' style='display:none'>None</textarea>";
+		echo "<textarea id='counterpartArea' style='display:none'></textarea>";
 
 		// hidden storage element for the chunk size to choose between 250-word and 1000-word chunks
 		echo "<textarea id='chunkSizeArea' style='display:none'>".$frags."</textarea>";
@@ -632,65 +656,76 @@ elseif ($outf == "graph") {
 					bindalert = bindalert + 'Y: ' + nodeY;
 					alert(bindalert);
 				}
-				else if (nodeColor == 'red') {
-					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'hotpink');
-
-					let chunkSize = chunkSizeArea.value;
-
-					let graphQueryElement = document.getElementById('baseArea');
-					let queryNodeIdList = graphQueryElement.value;
-					let queryNodeIds = queryNodeIdList.split(';');
-					let queryNodeId = queryNodeIds[0];
-					let queryNodeIdInt = parseInt(queryNodeId, 10);
-					let queryNodeDbid = queryNodeIds[1];
-					let queryNodeDbidInt = parseInt(queryNodeDbid, 10);
-					let nodeIdInt = parseInt(nodeId, 10);
-					let nodeDbidInt = parseInt(nodeDbid, 10);
-					console.log(queryNodeIdInt + ', ' + nodeIdInt);
-					// alert('queryNodeIdInt and NodeIdInt');
-					console.log(queryNodeDbidInt + ', ' + nodeDbidInt);
-					// alert('queryNodeDbidInt and nodeDbidInt');
-					let edgeIdDeduced = '000';
-					if (queryNodeIdInt < nodeIdInt) {
-						edgeIdDeduced = userGraph.edge(queryNodeId, nodeId);
-					} else {
-						edgeIdDeduced = userGraph.edge(nodeId, queryNodeId);
-					}
-					console.log(edgeIdDeduced);
-					// alert('edgeIdDeduced');
-
-					let edgeWeight = userGraph.getEdgeAttribute(edgeIdDeduced, 'weight');
-					console.log(edgeWeight);
-					// alert('edgeWeight');
-					let weightStore = document.getElementById('weightArea');
-					weightStore.value = edgeWeight;
-
-					let counterpartElement = document.getElementById('counterpartArea');
-					let priorIds = counterpartElement.value;
-					if (priorIds != 'None') {
+				else if (nodeColor == 'indianred') {
+					// first change any previous 'red' back to 'indian red'
+					let priorIds = document.getElementById('counterpartArea').textContent;
+					if (priorIds != '') {
 						let priorIdList = priorIds.split(';');
 						let priorNodeId = priorIdList[0];
 						let priorNodeDbid = priorIdList[1];
+
+						updateNodeAttribute(userGraph, sigma, priorNodeId, 'color', 'indianred');
+
 						if (priorNodeDbid == nodeDbid) {
 							// this means the user has just clicked the same neighbor again, so we will restore the graph and exit this event handler
 							restoreGraph(userGraph, sigma);
 							return;
 						}
-						updateNodeAttribute(userGraph, sigma, priorNodeId, 'color', 'red');
 					}
+					
+					// signal to user that node has been selected -- change the node's color
+					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'red');
+
+					let chunkSize = chunkSizeArea.value;
+
+					let baseIdList = document.getElementById('baseArea').textContent;
+					// console.log(baseIdList);
+					// alert('baseIdList');
+					let baseIds = baseIdList.split(';');
+					let baseId = baseIds[0];
+					let baseIdInt = parseInt(baseId, 10);
+					let baseDbid = baseIds[1];
+					let baseDbidInt = parseInt(baseDbid, 10);
+
+					let counterpartIds = nodeId + ';' + nodeDbid;
+					document.getElementById('counterpartArea').textContent = counterpartIds;
+
+					let nodeIdInt = parseInt(nodeId, 10);
+					let nodeDbidInt = parseInt(nodeDbid, 10);
+
+					// console.log(baseIdInt + ', ' + nodeIdInt);
+					// alert('baseIdInt and nodeIdInt');
+					// console.log(baseDbidInt + ', ' + nodeDbidInt);
+					// alert('baseDbidInt and nodeDbidInt');
+
+					let edgeIdDeduced = '000';
+					if (baseIdInt < nodeIdInt) {
+						edgeIdDeduced = userGraph.edge(baseId, nodeId);
+					} else {
+						edgeIdDeduced = userGraph.edge(nodeId, baseId);
+					}
+					// console.log(edgeIdDeduced);
+					// alert('edgeIdDeduced');
+
+					let edgeWeight = userGraph.getEdgeAttribute(edgeIdDeduced, 'weight');
+					// console.log(edgeWeight);
+					// alert('edgeWeight');
+					document.getElementById('weightArea').textContent = edgeWeight;
+
+					// everything ready for button request to view base and node texts side-by-side
+					return;
 				}
 			});
 
 			sigma.on('rightClickNode', (payload) => {
 				const nodeId = payload.node;
 				let nodeDbid = userGraph.getNodeAttribute(nodeId, 'dbid');
-				let queryIds = nodeId + ';' + nodeDbid;
+				let baseIds = nodeId + ';' + nodeDbid;
 
-				let graphQueryElement = document.getElementById('baseArea');
-				graphQueryElement.value = queryIds;
-
-				let n_neighbors = userGraph.neighbors(nodeId);
-				// console.log(nodeId, n_neighbors);
+				document.getElementById('baseArea').textContent = baseIds;
+				queryIds = document.getElementById('baseArea').textContent;
+				// console.log(queryIds);
+				// alert('queryIds');
 
 				let size = userGraph.getNodeAttribute(nodeId, 'size');
 				let color = userGraph.getNodeAttribute(nodeId, 'color');
@@ -699,20 +734,23 @@ elseif ($outf == "graph") {
 				let nodeTitle = userGraph.getNodeAttribute(nodeId, 'title');
 				let nodeAbbrev = userGraph.getNodeAttribute(nodeId, 'abbrev');
 
+				let n_neighbors = userGraph.neighbors(nodeId);
+				// console.log(nodeId, n_neighbors);
+
 				let n_edges = userGraph.edges(nodeId);
-				console.log(nodeId, n_edges);
+				// console.log(nodeId, n_edges);
 
 				// if the current color and orig_color are the same, then things can be changed
 				// if color and orig_color are different, then orig_color should be restored
 				if (color == orig_color) {
-					alert('neighbors of ' + nodeId + ' : ' + n_neighbors);
+					// alert('neighbors of ' + nodeId + ' : ' + n_neighbors);
 					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'maroon');
 					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 15);
 					updateNodeAttribute(userGraph, sigma, nodeId, 'label', nodeTitle);
 
 					userGraph.forEachNeighbor(nodeId, (neighborId, neighborAttributes) => {
 						neighborTitle = userGraph.getNodeAttribute(neighborId, 'title');
-						updateNodeAttribute(userGraph, sigma, neighborId, 'color', 'red');
+						updateNodeAttribute(userGraph, sigma, neighborId, 'color', 'indianred');
 						updateNodeAttribute(userGraph, sigma, neighborId, 'size', 15);
 						updateNodeAttribute(userGraph, sigma, neighborId, 'label', neighborTitle);
 					});

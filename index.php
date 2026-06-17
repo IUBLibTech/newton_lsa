@@ -772,8 +772,16 @@ HTML document begins here
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFive" style="display:none;">
 		<div id="lsa-spinningImageHolder"><img id="lsa-spinningLogo" src="images/ajax-loader.gif" alt="Waiting for Results" title="Waiting for Results" /> <span title="message"></span> </div>
-		<input type="button" id="lsa-sidebyside" style="display: none"/>
+		<!-- graph-related elements not visible to other user choices -->
+		<!-- <textarea id='baseArea' style='display:none'>None</textarea> -->
+		<!-- <textarea id='counterpartArea' style='display:none'>None</textarea> -->
+		<!-- <textarea id='chunkSizeArea' style='display:none'></textarea> -->
+		<!-- <textarea id='weightArea' style='display:none'></textarea> -->
+		<!-- <input type="button" value="Show base node and neighbor side by side" id="lsa-sidebyside" style="display: none; height: 40px; width: 500px"/> -->
+		
+		<!-- target div for ajax operations -->
 		<div id="lsa-results"></div>
+		
 		<br style="clear:both;"/>
 	</div>
 </div>
