@@ -566,7 +566,7 @@ elseif ($outf == "graph") {
 		// echo $see_graph_final;
 		echo "</div>";
 
-		echo "<div style='float: left; width: 360px; border: 2px solid black; box-sizing: border-box; padding: 20px' id='graphPanel'>";
+		echo "<div style='float: left; width: 360px; border: 2px solid black; box-sizing: border-box; padding: 20px; margin-left: 10px' id='graphPanel'>";
 		// make the "neighbors" button visible
 		// echo "<script type='text/javascript'>
 		// 	let sideBySideBtn = document.querySelector('#lsa-sidebyside');
@@ -580,19 +580,20 @@ elseif ($outf == "graph") {
 		<p>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
 		The selected neighbor will turn to red. You can now view those passages side by side by
 		clicking the button below.</p>
-		<p>&bullet; Right-click on the base node (maroon) to end the highlighting.</p>";
+		<p>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
 		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor (red) side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
+		echo "<p>&bullet; Refresh the web page to start another graph or search (Ctl-R or Command-R).</p>";
 		echo "<br/><p>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
 		alchemical manuscripts.</p>
-		<p>Each passage begins on indicated folio but because many folios contain more than
-		250 words, there can be successive cuts on the same folio, and the last cut likely includes the
-		top of the next page.</p>
+		<p>Each passage begins on indicated folio but many folios contain more than
+		250 words, so there can be successive cuts on the same folio. The last cut may include the
+		top of the next page while the first cut may not begin at the top of its own folio either.</p>
 		<p>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
 		or equal to the requested cosine threshold.</p>";
 		echo "</div>";  // end id='graphPanel
 
 		// define the div where the graph will be drawn
-		echo "<div id='sigmaGraph' style='width: 1200px; height: 1000px; background: white; border: 2px solid black; box-sizing: border-box; float: right' oncontextmenu='event.preventDefault();'></div>";
+		echo "<div id='sigmaGraph' style='width: 1200px; height: 1000px; background: cornsilk; border: 2px solid black; box-sizing: border-box; float: right' oncontextmenu='event.preventDefault();'></div>";
 		
 		// hidden storage element for the black "base" nodeId whose neighbors are enlarged and highlighted in red
 		echo "<textarea id='baseArea' style='display:none'></textarea>";
@@ -722,10 +723,17 @@ elseif ($outf == "graph") {
 				let nodeDbid = userGraph.getNodeAttribute(nodeId, 'dbid');
 				let baseIds = nodeId + ';' + nodeDbid;
 
-				document.getElementById('baseArea').textContent = baseIds;
+				// prevent possibility of opening more than one base node
+				// baseArea's contents should be empty to ensure a fresh start
 				queryIds = document.getElementById('baseArea').textContent;
 				// console.log(queryIds);
 				// alert('queryIds');
+				if (queryIds != '') {
+					restoreGraph(userGraph, sigma);
+					return;
+				}
+				
+				document.getElementById('baseArea').textContent = baseIds;
 
 				let size = userGraph.getNodeAttribute(nodeId, 'size');
 				let color = userGraph.getNodeAttribute(nodeId, 'color');

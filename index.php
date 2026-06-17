@@ -798,8 +798,7 @@ HTML document begins here
 						<div id="lsa-info"> 
 							NSF Project #0620868 &mdash; Science and Technology Studies<br/> 
 							<em>&#x2022; If you have problems seeing the alchemical symbols correctly, please install the Newton Sans TTF font </em>(NewtonSans-UnicodeFont-2025-09-09.tff)<em> directly onto your machine. <a href="font/NewtonSans-UnicodeFont-2025-09-09.zip">Download font zip file.</a><br/>
-							&#x2022; To view the Network Work Bench (.NWB) network graph files made by the 'Graph' options, please install the <a href='https://sci2.cns.iu.edu/user/index.php'>Sci<sup>2</sup> Tool</a>, a modular toolset for the study of science.<br/>
-							[CITE: Sci2 Team. (2009). Science of Science (Sci2) Tool. Indiana University and SciTech Strategies, https://sci2.cns.iu.edu.]</em><br/></div>
+							<br/></div>
 					</div>
 				</div>
 
