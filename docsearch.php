@@ -586,7 +586,8 @@ elseif ($outf == "graph") {
 		clicking the button below.</p>";
 		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor (red) side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
-		echo "<p style='font-size: 0.85rem'>&bullet; Refresh the web page to start another graph or search (Ctl-R or Command-R).</p>";
+		echo "<p style='font-size: 0.85rem'>&bullet; To start another graph or search, refresh the web page (Ctl-R or Command-R), or open
+		a new tab in the browser and start from there.</p>";
 		echo "<br/><p style='font-size: 0.85rem'>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
 		alchemical manuscripts.</p>
 		<p style='font-size: 0.85rem'>Each passage begins on indicated folio but many folios contain more than

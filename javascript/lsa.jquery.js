@@ -65,9 +65,13 @@ function getUserValues() {
 		// $boundRatio	=	$('#lsa-bounddocs').val();
 		$boundRatio = $boundElement.value;
 		// console.log($boundRatio);
-		// alert("boundRatio");	
+		// alert(" doc-doc boundRatio");	
 	} else if ($searchType == "chunks") {
-		$boundRatio	=	$('#lsa-boundchunk option:selected').val();
+		$boundElement = document.getElementById('lsa-boundchunk');
+		$boundRatio = $boundElement.value;
+		// $boundRatio	=	$('#lsa-boundchunk option:selected').val();
+		// console.log($boundRatio);
+		// alert("chunk-chunk boundRatio");	
 	} else if ($searchType == "terms") {
 		if ($chunkSize == "ch250") {
 			$boundRatio	=	$('#lsa-bound250 option:selected').val(); 
