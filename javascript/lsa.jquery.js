@@ -60,7 +60,12 @@ function getUserValues() {
 	
 	// set boundRatio
 	if ($searchType == "wholedocs") {
-		$boundRatio	=	$('#lsa-bounddocs option:selected').val();	
+		$boundElement = document.getElementById('lsa-bounddocs');
+		// $boundRatio = $boundElement.value;
+		// $boundRatio	=	$('#lsa-bounddocs').val();
+		$boundRatio = $boundElement.value;
+		// console.log($boundRatio);
+		// alert("boundRatio");	
 	} else if ($searchType == "chunks") {
 		$boundRatio	=	$('#lsa-boundchunk option:selected').val();
 	} else if ($searchType == "terms") {

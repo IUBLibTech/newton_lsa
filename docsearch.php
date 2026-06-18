@@ -64,6 +64,10 @@ $outf = $_GET['outf'];
 $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
+if ($bound == '' || $bound == 'Undefined') {
+	$bound = 0.89;
+}
+
 $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 
 //begin setup
@@ -566,29 +570,29 @@ elseif ($outf == "graph") {
 		// echo $see_graph_final;
 		echo "</div>";
 
-		echo "<div style='float: left; width: 360px; border: 2px solid black; box-sizing: border-box; padding: 20px; margin-left: 10px' id='graphPanel'>";
+		echo "<div style='float: left; width: 340px; border: 2px solid black; box-sizing: border-box; padding: 20px; margin-left: 10px' id='graphPanel'>";
 		// make the "neighbors" button visible
 		// echo "<script type='text/javascript'>
 		// 	let sideBySideBtn = document.querySelector('#lsa-sidebyside');
 		// 	sideBySideBtn.style.display = 'block';
 		// </script>";
 		// instruction text
-		echo "<p>&bullet; Click on a node to display that passage's title and display details.</p>";
-		echo "<p>&bullet; Right-click on a node to highlight that passage and neighbor passages with
-		which it shares significant vocabulary. The base passage turns maroon and its neighbors
+		echo "<p style='font-size: 0.85rem'>&bullet; Click on a node to display that passage's title and display details.</p>";
+		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on a node to highlight that passage and neighboring passages 
+		sharing significant vocabulary. The base passage turns maroon and its neighbors
 		turn indian red.</p>
-		<p>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
+		<p style='font-size: 0.85rem'>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
 		The selected neighbor will turn to red. You can now view those passages side by side by
-		clicking the button below.</p>
-		<p>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
+		clicking the button below.</p>";
 		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor (red) side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
-		echo "<p>&bullet; Refresh the web page to start another graph or search (Ctl-R or Command-R).</p>";
-		echo "<br/><p>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
+		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
+		echo "<p style='font-size: 0.85rem'>&bullet; Refresh the web page to start another graph or search (Ctl-R or Command-R).</p>";
+		echo "<br/><p style='font-size: 0.85rem'>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
 		alchemical manuscripts.</p>
-		<p>Each passage begins on indicated folio but many folios contain more than
+		<p style='font-size: 0.85rem'>Each passage begins on indicated folio but many folios contain more than
 		250 words, so there can be successive cuts on the same folio. The last cut may include the
 		top of the next page while the first cut may not begin at the top of its own folio either.</p>
-		<p>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
+		<p style='font-size: 0.85rem'>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
 		or equal to the requested cosine threshold.</p>";
 		echo "</div>";  // end id='graphPanel
 

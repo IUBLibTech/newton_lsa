@@ -614,7 +614,9 @@ HTML document begins here
 			</div>
 			<div id="lsa-docBoundEnv">
 				<form name="lsa-docboundForm" class="lsa-genericForm">
-					<fieldset>
+					<label>Doc-Doc Correlation Threshold
+					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.00" max="1.00" step="0.01" value="0.90">
+					<!-- <fieldset>
 						<ul class="lsa-formList">
 							<li>
 								<label>Doc-Doc Correlation Threshold
@@ -634,7 +636,7 @@ HTML document begins here
 								</label>
 							</li>
 						</ul>
-					</fieldset>
+					</fieldset> -->
 				</form>
 			</div>
 			<div id="lsa-chunkBoundEnv">
@@ -796,7 +798,7 @@ HTML document begins here
 				<div class="lsa-row" style="background-color: #FEFEFE;">
 					<div id="lsa-rowSix">
 						<div id="lsa-info"> 
-							NSF Project #0620868 &mdash; Science and Technology Studies<br/> 
+							NSF Project #0620868 &mdash; Science and Technology Studies<br/><br/>
 							<em>&#x2022; If you have problems seeing the alchemical symbols correctly, please install the Newton Sans TTF font </em>(NewtonSans-UnicodeFont-2025-09-09.tff)<em> directly onto your machine. <a href="font/NewtonSans-UnicodeFont-2025-09-09.zip">Download font zip file.</a><br/>
 							<br/></div>
 					</div>
