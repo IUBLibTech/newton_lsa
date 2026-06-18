@@ -72,4 +72,4 @@
                </p>
             </div>
          </div>
-      </footer><script src="js/global.js"></script>
+      </footer><script src="javascript/global.js"></script>

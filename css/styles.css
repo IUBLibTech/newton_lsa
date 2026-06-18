@@ -9,11 +9,9 @@
 	/*****************************************************************************/
 	@font-face {
 		font-family: 'Newton Sans';
-		src: url('../NewtonSans/newtonsans-2015-11-04.eot');
-		src: url('../NewtonSans/newtonsans-2015-11-04.eot?#iefix') format('embedded-opentype'),
-url('../NewtonSans/newtonsans-2015-11-04.woff') format('woff'),
-url('../NewtonSans/newtonsans-2015-11-04.ttf') format('truetype'),
-url('../NewtonSans/newtonsans-2015-11-04.svg#newton_sansregular') format('svg');
+		src: url('../NewtonSans/NewtonSans-2025-09-09.woff') format('woff'),
+url('../NewtonSans/NewtonSans-2025-09-09.woff2') format('woff2'),
+url('../NewtonSans/NewtonSans-2025-09-09.ttf') format('truetype');
 		font-weight: normal;
 		font-style: normal;
 	

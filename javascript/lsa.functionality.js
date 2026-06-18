@@ -89,8 +89,7 @@ $(document).ready(function() {
 		return false;
 	});	
 		
-		
-	
+
 	// ************************************************* //	
 	// ROW FOUR - RUN QUERY
 		$('#lsa-runSearchPress').on('click', function(i,e) {
@@ -108,7 +107,7 @@ $(document).ready(function() {
 			resetDisplay();
 			return false;
 		});
-	
+
 	// ************************************************* //	
 	// TAB TO SHOW QUERY ROWS 
 		$('#lsa-rightSideTab a').on('click', function() {
@@ -124,6 +123,9 @@ $(document).ready(function() {
 		});
 
 	// *************************************************//
+
+		// ROW FIVE - GRAPH INTERACTION
+
 			
 	// ************************************************* //	
 	// POPUP jQuery CODE

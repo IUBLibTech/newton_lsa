@@ -24,4 +24,4 @@ BEGIN SYMBOL SEARCH - jQUERY UI DIALOG BOX
 BEGIN NEWTON PROJECT STYLE
 ******************************  -->
 <link href="css/styles.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="css/print.css" rel="stylesheet" type="text/css" media="print" />    
+<link href="css/print.css" rel="stylesheet" type="text/css" media="print" />

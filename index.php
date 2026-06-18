@@ -63,6 +63,11 @@ HTML document begins here
 <html lang="en">
 <head>
 	<title>Latent Semantic Analysis of Newton's Chymistry</title>
+	<script src="https://cdn.jsdelivr.net/npm/graphology@0.26.0/dist/graphology.umd.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/graphology-library@0.6.0/dist/graphology-library.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/3.0.2/sigma.min.js"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/@sigma/node-square@3.0.0/+esm"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/3.0.2/sigma.min.js"></script> -->
 
 	<?php
 	require_once 'design/includes.php';
@@ -74,13 +79,14 @@ HTML document begins here
 
 	<!-- Newton Skin -->
 	<?php require_once('design/header.php') ?>
+ 
 </head>
 <body>
 
 <?php require_once('design/uniform-title.php') ?>
 
 <!--	 			--> 
-<!-- ROW #0 (HELP) 	--> 
+<!-- ROW #0 (HELP) locating "HELP Documentation" Button 	--> 
 <!--	 			-->
 <div class="lsa-row">
 	<div id="lsa-rowZero">
@@ -92,7 +98,7 @@ HTML document begins here
 </div>
 
 <!--	 			--> 
-<!-- ROW #1A (TAB) 	--> 
+<!-- ROW #1A (TAB) locating "Show Query Tool" Button 	--> 
 <!--	 			-->
 <div class="lsa-row">
 	<div id="lsa-rowOneA">
@@ -101,7 +107,7 @@ HTML document begins here
 </div>
 
 <!--	 	--> 
-<!-- ROW #2 --> 
+<!-- ROW #2 locating the four radio-button panels of "step" 1 --> 
 <!--	 	-->
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowTwo">
@@ -177,28 +183,28 @@ HTML document begins here
 					<legend>Results Output Type:</legend>
 					<ul class="lsa-formList">
 						<li>
-							<label>Descending Order
+							<label>Network Graph of Similar Pairs
+								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
+							</label>
+						</li>
+						<li>
+							<label>List of Pairs in Descending Order
 								<input type="radio" value="ranked" name="lsa-outputradio" aria-label="ranked-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>One Doc in Page Order
+							<label>All Pairs from One Doc in Page Order
 								<input type="radio" value="pages" name="lsa-outputradio" aria-label="pages-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Term Alpha Order
+							<label>List of Term Pairs in Alpha Order
 								<input type="radio" value="byterms" name="lsa-outputradio" aria-label="byterms-outputradio"/>
 							</label>
 						</li>
 						<li>
-							<label>Doc Catalog Order
+							<label>List of Pairs in Catalog Order
 								<input type="radio" value="bychunks" name="lsa-outputradio" aria-label="bychunks-outputradio"/>
-							</label>
-						</li>
-						<li>
-							<label>Graph for NWB
-								<input type="radio" value="graph" name="lsa-outputradio" aria-label="graph-outputradio"/>
 							</label>
 						</li>
 						<!-- <li>
@@ -274,24 +280,22 @@ HTML document begins here
 						<legend>Terms</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Choose one or more
-									<select name="lsa-selectterm250" id="lsa-selectterm250" size="15">
-								</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		//  style='font-family: Liberation Sans Alchemy'
-		$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
-		while ($term250 = mysqli_fetch_row($term250list)) {
-		    if (strpos($term250[0],"'") > -1) {
-                $term_string = str_replace("'", "&#8217;", $term250[0]);
-            }
-		    else $term_string = $term250[0];
+								<label>Choose one or more</label>
+								<select aria-label="Terms selection list" name="lsa-selectterm250" id="lsa-selectterm250" size="15">
+									<?php
+									// open the document chunk names file and read it into an array
+									$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
+									while ($term250 = mysqli_fetch_row($term250list)) {
+										if (strpos($term250[0],"'") > -1) {
+											$term_string = str_replace("'", "&#8217;", $term250[0]);
+										}
+										else $term_string = $term250[0];
 
-		    print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
-		}
-		mysqli_free_result($term250list);
-		// fwrite($log, "term250list loaded.\n");
-		?>
+										print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
+									}
+									mysqli_free_result($term250list);
+									// fwrite($log, "term250list loaded.\n");
+									?>
 								</select>
 							</li>
 						</ul>
@@ -302,7 +306,7 @@ HTML document begins here
                 unset($termlist);
                 unset($termselect);
                 ?>
-			</div>
+		</div>
 			<div id="lsa-appendTerm250Env">
 				<form name="lsa-appendTerm250Button" id="lsa-appendTerm250Button" class="lsa-genericForm">
 					<fieldset>
@@ -610,7 +614,9 @@ HTML document begins here
 			</div>
 			<div id="lsa-docBoundEnv">
 				<form name="lsa-docboundForm" class="lsa-genericForm">
-					<fieldset>
+					<label>Doc-Doc Correlation Threshold
+					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.00" max="1.00" step="0.01" value="0.90">
+					<!-- <fieldset>
 						<ul class="lsa-formList">
 							<li>
 								<label>Doc-Doc Correlation Threshold
@@ -630,7 +636,7 @@ HTML document begins here
 								</label>
 							</li>
 						</ul>
-					</fieldset>
+					</fieldset> -->
 				</form>
 			</div>
 			<div id="lsa-chunkBoundEnv">
@@ -768,7 +774,16 @@ HTML document begins here
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFive" style="display:none;">
 		<div id="lsa-spinningImageHolder"><img id="lsa-spinningLogo" src="images/ajax-loader.gif" alt="Waiting for Results" title="Waiting for Results" /> <span title="message"></span> </div>
+		<!-- graph-related elements not visible to other user choices -->
+		<!-- <textarea id='baseArea' style='display:none'>None</textarea> -->
+		<!-- <textarea id='counterpartArea' style='display:none'>None</textarea> -->
+		<!-- <textarea id='chunkSizeArea' style='display:none'></textarea> -->
+		<!-- <textarea id='weightArea' style='display:none'></textarea> -->
+		<!-- <input type="button" value="Show base node and neighbor side by side" id="lsa-sidebyside" style="display: none; height: 40px; width: 500px"/> -->
+		
+		<!-- target div for ajax operations -->
 		<div id="lsa-results"></div>
+		
 		<br style="clear:both;"/>
 	</div>
 </div>
@@ -783,10 +798,9 @@ HTML document begins here
 				<div class="lsa-row" style="background-color: #FEFEFE;">
 					<div id="lsa-rowSix">
 						<div id="lsa-info"> 
-							NSF Project #0620868 &mdash; Science and Technology Studies<br/> 
+							NSF Project #0620868 &mdash; Science and Technology Studies<br/><br/>
 							<em>&#x2022; If you have problems seeing the alchemical symbols correctly, please install the Newton Sans TTF font </em>(NewtonSans-UnicodeFont-2025-09-09.tff)<em> directly onto your machine. <a href="font/NewtonSans-UnicodeFont-2025-09-09.zip">Download font zip file.</a><br/>
-							&#x2022; To view the Network Work Bench (.NWB) network graph files made by the 'Graph' options, please install the <a href='https://sci2.cns.iu.edu/user/index.php'>Sci<sup>2</sup> Tool</a>, a modular toolset for the study of science.<br/>
-							[CITE: Sci2 Team. (2009). Science of Science (Sci2) Tool. Indiana University and SciTech Strategies, https://sci2.cns.iu.edu.]</em><br/></div>
+							<br/></div>
 					</div>
 				</div>
 
@@ -800,7 +814,7 @@ HTML document begins here
 <!-- Newton Skin -->
 <?php 
 require_once('design/page-footer.php');
-require_once 'design/jsfooter.php'; ?>
+require_once('design/jsfooter.php'); ?>
 
 </body>
 </html>	

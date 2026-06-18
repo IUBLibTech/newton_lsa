@@ -12,8 +12,7 @@
     <script type="text/javascript" src="js.new/jquery.hoverIntent.js"></script>
 	<script type="text/javascript" src="js.new/navigation.js"></script>
     <script type="text/javascript" src="js.new/symbol-search-code.js"></script>     
-	<script type="text/javascript" src="js.new/newton-javascript.js">
-</script>    
+	<script type="text/javascript" src="js.new/newton-javascript.js"></script>    
 	<!-- End JAVASCRIPT -->
 	<!-- JAVASCRIPT MAIN -->
 
@@ -28,14 +27,14 @@
 	<script type="text/javascript" src="js.new/multi-column-lists.js"></script>
 	<script type="text/javascript" src="javascript/iBrowsePage.js"></script>
 	<script type="text/javascript" src="js.new/newton-internalJavascript.js"></script> 
-	
+		
+	<!-- LSA Specific jQuery -->
+    <script src="javascript/lsa.jquery-popup.js" type="text/javascript"></script> 
+	<script src="javascript/lsa.jquery.js" type="text/javascript"></script>
+	<script src="javascript/lsa.functionality.js" type="text/javascript"></script>
+	<script src="javascript/lsa.graphs.js" type="text/javascript"></script>
+	<!-- End LSA Specific jQuery -->
 	
     <!-- END JavaScript -->
 	<!-- JAVASCRIPT SPECIAL by Page -->
-	
-	<!-- LSA Specific jQuery -->
-    <script src="javascript/lsa.jquery-popup.js" language="javascript" type="text/javascript"></script> 
-	<script src="javascript/lsa.jquery.js" language="javascript" type="text/javascript"></script>
-	<script src="javascript/lsa.functionality.js" type="text/javascript" language="javascript"></script>
-<!-- End LSA Specific jQuery -->
 	
