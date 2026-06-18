@@ -614,54 +614,16 @@ HTML document begins here
 			</div>
 			<div id="lsa-docBoundEnv">
 				<form name="lsa-docboundForm" class="lsa-genericForm">
-					<label>Doc-Doc Correlation Threshold
-					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.00" max="1.00" step="0.01" value="0.90">
-					<!-- <fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Doc-Doc Correlation Threshold
-								<select name="lsa-bounddocs" id="lsa-bounddocs">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3</option>
-									<option value="0.2">0.2</option>
-									<option value="0.1">0.1 (more results)</option>
-									<option value="0">0 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset> -->
+					<label>Document &#x2013; Document Correlation Threshold
+					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.00" max="1.00" step="0.01" value="0.90" style="font-size: 16px"></label>
+					<label>(Note: 1.0 &#x2248; the two are identical, while 0.0 &#x2248; nothing in common.)</label>
 				</form>
 			</div>
 			<div id="lsa-chunkBoundEnv">
 				<form name="lsa-chunkboundForm" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Chunk &#x2013; Term Threshold
-								<select name="lsa-boundchunk" id="lsa-boundchunk">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3</option>
-									<option value="0.2">0.2</option>
-									<option value="0.1">0.1 (more results)</option>
-									<option value="0">0 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset>
+					<label>Chunk &#x2013; Chunk Threshold
+					<input type="number" name="lsa-boundchunk" id="lsa-boundchunk" min="0.00" max="1.00" step="0.01" value="0.90" style="font-size: 16px"></label>
+					<label>(Note: 1.0 &#x2248; the two are identical, while 0.0 &#x2248; nothing in common.)</label>
 				</form>
 			</div>
 			<div id="lsa-term250BoundEnv">
