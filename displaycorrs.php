@@ -186,7 +186,8 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <!-- End LSA Style -->
 <style type="text/css" media="all">
 .match {
-	background-color: yellow;
+	color: firebrick;
+	<!-- background-color: yellow; -->
 }
 .content {
 	font-size:small;
