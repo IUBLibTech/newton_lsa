@@ -575,12 +575,12 @@ elseif ($outf == "graph") {
 		// instruction text
 		echo "<p style='font-size: 0.85rem'>&bullet; Click on a node to display that passage's title and display details.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on a node to highlight that passage and neighboring passages 
-		sharing significant vocabulary. The base passage turns maroon and its neighbors
-		turn indian red.</p>
+		sharing significant vocabulary. The base passage turns maroon and doubles in size, and its neighbors
+		turn indian red and increase in size.</p>
 		<p style='font-size: 0.85rem'>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
-		The selected neighbor will turn to red. You can now view those passages side by side by
-		clicking the button below.</p>";
-		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor (red) side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
+		The selected neighbor will become the same size as the base. Click the button below to view the base passage and selected neighbor side by side
+		in a new tab.</p>";
+		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; To start another graph or search, refresh the web page (Ctl-R or Command-R), or open
 		a new tab in the browser and start from there.</p>";
