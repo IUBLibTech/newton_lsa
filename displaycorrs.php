@@ -8,6 +8,81 @@ function & prepstring($strInput)
 	return $str2;
 }
 
+function & translateGentium($strInput)
+{
+	$sub_for = [
+		E000 => E005,
+		E008 => 1F772,
+		E017 => 1F72F,
+		E01a => 1F748,
+		E05a => 1F706,
+		E301 => 1F701,
+		E302 => 1F702,
+		E303 => 1F703,
+		E304 => 1F704,
+		E305 => 1F705,
+		E306 => 1F706,
+		E307 => 1F707,
+		E308 => 1F708,
+		E30A => 1F70A,
+		E30B => 1F70B,
+		E30C => 1F70C,
+		E30D => 1F70D,
+		E310 => 1F710,
+		E311 => 1F711,
+		E314 => 1F714,
+		E315 => 1F715,
+		E316 => 1F716,
+		E317 => 1F717,
+		E31C => 1F71C,
+		E31D => 1F71D,
+		E31F => 1F71F,
+		E320 => 1F720,
+		E321 => 1F721,
+		E322 => 1F722,
+		E325 => 1F725,
+		E326 => 1F726,
+		E327 => 1F727,
+		E328 => 1F728,
+		E329 => 1F729,
+		E32A => 1F72A,
+		E32B => 1F72B,
+		E32C => 1F72C,
+		E32D => 1F72D,
+		E32E => 1F72E,
+		E330 => 1F730,
+		E331 => 1F731,
+		E332 => 1F732,
+		E333 => 1F733,
+		E334 => 1F734,
+		E335 => 1F735,
+		E339 => 1F739,
+		E33E => 1F73E,
+		E33F => 1F73F,
+		E346 => 1F746,
+		E34E => 1F74E,
+		E34F => 1F74F,
+		E350 => 1F750,
+		E351 => 1F751,
+		E352 => 1F752,
+		E355 => 1F755,
+		E35E => 1F75E,
+		E367 => 1F767,
+		E36B => 1F76B,
+		E36E => 1F76E,
+		E370 => 1F770,
+		E373 => 1F773
+	];
+
+	$strOutput = str_replace(
+		$array_keys($sub_for),
+		$array_values($sub_for),
+		$strInput
+	);
+	return $strOutput;
+}
+		
+
 // function from PHP manual by Jesse Bussman at gmail
 function explodeX($delimiters,$string)
 {
@@ -57,6 +132,12 @@ $connection = new mysqli();
 $host = "";
 $port = "";
 require_once("functions/mysql_connection.php");
+
+// need to test for the source database because the Library version still uses the older Gentium font rather than Newton Sans
+$gentium = true;
+if ($host == "sasrdsmp01.uits.iu.edu") {
+	$gentium = false;
+}
 
 $frags = "";
 if (isset($_GET['frags']) && $_GET['frags'] != "")
@@ -132,6 +213,12 @@ $d2string = $doc2data[3];
 // fwrite($log, "doc2title = ". $doc2title . "\n");
 // fwrite($log, "doc2mstitle = ". $doc2mstitle . "\n");
 // fwrite($log, "d2string = ". $d2string . "\n");
+
+// change the font to get correct NewtonSans characters if necessary
+if ($gentium) {
+	$d1string = translateGentium($d1string);
+	$d2string = translateGentium($d2string);
+}
 
 // setting up the term list
 $termstring = "";
