@@ -571,11 +571,7 @@ elseif ($outf == "graph") {
 		echo "</div>";
 
 		echo "<div style='float: left; width: 340px; border: 2px solid black; box-sizing: border-box; padding: 20px; margin-left: 10px' id='graphPanel'>";
-		// make the "neighbors" button visible
-		// echo "<script type='text/javascript'>
-		// 	let sideBySideBtn = document.querySelector('#lsa-sidebyside');
-		// 	sideBySideBtn.style.display = 'block';
-		// </script>";
+		
 		// instruction text
 		echo "<p style='font-size: 0.85rem'>&bullet; Click on a node to display that passage's title and display details.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on a node to highlight that passage and neighboring passages 
@@ -651,7 +647,7 @@ elseif ($outf == "graph") {
 				let nodeColor = userGraph.getNodeAttribute(nodeId, 'color');
 				let nodeSize = userGraph.getNodeAttribute(nodeId, 'size');
 
-				if (nodeSize != 15) {
+				if (nodeSize < 15) {
 					// Display the node information in an alert or console log
 					let bindalert = 'Selected Node ID: ' + nodeId + '\\n';
 					bindalert = bindalert + 'Label: ' + nodeLabel + '\\n\\n';
@@ -661,8 +657,9 @@ elseif ($outf == "graph") {
 					bindalert = bindalert + 'X: ' + nodeX + ', ';
 					bindalert = bindalert + 'Y: ' + nodeY;
 					alert(bindalert);
+					return;
 				}
-				else if (nodeColor == 'indianred') {
+				else if (nodeSize == 15 && nodeColor == 'indianred') {
 					// first change any previous 'red' back to 'indian red'
 					let priorIds = document.getElementById('counterpartArea').textContent;
 					if (priorIds != '') {
@@ -670,7 +667,7 @@ elseif ($outf == "graph") {
 						let priorNodeId = priorIdList[0];
 						let priorNodeDbid = priorIdList[1];
 
-						updateNodeAttribute(userGraph, sigma, priorNodeId, 'color', 'indianred');
+						updateNodeAttribute(userGraph, sigma, priorNodeId, 'size', 15);
 
 						if (priorNodeDbid == nodeDbid) {
 							// this means the user has just clicked the same neighbor again, so we will restore the graph and exit this event handler
@@ -680,7 +677,7 @@ elseif ($outf == "graph") {
 					}
 					
 					// signal to user that node has been selected -- change the node's color
-					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'red');
+					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 20);
 
 					let chunkSize = chunkSizeArea.value;
 
@@ -721,6 +718,10 @@ elseif ($outf == "graph") {
 					// everything ready for button request to view base and node texts side-by-side
 					return;
 				}
+				else if (nodeSize == 20) {
+					restoreGraph(userGraph, sigma);
+					return;
+				}
 			});
 
 			sigma.on('rightClickNode', (payload) => {
@@ -758,7 +759,7 @@ elseif ($outf == "graph") {
 				if (color == orig_color) {
 					// alert('neighbors of ' + nodeId + ' : ' + n_neighbors);
 					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'maroon');
-					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 15);
+					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 20);
 					updateNodeAttribute(userGraph, sigma, nodeId, 'label', nodeTitle);
 
 					userGraph.forEachNeighbor(nodeId, (neighborId, neighborAttributes) => {
