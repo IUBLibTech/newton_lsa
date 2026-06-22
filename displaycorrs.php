@@ -8,7 +8,7 @@ function & prepstring($strInput)
 	return $str2;
 }
 
-function & translateGentium($strInput)
+/* function & translateGentium($strInput)
 {
 	$sub_for = [
 		E000 => E005,
@@ -81,6 +81,7 @@ function & translateGentium($strInput)
 	);
 	return $strOutput;
 }
+*/
 		
 
 // function from PHP manual by Jesse Bussman at gmail
@@ -215,10 +216,11 @@ $d2string = $doc2data[3];
 // fwrite($log, "d2string = ". $d2string . "\n");
 
 // change the font to get correct NewtonSans characters if necessary
-if ($gentium) {
+
+/* if ($gentium) {
 	$d1string = translateGentium($d1string);
 	$d2string = translateGentium($d2string);
-}
+} */
 
 // setting up the term list
 $termstring = "";
