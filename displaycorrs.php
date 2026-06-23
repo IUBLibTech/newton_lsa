@@ -10,7 +10,7 @@ function & prepstring($strInput)
 	return $str2;
 }
 
-function & translateGentium($strInput)
+/* function & translateGentium($strInput)
 {
 	$gentiumToNewtonSans = [
 		E000 => E005,
@@ -78,7 +78,7 @@ function & translateGentium($strInput)
 
 	$strOutput = strtr($strInput, $gentiumToNewtonSans);
 	return $strOutput;
-}
+} */
 		
 
 // function from PHP manual by Jesse Bussman at gmail
