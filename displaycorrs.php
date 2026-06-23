@@ -77,7 +77,7 @@ function & translateGentium($strInput)
 		"\u{E373}" => "\u{1F773}"
 	];
 
-	$strOutput = strtr($strInput, $gentiumToNewtonSans);
+	$strOutput = mb_strtr($strInput, $gentiumToNewtonSans);
 	return $strOutput;
 }
 		
