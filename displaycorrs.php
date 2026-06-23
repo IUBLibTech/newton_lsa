@@ -1,6 +1,6 @@
 <?php
 /* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
-$gentium = true;
+$gentium = false;
 
 /* FUNCTIONS */
 function & prepstring($strInput)
