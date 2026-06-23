@@ -1,6 +1,7 @@
 <?php
-/* MANUAL SWITCH FOR TRANSLATION FROM GENTIUM FONT TO NEWTON SANS */
-// $gentium = false;
+/* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
+$gentium = true;
+
 /* FUNCTIONS */
 function & prepstring($strInput)
 {
@@ -10,7 +11,7 @@ function & prepstring($strInput)
 	return $str2;
 }
 
-/* function & translateGentium($strInput)
+function & translateGentium($strInput)
 {
 	$gentiumToNewtonSans = [
 		\u{E000} => \u{E005},
@@ -78,7 +79,7 @@ function & prepstring($strInput)
 
 	$strOutput = strtr($strInput, $gentiumToNewtonSans);
 	return $strOutput;
-} */
+}
 		
 
 // function from PHP manual by Jesse Bussman at gmail
@@ -214,10 +215,10 @@ $d2string = $doc2data[3];
 
 // change the font to get correct NewtonSans characters if necessary
 
-/* if ($gentium) {
+if ($gentium) {
 	$d1string = translateGentium($d1string);
 	$d2string = translateGentium($d2string);
-} */
+}
 
 // setting up the term list
 $termstring = "";
