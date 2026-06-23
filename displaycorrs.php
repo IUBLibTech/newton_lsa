@@ -77,7 +77,7 @@ function & translateGentium($strInput)
 		"\u{E373}" => "\u{1F773}"
 	];
 
-	$characters_in = mb_str_split($strInput, 1, 'UTF-8');
+	$charactersIn = mb_str_split($strInput, 1, 'UTF-8');
 	$strOutput = "";
 
 	foreach($charactersIn as $nextIn) {
