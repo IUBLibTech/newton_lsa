@@ -297,7 +297,7 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <!-- Newton Skin -->
 <?php require_once("design/uniform-title.php"); ?>
 
-<table class="content">
+<table class="content" style="margin-left: 10px">
 <tr>
 <td width="40%" valign="top">
 <?php 
