@@ -77,7 +77,17 @@ function & translateGentium($strInput)
 		"\u{E373}" => "\u{1F773}"
 	];
 
-	$strOutput = mb_strtr($strInput, $gentiumToNewtonSans);
+	$characters_in = mb_str_split($strInput, 1, 'UTF-8');
+	$strOutput = "";
+
+	foreach($charactersIn as $nextIn) {
+		if (array_key_exists($nextIn, $gentiumToNewtonSans)) {
+			$strOutput .= $gentiumToNewtonSans[$nextIn];
+		} else {
+			$strOutput .= $nextIn;
+		}
+	}
+	
 	return $strOutput;
 }
 		
