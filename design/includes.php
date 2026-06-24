@@ -2,7 +2,7 @@
 BEGIN FAVICON
 ******************************  -->
 <!-- <link rel="icon" href="favicon.ico"> -->
-<link rel="shortcut icon" href="http://webapp1.dlib.indiana.edu/newton/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="https://webapp1.dlib.indiana.edu/newton/favicon.ico" type="image/x-icon">
 <!-- ******************************
 BEGIN 1140GRID SYSTEM from http://cssgrid.net/ 
 ******************************  -->
@@ -11,7 +11,7 @@ BEGIN 1140GRID SYSTEM from http://cssgrid.net/
 <!-- ******************************
 BEGIN jQUERY UI
 ******************************  -->
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/flick/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
 <!-- ******************************
 BEGIN DROP-DOWN BOX
 ******************************  -->
