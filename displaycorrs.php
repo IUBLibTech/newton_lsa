@@ -81,7 +81,8 @@ $port = "";
 require_once("functions/mysql_connection.php");
 
 /* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
-$gentium = true;
+$gentium = false;
+//$gentium = true;
 // need to test for the source database because the Library version still uses the older Gentium font rather than Newton Sans
 //if ($host == "sasrdsmp01.uits.iu.edu") {
 //	$gentium = false;
