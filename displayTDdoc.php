@@ -138,7 +138,7 @@ $termstring = prepstring($termx);
 
 <?php require_once 'design/includes.php'; ?>
 <!-- LSA Style -->
-<link href="css.lsa/style.css" rel="stylesheet" media="all" />
+<link href="css/style.css" rel="stylesheet" media="all" />
 <!-- End LSA Style -->
 
 <style type="text/css" media="all">

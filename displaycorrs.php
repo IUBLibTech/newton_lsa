@@ -1,7 +1,4 @@
 <?php
-/* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
-$gentium = true;
-
 /* FUNCTIONS */
 function & prepstring($strInput)
 {
@@ -13,10 +10,21 @@ function & prepstring($strInput)
 
 function & translateGentium($strInput)
 {
-	$gentiumChars = [ '\x{E000}', '\x{E008}', '\x{E017}', '\x{E01A}', '\x{E05A}', '\x{E301}', '\x{E302}', '\x{E303}', '\x{E304}', '\x{E305}', '\x{E306}', '\x{E307}', '\x{E308}', '\x{E30A}', '\x{E30B}', '\x{E30C}', '\x{E30D}', '\x{E310}', '\x{E311}', '\x{E314}', '\x{E315}', '\x{E316}', '\x{E317}', '\x{E31C}', '\x{E31D}', '\x{E31F}', '\x{E320}', '\x{E321}', '\x{E322}', '\x{E325}', '\x{E326}', '\x{E327}', '\x{E328}', '\x{E329}', '\x{E32A}', '\x{E32B}', '\x{E32C}', '\x{E32D}', '\x{E32E}', '\x{E330}', '\x{E331}', '\x{E332}', '\x{E333}', '\x{E334}', '\x{E335}', '\x{E339}', '\x{E33E}', '\x{E33F}', '\x{E346}', '\x{E34E}', '\x{E34F}', '\x{E350}', '\x{E351}', '\x{E352}', '\x{E355}', '\x{E35E}', '\x{E367}', '\x{E36B}', '\x{E36E}', '\x{E370}', '\x{E373}' ];
-	$newtonSansChars = [ '\x{E005}', '\x{1F772}', '\x{1F72F}', '\x{1F748}', '\x{1F706}', '\x{1F701}', '\x{1F702}', '\x{1F703}', '\x{1F704}', '\x{1F705}', '\x{1F706}', '\x{1F707}', '\x{1F708}', '\x{1F70A}', '\x{1F70B}', '\x{1F70C}', '\x{1F70D}', '\x{1F710}', '\x{1F711}', '\x{1F714}', '\x{1F715}', '\x{1F716}', '\x{1F717}', '\x{1F71C}', '\x{1F71D}', '\x{1F71F}', '\x{1F720}', '\x{1F721}', '\x{1F722}', '\x{1F725}', '\x{1F726}', '\x{1F727}', '\x{1F728}', '\x{1F729}', '\x{1F72A}', '\x{1F72B}', '\x{1F72C}', '\x{1F72D}', '\x{1F72E}', '\x{1F730}', '\x{1F731}', '\x{1F732}', '\x{1F733}', '\x{1F734}', '\x{1F735}', '\x{1F739}', '\x{1F73E}', '\x{1F73F}', '\x{1F746}', '\x{1F74E}', '\x{1F74F}', '\x{1F750}', '\x{1F751}', '\x{1F752}', '\x{1F755}', '\x{1F75E}', '\x{1F767}', '\x{1F76B}', '\x{1F76E}', '\x{1F770}', '\x{1F773}' ];
+	// $newtonSansTestInts = [ 57349 => 57349, 128882 => 128882, 128815 => 128815, 128840 => 128840, 128774 => 128774, 128769 => 128769, 128770 => 128770, 128771 => 128526, 128772 => 128772, 128773 => 128773, 128774 => 128774, 128775 => 128775, 128776 => 128776, 128778 => 128778, 128779 => 128779, 128780 => 128780, 128781 => 128781, 128784 => 128784, 128785 => 128785, 128788 => 128788, 128789 => 128789, 128790 => 128790, 128791 => 128791, 128796 => 128796, 128797 => 128797, 128799 => 128799, 128800 => 128800, 128801 => 128801, 128802 => 128802, 128805 => 128805, 128806 => 128806, 128807 => 128807, 128808 => 128808, 128809 => 128809, 128810 => 128810, 128811 => 128811, 128812 => 128812, 128813 => 128813, 128814 => 128814, 128816 => 128816, 128817 => 128817, 128818 => 128818, 128819 => 128819, 128820 => 128820, 128821 => 128821, 128825 => 128825, 128830 => 128830, 128831 => 128831, 128838 => 128838, 128846 => 128846, 128847 => 128847, 128848 => 128848, 128849 => 128849, 128850 => 128850, 128853 => 128853, 128862 => 128862, 128871 => 128871, 128875 => 128875, 128878 => 128878, 128880 => 128880, 128883 => 128883 ];
+	$gentium2sans = [ 57344 => 57349, 57352 => 128882, 57367 => 128815, 57370 => 128840, 57434 => 128774, 58113 => 128769, 58114 => 128770, 58115 => 128771, 58116 => 128772, 58117 => 128773, 58118 => 128774, 58119 => 128775, 58120 => 128776, 58122 => 128778, 58123 => 128779, 58124 => 128780, 58125 => 128781, 58128 => 128784, 58129 => 128785, 58132 => 128788, 58133 => 128789, 58134 => 128790, 58135 => 128791, 58140 => 128796, 58141 => 128797, 58143 => 128799, 58144 => 128800, 58145 => 128801, 58146 => 128802, 58149 => 128805, 58150 => 128806, 58151 => 128807, 58152 => 128808, 58153 => 128809, 58154 => 128810, 58155 => 128811, 58156 => 128812, 58157 => 128813, 58158 => 128814, 58160 => 128816, 58161 => 128817, 58162 => 128818, 58163 => 128819, 58164 => 128820, 58165 => 128821, 58169 => 128825, 58174 => 128830, 58175 => 128831, 58182 => 128838, 58190 => 128846, 58191 => 128847, 58192 => 128848, 58193 => 128849, 58194 => 128850, 58197 => 128853, 58206 => 128862, 58215 => 128871, 58219 => 128875, 58222 => 128878, 58224 => 128880, 58227 => 128883 ];
 
-	$strOutput = str_replace($gentiumChars, $newtonSansChars, $strInput);
+	$inputList = mb_str_split($strInput, 1, 'UTF-8');
+	$outputList = array();
+	foreach ($inputList as $char) {
+		$charCode = mb_ord($char, 'UTF-8');  // returns a decimal int
+		if (array_key_exists($charCode, $gentium2sans)) {
+			$newCharCode = $gentium2sans[$charCode];
+			$outputList[] = mb_chr($newCharCode, 'UTF-8');
+		} else {
+			$outputList[] = $char;
+		}
+	}
+	$strOutput = implode('', $outputList);
 	
 	return $strOutput;
 }
@@ -135,7 +143,7 @@ $doc1data = mysqli_fetch_row($doc1row);
 $doc1alch = $doc1data[0];
 $doc1title = $doc1data[1];
 $doc1mstitle = $doc1data[2];
-$d1string = $doc1data[3];
+$d1stringIn = $doc1data[3];
 // fwrite($log, "doc1alch = ". $doc1alch . "\n");
 // fwrite($log, "doc1title = ". $doc1title . "\n");
 // fwrite($log, "doc1mstitle = ". $doc1mstitle . "\n");
@@ -147,16 +155,21 @@ $doc2data = mysqli_fetch_row($doc2row);
 $doc2alch = $doc2data[0];
 $doc2title = $doc2data[1];
 $doc2mstitle = $doc2data[2];
-$d2string = $doc2data[3];
+$d2stringIn = $doc2data[3];
 // fwrite($log, "doc2alch = ". $doc2alch . "\n");
 // fwrite($log, "doc2title = ". $doc2title . "\n");
 // fwrite($log, "doc2mstitle = ". $doc2mstitle . "\n");
 // fwrite($log, "d2string = ". $d2string . "\n");
 
+/* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
+$gentium = true;
 // change the font to get correct NewtonSans characters if data was encoded for Gentium Newton
 if ($gentium) {
-	$d1string = translateGentium($d1string);
-	$d2string = translateGentium($d2string);
+	$d1string = translateGentium($d1stringIn);
+	$d2string = translateGentium($d2stringIn);
+} else {
+	$d1string = $d1stringIn;
+	$d2string = $d2stringIn;	
 }
 
 // setting up the term list
@@ -208,7 +221,7 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <?php require_once 'design/includes.php'; ?>
 <?php require_once 'design/header.php'; ?>
 <!-- LSA Style -->
-<link href="css.lsa/style.css" rel="stylesheet" media="all" />
+<link href="css/style.css" rel="stylesheet" media="all" />
 <!-- End LSA Style -->
 <style type="text/css" media="all">
 .match {
