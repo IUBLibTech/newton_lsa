@@ -14,7 +14,10 @@ url('../NewtonSans/NewtonSans-2025-09-09.woff2') format('woff2'),
 url('../NewtonSans/NewtonSans-2025-09-09.ttf') format('truetype');
 		font-weight: normal;
 		font-style: normal;
-	
+	}
+	@font-face {
+		font-family: 'GentiumNewton';
+		src: url('../Gentium/GenR102-Newton-ansi.ttf') format('truetype');
 	}
 	html, body {
 		font-family: 'Newton Sans';
