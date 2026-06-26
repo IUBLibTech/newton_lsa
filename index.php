@@ -91,7 +91,9 @@ HTML document begins here
 <div class="lsa-row">
 	<div id="lsa-rowZero">
 		<div class="alignRight border paddingSmall" style="background-color: #7D100B;"><a href="help.php" title="HELP" class="helpLink">HELP Documentation</a></div>
-        <p style="margin: 1em; margin-bottom:0;"><span class="instructionHeading">INSTRUCTIONS:</span> <span class="instructions">To begin, choose a search type and chunk size in Step 1. Choose an output type for results in Step 2 then select threshold types and scopes in Step 3.<br/>
+        <p style="margin: 1em; margin-bottom:0;"><span class="instructionHeading">INSTRUCTIONS:</span> <span class="instructions">Please wait until all the libraries have loaded. (HINT: Component will be ready when Newton has appeared on the tab above.)<br/>
+		To begin, choose a search type and chunk size in Step 1.
+		Choose an output type for results in Step 2 then select threshold types and scopes in Step 3.
 		After Step 3, click the Continue button and proceed to Step 4 when the window reorganizes.</span></p>
         
 	</div>
@@ -278,7 +280,7 @@ HTML document begins here
 				<form name="lsa-selectTerm250Form" id="lsa-selectTerm250Form" class="lsa-genericForm">
 					<fieldset>
 						<legend>Terms</legend>
-						<ul class="lsa-formList">
+						<ul class="lsa-formList" style="font-family: GentiumNewton">
 							<li>
 								<label>Choose one or more</label>
 								<select aria-label="Terms selection list" name="lsa-selectterm250" id="lsa-selectterm250" size="15">
@@ -328,7 +330,7 @@ HTML document begins here
 				<form name="lsa-selectTerm1000Form" id="lsa-selectTerm1000Form" class="lsa-genericForm">
 					<fieldset>
 						<legend>Terms</legend>
-						<ul class="lsa-formList">
+						<ul class="lsa-formList" style="font-family: GentiumNewton">
 							<li>
 								<label>Choose One or More
 									<select name="lsa-selectterm1000" id="lsa-selectterm1000" size="15" >
@@ -380,7 +382,7 @@ HTML document begins here
 				<form name="lsa-regexForm" class="lsa-genericForm">
 					<fieldset>
 						<legend>Regex pattern to select from list of terms:</legend>
-						<ul class="lsa-formList">
+						<ul class="lsa-formList" style="font-family: GentiumNewton">
 							<li> <label>/
 								<input type="text" name="lsa-thePattern" id="lsa-thePattern" size="30"/>
 								/</label></li>
@@ -537,7 +539,7 @@ HTML document begins here
 					<ul class="lsa-formList">
 						<li>
 							<label>Query Set:
-								<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: Newton Sans" readonly></textarea>
+								<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: GentiumNewton" readonly></textarea>
 							</label>
 						</li>
 					</ul>
@@ -736,12 +738,6 @@ HTML document begins here
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFive" style="display:none;">
 		<div id="lsa-spinningImageHolder"><img id="lsa-spinningLogo" src="images/ajax-loader.gif" alt="Waiting for Results" title="Waiting for Results" /> <span title="message"></span> </div>
-		<!-- graph-related elements not visible to other user choices -->
-		<!-- <textarea id='baseArea' style='display:none'>None</textarea> -->
-		<!-- <textarea id='counterpartArea' style='display:none'>None</textarea> -->
-		<!-- <textarea id='chunkSizeArea' style='display:none'></textarea> -->
-		<!-- <textarea id='weightArea' style='display:none'></textarea> -->
-		<!-- <input type="button" value="Show base node and neighbor side by side" id="lsa-sidebyside" style="display: none; height: 40px; width: 500px"/> -->
 		
 		<!-- target div for ajax operations -->
 		<div id="lsa-results"></div>
@@ -761,8 +757,7 @@ HTML document begins here
 					<div id="lsa-rowSix">
 						<div id="lsa-info"> 
 							NSF Project #0620868 &mdash; Science and Technology Studies<br/><br/>
-							<em>&#x2022; If you have problems seeing the alchemical symbols correctly, please install the Newton Sans TTF font </em>(NewtonSans-UnicodeFont-2025-09-09.tff)<em> directly onto your machine. <a href="font/NewtonSans-UnicodeFont-2025-09-09.zip">Download font zip file.</a><br/>
-							<br/></div>
+						</div>
 					</div>
 				</div>
 

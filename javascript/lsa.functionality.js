@@ -96,7 +96,7 @@ $(document).ready(function() {
 			$('#lsa-rowFour').removeClass('lsa-boxFive lsa-opacityNormal')
 					.addClass('lsa-halfOpacity').toggle();	
 	
-			$('span.instructions').text('Clicking on a result will open a new window.');
+			$('span.instructions').text('Clicking on a result will open a new window. ———  Use the SHOW_QUERY_TOOL at right to further modify and work with the results.');
 	
 			doSearch();
 			return false;

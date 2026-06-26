@@ -101,3 +101,26 @@ function showCounterparts() {
         openViewer(size, counterpartDbid, baseDbid, edgeWeight);
     }
 }
+
+function releaseGraphMemory() {
+    if (typeof window.sigma !== 'undefined') {
+        // console.log('window.sigma is defined.');
+        window.sigma.kill();
+        window.sigma = null;
+        // console.log('window.sigma instance was found and killed.');
+    }
+    // else {
+    //     console.log('window.sigma was not found.');
+    // }
+    if (typeof window.userGraph !== 'undefined') {
+        // console.log('window.userGraph is defined.');
+        window.userGraph.clear();
+        window.userGraph = null;
+        // console.log('window.userGraph was found and killed.');
+    }
+    // else {
+    //     console.log('window.userGraph === \'undefined\'.');
+    // }
+    // alert('exiting graph');
+    location.reload();
+}

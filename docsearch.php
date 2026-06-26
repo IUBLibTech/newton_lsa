@@ -348,7 +348,7 @@ elseif ($outf == "graph") {
 	else 
 	{
 		// we can write the graph
-		// echo "<script>alert('there are returned results  - line 337');</script>";
+		// echo "<script>alert('there are returned results');</script>";
 		require_once("mexitek/Color.php");
 
 		$newgraph = "graph-". $hash_value.".json";
@@ -573,24 +573,32 @@ elseif ($outf == "graph") {
 		echo "<div style='float: left; width: 340px; border: 2px solid black; box-sizing: border-box; padding: 20px; margin-left: 10px' id='graphPanel'>";
 		
 		// instruction text
+		echo "<p style='font-size: 0.85rem'>&bullet; The graph surface is interactive, zooms on mouse wheel, and can be dragged.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Click on a node to display that passage's title and display details.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on a node to highlight that passage and neighboring passages 
 		sharing significant vocabulary. The base passage turns maroon and doubles in size, and its neighbors
 		turn indian red and increase in size.</p>
 		<p style='font-size: 0.85rem'>&bullet; Click on a neighbor (indian red) to highlight its relationship to the base passage. 
-		The selected neighbor will become the same size as the base. Click the button below to view the base passage and selected neighbor side by side
+		The selected neighbor will turn burgundy and become the same size as the base. Click the button below to view the base passage and selected neighbor side by side
 		in a new tab.</p>";
+
 		echo "<input type='button' id='lsa-sidebyside' value='Show base node (maroon) and\nselected neighbor side by side' style='style='display: none; height: 40px; width: 500px' onclick='showCounterparts()'>";
+		
 		echo "<p style='font-size: 0.85rem'>&bullet; Right-click on any highlighted node to end the highlighting.</p>";
 		echo "<p style='font-size: 0.85rem'>&bullet; To start another graph or search, refresh the web page (Ctl-R or Command-R), or open
 		a new tab in the browser and start from there.</p>";
+		echo "<p style='font-size: 0.85rem'>&bullet; If this graph is no longer needed, click the button below to flush the graph from memory.</p>";
+
+		echo "<input type='button' id='lsa-kill-graph' value='Flush graph from memory\nand restart LSA' style='style='display: none; height: 40px; width: 500px' onclick='releaseGraphMemory()'>";
+		
 		echo "<br/><p style='font-size: 0.85rem'>NOTE: Each node represents a passage or chunk of about 250 words from one of Newton's
 		alchemical manuscripts.</p>
+		<p style='font-size: 0.85rem'>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
+		or equal to the requested cosine threshold.</p>
 		<p style='font-size: 0.85rem'>Each passage begins on indicated folio but many folios contain more than
 		250 words, so there can be successive cuts on the same folio. The last cut may include the
-		top of the next page while the first cut may not begin at the top of its own folio either.</p>
-		<p style='font-size: 0.85rem'>Each edge indicates that that pair of nodes or passages has a cosine similarity greater than 
-		or equal to the requested cosine threshold.</p>";
+		top of the next page while the first cut may not begin at the top of its own folio either.</p>";
+
 		echo "</div>";  // end id='graphPanel
 
 		// define the div where the graph will be drawn
@@ -612,21 +620,21 @@ elseif ($outf == "graph") {
 			const graphdata = document.getElementById('graph_data').textContent;
 			const serializedGraphData = JSON.parse(graphdata);
 
-			const Graph = window.graphology;
-			const userGraph = new Graph();
+			let Graph = window.graphology;
+			window.userGraph = new Graph();
 
-			const SigmaRend = window.Sigma;
+			let SigmaRend = window.Sigma;
 			// const NodeSquareProgram = window.NodeSquareProgram;
 			// const EdgeCurveProgram = window.EdgeCurveProgram;
 
-			userGraph.import(serializedGraphData);
+			window.userGraph.import(serializedGraphData);
 
 			const container = document.getElementById('sigmaGraph');
 			container.addEventListener('contextmenu', function(event) {
 				event.preventDefault();
 			});
 
-			const sigma = new SigmaRend(userGraph, container, {
+			window.sigma = new SigmaRend(window.userGraph, container, {
 				renderLabels: true,
 				renderEdgeLabels: false,
 				labelSize: 15,
@@ -635,7 +643,7 @@ elseif ($outf == "graph") {
 				}
 			});
 
-			sigma.on('clickNode', (payload) => {
+			window.sigma.on('clickNode', (payload) => {
 				const nodeId = payload.node;
 				let nodeLabel = userGraph.getNodeAttribute(nodeId, 'label');
 				let nodeTitle = userGraph.getNodeAttribute(nodeId, 'title');
@@ -660,24 +668,26 @@ elseif ($outf == "graph") {
 					return;
 				}
 				else if (nodeSize == 15 && nodeColor == 'indianred') {
-					// first change any previous 'red' back to 'indian red'
+					// first change any previous 'burgundy' back to 'indian red'
 					let priorIds = document.getElementById('counterpartArea').textContent;
 					if (priorIds != '') {
 						let priorIdList = priorIds.split(';');
 						let priorNodeId = priorIdList[0];
 						let priorNodeDbid = priorIdList[1];
 
-						updateNodeAttribute(userGraph, sigma, priorNodeId, 'size', 15);
+						updateNodeAttribute(window.userGraph, window.sigma, priorNodeId, 'color', 'indianred');
+						updateNodeAttribute(window.userGraph, window.sigma, priorNodeId, 'size', 15);
 
 						if (priorNodeDbid == nodeDbid) {
 							// this means the user has just clicked the same neighbor again, so we will restore the graph and exit this event handler
-							restoreGraph(userGraph, sigma);
+							restoreGraph(window.userGraph, window.sigma);
 							return;
 						}
 					}
 					
-					// signal to user that node has been selected -- change the node's color
-					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 20);
+					// signal to user that node has been selected -- change the node's color to burgundy
+					updateNodeAttribute(window.userGraph, window.sigma, nodeId, 'color', '#800020');  // burgundy
+					updateNodeAttribute(window.userGraph, window.sigma, nodeId, 'size', 20);
 
 					let chunkSize = chunkSizeArea.value;
 
@@ -703,14 +713,14 @@ elseif ($outf == "graph") {
 
 					let edgeIdDeduced = '000';
 					if (baseIdInt < nodeIdInt) {
-						edgeIdDeduced = userGraph.edge(baseId, nodeId);
+						edgeIdDeduced = window.userGraph.edge(baseId, nodeId);
 					} else {
-						edgeIdDeduced = userGraph.edge(nodeId, baseId);
+						edgeIdDeduced = window.userGraph.edge(nodeId, baseId);
 					}
 					// console.log(edgeIdDeduced);
 					// alert('edgeIdDeduced');
 
-					let edgeWeight = userGraph.getEdgeAttribute(edgeIdDeduced, 'weight');
+					let edgeWeight = window.userGraph.getEdgeAttribute(edgeIdDeduced, 'weight');
 					// console.log(edgeWeight);
 					// alert('edgeWeight');
 					document.getElementById('weightArea').textContent = edgeWeight;
@@ -719,14 +729,14 @@ elseif ($outf == "graph") {
 					return;
 				}
 				else if (nodeSize == 20) {
-					restoreGraph(userGraph, sigma);
+					restoreGraph(window.userGraph, window.sigma);
 					return;
 				}
 			});
 
-			sigma.on('rightClickNode', (payload) => {
+			window.sigma.on('rightClickNode', (payload) => {
 				const nodeId = payload.node;
-				let nodeDbid = userGraph.getNodeAttribute(nodeId, 'dbid');
+				let nodeDbid = window.userGraph.getNodeAttribute(nodeId, 'dbid');
 				let baseIds = nodeId + ';' + nodeDbid;
 
 				// prevent possibility of opening more than one base node
@@ -735,47 +745,47 @@ elseif ($outf == "graph") {
 				// console.log(queryIds);
 				// alert('queryIds');
 				if (queryIds != '') {
-					restoreGraph(userGraph, sigma);
+					restoreGraph(window.userGraph, window.sigma);
 					return;
 				}
 				
 				document.getElementById('baseArea').textContent = baseIds;
 
-				let size = userGraph.getNodeAttribute(nodeId, 'size');
-				let color = userGraph.getNodeAttribute(nodeId, 'color');
-				let orig_color = userGraph.getNodeAttribute(nodeId, 'orig_color');
+				let size = window.userGraph.getNodeAttribute(nodeId, 'size');
+				let color = window.userGraph.getNodeAttribute(nodeId, 'color');
+				let orig_color = window.userGraph.getNodeAttribute(nodeId, 'orig_color');
 
-				let nodeTitle = userGraph.getNodeAttribute(nodeId, 'title');
-				let nodeAbbrev = userGraph.getNodeAttribute(nodeId, 'abbrev');
+				let nodeTitle = window.userGraph.getNodeAttribute(nodeId, 'title');
+				let nodeAbbrev = window.userGraph.getNodeAttribute(nodeId, 'abbrev');
 
-				let n_neighbors = userGraph.neighbors(nodeId);
+				let n_neighbors = window.userGraph.neighbors(nodeId);
 				// console.log(nodeId, n_neighbors);
 
-				let n_edges = userGraph.edges(nodeId);
+				let n_edges = window.userGraph.edges(nodeId);
 				// console.log(nodeId, n_edges);
 
 				// if the current color and orig_color are the same, then things can be changed
 				// if color and orig_color are different, then orig_color should be restored
 				if (color == orig_color) {
 					// alert('neighbors of ' + nodeId + ' : ' + n_neighbors);
-					updateNodeAttribute(userGraph, sigma, nodeId, 'color', 'maroon');
-					updateNodeAttribute(userGraph, sigma, nodeId, 'size', 20);
-					updateNodeAttribute(userGraph, sigma, nodeId, 'label', nodeTitle);
+					updateNodeAttribute(window.userGraph, window.sigma, nodeId, 'color', 'maroon');
+					updateNodeAttribute(window.userGraph, window.sigma, nodeId, 'size', 20);
+					updateNodeAttribute(window.userGraph, window.sigma, nodeId, 'label', nodeTitle);
 
 					userGraph.forEachNeighbor(nodeId, (neighborId, neighborAttributes) => {
-						neighborTitle = userGraph.getNodeAttribute(neighborId, 'title');
-						updateNodeAttribute(userGraph, sigma, neighborId, 'color', 'indianred');
-						updateNodeAttribute(userGraph, sigma, neighborId, 'size', 15);
-						updateNodeAttribute(userGraph, sigma, neighborId, 'label', neighborTitle);
+						neighborTitle = window.userGraph.getNodeAttribute(neighborId, 'title');
+						updateNodeAttribute(window.userGraph, window.sigma, neighborId, 'color', 'indianred');
+						updateNodeAttribute(window.userGraph, window.sigma, neighborId, 'size', 15);
+						updateNodeAttribute(window.userGraph, window.sigma, neighborId, 'label', neighborTitle);
 					});
 
 					n_edges.forEach((n_edge) => {
-						updateEdgeAttribute(userGraph, sigma, n_edge, 'color', 'red');
-						updateEdgeAttribute(userGraph, sigma, n_edge, 'size', 8);
+						updateEdgeAttribute(window.userGraph, window.sigma, n_edge, 'color', 'red');
+						updateEdgeAttribute(window.userGraph, window.sigma, n_edge, 'size', 8);
 					});
 				}
 				else {
-					restoreGraph(userGraph, sigma);
+					restoreGraph(window.userGraph, window.sigma);
 				}
 			});
 		</script>";
