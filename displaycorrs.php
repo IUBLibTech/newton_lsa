@@ -1,4 +1,7 @@
 <?php
+//  Load arrays of labels for graph nodes
+require "design/chym_ms_arrays.php";
+
 /* FUNCTIONS */
 function & prepstring($strInput)
 {
@@ -66,6 +69,20 @@ function makeDocUrl($urlBase, $alchid, $title) {
 	return $urlBase."text/".$alch."/diplomatic"."#f".$folio;
 }
 
+function abbreviateTitleForTab($titleString, $npid, $StemFromNPID, $LabelFromNPID) {
+
+	$stem = $StemFromNPID[$npid];
+	$abbrev = $LabelFromNPID[$npid];
+	
+	$folio = str_replace($stem, "", $titleString);
+	$folio = str_replace(", f.", ".", $folio);
+
+	$label = $abbrev.$folio;
+	$label = str_replace("_", ".", $label);
+
+	return $label;
+}
+
 /* STOP LISTS */
 
 $stoplist =" PARAG[[ ]]PARAG EXPAN[[ ]]EXPAN REG[[ ]]REG [[LB]] HEAD[[ ]]HEAD LATIN[[ ]]LATIN ENGLISH[[ ]]ENGLISH FRENCH[[ ]]FRENCH NAME[[ ]]NAME ABBR[[ ]]ABBR CORR[[ ]]CORR";
@@ -79,14 +96,6 @@ $connection = new mysqli();
 $host = "";
 $port = "";
 require_once("functions/mysql_connection.php");
-
-/* MANUAL SWITCH TO FORCE TRANSLATION OF FRAG STRINGS FROM GENTIUM FONT TO NEWTON SANS */
-$gentium = false;
-//$gentium = true;
-// need to test for the source database because the Library version still uses the older Gentium font rather than Newton Sans
-//if ($host == "sasrdsmp01.uits.iu.edu") {
-//	$gentium = false;
-//}
 
 $frags = "";
 if (isset($_GET['frags']) && $_GET['frags'] != "")
@@ -116,20 +125,10 @@ if (isset($_GET['corr']) && $_GET['corr'] != 0)
 	$corr = $_GET['corr'];
 }
 
-/****************************
-Write to a log file 
-****************************/
-// $logfile = "log/displaycorrs.txt";
-// $log = fopen($logfile, "w");
-// fwrite($log, "host = ". $host . ", port = ". $port."\n");
-// fwrite($log, "open viewcorrs with ".memory_get_usage()." RAM at ".date('M d g:i:s')."\n");
-// if ($connection) {
-	// fwrite($log, "mysql connected\n"); 
-// }
-// fwrite($log, "doc1 = ". $doc1 . "\n");
-// fwrite($log, "doc2 = ". $doc2 . "\n");
+/*******************************************************************
+  Form MySQL query for data about the two selected grid passages
+*******************************************************************/
 
-//begin setup
 $getdoc1data = "SELECT alch, ctitle, mstitle, ctext FROM frag250 WHERE id=".$doc1;
 $getdoc2data = "SELECT alch, ctitle, mstitle, ctext FROM frag250 WHERE id=".$doc2;
 $getallterms = "SELECT wordform FROM term250_list";
@@ -145,11 +144,7 @@ $doc1data = mysqli_fetch_row($doc1row);
 $doc1alch = $doc1data[0];
 $doc1title = $doc1data[1];
 $doc1mstitle = $doc1data[2];
-$d1stringIn = $doc1data[3];
-// fwrite($log, "doc1alch = ". $doc1alch . "\n");
-// fwrite($log, "doc1title = ". $doc1title . "\n");
-// fwrite($log, "doc1mstitle = ". $doc1mstitle . "\n");
-// fwrite($log, "d1string = ". $d1string . "\n");
+$d1string = $doc1data[3];
 
 $doc2row = mysqli_query($connection, $getdoc2data);
 $doc2data = mysqli_fetch_row($doc2row);
@@ -157,37 +152,46 @@ $doc2data = mysqli_fetch_row($doc2row);
 $doc2alch = $doc2data[0];
 $doc2title = $doc2data[1];
 $doc2mstitle = $doc2data[2];
-$d2stringIn = $doc2data[3];
-// fwrite($log, "doc2alch = ". $doc2alch . "\n");
-// fwrite($log, "doc2title = ". $doc2title . "\n");
-// fwrite($log, "doc2mstitle = ". $doc2mstitle . "\n");
-// fwrite($log, "d2string = ". $d2string . "\n");
+$d2string = $doc2data[3];
 
 // change the font to get correct NewtonSans characters if data was encoded for Gentium Newton
-if ($gentium) {
-	$d1string = translateGentium($d1stringIn);
-	$d2string = translateGentium($d2stringIn);
-} else {
-	$d1string = $d1stringIn;
-	$d2string = $d2stringIn;	
-}
+// if ($gentium) {
+// 	$d1string = translateGentium($d1stringIn);
+// 	$d2string = translateGentium($d2stringIn);
+// } else {
+// 	$d1string = $d1stringIn;
+// 	$d2string = $d2stringIn;	
+// }
 
-// setting up the term list
+/*********************************************************
+  Form MySQL query for list of terms for matching 
+*********************************************************/
 $termstring = "";
 $termrows = mysqli_query($connection, $getallterms);
 while ($termrow = mysqli_fetch_row($termrows)) {
 	$termstring = $termstring.$termrow[0]."\n";
 }
 
-//$termstring = file_get_contents($termsfile);
 $termsx = prepstring($termstring);
 $terms = explode("\n", $termsx);
 
-// make document URLs
+/*********************************************************
+  Make URLs to carry the user to the identified main site
+*********************************************************/
 $doc1url = makeDocUrl($textSite, $doc1alch, $doc1title);
 $doc2url = makeDocUrl($textSite, $doc2alch, $doc2title);
 
-// pulling out the text
+/*********************************************************
+  Make webpage's tab title abbreviations from two titles
+*********************************************************/
+$doc1abbrev = abbreviateTitleForTab($doc1title, $doc1alch, $StemFromNPID, $LabelFromNPID);
+$doc2abbrev = abbreviateTitleForTab($doc2title, $doc2alch, $StemFromNPID, $LabelFromNPID);
+$tabTitleArray = [$doc1abbrev, $doc2abbrev, $corr];
+$tabTitle = implode(" | ", $tabTitleArray);
+
+/*************************************************************************
+  Break each passage into rows for display and into words for matching
+*************************************************************************/
 $d1 = explode("\n", $d1string);
 $d2 = explode("\n", $d2string);
 $d1sx = prepstring($d1string);
@@ -202,21 +206,7 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <meta charset="utf-8" />
-<meta name="keywords" content="science,chemistry,history,isaac newton,chymistry,alchemical manuscripts,national science foundation,laboratory,chymistry of isaac newton,indiana university,digtial library,alchemy,newton">
-<meta name="description" content="Isaac Newton, like Albert Einstein, is a quintessential symbol of the human intellect and its ability to decode the secrets of nature. Newton wrote and transcribed about a million words on the subject of alchemy, of which only a tiny fraction has today been published. With the support of the National Science Foundation and the National Endowment for the Humanities, The Chymistry of Isaac Newton hosted by Indiana University's Digital Library Program, is producing a scholarly online edition of Newton's alchemical manuscripts integrated with new research on Newton's chymistry.">
-<meta name="author" content="Wallace Hooper">
-<meta name="generator" content="tei2html stylesheets" /> -->
-<!-- Dublin Core Record: start -->
-<!-- <meta name="DC.title" content="Latent Semantic Analysis Tool" />
-<meta name="DC.creator" content="Wally Hooper">
-<meta name="DC.designer" content="Timothy D Bowman">
-<meta name="DC.type" scheme="DCTERMS.DCMIType" content="Text">
-<meta name="DC.Format" scheme="DCTERMS.IMT" content="application/xhtml+xml"> -->
-<!-- Dublin Core Record: end -->
-
-
-<title>LSA Results at <?php echo $corr; ?>: The Chymistry of Isaac Newton Project</title>
+<title><?php echo $tabTitle; ?></title>
 
 <?php require_once 'design/includes.php'; ?>
 <?php require_once 'design/header.php'; ?>

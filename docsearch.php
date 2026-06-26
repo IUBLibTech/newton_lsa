@@ -65,7 +65,7 @@ $bound = $_GET['bound'];
 $qs = $_GET['qs'];
 
 if ($bound == '' || $bound == 'Undefined') {
-	$bound = 0.89;
+	$bound = 0.90;
 }
 
 $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
