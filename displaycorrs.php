@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 //  Load arrays of labels for graph nodes
 require "design/chym_ms_arrays.php";
 
@@ -202,7 +203,10 @@ $d2check = explodeX(Array(" ", "\n"), $d2sx);
 $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 ?>
 <!-- resume HTML -->
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
 	<title><?php echo $tabTitle; ?></title>
 
 	<?php require_once 'design/includes.php'; ?>
