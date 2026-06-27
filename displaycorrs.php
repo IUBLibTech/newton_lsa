@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+
 //  Load arrays of labels for graph nodes
 require "design/chym_ms_arrays.php";
 
@@ -201,6 +201,9 @@ $d1check = explodeX(Array(" ", "\n"), $d1sx);
 $d2check = explodeX(Array(" ", "\n"), $d2sx);
 //zero out big strings that are no longer needed
 $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
+
+
+header('Content-Type: text/html; charset=utf-8');
 ?>
 <!-- resume HTML -->
 <!DOCTYPE html>
