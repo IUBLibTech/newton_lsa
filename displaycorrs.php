@@ -206,6 +206,7 @@ $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
 <title><?php echo $tabTitle; ?></title>
 
 <?php require_once 'design/includes.php'; ?>
