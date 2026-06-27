@@ -201,10 +201,8 @@ $d2check = explodeX(Array(" ", "\n"), $d2sx);
 //zero out big strings that are no longer needed
 $d1string = ""; $d2string = ""; $d1sx = ""; $d2sx = "";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
+<!-- resume HTML -->
+
 	<title><?php echo $tabTitle; ?></title>
 
 	<?php require_once 'design/includes.php'; ?>
