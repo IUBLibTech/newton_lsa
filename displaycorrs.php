@@ -236,7 +236,7 @@ header('Content-Type: text/html; charset=utf-8');
 <tr>
 <td width="40%" valign="top">
 <?php 
-echo "<a href='".$doc1url."' target='_blank'>".$doc1url." (new window)</a><br/><br/>";
+echo "Open the diplomatic folio: <a href='".$doc1url."' target='_blank'>".$doc1url." (new window)</a><br/><br/>";
 echo "$doc1alch<br/>$doc1title<br/>$doc1mstitle<br/><br/>";
 foreach($d1 as $line1) {
 	if ($line1 == "") {
@@ -268,7 +268,7 @@ foreach($d1 as $line1) {
 </td>
 <td width="40%" valign="top">
 <?php 
-echo "<a href='".$doc2url."' target='_blank'>".$doc2url." (new  window)</a><br/></br>";
+echo "Open the diplomatic folio: <a href='".$doc2url."' target='_blank'>".$doc2url." (new  window)</a><br/></br>";
 echo "$doc2alch<br/>$doc2title<br/>$doc2mstitle<br/><br/>";
 foreach($d2 as $line2) {
 	if ($line2 == "") {
