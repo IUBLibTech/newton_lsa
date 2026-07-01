@@ -6,8 +6,8 @@ require "design/chym_ms_arrays.php";
 use Random\Randomizer;
 use Random\IntervalBoundary;
 $random_band = new Randomizer();
-$y_min = 0.4;
-$y_max= 0.6;
+$y_min = 0.0;
+$y_max= 0.1;
 
 //  FUNCTIONS
 //####################
@@ -399,6 +399,7 @@ elseif ($outf == "graph") {
 		$last_npid = "";
 		$n_i = 1;
 		$n_j = 1;
+		$singletons = 0;
 		foreach ($passageIdx as $node_row) {
 			$node_row_parts = explode("^", $node_row);
 			$npid = $node_row_parts[0];
@@ -418,7 +419,12 @@ elseif ($outf == "graph") {
 			$n_y = 1 - ($n_j / ($npidIdx[$npid] + 2));
 			if ($npidIdx[$npid] == 1) {
 				// $n_y = $n_y - ($n_i * 0.02);
-				$n_y = $random_band->getFloat($y_min, $y_max, IntervalBoundary::ClosedOpen);
+				$singletons++;
+				$increment = $random_band->getFloat($y_min, $y_max, IntervalBoundary::ClosedOpen);
+				if ($singletons % 2 === 0) {
+					$increment = $increment * -1;
+				}
+				$n_y = 0.5 + $increment;
 			}
 			$see_n_y = sprintf("%.5f", $n_y);
 

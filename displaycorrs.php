@@ -236,7 +236,7 @@ function toggleMatches() {
 	// alert("after toggle");
 }
 </script>
-<table class="content" style="margin-left: 10px; font-family: 'GentiumNewton'; font-size: 16px; width: 100%;">
+<table class="content" style="margin-left: 10px; font-family: 'GentiumNewton'; font-size: 17.5px; width: 100%;">
 <tr><td width="40%">&nbsp;&nbsp;<input type="button" id="toggle-highlight-button" value="Toggle highlighting" onclick="toggleMatches()" style="float: right"></td></tr>
 <tr>
 <td width="40%" valign="top">
