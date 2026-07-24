@@ -1,4 +1,8 @@
 /* DEFAULTS */
+const $indexDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+// console.log($indexDir);
+// alert("$indexDir");
+
 var $searchType,//		= 	"wholedocs", 
 	$chunkSize,//		= 	"ch250",  
 	$outputType,//		= 	"ranked", 
@@ -30,7 +34,7 @@ function resetDisplay() {
 	// hide rows that are by default hidden
 	$('#lsa-rowThree, #lsa-rowFour, #lsa-rowFive').css({'display':'none'}).removeClass('lsa-halfOpacity');
 	
-	$('#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv').removeClass('lsa-halfOpacity');
+	$('#lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv').removeClass('lsa-halfOpacity');
 	
 	
 	$('#lsa-searchChunkDiv')
@@ -50,9 +54,13 @@ function resetDisplay() {
 /* GRAB ALL USER DATA */
 function getUserValues() {
 	
+	// from step 1
 	$searchType	= 	$('input[name=lsa-searchradio]:checked','#lsa-searchtype').val(), //radio
+	// from step 2
 	$chunkSize	= 	$('input[name=lsa-chunkradio]:checked',	'#lsa-chunksize').val(),  //radio
+	// from step 3
 	$outputType	= 	$('input[name=lsa-outputradio]:checked','#lsa-outputtype').val(), //radio
+	// from step 4
 	$scopeType	= 	$('input[name=lsa-scoperadio]:checked', '#lsa-scopetype').val();  //radio	
 	// $mdb		= 	$('#lsa-mdbValue').val();
 	// $hs			= 	$('#lsa-hsValue').val();
@@ -74,9 +82,13 @@ function getUserValues() {
 		// alert("chunk-chunk boundRatio");	
 	} else if ($searchType == "terms") {
 		if ($chunkSize == "ch250") {
-			$boundRatio	=	$('#lsa-bound250 option:selected').val(); 
+			$boundElement = document.getElementById('lsa-bound250');
+			$boundRatio = $boundElement.value;
+			// $boundRatio	=	$('#lsa-bound250 option:selected').val(); 
 		} else if ($chunkSize == "ch1000") {
-			$boundRatio	=	$('#lsa-bound1000 option:selected').val();
+			$boundElement = document.getElementById('lsa-bound1000');
+			$boundRatio = $boundElement.value;
+			// $boundRatio	=	$('#lsa-bound1000 option:selected').val();
 		}
 	} else if ($searchType == 'termdoc' || $searchType == 'termquery') {
 		if ($chunkSize == "ch250") {
@@ -143,9 +155,32 @@ function clearQuerySet() {
 		$('#lsa-theQuery').val('');
 }
 
+function makeQueryStringFromValues() {
+	var queryArray = $('#theQuery option').map(function() {
+		return $(this).val();
+	}).get();
+
+	// console.log(queryArray);
+	// alert("queryArray for makeQueryString");
+
+	var queryString = queryArray.join('_');
+
+	// console.log(queryString);
+	// alert("queryArray joined as queryString");
+
+	// $queryString = encodeURIComponent(arrayString);
+
+	return queryString;
+}
+
 function doSearch() {
 
 	getUserValues();
+
+	$queryString = makeQueryStringFromValues();
+
+	// console.log($queryString);
+	// alert("queryString");
 	
 	/* HIDE QUERY ROWS */
 	$('#lsa-rowTwo, #lsa-rowThree, #lsa-rowFour').hide();
@@ -200,21 +235,27 @@ function doSearch() {
 		return;
 	}
 
-	if ($searchType == "terms") { 	$searchURL = 'termsearch.php';
-	} else if ($searchType == "termdoc") { $searchURL = 'termdocsearch.php';
-	} else if ($searchType == "chunkterm") { $searchURL = 'chunktermsearch.php';
-	} else if ($searchType == "termquery") { $searchURL = 'usersearch.php';
-	} else if ($searchType == "chunkquery") { $searchURL = 'usersearch.php';
+	if ($searchType == "terms") { 	$searchURL = $indexDir + '/termsearch.php';
+	} else if ($searchType == "termdoc") { $searchURL = '/termdocsearch.php';
+	} else if ($searchType == "chunkterm") { $searchURL = '/chunktermsearch.php';
+	} else if ($searchType == "termquery") { $searchURL = '/usersearch.php';
+	} else if ($searchType == "chunkquery") { $searchURL = '/usersearch.php';
 	}
+
+	// adding https to the front of $searchURL
+	// $searchURL = window.location.protocol + "//" + window.location.host + "/" + $searchURL;
 	
 	// $getData = "hs="+$hs;
 	// $getData += "&mdb="+$mdb;
-	$getData = "&list="+$searchType;
+	$getData = "&list="+ $searchType;
 	$getData += "&frags="+ $chunkSize;
 	$getData += "&scope="+ $scopeType;
 	$getData += "&outf="+	$outputType;
 	$getData += "&bound="+ $boundRatio;
 	$getData += "&qs="+	$queryString;
+
+	console.log($getData);
+	// alert("getData string");
 	
 /* CREATE AJAX CALL */
 	$.ajax({
@@ -248,70 +289,49 @@ function disableRadioButtons($radioButton, $items) {
 function searchTypeClick() {
 
 	getUserValues();
-
-	//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);
-	//$('input:radio[name=lsa-scoperadio][value=allcorrs]').attr('checked', true);
 	
 	if ($searchType == "wholedocs") {
 		
-		var outputAlive = new Array(0,1,4),
+		var outputAlive = new Array(0,1,2,4),
 			scopeAlive = new Array(0,1,2);
 			
 		disableRadioButtons('outputradio',outputAlive);	
 		disableRadioButtons('scoperadio',scopeAlive);
-		
-		//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);		
-		//$('input:radio[name=lsa-scoperadio][value=allcorrs]').attr('checked', true);
 	}
 	if ($searchType == "chunks") {
-		var outputAlive = new Array(0,4),
-			scopeAlive = new Array(0,' ');
+		var outputAlive = new Array(0,1,2,4),
+			scopeAlive = new Array(0,1,2);
 			
 		disableRadioButtons('outputradio',outputAlive);	
-		disableRadioButtons('scoperadio',scopeAlive);
-		
-		//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);		
-		//$('input:radio[name=lsa-scoperadio][value=allcorrs]').attr('checked', true);	
+		disableRadioButtons('scoperadio',scopeAlive);	
 	}
 	if ($searchType == "terms") {
-		var outputAlive = new Array(0,4),
+		var outputAlive = new Array(1,3),
 			scopeAlive = new Array(0,1);
 			
 		disableRadioButtons('outputradio',outputAlive);	
 		disableRadioButtons('scoperadio',scopeAlive);
-
-		//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);	
-		//$('input:radio[name=lsa-scoperadio][value=allcorrs]').attr('checked', true);
 	}
 	if ($searchType == "termdoc") {
-		var outputAlive = new Array(0,2,3,5),
+		var outputAlive = new Array(1,2,3,4),
 			scopeAlive = new Array(0,3,4);
 			
 		disableRadioButtons('outputradio',outputAlive);	
 		disableRadioButtons('scoperadio',scopeAlive);
-
-		//$('input:radio[name=lsa-outputradio][value=bychunks]').attr('checked', true);			
-		//$('input:radio[name=lsa-scoperadio][value=presence]').attr('checked', true);
 	}
 	if ($searchType == "chunkterm") {
-		var outputAlive = new Array(0,2,3,5),
-			scopeAlive = new Array(0,3,4);
+		var outputAlive = new Array(1,2,3,4),
+			scopeAlive = new Array(0,1,3,4);
 			
 		disableRadioButtons('outputradio',outputAlive);	
-		disableRadioButtons('scoperadio',scopeAlive);
-		
-		//$('input:radio[name=lsa-outputradio][value=byterms]').attr('checked', true);		
-		//$('input:radio[name=lsa-scoperadio][value=presentonly]').attr('checked', true);		
+		disableRadioButtons('scoperadio',scopeAlive);		
 	}
 	if ($searchType == "termquery") {
 		var outputAlive = new Array(0,' '),
 			scopeAlive = new Array(0,3,4);
 			
 		disableRadioButtons('outputradio',outputAlive);	
-		disableRadioButtons('scoperadio',scopeAlive);
-
-		//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);
-		//$('input:radio[name=lsa-scoperadio][value=presence]').attr('checked', true);	
+		disableRadioButtons('scoperadio',scopeAlive);	
 	}
 	if ($searchType == "chunkquery") {
 		var outputAlive = new Array(0,' '),
@@ -319,9 +339,6 @@ function searchTypeClick() {
 			
 		disableRadioButtons('outputradio',outputAlive);	
 		disableRadioButtons('scoperadio',scopeAlive);
-
-		//$('input:radio[name=lsa-outputradio][value=ranked]').attr('checked', true);		
-		//$('input:radio[name=lsa-scoperadio][value=allcorrs]').attr('checked', true);
 	}
 }
 
@@ -381,11 +398,10 @@ function scopeTypeClick() {
 }
 
 function letUserWork() {
-
 	getUserValues();
 	
 	/* HIDE THEM ALL */
-	$('#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv').hide();	
+	$('#lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv').hide();	
 		
 	/* SHOW THE MAIN ITEMS */
 	$('#lsa-queryEnv, #lsa-queryButtonArea, #lsa-queryButtons').show();
@@ -396,7 +412,7 @@ function letUserWork() {
 	
 	/* LOGIC */
 	if ($searchType == "wholedocs") { 
-		$('#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv').show(); 
+		$('#lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv').show(); 
 		
 	} else if ($searchType == "chunks") {
 		if ($chunkSize == "ch250") { 
@@ -410,7 +426,6 @@ function letUserWork() {
 		} else { 
 			$('#lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-regexTermEnv, #lsa-appendregexTermEnv').show(); 
 		}
-	
 		$('#lsa-regexTermEnv, #lsa-appendregexTermEnv').show();
 	} else if ($searchType == "termdoc") {
 		if ($chunkSize == "ch250") { 
@@ -445,72 +460,95 @@ function letUserWork() {
 }
 
 function addTerm250ToQuery() {
-	var $selectedIndex = $("#lsa-selectterm250 option").index($("#lsa-selectterm250 option:selected"));
+	var $termSelect = $('#lsa-selectterm250');
+	var $selectedOptions = $termSelect.find('option:selected');
 
-	addItemToQuery($selectedIndex);
-	updateQueryDisplay("terms250");
-	return;	
+	var $queryList = $('#theQuery');
+	var $queryLength = $('#theQuery option').length;
+
+	// prevent duplicates
+	var $existingQuery = $queryList.find('option').map(function() {
+		return $(this).val();
+	}).get();
+
+	if ($queryLength == 0) {
+		$queryList.append($selectedOptions.clone());
+	}
+	else {
+		// check for existing values in $queryList
+		var $newOptions = $termSelect.find('option:selected').filter(function() {
+			return !$existingQuery.includes($(this).val());
+		}).clone();
+
+		if ($newOptions.length === 0) {
+			return;
+		}
+		$queryList.append($newOptions);
+	}
+	
+	var $sortedQuery = $queryList.find('option').sort(function(a, b) {
+		return parseInt($(a).val(), 10) - parseInt($(b).val(), 10);
+	}).appendTo('#theQuery');
 }
 
 function addTerm1000ToQuery() {
-	var $selectedIndex = $("#lsa-selectterm1000 option").index($("#lsa-selectterm1000 option:selected"));
+	var $selectedItem = $('#lsa-selectterm1000 option:selected');
+	var $value = $selectedItem.val();
+	var $text = $selectedItem.text();
+
+	var $queryList = $('#theQuery');
+
+	if (!$('#theQuery option[value=' +$value + ']').length > 0) {
+		$queryList.append(
+			$('<option></option>').attr('value', $value).text($text)
+		);
+	}
 	
-	addItemToQuery($selectedIndex);
-	updateQueryDisplay("terms1000");
-	return;	
+	$('#theQuery option').sort(function(a, b) {
+		return parseInt($(a).val(), 10) - parseInt($(b).val(), 10);
+	}).appendTo('#theQuery');
 }
 
 function addDocToQuery() {
+	var $selectedItem = $('#lsa-selectdoc option:selected');
+	var $value = $selectedItem.val();  // verified
+	var $text = $selectedItem.text();  // verified
 
-	getUserValues();
+	var $queryList = $('#theQuery');
 
-	var $selectedIndex = $("#lsa-selectdoc option").index($("#lsa-selectdoc option:selected"));
-
-	if ($queryElements.length == 1 || $selectedIndex == 0) {
-		if ($scopeType == "internal") {
-			alert("More than one document is not an option for 'Correlations within one document.'");
-			return;
-		}
-		if ($outputType == "pages") {
-			alert("More than one document is not an option for 'Page order' output.");
-			return;
-		}
+	if (!$('#theQuery option[value=' +$value + ']').length > 0) {
+		$queryList.append(
+			$('<option></option>').attr('value', $value).text($text)
+		);
 	}
-
-	// if the user selects or has already selected "All documents" zero out the existing queryelements array
-	if ($selectedIndex == 0 || $queryElements[0] == 0) {
-		$queryElements.length = 0;
-	}
-	addItemToQuery($selectedIndex);
-	updateQueryDisplay("docs");
-	return;
+	
+	$('#theQuery option').sort(function(a, b) {
+		return a.value.localeCompare(b.value);
+	}).appendTo('#theQuery');
 }
 
 function addChunkToQuery() {
-
 	getUserValues();
 	
-	//$('#results').show();
-
-	if ($chunkSize == "ch250") {
-		var $selected = $("#lsa-selectchunk250 option").index($("#lsa-selectchunk250 option:selected"));		
-	} else if ($chunkSize == "ch1000") {
-		var $selected = $("#lsa-selectchunk1000 option").index($("#lsa-selectchunk1000 option:selected"));
+	var $selectedItem = $('#lsa-selectchunk250 option:selected');
+	if ($chunkSize == "ch1000") {
+		$selectedItem = $('#lsa-selectchunk1000 option:selected');
 	}
+	var $value = $selectedItem.val();
+	var $text = $selectedItem.text();
 
-	if ($selected == 0 || $queryElements[0] == 0) {
-		$queryElements.length = 0;
+	var $queryList = $('#theQuery');
+
+	if (!$('#theQuery option[value=' +$value + ']').length > 0) {
+		$queryList.append(
+			$('<option></option>').attr('value', $value).text($text)
+		);
 	}
 	
-	addItemToQuery($selected);
-	
-	if ($chunkSize == "ch250") {
-		updateQueryDisplay("chunk250");
-	}
-	else if ($chunkSize == "ch1000") {
-		updateQueryDisplay("chunk1000");
-	}
-	return;
+	$('#theQuery option').sort(function(a, b) {
+		return parseInt($(a).val(), 10) - parseInt($(b).val(), 10);
+	}).appendTo('#theQuery');
+
 }
 
 function addRegexPatternToQuery() {
@@ -518,97 +556,57 @@ function addRegexPatternToQuery() {
 	if ($('#lsa-thePattern').val() == "") {
 		return;
 	}
-	
+	// console.log($('#lsa-thePattern').val());
+	// alert("got the pattern");
 
+	let $userPattern = document.getElementById('lsa-thePattern').value
+	let $boundedPattern = $userPattern + "\\b";
 	
+	$regexPattern = new RegExp($boundedPattern, "i");
+
+	// console.log($regexPattern);
+	// alert("RegExp regexPattern");
+
 	getUserValues();
-	
-	$regexPattern = new RegExp(document.getElementById('lsa-thePattern').value);
-
 
 	if ($chunkSize == "ch250") {
-
-
-		$i=0;
 		$('#lsa-selectterm250 option').each(function() {
-			if($regexPattern.test( $(this).val() )) {
-				//console.log($i);
-				addItemToQuery($i);
+			if($regexPattern.test( $(this).text() )) {
+				addItemToQuery($(this).val(), $(this).text());
 			}
-			$i++;
 		});
-		
-		updateQueryDisplay("terms250");
-		
-		
 	} else if ($chunkSize == "ch1000") {
 
-		$j=0;
 		$('#lsa-selectterm1000 option').each(function() {
-			if($regexPattern.test( $(this).val() )) {
-				//console.log($j);
-				addItemToQuery($j);
+			if($regexPattern.test( $(this).text() )) {
+				addItemToQuery($(this).val(), $(this).text());
 			}
-			$j++;
 		});
 		
-		updateQueryDisplay("terms1000");
+		// updateQueryDisplay("terms1000");
 		
 	}
 	return;	
 }
 
-function addItemToQuery($selectedOption) {
+function addItemToQuery($iValue, $iText) {
+	var $queryList = $('#theQuery');
 
-	if ($queryElements.indexOf($selectedOption) > -1) {
-		return;
+	if (!$('#theQuery option[value=' +$iValue + ']').length > 0) {
+		$queryList.append(
+			$('<option></option>').attr('value', $iValue).text($iText)
+		);
 	}
 	
-	$queryElements.push($selectedOption);
-	$queryElements.sort(function (a,b) {return a-b });
-
-	return;
+	// sort Item into place by integer values by its mysql database ID
+	$('#theQuery option').sort(function(a, b) {
+		return parseInt($(a).val(), 10) - parseInt($(b).val(), 10);
+	}).appendTo('#theQuery');
 }
 
-
-
-function updateQueryDisplay($selectSet) {
-
-	$('#lsa-theQuery').empty();
-	
-	var $newString 	= "",
-		$newDisplay = "";
-
-	for (i = 0; i < $queryElements.length; i++) {
-	
-		if (i > 0) {
-			$newString = $newString + "_";
-			$newDisplay = $newDisplay + "\n";
-		}
-		if ($selectSet == "docs") {
-			$newString = $newString + $('#lsa-selectdoc option:eq('+$queryElements[i]+')').val();
-			$newDisplay = $newDisplay + $('#lsa-selectdoc option:eq('+$queryElements[i]+')').text();
-		}
-		else if ($selectSet == "terms250") {
-			$newString = $newString + $('#lsa-selectterm250 option:eq('+$queryElements[i]+')').val();
-			$newDisplay = $newDisplay + $('#lsa-selectterm250 option:eq('+$queryElements[i]+')').text();			
-		}
-		else if ($selectSet == "terms1000") {
-			$newString = $newString + $('#lsa-selectterm1000 option:eq('+$queryElements[i]+')').val();
-			$newDisplay = $newDisplay + $('#lsa-selectterm1000 option:eq('+$queryElements[i]+')').text();			
-		}
-		else if ($selectSet == "chunk250") {
-			$newString = $newString + $('#lsa-selectchunk250 option:eq('+$queryElements[i]+')').val();
-			$newDisplay = $newDisplay + $('#lsa-selectchunk250 option:eq('+$queryElements[i]+')').text();	
-		}
-		else if ($selectSet == "chunk1000") {
-			$newString = $newString + $('#lsa-selectchunk1000 option:eq('+$queryElements[i]+')').val();
-			$newDisplay = $newDisplay + $('#lsa-selectchunk1000 option:eq('+$queryElements[i]+')').text();	
-		}
-	}
-	
-	$queryString = $newString;
-	$('#lsa-theQuery').val($newDisplay);
+function removeOptionsFromQuery() {
+	// alert("have entered removeOptions");
+	$('#theQuery option:selected').remove();
 }
 
 function openViewer($chset, $chunk1, $chunk2, $correlation) {

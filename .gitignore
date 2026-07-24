@@ -1,3 +1,7 @@
 functions/mysql_connection.php
 functions/connector.php:Zone.Identifier
 .vscode/
+node_modules/
+eslint.config.mjs
+package-lock.json
+package.json

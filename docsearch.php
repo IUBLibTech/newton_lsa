@@ -623,19 +623,19 @@ elseif ($outf == "graph") {
 		echo "<textarea id='weightArea' style='display:none'></textarea>";
 
 		echo "<script type='text/javascript'>
-			const graphdata = document.getElementById('graph_data').textContent;
-			const serializedGraphData = JSON.parse(graphdata);
+			var graphdata = document.getElementById('graph_data').textContent;
+			var serializedGraphData = JSON.parse(graphdata);
 
-			let Graph = window.graphology;
+			var Graph = window.graphology;
 			window.userGraph = new Graph();
 
-			let SigmaRend = window.Sigma;
+			var SigmaRend = window.Sigma;
 			// const NodeSquareProgram = window.NodeSquareProgram;
 			// const EdgeCurveProgram = window.EdgeCurveProgram;
 
 			window.userGraph.import(serializedGraphData);
 
-			const container = document.getElementById('sigmaGraph');
+			var container = document.getElementById('sigmaGraph');
 			container.addEventListener('contextmenu', function(event) {
 				event.preventDefault();
 			});
@@ -741,7 +741,7 @@ elseif ($outf == "graph") {
 			});
 
 			window.sigma.on('rightClickNode', (payload) => {
-				const nodeId = payload.node;
+				var nodeId = payload.node;
 				let nodeDbid = window.userGraph.getNodeAttribute(nodeId, 'dbid');
 				let baseIds = nodeId + ';' + nodeDbid;
 

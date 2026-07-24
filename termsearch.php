@@ -46,18 +46,16 @@ function extract_key1($keyint, $mod) {
 $connection = null;
 require_once("functions/mysql_connection.php");
 
-// $logfile = "log/termsearch.txt";
-// $log = fopen($logfile, "w");
-// fwrite($log, "open termsearch: ".memory_get_usage()." at ".date("M d g:i:s")."\n");
-
 $list = $_GET['list'];
 $frags = $_GET['frags'];
 $scope = $_GET['scope'];
 $outf = $_GET['outf'];
-$bound = $_GET['bound'];
+$boundStr = $_GET['bound'];
 $qs = $_GET['qs'];
 
-$hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
+$bound = (float)$boundStr;
+
+$hash_value = md5($list."|".$frags."|".$scope."|".$boundStr."|".$qs);
 
 // if($outf == "graph" &&  file_exists("graphs/graph-".$hash_value.".nwb")) {
 //   $downloadpath = "graphs/graph-".$hash_value.".nwb";
@@ -67,10 +65,6 @@ $hash_value = md5($list."|".$frags."|".$scope."|".$bound."|".$qs);
 // 				</table><br/><br/>";
 //      exit;
 // }
-
-// fwrite($log, "list=$list, frags=$frags, scope=$scope, outf=$outf, bound=$bound, qs=$qs\n");
-
-echo "<script type='text/javascript'>alert('have entered graph in termsearch');</script>";
 
 //begin setup
 $listTable = "term250_list";
@@ -94,114 +88,160 @@ if ($qs == "ALL") {
 	return;
 }
 else {
-	$selectedterms = str_replace("_", "','", $qs);
-	$selectedterms = "'".$selectedterms."'";
-	$getselectedtermids = "SELECT id FROM ".$listTable." WHERE wordform IN (".$selectedterms.")";
-	$selectedrows = mysqli_query($connection, $getselectedtermids);
-	while ($nextid = mysqli_fetch_row($selectedrows)) {
-		if (count($selected) > 0) {
-			$selectedids = $selectedids.",";
-		}
-		$selected[] = $nextid[0];
-		$selectedids = $selectedids.$nextid[0];
-	}
-	mysqli_free_result($selectedrows);
+	$selectedids = str_replace("_", ",", $qs);
+	// echo "<script type='text/javascript'>console.log('" . $selectedids . "');</script>";
 }
-// fwrite($log, "selected array loaded: ".memory_get_usage()."\n");
-// fwrite($log, "count in selected: ".count($selected)."\n");
 
-// fwrite($log, "selectedids: $selectedids\n");
+// next convert $selectedids into an int array for sql queries below
+$selectedIntArray = array_map('intval', explode(',', $selectedids));
+$selectedInts = implode(',', $selectedIntArray);
 
-//  going to try using a temporary table called results to organize the work
-// create temporary table results
-$removeresultstemp = "DROP TEMPORARY TABLE IF EXISTS results";
-mysqli_query($connection, $removeresultstemp);
-$makeresultstemp = "CREATE TEMPORARY TABLE results (
-		correlation TEXT, 
-		term1 INT NOT NULL, 
-		term2 INT NOT NULL)";
-mysqli_query($connection, $makeresultstemp);
+// echo "<script type='text/javascript'>
+// console.log(" . $selectedInts . ");
+// alert('selectedInts defined');</script>";
 
+
+// define sql union queries that may need one, two or three term cosine tables
+$getCosFrom6andUp = "SELECT correlation, term1, term2
+	FROM $correlationTable6
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts) ORDER BY correlation DESC";
+	
+$getCosFrom3andUp = "SELECT correlation, term1, term2
+	FROM $correlationTable6
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts)
+	UNION ALL
+	SELECT correlation, term1, term2
+	FROM $correlationTable3
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts)
+	ORDER BY correlation DESC";
+
+$getCosFrom2andUp = "SELECT correlation, term1, term2
+	FROM $correlationTable6
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts)
+	UNION ALL
+	SELECT correlation, term1, term2
+	FROM $correlationTable3
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts)
+	UNION ALL
+	SELECT correlation, term1, term2 
+	FROM $correlationTable2
+	WHERE term1 IN ($selectedInts) OR term2 IN ($selectedInts)
+	ORDER BY correlation DESC";
+
+// echo "<script type='text/javascript'>alert('query statements defined');</script>";
+
+
+
+// create $output based on the depth of the cosine threshold
 $pairs6 = 0;
 $pairs3 = 0;
 $pairs2 = 0;
 //  load the temporary table
-$getcosines6 = "INSERT INTO results (correlation, term1, term2)
-		SELECT correlation, term1, term2 FROM $correlationTable6
-		WHERE (correlation >= $bound) AND (
-		(term1 IN ($selectedids)) OR
-		(term2 IN ($selectedids)) )";
-mysqli_query($connection, $getcosines6);
-// fwrite($log, "getcosines6 query executed: ".memory_get_usage()."\n");
-$pairs6 = mysqli_affected_rows();
-if ($bound <= 0.6) {
-	$getcosines3 = "INSERT INTO results (correlation, term1, term2)
-			SELECT correlation, term1, term2 FROM $correlationTable3
-			WHERE (correlation >= $bound) AND (
-			(term1 IN ($selectedids)) OR 
-			(term2 IN ($selectedids)) )";
-	mysqli_query($connection, $getcosines3);
-	// fwrite($log, "getcosines3 query executed: ".memory_get_usage()."\n");
-	$pairs3 = mysqli_affected_rows();
+if ($bound >= 0.6) {
+	$query = mysqli_prepare($connection, $getCosFrom6andUp);
 }
-if ($bound <= 0.3) {
-	$getcosines2 = "INSERT INTO results (correlation, term1, term2)
-			SELECT correlation, term1, term2 FROM $correlationTable2
-			WHERE (correlation >= $bound) AND (
-			(term1 IN ($selectedids)) OR 
-			(term2 IN ($selectedids)) )";
-	mysqli_query($connection, $getcosines2);
-	// fwrite($log, "getcosines2 query executed: ".memory_get_usage()."\n");
-	$pairs2 = mysqli_affected_rows();
+else if ($bound >= 0.3 && $bound < 0.6) {
+	$query = mysqli_prepare($connection, $getCosFrom3andUp);
 }
+else if ($bound >= 0.2 && $bound < 0.3) {
+	$query = mysqli_prepare($connection, $getCosFrom2andUp);
+}
+else {
+	return;
+}
+mysqli_stmt_execute($query);
+$output = mysqli_stmt_get_result($query);
+$rows = mysqli_fetch_all($output, MYSQLI_ASSOC);
+$numrows = count($rows);
 
-// load the appropriate term list into memory array for output
-$getallterms = "SELECT wordform FROM ".$listTable;
-$termliststring = "BASE\n";
-$termrows = mysqli_query($connection, $getallterms);
-while ($termrow = mysqli_fetch_row($termrows)) {
-	$termliststring = $termliststring.$termrow[0]."\n";
-}
-$termlist = explode("\n", $termliststring);
-// fwrite($log, "termlist array loaded: ".memory_get_usage()."\n");
-unset($termliststring);
-mysqli_free_result($termrows);
-// fwrite($log, "termliststring and termrows freed: ".memory_get_usage()."\n");
+// echo "<script type='text/javascript'>
+// console.log(" . $numrows . ");
+// console.table(" . json_encode($rows) . ");
+// alert('output now fetched into rows');
+// </script>";
 
 echo "<br/><br/>";
 
-// everything is gathered in results, time to work through them
-$getoutput = "SELECT * FROM results ORDER BY correlation DESC";
-$output = mysqli_query($connection, $getoutput);
-// fwrite($log, "getoutput query executed. memory used: ".memory_get_usage()."\n");
-//$output = $db->query("select * from results order by correlation desc");
+// echo "<script type='text/javascript'><alert>'output returned'</alert>;</script>";
+$neighbors = array();
+foreach($rows as $survey) {
+	$thisCorrelation = (float)$survey['correlation'];
+
+	if ($thisCorrelation < $bound) {
+		break;
+	}
+
+	// echo "<script type='text/javascript'>
+	// console.log(" . $thisCorrelation . ");
+	// console.log(" . $bound . ");
+	// alert('see thisCorrelation');
+	// </script>";
+
+	if (!in_array($survey['term1'], $neighbors, true)) {
+		$neighbors[] = $survey['term1'];
+	}
+	if (!in_array($survey['term2'], $neighbors, true)) {
+		$neighbors[] = $survey['term2'];
+	}
+}
+
+// echo "<pre>";
+// print_r($neighbors);
+// echo "</pre>";
+
+sort($neighbors, SORT_NUMERIC);
+
+// echo "<script type='text/javascript'>
+// console.table(" . json_encode($neighbors) . ");
+// alert('termsOut now fetched into termlist');</script>";
+
+$numNeighbors = count($neighbors);
+$placeholders = implode(',', array_fill(1, $numNeighbors, '?'));
+$sortedNeighbors = implode(',', $neighbors);
+
+$getNeighborTerms = "SELECT id, wordform FROM $listTable WHERE id IN ($sortedNeighbors)";
+$termQuery = mysqli_prepare($connection, $getNeighborTerms);
+mysqli_stmt_execute($termQuery);
+$termsOut = mysqli_stmt_get_result($termQuery);
+$termlist = mysqli_fetch_all($termsOut, MYSQLI_ASSOC);
+$numterms = count($termlist);
+
+// echo "<script type='text/javascript'>
+// console.log(" . $numterms . ");
+// console.table(" . json_encode($termlist) . ");
+// alert('termsOut now fetched into termlist');
+// </script>";
+
+echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cosine similarity between two terms is a measure of their co-occurrence across all the passages.<br/><br/><br/>";
+
+// everything is gathered in $output and $termlist, time to work through them
 	
 if ($outf == "ranked") {
 	$outputcount = 0;
-	//fwrite($log, "output array initialized. ".memory_get_usage()."\n");
 	echo "<table cellpadding=10>";
-	while ($outrow = mysqli_fetch_row($output)) {
+	// while ($outrow = mysqli_fetch_row($output)) {
+	foreach($rows as $outrow) {
 		//
 
-		$corr = $outrow[0];		
-		//if ($corr < $bound) {
-		//	break;
-		//}
-		$term1 = $outrow[1];
-		$term2 = $outrow[2];
+		$corr = (float)$outrow['correlation'];
+		if ($corr < $bound) {
+			break;
+		}
+		$term1 = $outrow['term1'];
+		$term2 = $outrow['term2'];
 
 		if ($qs != "ALL") {
 			if ($scope == "allcorrs") {
-				if (!(in_array($term1, $selected) || in_array($term2, $selected))) {
+				if (!(in_array($term1, $selectedIntArray) || in_array($term2, $selectedIntArray))) {
 					continue;
 				}
 			}
 			else if ($scope == "onlyselected") {
 				// $scope == "onlyselected"
-				if (!in_array($term1, $selected)) {
+				if (!in_array($term1, $selectedIntArray)) {
 					continue;
 				}
-				if (!in_array($term2, $selected)) {
+				if (!in_array($term2, $selectedIntArray)) {
 					continue;
 				}
 				//if (!(in_array($term1, $selected) && in_array($term2, $selected))) {
@@ -209,8 +249,13 @@ if ($outf == "ranked") {
 				//}
 			}
 		}
-			
-		echo "<tr><td>".$termlist[$term1]."</td><td>~</td><td>".$termlist[$term2]."</td><td>".$corr."</td></tr>";
+
+		$term1_idx = array_search($term1, array_column($termlist, 'id'));
+		$term2_idx = array_search($term2, array_column($termlist, 'id'));
+		$term1_word = $termlist[$term1_idx]['wordform'];
+		$term2_word = $termlist[$term2_idx]['wordform'];
+		
+		echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>". $term1_word ."</td><td>~</td><td>". $term2_word ."</td><td>".$corr."</td></tr>";
 		$outputcount++;
 	}
 	
@@ -283,17 +328,7 @@ else if ($outf == "graph") {
 	}
 	else {
 		// we can write the graph
-		$newgraph = "graph-". $hash_value.".nwb";
-		// $downloadpath = "graphs/$newgraph";
-		// #$graph = fopen($graphfile, 'w');
-		// $graph = fopen("graphs/$newgraph", 'w');
-		// if ($graph == '' || $graph == 0) {
-		// 	fwrite($log, "Can't open graph file.\n");
-		// }
-		// chmod($graph, 0666);  # make sure the file is user/group writable.
-		
-		// fwrite($graph, '*Nodes'."\n");
-		// fwrite($graph, 'id*int label*string docid*string lemmaid*string'."\n");
+		$newgraph = "graph-". $hash_value.".nwb";		
 
 		$graphstring = "*Nodes".PHP_EOL."id*int label*string docid*string";
 		// echo "<script>alert(`".$graphstring."`);</script>";
@@ -327,7 +362,7 @@ else if ($outf == "graph") {
 			
 			// fwrite($graph, "\n".$nodeIdx[$ekey1]."\t".$nodeIdx[$ekey2]."\t".$edgecorr);
 		}
-		echo "<script type='text/javascript'>console.log(`".$graphstring."`)</script>";
+		echo "<script type=\'text/javascript\'>console.log(`".$graphstring."`)</script>";
 		
 		// fclose($graph);
 		// fwrite($log, "Closed graph file.\n");
@@ -336,11 +371,11 @@ else if ($outf == "graph") {
 		// chmod($newgraph, 0644);
 		
 		// define the graph download function
-		echo "<script type='text/javascript'>
+		echo "<script type=\'text/javascript\'>
 			function downloadGraph(contents, filename) {
-				const graphBlob = new Blob([contents], { type: 'text/plain' });
+				const graphBlob = new Blob([contents], { type: \'text/plain\' });
 				const graphUrl = URL.createObjectURL(graphBlob);
-				const graphLink = document.createElement('a');
+				const graphLink = document.createElement(\'a\');
 				graphLink.href = graphUrl;
 				graphLink.download = filename;
 				document.body.appendChild(graphLink);
@@ -353,13 +388,13 @@ else if ($outf == "graph") {
 		// start downloading the graph and inform the user
 		echo  "<br/><br/>
 			<p>&nbsp;&nbsp;&nbsp;&nbsp;Confirm download of the requested graph file, '$newgraph'
-			to your browser's default download location.</p>
+			to your browser\'s default download location.</p>
 			<p>&nbsp;&nbsp;&nbsp;&nbsp;Nodes and edges are encoded in Network Work Bench (.nwb) format for 
 			use in the Sci<sup>2</sup> network-graph application, but the file is
 			plain text, so it can be read in other editors.</p>
 			<br/><br/>
-			<script type='text/javascript'>
-				let permission = confirm('Download requested graph file?');
+			<script type=\'text/javascript\'>
+				let permission = confirm(\'Download requested graph file?\');
 				if (permission) {
 						const graphContents = `$graphstring`;
 						const graphFile = '$newgraph';

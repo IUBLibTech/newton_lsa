@@ -10,6 +10,8 @@ Description:	Latent Semantic Analysis Tool
 
 $this_server = $_SERVER['SERVER_NAME'];
 
+$indexDir = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+
 /****************************
 Set up variable values 
 ****************************/
@@ -120,40 +122,40 @@ HTML document begins here
 						<legend>Search Type:</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>Document-Document
+								<label>Document-Document similarities
 									<input type="radio" value="wholedocs" name="lsa-searchradio" aria-label="wholedocs-searchradio"/>
 								</label>
 							</li>
 							<li>
-								<label>Chunk-Chunk
+								<label>Passage-Passage similarities
 									<input type="radio" value="chunks" name="lsa-searchradio" aria-label="chunks-searchradio"/>
 								</label>
 							</li>
 							<li>
-								<label>Term-Term
+								<label>Term-Term similarities
 									<input type="radio" value="terms" name="lsa-searchradio" aria-label="terms-searchradio"/>
 								</label>
 							</li>
 							<li>
-								<label>Term-Chunk
+								<label>Term-Passage correlations
 									<input type="radio" value="termdoc" name="lsa-searchradio" aria-label="termdoc-searchradio"/>
 								</label>
 							</li>
-							<li>
-								<label>Chunk-Term
+							<!-- <li>
+								<label>Passage-Term correlations
 									<input type="radio" value="chunkterm" name="lsa-searchradio" aria-label="chunkterm-searchradio"/>
 								</label>
-							</li>
-							<li>
+							</li> -->
+							<!-- <li>
 								<label>Compose Query w/Terms
 									<input type="radio" value="termquery" name="lsa-searchradio" aria-label="termquery-searchradio"/>
 								</label>
-							</li>
-							<li>
+							</li> -->
+							<!-- <li>
 								<label>Compose Query w/Chunks
 									<input type="radio" value="chunkquery" name="lsa-searchradio" aria-label="chunkquery-searchradio"/>
 								</label>
-							</li>
+							</li> -->
 						</ul>
 					</fieldset>
 				</form>
@@ -162,15 +164,15 @@ HTML document begins here
 			<div id="lsa-chunkSizeDiv" class="lsa-halfOpacity">
 				<form name="lsa-chunksize" id="lsa-chunksize" class="lsa-genericForm">
 					<fieldset>
-						<legend>Chunk Size:</legend>
+						<legend>Grid Passage Size:</legend>
 						<ul class="lsa-formList">
 							<li>
-								<label>250-word Chunks
+								<label>250-word Passages
 									<input type="radio" value="ch250" name="lsa-chunkradio" aria-label="ch250-chunkradio"/>
 								</label>
 							</li>
 							<li>
-								<label>1000-word Chunks
+								<label>1000-word Passages
 									<input type="radio" value="ch1000" name="lsa-chunkradio" aria-label="ch1000-chunkradio"/>
 								</label>
 							</li>
@@ -254,13 +256,13 @@ HTML document begins here
 			</form>
 			<br/>
 			<br/>
-			<form name="lsa-submitQuery" id="lsa-submitQuery" class="lsa-genericForm">
+			<form name="lsa-beginQuery" id="lsa-beginQuery" class="lsa-genericForm">
 				<fieldset>
 					<legend></legend>
 					<ul class="lsa-formList">
 						<li>
 							<label>&nbsp;
-								<input type="submit" value="Continue" name="lsa-submit" id="lsa-submitQueryButton"/>
+								<input type="submit" value="Retrieve search options from database" name="lsa-submit" id="lsa-beginQueryButton"/>
 							</label>
 						</li>
 						<li>
@@ -271,300 +273,81 @@ HTML document begins here
 	</div>
 </div>
 <!--	 	--> 
-<!-- ROW #3 --> 
+<!-- ROW #3 --  SELECTION OF TERMS, DOCS, OR CHUNKS --> 
 <!--	 	-->
 <div class="lsa-row" style="background-color: #FEFEFE;">
-	<div id="lsa-rowThree">
-		<div id="lsa-selectTerm250Env">
-			<div id="lsa-selectTerm250FormDiv">
-				<form name="lsa-selectTerm250Form" id="lsa-selectTerm250Form" class="lsa-genericForm">
-					<fieldset>
-						<legend>Terms</legend>
-						<ul class="lsa-formList" style="font-family: GentiumNewton">
-							<li>
-								<label>Choose one or more</label>
-								<select aria-label="Terms selection list" name="lsa-selectterm250" id="lsa-selectterm250" size="15">
-									<?php
-									// open the document chunk names file and read it into an array
-									$term250list = mysqli_query($connection, "SELECT wordform FROM term250_list");
-									while ($term250 = mysqli_fetch_row($term250list)) {
-										if (strpos($term250[0],"'") > -1) {
-											$term_string = str_replace("'", "&#8217;", $term250[0]);
-										}
-										else $term_string = $term250[0];
-
-										print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
-									}
-									mysqli_free_result($term250list);
-									// fwrite($log, "term250list loaded.\n");
-									?>
-								</select>
-							</li>
-						</ul>
-					</fieldset>
-				</form>
-				<?php 
-                unset($termliststring);
-                unset($termlist);
-                unset($termselect);
-                ?>
-		</div>
-			<div id="lsa-appendTerm250Env">
-				<form name="lsa-appendTerm250Button" id="lsa-appendTerm250Button" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Add term
-									<input type="button" value="Add Term" />
-								</label>
-								
-							</li>
-						</ul>
-					</fieldset>
-				</form>
-			</div>
-			<br style="clear:both;"/>
-		</div>
-		<div id="lsa-selectTerm1000Env">
-			<div id="lsa-selectTerm1000FormDiv">
-				<form name="lsa-selectTerm1000Form" id="lsa-selectTerm1000Form" class="lsa-genericForm">
-					<fieldset>
-						<legend>Terms</legend>
-						<ul class="lsa-formList" style="font-family: GentiumNewton">
-							<li>
-								<label>Choose One or More
-									<select name="lsa-selectterm1000" id="lsa-selectterm1000" size="15" >
-								</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		//   style='font-family: Liberation Sans Alchemy'
-		$term1000list = mysqli_query($connection, "SELECT wordform FROM term1000_list");
-		while ($term1000 = mysqli_fetch_row($term1000list)) {
-            if (strpos($term1000[0],"'") > -1) {
-                $term_string = str_replace("'", "&#8217;", $term1000[0]);
-            }
-            else $term_string = $term1000[0];
-
-            print("<option value='$term_string' style='font-family: Newton Sans'>$term_string</option>");
-		}
-		mysqli_free_result($term1000list);
-		// fwrite($log, "term1000list loaded.\n");
-		?>
-								</select>
-		<label>(Browsers other than Firefox may not render alchemical symbols.)</label>
-							</li>
-						</ul>
-					</fieldset>
-				</form>
-				<?php 
-                unset($termliststring);
-                unset($termlist);
-                unset($termselect);
-                ?>
-			</div>
-			<div id="lsa-appendTerm1000Env">
-				<form name="lsa-appendTerm1000Button" id="lsa-appendTerm1000Button" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Add term
-									<input type="button" value="Add Term" />
-								</label>
-							</li>
-						</ul>
-					</fieldset>
-				</form>
-			</div>
-			<br style="clear:both;" />
-		</div>
-		<div id="lsa-regexTermEnv">
+	<div id="lsa-rowThree" style="height: 575px">
+		<!-- TERM SELECTION -- 250-WORD chunks first -->
+		<!-- TERM SELECTION -- Regex Entry -->
+		<div id="lsa-regexTermEnv" style="float:left; position: absolute; left: 30%">
 			<div id="lsa-regexTermFormDiv">
 				<form name="lsa-regexForm" class="lsa-genericForm">
-					<fieldset>
-						<legend>Regex pattern to select from list of terms:</legend>
-						<ul class="lsa-formList" style="font-family: GentiumNewton">
-							<li> <label>/
-								<input type="text" name="lsa-thePattern" id="lsa-thePattern" size="30"/>
-								/</label></li>
-						</ul>
-					</fieldset>
+					<legend for="lsa-thePattern">Use a Regex pattern to select terms:</legend><br/>
+					<input type="text" name="lsa-thePattern" id="lsa-thePattern" size="25" style="font-family: GentiumNewton; font-size: 20px"/>
 				</form>
 			</div>
-			<div id="lsa-appendregexTermEnv">
-				<form name="lsa-appendregexTermButton" id="lsa-appendregexTermButton" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Add matches
-									<input type="button" value="Add Matches" />
-								</label>
-							</li>
-						</ul>
-					</fieldset>
+			<!-- TERM SELECTION -- Regex Add Term -->
+			<div id="lsa-appendregexTermEnv" style="float:left; display: block; position: absolute; top: 90%">
+				<form name="lsa-appendregexTermButtonForm" id="lsa-appendregexTermButtonForm" class="lsa-genericForm">
+					<label for="lsa-appendregexTermButton">Add regex matches</label>
+					<input type="button" name="lsa-appendregexTermButton" id="lsa-appendregexTermButton" value="Add" />
 				</form>
 			</div>
 			<br style="clear:both;" />
 		</div>
 		
-		<!-- BREAK0 -->
-		<div id="lsa-break0"></div>
-		<div id="lsa-selectDocEnv" style="z-index:10;">
-			<form name="lsa-selectDocForm" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>Choose One or More, or All
-							<select name="lsa-selectdoc" id="lsa-selectdoc" size="15">
-								<option value="ALL">All documents</option>
-							</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		$corpuslist = mysqli_query($connection, "SELECT * FROM corpus_list");
-		while ($docinfo = mysqli_fetch_row($corpuslist)) {
-			print("<option value=\"$docinfo[2]\">$docinfo[0]</option>");
-		}
-		mysqli_free_result($corpuslist);
-		// fwrite($log, "corpuslist loaded.\n");
-		?>
-							</select>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-			<?php 
-            unset($docliststring);
-            unset($doclist);
-            unset($wholeselect);
-            ?>
+		<!-- SELECT2 WRAPPER -->	
+		<div id="lsa-wholeDocsEnv" style="width: 25%; margin-top: 20px; display: none;">
+			<label for="lsa-wholeDocs-select2">Which manuscripts do you want to start from?</label>
+			<select id="lsa-wholeDocs-select2" name="lsa-wholeDocs-select2[]" multiple="multiple" style="width: 100%;"></select>
+		</div>	
+		<div id="lsa-selectChunk250Env" style="width: 25%; margin-top: 20px; display: none;">
+			<label for="lsa-chunk250-select2">Which passages do you want to start from?</label>
+			<select id="lsa-chunk250-select2" name="lsa-chunk250-select2[]" multiple="multiple" style="width: 100%;"></select>
+		</div>	
+		<div id="lsa-selectChunk1000Env" style="width: 25%; margin-top: 20px; display: none;">
+			<label for="lsa-chunk1000-select2">Which passages do you want to start from?</label>
+			<select id="lsa-chunk1000-select2" name="lsa-chunk1000-select2[]" multiple="multiple" style="width: 100%;"></select>
 		</div>
-		<div id="lsa-selectChunk250Env" style="z-index:10;">
-			<form name="lsa-selectChunk250Form" class="lsa-genericForm">
-				<fieldset>
-					<legend>Document Chunks:</legend>
-					<ul class="lsa-formList">
-						<li>
-							<label>Choose One or More, or All
-								<select name="lsa-selectchunk250" id="lsa-selectchunk250" size="15" >
-								<option value = "ALL">All chunks</option>
-							</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		$doc250count = 1;
-		$doc250list = mysqli_query($connection, "SELECT ctitle FROM doc250_list");
-		while ($doc250 = mysqli_fetch_row($doc250list)) {
-			print("<option value=\"$doc250count\">$doc250[0]</option>");
-		$doc250count++;
-		}
-		// fwrite($log, "doc250list loaded.\n");
-		?>
-							</select>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-			<?php 
-            unset($chunk250liststring);
-            unset($chunk250list);
-            unset($chunk250select);
-            ?>
+		<div id="lsa-selectTerm250Env" style="width: 25%; margin-top: 20px; display: none;">
+			<label for="lsa-term250-select2">Which terms do you want to start from?</label>
+			<select id="lsa-term250-select2" name="lsa-term250-select2[]" multiple="multiple" style="width: 100%;"></select>
+		</div>	
+		<div id="lsa-selectTerm1000Env" style="width: 25%; margin-top: 20px; display: none;">
+			<label for="lsa-term1000-select2">Which terms do you want to start from?</label>
+			<select id="lsa-term1000-select2" name="lsa-term1000-select2[]" multiple="multiple" style="width: 100%;"></select>
 		</div>
-		<div id="lsa-selectChunk1000Env" style="z-index:10;">
-			<form name="lsa-selectChunk1000Form" class="lsa-genericForm">
-				<fieldset>
-					<legend>Document Chunks:</legend>
-					<ul class="lsa-formList">
-						<li>
-							<label>Choose One or More, or All
-								<select name="lsa-selectchunk1000" id="lsa-selectchunk1000" size="15" >
-									<option></option>
-									<option value="ALL">All chunks</option>
-							</label>
-		<?php
-		// open the document chunk names file and read it into an array
-		$doc1000count = 1;
-		$doc1000list = mysqli_query($connection, "SELECT ctitle FROM doc1000_list");
-		while ($doc1000 = mysqli_fetch_row($doc1000list)) {
-			print("<option value=\"$doc1000count\">$doc1000[0]</option>");
-		$doc1000count++;
-		}
-		// fwrite($log, "doc1000list loaded.\n");
-		?>
-							</select>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-			<?php 
-            unset($chunk1000liststring);
-            unset($chunk1000list);
-            unset($chunk1000select);
-            ?>
-		</div>
-		
-		
-		<!--	/* ADD BUTTONS */  -->
-		<div id="lsa-appendDocEnv">
-			<form name="lsa-appendDocButton" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>&nbsp;
-								<input type="button" id="lsa-appendDocPress" value="Add Doc to Query Set" />
-							</label>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-		</div>
-		<div id="lsa-appendChunkEnv">
-			<form name="lsa-appendChunkButton" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>Add passage
-								<input type="button" id="lsa-appendChunkPress" value="Add Chunk" />
-							</label>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-		</div>
-		
-		<br style="clear:both;" />
-		
-		<!--	/* THE QUERY BOX */  -->
-		<div id="lsa-queryEnv">
-			<form name="lsa-queryForm" id="lsa-queryForm" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>Query Set:
-								<textarea name="lsa-theQuery" id="lsa-theQuery" style="font-family: GentiumNewton" readonly></textarea>
-							</label>
-						</li>
-					</ul>
-				</fieldset>
-			</form>
-			<form name="lsa-queryFormClear" id="lsa-queryFormClear" class="lsa-genericForm">
-				<fieldset>
-					<ul class="lsa-formList">
-						<li>
-							<label>&nbsp;
-								<input type="submit" id="lsa-queryFormClearButton" value="Clear Query Set" />
-							</label>
-							
-						</li>
-						
-					</ul>
-				</fieldset>
-			</form>
-			<form name="lsa-queryFormContinue" id="lsa-queryFormContinue" class="lsa-genericForm">
+
+		<!--	/* THE QUERY SET BOX */  -->
+		<div id="lsa-queryEnv" style="position: absolute; left: 55%">
+			<form name="lsa-queryFormContinue" id="lsa-queryFormContinue" class="lsa-genericForm" style="float: right">
 				<fieldset>
 					<ul class="lsa-formList">
 						<li>
 							<label>&nbsp;
 								<input type="submit" id="lsa-queryFormContinuePress" value="Continue to thresholds" />
 							</label>
+						</li>
+					</ul>
+				</fieldset>
+			</form>
+			<form name="lsa-queryForm" id="lsa-queryForm" class="lsa-genericForm">
+				<label for="lsa-theQuery">Query Set:</label>
+				<select name="lsa-theQuery" id="theQuery" size="8" style="font-family: GentiumNewton; font-size: 17.5px; width:397px" multiple>
+				</select>
+			</form>
+			<form name="lsa-queryRemoveSelected" id="lsa-queryRemoveSelected" class="lsa-genericForm">
+				<br/>
+				<button id="lsa-queryRemoveSelectedButton" type="button">Remove Selected Options</button>
+			</form>
+			<form name="lsa-queryFormClear" id="lsa-queryFormClear" class="lsa-genericForm" style="float: right">
+				<fieldset>
+					<ul class="lsa-formList">
+						<li>
+							<label>&nbsp;
+								<input type="submit" id="lsa-queryFormClearButton" value="Restart the Webapp" />
+							</label>
+							
 						</li>
 						
 					</ul>
@@ -576,7 +359,7 @@ HTML document begins here
 </div>
 
 <!--	 	--> 
-<!-- ROW #4 --> 
+<!-- ROW #4   MANAGING AND INITIATING THE QUERY--> 
 <!--	 	-->
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFour">
@@ -616,112 +399,44 @@ HTML document begins here
 			</div>
 			<div id="lsa-docBoundEnv">
 				<form name="lsa-docboundForm" class="lsa-genericForm">
-					<label>Document &#x2013; Document Correlation Threshold
-					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.00" max="1.00" step="0.01" value="0.90" style="font-size: 16px"></label>
-					<label>(Note: 1.0 &#x2248; the two are identical, while 0.0 &#x2248; nothing in common.)</label>
+					<label for="lsa-bounddocs">Document &#x2013; Document Cosine Threshold</label><br/>
+					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+					<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
 				</form>
 			</div>
 			<div id="lsa-chunkBoundEnv">
 				<form name="lsa-chunkboundForm" class="lsa-genericForm">
-					<label>Chunk &#x2013; Chunk Threshold
-					<input type="number" name="lsa-boundchunk" id="lsa-boundchunk" min="0.00" max="1.00" step="0.01" value="0.90" style="font-size: 16px"></label>
-					<label>(Note: 1.0 &#x2248; the two are identical, while 0.0 &#x2248; nothing in common.)</label>
+					<label for="lsa-boundchunk">Passage &#x2013; Passage Cosine Threshold</label><br/>
+					<input type="number" name="lsa-boundchunk" id="lsa-boundchunk" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+					<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
 				</form>
 			</div>
 			<div id="lsa-term250BoundEnv">
 				<form name="lsa-term250boundForm" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Term-Term Threshold
-								<select name="lsa-bound250" id="lsa-bound250">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3 (more results)</option>
-									<option value="0.2">0.2 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset>
-				</form>
-			</div>
-			<div id="lsa-termdoc250BoundEnv">
-				<form name="lsa-termdoc250boundForm" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Term-Document Threshold
-								<select name="lsa-tdbound250" id="lsa-tdbound250">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3</option>
-									<option value="0.2">0.2</option>
-									<option value="0.1">0.1 (more results)</option>
-									<option value="0.0">0.0 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset>
+					<label for="lsa-bound250">Term &#x2013; Term Cosine Threshold</label><br/>
+					<input type="number" name="lsa-bound250" id="lsa-bound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+					<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
 				</form>
 			</div>
 			<div id="lsa-term1000BoundEnv">
 				<form name="lsa-term1000boundForm" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Term-Term Threshold
-								<select name="lsa-bound1000" id="lsa-bound1000">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3 (more results)</option>
-									<option value="0.2">0.2 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset>
+					<label for="lsa-bound1000">Term &#x2013; Term Cosine Threshold</label><br/>
+					<input type="number" name="lsa-bound1000" id="lsa-bound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+					<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
+				</form>
+			</div>
+			<div id="lsa-termdoc250BoundEnv">
+				<form name="lsa-termdoc250boundForm" class="lsa-genericForm">
+					<label for="lsa-tdbound250">Term-Document Threshold</label><br/>
+					<input type="number" name="lsa-tdbound250" id="lsa-tdbound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
+					<label>(Note: 1.0 &#x2248; 'term correlated with passage',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
 				</form>
 			</div>
 			<div id="lsa-termdoc1000BoundEnv">
 				<form name="lsa-termdoc1000boundForm" class="lsa-genericForm">
-					<fieldset>
-						<ul class="lsa-formList">
-							<li>
-								<label>Term-Document Threshold
-								<select name="lsa-tdbound1000" id="lsa-tdbound1000">
-									<option value=""></option>
-									<option value="0.9">0.9 (fewer results)</option>
-									<option value="0.8">0.8</option>
-									<option value="0.7">0.7</option>
-									<option value="0.6">0.6</option>
-									<option value="0.5">0.5</option>
-									<option value="0.4">0.4</option>
-									<option value="0.3">0.3</option>
-									<option value="0.2">0.2</option>
-									<option value="0.1">0.1 (more results)</option>
-									<option value="0.0">0.0 (lowest available correlations)</option>
-								</select>
-								</label>
-							</li>
-						</ul>
-					</fieldset>
+					<label for="lsa-tdbound1000">Term-Document Threshold</label><br/>
+					<input type="number" name="lsa-tdbound1000" id="lsa-tdbound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
+					<label>(Note: 1.0 &#x2248; 'the two are identical',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
 				</form>
 			</div>
 		</div>

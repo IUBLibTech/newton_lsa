@@ -95,8 +95,8 @@ div {
 
 
 /* INSIDE BOXES */
-#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv {
-	/* font-family: Liberation Sans Alchemy; */
+#lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv {
+	/* font-family: GentiumNewton; */
 	position:relative;	
 	width: auto;
 	height: auto;
@@ -128,10 +128,35 @@ div {
 
 
 /* ROW THREE */
-#lsa-selectDocEnv, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv  {
+/* #lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv, #lsa-queryEnv  {
 	float:left;
 	width: 30em;
 	clear:right;
+} */
+
+/* SELECT2 term font */
+#select2-lsa-term250-select2-results,
+#select2-lsa-term250-select2-results ~ .select2-search,
+#select2-lsa-term250-select2-results * {
+	font-family: 'GentiumNewton', Georgia, serif !important;
+}
+
+#select2-lsa-term250-select2-results + .select2-search .select2-search__field,
+#select2-lsa-term250-select2-results ~ .select2-search .select2-search__field,
+#lsa-selectTerm250Env .select2-search__field {
+	font-family: 'GentiumNewton', Georgia, serif !important;
+}
+
+#select2-lsa-term1000-select2-results,
+#select2-lsa-term1000-select2-results ~ .select2-search,
+#select2-lsa-term1000-select2-results * {
+	font-family: 'GentiumNewton', Georgia, serif !important;
+}
+
+#select2-lsa-term1000-select2-results + .select2-search .select2-search__field,
+#select2-lsa-term1000-select2-results ~ .select2-search .select2-search__field,
+#lsa-selectTerm1000Env .select2-search__field {
+	font-family: 'GentiumNewton', Georgia, serif !important;
 }
 
 /* ROW FIVE */
@@ -193,9 +218,12 @@ div {
 }
 
 /* FORM DESIGN */
-#lsa-selectdoc {
-	min-width: 30em;
-}
+/* #lsa-selectdoc {
+	min-width: 20em;
+	font-family: GentiumNewton;
+	font-size: 17.5px;
+} */
+
 
 
 /* BUTTONS 
