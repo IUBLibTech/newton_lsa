@@ -48,8 +48,8 @@ $(document).ready(function() {
 			const $searchType	= 	$('input[name=lsa-searchradio]:checked','#lsa-searchtype').val(); //radio
 			const $chunkSize	= 	$('input[name=lsa-chunkradio]:checked',	'#lsa-chunksize').val();  //radio
 
-			console.log($searchType);
-			console.log($chunkSize);
+			// console.log($searchType);
+			// console.log($chunkSize);
 			// alert("check type and size from init");
 
 			let $el = null;
@@ -295,8 +295,8 @@ $('#lsa-appendregexTermButton').on('click', function(e) {
 		return;
 	}
 
-	console.log(pattern);
-	alert("the pattern string");
+	// console.log(pattern);
+	// alert("the pattern string");
 
 	// create the case-insensitive regex object
 	let regex;
@@ -317,8 +317,8 @@ $('#lsa-appendregexTermButton').on('click', function(e) {
 		$activeSelect = $('lsa-term1000-select2');
 	}
 
-	console.dir($activeSelect);
-	alert("$activeSelect");
+	// console.dir($activeSelect);
+	// alert("$activeSelect");
 
 	if (!$activeSelect || !$activeSelect.data('loaded')) {
 		alert("Please select a search category and load the options first.");
@@ -332,8 +332,8 @@ $('#lsa-appendregexTermButton').on('click', function(e) {
 		return;
 	}
 
-	console.table(dataset);
-	alert("dataset");
+	// console.table(dataset);
+	// alert("dataset");
 
 	const $targetSelect = $('#theQuery');
 
@@ -384,7 +384,7 @@ $('#lsa-appendregexTermButton').on('click', function(e) {
 		});
 
 		$targetSelect.empty().append($options).trigger('change');
-		alert("Matched and added " + addedToTargetCount + "items to the query.");
+		alert("Matched and added " + addedToTargetCount + " items to the query.");
 	} else {
 		alert("No matches for the pattern " + pattern);
 	}
