@@ -364,80 +364,47 @@ HTML document begins here
 <div class="lsa-row" style="background-color: #FEFEFE;">
 	<div id="lsa-rowFour">
 		<div id="lsa-break1"></div>
-		<div id="lsa-queryArea">
-			<div id="lsa-queryButtonArea" >
-				<div id="lsa-queryButtons" >
-					<div id="lsa-runSearch">
-						<form name="lsa-search" class="lsa-genericForm">
-							<fieldset>
-								<ul class="lsa-formList">
-									<li>
-										<label>Run search
-											<input type="button" value="RUN" id="lsa-runSearchPress"/>
-										</label>
-									</li>
-								</ul>
-							</fieldset>
-						</form>
-					</div>
-					&nbsp; &nbsp;
-					<div id="lsa-clearQueryEnv">
-						<form name="lsa-clearQueryButton" class="lsa-genericForm">
-							<fieldset>
-								<ul class="lsa-formList">
-									<li>
-										<label>Clear query
-											<input type="button" value="CLEAR QUERY" id="lsa-clearSearchPress" />
-										</label>
-										
-									</li>
-								</ul>
-							</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
+		<div id="lsa-thresholdArea">
 			<div id="lsa-docBoundEnv">
-				<form name="lsa-docboundForm" class="lsa-genericForm">
-					<label for="lsa-bounddocs">Document &#x2013; Document Cosine Threshold</label><br/>
-					<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
-					<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
-				</form>
+				<label for="lsa-bounddocs">Document &#x2013; Document Cosine Threshold</label><br/>
+				<input type="number" name="lsa-bounddocs" id="lsa-bounddocs" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+				<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
 			</div>
 			<div id="lsa-chunkBoundEnv">
-				<form name="lsa-chunkboundForm" class="lsa-genericForm">
-					<label for="lsa-boundchunk">Passage &#x2013; Passage Cosine Threshold</label><br/>
-					<input type="number" name="lsa-boundchunk" id="lsa-boundchunk" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
-					<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
-				</form>
+				<label for="lsa-boundchunk">Passage &#x2013; Passage Cosine Threshold</label><br/>
+				<input type="number" name="lsa-boundchunk" id="lsa-boundchunk" min="0.30" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+				<label>Note: 1.0 &#x2248; 'passages are practically identical',<br/>while 0.0 &#x2248; 'they have nothing in common'.<br/>No pair cosines less than 0.3 were stored in order to save space.</label>
 			</div>
 			<div id="lsa-term250BoundEnv">
-				<form name="lsa-term250boundForm" class="lsa-genericForm">
-					<label for="lsa-bound250">Term &#x2013; Term Cosine Threshold</label><br/>
-					<input type="number" name="lsa-bound250" id="lsa-bound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
-					<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
-				</form>
+				<label for="lsa-bound250">Term &#x2013; Term Cosine Threshold</label><br/>
+				<input type="number" name="lsa-bound250" id="lsa-bound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+				<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
 			</div>
 			<div id="lsa-term1000BoundEnv">
-				<form name="lsa-term1000boundForm" class="lsa-genericForm">
-					<label for="lsa-bound1000">Term &#x2013; Term Cosine Threshold</label><br/>
-					<input type="number" name="lsa-bound1000" id="lsa-bound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
-					<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
-				</form>
+				<label for="lsa-bound1000">Term &#x2013; Term Cosine Threshold</label><br/>
+				<input type="number" name="lsa-bound1000" id="lsa-bound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float:left"><br/><br/>
+				<label>(Note: 1.0 &#x2248; 'always together',<br/>while 0.0 &#x2248; 'never together'.<br/>No term cosines less than 0.2 were stored.)</label>
 			</div>
 			<div id="lsa-termdoc250BoundEnv">
-				<form name="lsa-termdoc250boundForm" class="lsa-genericForm">
-					<label for="lsa-tdbound250">Term-Document Threshold</label><br/>
-					<input type="number" name="lsa-tdbound250" id="lsa-tdbound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
-					<label>(Note: 1.0 &#x2248; 'term correlated with passage',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
-				</form>
+				<label for="lsa-tdbound250">Term-Document Threshold</label><br/>
+				<input type="number" name="lsa-tdbound250" id="lsa-tdbound250" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
+				<label>(Note: 1.0 &#x2248; 'term correlated with passage',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
 			</div>
 			<div id="lsa-termdoc1000BoundEnv">
-				<form name="lsa-termdoc1000boundForm" class="lsa-genericForm">
-					<label for="lsa-tdbound1000">Term-Document Threshold</label><br/>
-					<input type="number" name="lsa-tdbound1000" id="lsa-tdbound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
-					<label>(Note: 1.0 &#x2248; 'the two are identical',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
-				</form>
+				<label for="lsa-tdbound1000">Term-Document Threshold</label><br/>
+				<input type="number" name="lsa-tdbound1000" id="lsa-tdbound1000" min="0.20" max="1.00" step="0.01" value="0.90" style="font-size: 20px; float: left"><br/><br/>
+				<label>(Note: 1.0 &#x2248; 'the two are identical',<br/>while 0.0 &#x2248; 'nothing in common'.<br/>No term cosines less than 0.2 were stored.)</label>
+			</div>
+			<div id="lsa-queryButtons" >
+				<div id="lsa-runSearch">
+					<label for="lsa-runSearchPress">Run search</label>
+					<input type="button" value="RUN" id="lsa-runSearchPress"/>
+				</div>
+				&nbsp; &nbsp;
+				<div id="lsa-clearQueryEnv">
+					<label for="lsa-clearSearchPress">Clear query</label>
+					<input type="button" value="CLEAR QUERY" id="lsa-clearSearchPress" />
+				</div>
 			</div>
 		</div>
 		

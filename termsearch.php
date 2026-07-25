@@ -1,7 +1,7 @@
 <?php
 //  FUNCTIONS
 //####################
-function cosine_sim($vecstring1, $vecstring2, $sumsq1, $sumsq2) {
+function cosine_sim(string $vecstring1, string $vecstring2, float $sumsq1, float $sumsq2) {
 	//echo "vecstring1: ".$vecstring1."<br/>";
 	$vector1 = explode(" ", $vecstring1);
 	$vector2 = explode(" ", $vecstring2);
@@ -21,18 +21,18 @@ function cosine_sim($vecstring1, $vecstring2, $sumsq1, $sumsq2) {
 	return $correlation;
 }
 
-function combine_key($int1, $int2) {
+function combine_key(int $int1, int $int2) {
 	$newkey = $int1 * 1000000000;
 	$newkey = $newkey + $int2;
 	return $newkey;
 }
 
-function extract_key2($keyint) {
+function extract_key2(int $keyint) {
 	$key2 = $keyint % 1000000000;
 	return $key2;
 }
 
-function extract_key1($keyint, $mod) {
+function extract_key1(int $keyint, int $mod) {
 	$key0 = $keyint - $mod;
 	$key1 = $key0 / 1000000000;
 	return $key1;
@@ -171,12 +171,6 @@ foreach($rows as $survey) {
 		break;
 	}
 
-	// echo "<script type='text/javascript'>
-	// console.log(" . $thisCorrelation . ");
-	// console.log(" . $bound . ");
-	// alert('see thisCorrelation');
-	// </script>";
-
 	if (!in_array($survey['term1'], $neighbors, true)) {
 		$neighbors[] = $survey['term1'];
 	}
@@ -191,26 +185,43 @@ foreach($rows as $survey) {
 
 sort($neighbors, SORT_NUMERIC);
 
-// echo "<script type='text/javascript'>
-// console.table(" . json_encode($neighbors) . ");
-// alert('termsOut now fetched into termlist');</script>";
-
 $numNeighbors = count($neighbors);
 $placeholders = implode(',', array_fill(1, $numNeighbors, '?'));
 $sortedNeighbors = implode(',', $neighbors);
 
-$getNeighborTerms = "SELECT id, wordform FROM $listTable WHERE id IN ($sortedNeighbors)";
-$termQuery = mysqli_prepare($connection, $getNeighborTerms);
-mysqli_stmt_execute($termQuery);
-$termsOut = mysqli_stmt_get_result($termQuery);
-$termlist = mysqli_fetch_all($termsOut, MYSQLI_ASSOC);
-$numterms = count($termlist);
+// get termlist
+
+$jsonPath = 'json/term250_list.json';
+if ($frags == 'ch1000') {
+	$jsonPath = 'json/term1000_list.json';
+}
+$jsonList = file_get_contents($jsonPath);
+
+$jsonData = json_decode($jsonList, true);
+
+
+// echo "<pre>";
+// print_r($jsonData["7"]["text"]);
+// echo "</pre>";
 
 // echo "<script type='text/javascript'>
-// console.log(" . $numterms . ");
-// console.table(" . json_encode($termlist) . ");
-// alert('termsOut now fetched into termlist');
+// console.table(" . $jsonData . ");
+// alert('jsonContent in console.table');
 // </script>";
+
+$termlist = array();
+foreach ($jsonData['results'] as $item) {
+	$id = $item['id'];
+	if (in_array($id, $neighbors)) {
+		$termlist[$id] = $item['text'];
+	}
+}
+
+// echo "<pre>";
+// print_r($termlist);
+// echo "</pre>";
+// ==============================
+
 
 echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cosine similarity between two terms is a measure of their co-occurrence across all the passages.<br/><br/><br/>";
 
@@ -250,10 +261,8 @@ if ($outf == "ranked") {
 			}
 		}
 
-		$term1_idx = array_search($term1, array_column($termlist, 'id'));
-		$term2_idx = array_search($term2, array_column($termlist, 'id'));
-		$term1_word = $termlist[$term1_idx]['wordform'];
-		$term2_word = $termlist[$term2_idx]['wordform'];
+		$term1_word = $termlist[$term1];
+		$term2_word = $termlist[$term2];
 		
 		echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>". $term1_word ."</td><td>~</td><td>". $term2_word ."</td><td>".$corr."</td></tr>";
 		$outputcount++;
@@ -268,44 +277,41 @@ else if ($outf == "graph") {
 	//
 
 	echo "<script>alert('have entered graph in docsearch');</script>";
-	// fwrite($log, "Entered graph.\n");
+
 	$nodes = array();
 	$edges = array();
-	
+
 	$outputcount = 0;
-	while ($outrow = mysqli_fetch_row($output)) {
+	while ($edgeRow = mysqli_fetch_row($output)) {
 
 		// fwrite($log, "Graph loop ".$outputcount."\n");
-		$corr = $outrow[0];
+		$corr = $edgeRow[0];
 		if ($corr < $bound) {
 			break;
 		}
-		$new1 = $outrow[1];
-		$new2 = $outrow[2];
+		$new1 = $edgeRow[1];
+		$new2 = $edgeRow[2];
 		
 		$writethis = 0;
 		if ($qs == "ALL") {
 			$writethis = 1;
 		}
 		elseif ($scope == "allcorrs") {
-			if (in_array($new1, $selected) || in_array($new2, $selected)) {
+			if (in_array($new1, $selectedIntArray) || in_array($new2, $selectedIntArray)) {
 				$writethis = 1;
 			}
 		}
 		elseif ($scope == "onlyselected") {
-			if (in_array($new1, $selected) && in_array($new2, $selected)) {
-				//if ($selected[$new1] != $selected[$new2]) {
-					$writethis = 1;
-				//}
+			if (in_array($new1, $selectedIntArray) && in_array($new2, $selectedIntArray)) {
+				$writethis = 1;
 			}
 		}
 		
 		if ($writethis == 0) {
 			continue;
 		}
-		// fwrite($log, "will writethis.\n");
 
-		$corr = $outrow[0];
+		$corr = $edgeRow[0];
 
 		$newkey = combine_key($new1, $new2);
 		// fwrite($log, "got newkey ".$newkey."\n");
@@ -408,9 +414,6 @@ else if ($outf == "graph") {
 
 mysqli_close($connection);
 unset($termlist);
-//$db->close();
-// fwrite($log, "quitting, memory now ".memory_get_usage().".\n");
-// fclose($log);
 return;
 	
 ?>

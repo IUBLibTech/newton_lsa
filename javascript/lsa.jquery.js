@@ -254,7 +254,7 @@ function doSearch() {
 	$getData += "&bound="+ $boundRatio;
 	$getData += "&qs="+	$queryString;
 
-	console.log($getData);
+	// console.log($getData);
 	// alert("getData string");
 	
 /* CREATE AJAX CALL */
@@ -266,8 +266,6 @@ function doSearch() {
 			$('#lsa-results').html(data);
 		}
 	});
-	
-
 }
 
 /* tdbowman */
@@ -404,7 +402,7 @@ function letUserWork() {
 	$('#lsa-select2Wrapper, #lsa-appendDocEnv, #lsa-docBoundEnv, #lsa-selectChunk250Env, #lsa-selectChunk1000Env, #lsa-appendChunkEnv, #lsa-chunkBoundEnv, #lsa-selectTerm250Env, #lsa-appendTerm250Env, #lsa-regexTermEnv, #lsa-appendregexTermEnv, #lsa-term250BoundEnv, #lsa-termdoc250BoundEnv, #lsa-selectTerm1000Env, #lsa-appendTerm1000Env, #lsa-term1000BoundEnv, #lsa-termdoc1000BoundEnv').hide();	
 		
 	/* SHOW THE MAIN ITEMS */
-	$('#lsa-queryEnv, #lsa-queryButtonArea, #lsa-queryButtons').show();
+	$('#lsa-queryEnv, #lsa-queryButtons').show();
 
 
 	/* CLEAR OUT RESULTS AREA */

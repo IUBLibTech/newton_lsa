@@ -192,6 +192,7 @@ $(document).ready(function() {
 	// ************************************************* //	
 	// ROW FOUR - RUN QUERY
 		$('#lsa-runSearchPress').on('click', function(i,e) {
+			// alert("have entered Run button code.")
 			$('#lsa-rowFour').removeClass('lsa-boxFive lsa-opacityNormal')
 					.addClass('lsa-halfOpacity').toggle();	
 	
@@ -384,7 +385,7 @@ $('#lsa-appendregexTermButton').on('click', function(e) {
 		});
 
 		$targetSelect.empty().append($options).trigger('change');
-		alert("Matched and added " + addedToTargetCount + " items to the query.");
+		// alert("Matched and added " + addedToTargetCount + " items to the query.");
 	} else {
 		alert("No matches for the pattern " + pattern);
 	}
