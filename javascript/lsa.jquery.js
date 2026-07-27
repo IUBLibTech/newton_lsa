@@ -1,19 +1,21 @@
+// const { complete } = require("graphology-library/generators");
+
 /* DEFAULTS */
-const $indexDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+var $indexDir = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
 // console.log($indexDir);
 // alert("$indexDir");
 
-var $searchType,//		= 	"wholedocs", 
-	$chunkSize,//		= 	"ch250",  
-	$outputType,//		= 	"ranked", 
-	$scopeType,//		= 	"all",  
-	$boundRatio,//		=	"", // <<<<<< 
-	$queryElements	= 	new Array(),
-	$queryString	=	'',
-	$getData 		= 	'',
-	$regexPattern	=	'',
-	$searchURL 		= 	'docsearch.php';
-	// $mdb 			= 	2;
+// var $searchType,//		= 	"wholedocs", 
+// 	$chunkSize,//		= 	"ch250",  
+// 	$outputType,//		= 	"ranked", 
+// 	$scopeType,//		= 	"all",  
+// 	$boundRatio,//		=	"", // <<<<<< 
+// 	$queryElements	= 	new Array(),
+// 	$queryString	=	'',
+// 	$getData 		= 	'',
+// 	$regexPattern	=	'',
+// 	$searchURL 		= 	'docsearch.php';
+// 	// $mdb 			= 	2;
 
 function init() {
 	
@@ -132,16 +134,16 @@ function clearQuery() {
 	$('#lsa-spinningImageHolder').children('span[title="message"]').empty();
 
 	// back to default
-	$searchType,//		= 	"wholedocs", 
-	$chunkSize,//		= 	"ch250",  
-	$outputType,//		= 	"ranked", 
-	$scopeType,//		= 	"all",  
-	$boundRatio,//		=	"", // <<<<<< 
-	$queryElements	= 	new Array(),
-	$queryString	=	'',
-	$getData 		= 	'',
-	$regexPattern	=	'',
-	$searchURL 		= 	'docsearch.php';
+	// $searchType,//		= 	"wholedocs", 
+	// $chunkSize,//		= 	"ch250",  
+	// $outputType,//		= 	"ranked", 
+	// $scopeType,//		= 	"all",  
+	// $boundRatio,//		=	"", // <<<<<< 
+	// $queryElements	= 	new Array(),
+	// $queryString	=	'',
+	// $getData 		= 	'',
+	// $regexPattern	=	'',
+	// $searchURL 		= 	'docsearch.php';
 	// $mdb			=	2;
 	// $hs				= 	1;
 
@@ -193,30 +195,23 @@ function doSearch() {
 	/* SHOW SPINNING ICON */	
 	$('#lsa-rowFive').show();
 	
-	$('#lsa-spinningImageHolder')
-		.ajaxStart(function() {
+	// $('#lsa-spinningImageHolder')
+	// 	.ajaxStart(function() {
 
-			$(this).show();
-			if ($searchType == "wholedocs" || $searchType == "chunks") {
-				$(this).children('span[title="message"]').html('Working through 2.3 million document-document correlations greater than 0.<br/><br/>');
-			}
-			else if ($searchType == "terms") {
-				$(this).children('span[title="message"]').html('Working through 28.3 million term-term correlations greater than 0.2.<br/><br/>');
-			}
-			else if ($searchType == "termdoc") {
-				$(this).children('span[title="message"]').html('Working through 40.3 million term-document correlations greater than 0.<br/><br/>');
-			}
-			else if ($searchType == "chunkterm") {
-				$(this).children('span[title="message"]').html('Working through 40.3 million chunk-term correlations greater than 0.<br/><br/>');
-			}
-			else if ($searchType == "termquery" || $searchType == "chunkquery") {
-				$(this).children('span[title="message"]').html('Doing real-time calculations across 24,027 term vectors and 2975 chunk vectors.<br/><br/>');
-			}
-		})
-		.ajaxStop(function() {
-			$(this).hide().children('span[title="message"]').empty();		
-		});
+	// 		$(this).show();
+	// 	})
+	// 	.ajaxStop(function() {
+	// 		$(this).hide().children('span[title="message"]').empty();		
+	// 	});
 
+	$(document).off('ajaxStart ajaxStop');
+	$(document).ajaxStart(function() {
+		var $holder = $('#lsa-spinningImageHolder');
+		$holder.show();
+	});
+	$(document).ajaxStop(function() {
+		$('lsa-spinningImageHolder').hide().children('span[title="message"]').empty();
+	});
 
 	if ($queryString == "") {
 		$('#lsa-spinningImageHolder').toggle().children('span[title="message"]').html("<h2>Empty query! Please construct a query.</h2>");
@@ -235,18 +230,13 @@ function doSearch() {
 		return;
 	}
 
+	$searchURL = $indexDir + '/docsearch.php';
 	if ($searchType == "terms") { 	$searchURL = $indexDir + '/termsearch.php';
-	} else if ($searchType == "termdoc") { $searchURL = '/termdocsearch.php';
-	} else if ($searchType == "chunkterm") { $searchURL = '/chunktermsearch.php';
-	} else if ($searchType == "termquery") { $searchURL = '/usersearch.php';
-	} else if ($searchType == "chunkquery") { $searchURL = '/usersearch.php';
+	} else if ($searchType == "termdoc") { $searchURL = $indexDir + '/termdocsearch.php';
+	} else if ($searchType == "chunkterm") { $searchURL = $indexDir + '/chunktermsearch.php';
+	} else if ($searchType == "termquery") { $searchURL = $indexDir + '/usersearch.php';
+	} else if ($searchType == "chunkquery") { $searchURL = $indexDir + '/usersearch.php';
 	}
-
-	// adding https to the front of $searchURL
-	// $searchURL = window.location.protocol + "//" + window.location.host + "/" + $searchURL;
-	
-	// $getData = "hs="+$hs;
-	// $getData += "&mdb="+$mdb;
 	$getData = "&list="+ $searchType;
 	$getData += "&frags="+ $chunkSize;
 	$getData += "&scope="+ $scopeType;
@@ -262,8 +252,30 @@ function doSearch() {
 		type: "GET",
 		url: $searchURL,
 		data: $getData,
+		beforeSend: function() {
+			var $holder = $('lsa-spinningImageHolder');
+			$holder.show();
+			if ($searchType == "wholedocs" || $searchType == "chunks") {
+				$holder.children('span[title="message"]').html('Working through 2.3 million document-document correlations greater than 0.3<br/><br/>');
+			}
+			else if ($searchType == "terms") {
+				$holder.children('span[title="message"]').html('Working through 28.3 million term-term correlations greater than 0.2.<br/><br/>');
+			}
+			else if ($searchType == "termdoc") {
+				$holder.children('span[title="message"]').html('Working through 40.3 million term-document correlations greater than 0.2<br/><br/>');
+			}
+			else if ($searchType == "chunkterm") {
+				$holder.children('span[title="message"]').html('Working through 40.3 million chunk-term correlations greater than 0.2<br/><br/>');
+			}
+			else if ($searchType == "termquery" || $searchType == "chunkquery") {
+				$holder.children('span[title="message"]').html('Doing real-time calculations across 24,027 term vectors and 2975 chunk vectors.<br/><br/>');
+			}
+		},
 		success: function(data){
 			$('#lsa-results').html(data);
+		},
+		complete: function() {
+			$('#lsa-spinningImageHolder').hide().children('span[title="message"]').empty();
 		}
 	});
 }

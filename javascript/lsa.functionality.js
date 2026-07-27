@@ -175,7 +175,7 @@ $(document).ready(function() {
 	$('#lsa-queryFormContinue input[type=submit]').on('click', function(i,e) {
 			$('#lsa-rowThree').removeClass('lsa-boxFour lsa-opacityNormal').addClass('lsa-halfOpacity').toggle();	
 			$('#lsa-rowFour').show().addClass('lsa-boxFive lsa-opacityNormal').removeClass('lsa-halfOpacity');
-			$('span.instructions').text('Select a Threshold (we recommend 0.6 as a starting point) and click the Run button to generate query results.');
+			$('span.instructions').text('Select a Threshold (we recommend 0.9 as a starting point) and click the Run button to generate query results.');
 			return false;
 		});		
 	// ROW THREE - REMOVE ITEM FROM QUERY SET

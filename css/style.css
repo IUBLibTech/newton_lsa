@@ -159,17 +159,18 @@ div {
 	font-family: 'GentiumNewton', Georgia, serif !important;
 }
 
-/* ROW FIVE */
-#lsa-docBoundEnv {
-	width: auto;
-	height: auto;
-	float: left;
+/* ROW FOUR */
+#lsa-thresholdArea {
+	position: absolute;
+	left: 3%;
 }
-#lsa-queryButtons {
+
+#lsa-docBoundEnv {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	width: auto;
 	height: auto;
-	max-width: 30em;
-	min-height:5em;
 	float: left;
 }
 #lsa-chunkBoundEnv {
@@ -179,8 +180,23 @@ div {
 	min-height:5em;
 	float: left;	
 }
-#lsa-runSearch, #lsa-clearQueryEnv {
-	float:left !important;
+#lsa-queryButtons {
+	position: absolute;  /* child of "#lsa-rowFour" */
+	top: 20px;
+	left: 40%;
+	width: auto;
+	height: auto;
+	max-width: 30em;
+	min-height:5em;
+}
+#lsa-clearQueryEnv {
+	position: absolute;  /* child of "#lsa-rowFour" */
+	top: 20px;
+	left: 50%;
+	width: auto;
+	height: auto;
+	max-width: 30em;
+	min-height:5em;
 }
 
 
