@@ -54,26 +54,22 @@ $(document).ready(function() {
 
 			let $el = null;
 			let $sourceList = '';
-			let cacheKey = '';
 
 			if ($searchType == 'wholedocs') {
 				$el = $('#lsa-wholeDocs-select2');
 				$sourceList = 'json/corpus_list.json';
-				cacheKey = 'lsaCorpusCache';
 				promptText = "Type to view documents, click to select or remove";
 				$("#lsa-wholeDocsEnv").show();
 			}
 			else if ($searchType == 'chunks'  && $chunkSize == 'ch250') {
 				$el = $('#lsa-chunk250-select2');
 				$sourceList = 'json/doc250_list.json';
-				cacheKey = 'lsaDoc250Cache';
 				promptText = "Type to view passages, click to select or remove";
 				$("#lsa-selectChunk250Env").show();
 			}
 			else if ($searchType == 'chunks'  && $chunkSize == 'ch1000') {
 				$el = $('#lsa-chunk1000-select2');
 				$sourceList = 'json/doc1000_list.json';
-				cacheKey = 'lsaDoc1000Cache';
 				promptText = "Type to view passages, click to select or remove";
 				$("#lsa-selectChunk1000Env").show();
 			}
@@ -81,14 +77,12 @@ $(document).ready(function() {
 				if ($chunkSize == 'ch250') {
 					$el = $('#lsa-term250-select2');
 					$sourceList = 'json/term250_list.json';
-					cacheKey = 'lsaTerm250Cache';
 					promptText = "Type to view terms, click to select or remove";
 					$("#lsa-selectTerm250Env").show();
 				}
 				else if ($chunkSize == 'ch1000') {
 					$el = $('#lsa-term1000-select2');
 					$sourceList = 'json/term1000_list.json';
-					cacheKey = 'lsaTerm1000Cache';
 					promptText = "Type to view terms, click to select or remove";
 					$("#lsa-selectTerm1000Env").show();
 				}

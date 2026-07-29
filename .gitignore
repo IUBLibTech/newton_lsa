@@ -1,5 +1,5 @@
 functions/mysql_connection.php
-functions/connector.php:Zone.Identifier
+functions/connector.php
 .vscode/
 node_modules/
 eslint.config.mjs
