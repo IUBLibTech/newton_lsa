@@ -22,8 +22,8 @@ FROM base AS app
 
 # Set up app home
 ENV APP_HOME=/app/newton_lsa
-RUN mkdir -p $APP_HOME && chown -R www-data:www-data /app
+RUN mkdir -p $APP_HOME/lsa && chown -R www-data:www-data /app
 WORKDIR $APP_HOME
 
 # Copy application code
-COPY --chown=www-data:www-data . $APP_HOME
+COPY --chown=www-data:www-data . $APP_HOME/lsa
