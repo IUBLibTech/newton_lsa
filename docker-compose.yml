@@ -1,0 +1,30 @@
+# Requires Docker Compose v2
+name: newton_lsa
+services:
+  app:
+    build:
+      context: .
+    image: ghcr.io/iublibtech/newton_lsa/newton_lsa:latest
+    env_file:
+      - .docker.env
+    volumes:
+      - php-static-content:/app/newton_lsa
+      # Do something like the following to provide the DB config when deployed:
+      # - ./secrets/mysql_connection.php:/app/newton_lsa/functions/mysql_connection.php
+      # In case we need to override any php-fpm settings:
+      # - ./php-fpm/my-fpm.conf:/usr/local/etc/php-fpm.d/my-fpm.conf
+
+  web:
+    image: nginx:latest
+    ports:
+      - '8080:80'
+    volumes:
+      - php-static-content:/app/newton_lsa
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - app
+    depends_on:
+      - app
+
+volumes:
+  php-static-content:
